@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-002"
+
+[[case]]
+id = "evd-002-positive-positive-negative-roles"
+scenario = "positive-positive-and-negative-roles-present"
+polarity = "positive"
+operation = "evaluate-required-roles"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["register-positive-and-negative-roles"]
+expected = { outcome = "accept", codes = [], facts = ["coverage:EVD-BASE:positive=satisfied", "coverage:EVD-BASE:negative=satisfied"] }
+
+[[case]]
+id = "evd-002-negative-name-implies-role"
+scenario = "negative-test-name-implies-missing-role"
+polarity = "negative"
+operation = "evaluate-required-roles"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["remove-negative-role", "rename-positive-carrier-like-negative"]
+expected = { outcome = "accept", codes = ["EVD-POLICY-MISSING-ROLE"], facts = ["coverage:EVD-BASE:positive=satisfied", "coverage:EVD-BASE:negative=unsatisfied"] }

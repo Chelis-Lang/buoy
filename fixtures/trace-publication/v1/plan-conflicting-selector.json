@@ -1,0 +1,1 @@
+{"schema":"buoy/trace-publication-plan/v1","publication_id":"demo-conflicting-selector","selector":{"requirement_id":"DEMO-001","relation_id":"DEMO-REL"},"expected_rows":1,"source_set":[],"outputs":[]}

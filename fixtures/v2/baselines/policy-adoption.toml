@@ -1,0 +1,28 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "policy-adoption"
+
+[base_policy]
+id = "POL-ADOPTION"
+mode = "blocking"
+ratchet = "coverage-v1"
+scope = ["EVD-BASE"]
+roles = ["positive", "negative"]
+expected_authority = ["required"]
+derivations = "none"
+approval = "$approval:spec-provenance-maintainers:POL-ADOPTION:base"
+lifecycle = "active"
+
+[head_policy]
+id = "POL-ADOPTION"
+mode = "blocking"
+ratchet = "coverage-v1"
+scope = ["EVD-BASE"]
+roles = ["positive", "negative"]
+expected_authority = ["required"]
+derivations = "none"
+approval = "$approval:spec-provenance-maintainers:POL-ADOPTION:head"
+lifecycle = "active"
+
+[[available_surfaces]]
+id = "SURFACE-ADOPTION"
+obligations = ["surface-completeness", "surface-authority", "structural"]

@@ -1,0 +1,26 @@
+schema = "spec-provenance-correspondence-approval/v1"
+id = "APPROVAL-CORE-INTEGRITY-CORRESPONDENCE-V2"
+status = "approved"
+authority = "buoy-maintainers"
+derivation = "DERIV-CORE-INTEGRITY-REPRESENTATION-V2"
+record = "docs/architecture/adr-0001-primary-formal-lane.md"
+scope = "Named lifecycle, surface completeness, freshness, policy monotonicity, impact closure, and no-laundering relations only."
+rationale = "The review approves only the explicit symbol-level manual formalization mappings and their assumptions; detached theorems without production mappings are outside the selected proof inventory."
+approved_obligations = [
+  "terminal lifecycle cannot reactivate",
+  "missing decision-surface members prevent completeness",
+  "stale bindings prevent freshness",
+  "coverage growth is monotonic",
+  "missing impact dispositions prevent closure",
+  "debt, waiver, and reaffirmation do not alter tested assurance",
+]
+blocked_obligations = []
+assumptions = [
+  "safe sequential mathematical value semantics",
+  "reviewed abstraction of production inputs into the proof representation",
+]
+exclusions = [
+  "automatic or proved source-to-Verus translation",
+  "canonical encoder field-identity properties without an approved production mapping",
+  "rustc, LLVM, native code, parser, filesystem, and process behavior",
+]

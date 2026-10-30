@@ -1,0 +1,16 @@
+class	text	rationale
+required	# Implementation trace	the page opens with one stable heading
+required	## Requirement	the page names the requirement section
+required	## Implementation	the page names the implementation section
+required	## Relations	the page carries the relation table
+required	Derived data	the page warns that its content is derived
+required	navigation and impact only	the page keeps the assurance boundary visible
+required	Buoy remains the current-state authority	the page defers to a current query
+required	buoy/readable-trace-markdown/v1	the page identifies its own renderer schema
+required	buoy/trace-report/v1	the page identifies the machine trace-report schema it derives from
+required	Source graph	the page labels its graph digest unambiguously as the source graph
+required	Atom revision	each relation row exposes the complete semantic atom revision
+required	Freshness	each relation row exposes its freshness facets
+required	attachment=	each relation row exposes its attachment freshness facet, which is an independent facet of the machine report
+forbidden	coverage established	a projection establishes no coverage
+forbidden	proved	a projection establishes no proof

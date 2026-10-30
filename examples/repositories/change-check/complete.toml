@@ -1,0 +1,12 @@
+schema = "spec-provenance-change-manifest/v1"
+id = "CHANGE-EXAMPLE"
+base_graph = "xxh3-128:47208a0e4d06f91f3b6abf7c2bf68da4"
+head_graph = "xxh3-128:1f91cb8cc114a621b51acc8a64cbb19b"
+
+[[dispositions]]
+id = "CHANGE-EXAMPLE-DISPOSITION"
+kind = "atom"
+object = "CHANGE-EXAMPLE-001"
+base = "xxh3-128:a8fa560f40718d329a0d98ebc5e52bcd"
+head = "xxh3-128:5a337997c6f543f6fb976c2481311352"
+disposition = "revised"

@@ -1,0 +1,2 @@
+target_id	path	kind	platform	coverage_class	disposition	rationale
+invalid-disposition	src/covered.rs	production-library	portable	no-executable-regions	not-applicable	incorrect executable exclusion

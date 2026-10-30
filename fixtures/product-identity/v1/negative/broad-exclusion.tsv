@@ -1,0 +1,2 @@
+schema	id	path	line	column	form	lexeme	context_digest	disposition	rationale	owner	rule
+buoy-naming-inventory/v1	OLD-NAME-000001	docs/*	1	1	display	Spec Provenance	xxh3-128:00000000000000000000000000000000	historical-reference	history	buoy-maintainers	retain-as-history

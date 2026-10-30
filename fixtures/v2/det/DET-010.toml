@@ -1,0 +1,38 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "DET-010"
+
+[[case]]
+id = "det-010-positive-all-impacts-dispositioned"
+scenario = "positive-every-affected-claim-dispositioned"
+polarity = "positive"
+operation = "validate-impact-closure"
+baseline = "fixtures/v2/baselines/change-impact.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["impact-closure=complete", "impact-count=4", "disposition-count=4"] }
+
+[[case]]
+id = "det-010-negative-one-derivation-omitted"
+scenario = "negative-one-affected-derivation-omitted"
+polarity = "negative"
+operation = "validate-impact-closure"
+baseline = "fixtures/v2/baselines/change-impact.toml"
+mutations = ["remove-one-impact-disposition"]
+expected = { outcome = "reject", codes = ["DET-IMPACT-MISSING-DISPOSITION"], facts = ["impact-closure=incomplete", "impact-count=4", "disposition-count=3"] }
+
+[[case]]
+id = "det-010-negative-duplicate-disposition"
+scenario = "negative-duplicate-impact-disposition"
+polarity = "negative"
+operation = "validate-impact-closure"
+baseline = "fixtures/v2/baselines/change-impact.toml"
+mutations = ["duplicate-one-impact-disposition"]
+expected = { outcome = "reject", codes = ["DET-IMPACT-DUPLICATE-DISPOSITION"], facts = ["impact-closure=incomplete", "impact-count=4", "disposition-count=5"] }
+
+[[case]]
+id = "det-010-negative-stale-disposition"
+scenario = "negative-stale-impact-disposition"
+polarity = "negative"
+operation = "validate-impact-closure"
+baseline = "fixtures/v2/baselines/change-impact.toml"
+mutations = ["stale-one-impact-disposition"]
+expected = { outcome = "reject", codes = ["DET-IMPACT-STALE-DISPOSITION"], facts = ["impact-closure=incomplete", "impact-count=4", "disposition-count=4"] }

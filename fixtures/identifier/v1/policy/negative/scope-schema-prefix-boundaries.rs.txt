@@ -1,0 +1,9 @@
+struct Boundary;
+impl Boundary {
+    fn scope(scope_id: impl Into<String>) {}
+    fn schema(schema_id: impl Into<String>) {}
+    fn check(value: &str) {
+        require_scope_id(value);
+        require_schema_id(value);
+    }
+}

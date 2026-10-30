@@ -1,0 +1,10 @@
+[package]
+name = "buoy-core-effect-negative"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+buoy = { path = "../../../../..", version = "=0.2.0" }
+
+[workspace]

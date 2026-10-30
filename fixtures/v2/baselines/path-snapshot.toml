@@ -1,0 +1,14 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "path-snapshot"
+
+[[files]]
+path = "a/spec.md"
+adapter = "markdown/v1"
+authority_expectation = "optional"
+content = "alpha\n"
+
+[[files]]
+path = "b/code.rs"
+adapter = "rust/v1"
+authority_expectation = "forbidden"
+content = "pub const BETA: u8 = 2;\n"

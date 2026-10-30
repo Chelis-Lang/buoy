@@ -1,0 +1,19 @@
+{
+  "schema": "buoy-trace-publication-path-fixtures/v1",
+  "cases": [
+    { "name": "basis", "template": "docs/{publication_basis_path}.md", "registered": true },
+    { "name": "atom", "template": "docs/{atom_revision_path}.md", "registered": true },
+    { "name": "record", "template": "docs/{record_digest_path}.md", "registered": true },
+    { "name": "atom-literal", "template": "docs/{atom_revision}.md", "registered": true },
+    { "name": "record-literal", "template": "docs/{record_digest}.md", "registered": true },
+    { "name": "wrong-class", "template": "docs/{publication_basis_path}.md", "active_member": "xxh3-128", "registered": false, "diagnostic": "TPT-DIGEST-CLASS" },
+    { "name": "traversal", "template": "docs/../{publication_basis_path}.md", "registered": false, "diagnostic": "TPT-PATH-TRAVERSAL" },
+    { "name": "query", "target_base": "https://example.invalid/trace/?x=1", "registered": false, "diagnostic": "TPT-TARGET-BASE" },
+    { "name": "graph", "template": "docs/{graph_digest}.md", "registered": false, "diagnostic": "TPT-UNKNOWN-SUBSTITUTION" },
+    { "name": "page", "template": "docs/{page_digest}.md", "registered": false, "diagnostic": "TPT-UNKNOWN-SUBSTITUTION" },
+    { "name": "link", "template": "docs/{link_digest}.md", "registered": false, "diagnostic": "TPT-UNKNOWN-SUBSTITUTION" },
+    { "name": "commit", "template": "docs/{page_commit}.md", "registered": false, "diagnostic": "TPT-UNKNOWN-SUBSTITUTION" },
+    { "name": "provider", "template": "docs/{provider_id}.md", "registered": false, "diagnostic": "TPT-UNKNOWN-SUBSTITUTION" },
+    { "name": "unknown", "template": "docs/{mystery}.md", "registered": false, "diagnostic": "TPT-UNKNOWN-SUBSTITUTION" }
+  ]
+}

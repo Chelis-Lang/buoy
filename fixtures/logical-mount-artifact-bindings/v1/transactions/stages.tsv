@@ -1,0 +1,15 @@
+schema	stage	expected
+buoy-binding-transaction-fixture/v1	validate-input	exact-prior-state
+buoy-binding-transaction-fixture/v1	create-object-directory	exact-prior-state
+buoy-binding-transaction-fixture/v1	create-object-temporary	exact-prior-state
+buoy-binding-transaction-fixture/v1	write-object	exact-prior-state
+buoy-binding-transaction-fixture/v1	sync-object	exact-prior-state
+buoy-binding-transaction-fixture/v1	replace-object	exact-prior-state
+buoy-binding-transaction-fixture/v1	create-sidecar-directory	exact-prior-state
+buoy-binding-transaction-fixture/v1	create-sidecar-temporary	exact-prior-state
+buoy-binding-transaction-fixture/v1	write-sidecar	exact-prior-state
+buoy-binding-transaction-fixture/v1	sync-sidecar	exact-prior-state
+buoy-binding-transaction-fixture/v1	replace-sidecar	exact-prior-state
+buoy-binding-transaction-fixture/v1	rollback-sidecar	exact-prior-state
+buoy-binding-transaction-fixture/v1	remove-uncommitted-object	exact-prior-state
+buoy-binding-transaction-fixture/v1	retry-after-failure	success

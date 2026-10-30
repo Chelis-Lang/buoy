@@ -1,0 +1,110 @@
+schema = "spec-provenance-reference-model/v1"
+id = "model-proof-invalidation-v1"
+requirement_ids = ["FPR-002", "FPR-003", "FPR-004"]
+kind = "truth-table"
+expected_state_count = 16384
+
+[[dimensions]]
+name = "atom"
+values = ["current", "stale"]
+[[dimensions]]
+name = "property"
+values = ["current", "stale"]
+[[dimensions]]
+name = "implementation"
+values = ["current", "stale"]
+[[dimensions]]
+name = "assumption"
+values = ["current", "stale"]
+[[dimensions]]
+name = "translator"
+values = ["current", "stale"]
+[[dimensions]]
+name = "translator_config"
+values = ["current", "stale"]
+[[dimensions]]
+name = "verifier"
+values = ["current", "stale"]
+[[dimensions]]
+name = "verifier_config"
+values = ["current", "stale"]
+[[dimensions]]
+name = "external_model"
+values = ["current", "stale"]
+[[dimensions]]
+name = "generated_artifact"
+values = ["current", "stale"]
+[[dimensions]]
+name = "proof_source"
+values = ["current", "stale"]
+[[dimensions]]
+name = "verdict"
+values = ["current", "stale"]
+[[dimensions]]
+name = "scope"
+values = ["current", "stale"]
+[[dimensions]]
+name = "exclusions"
+values = ["current", "stale"]
+
+[[predicates]]
+name = "proof_fresh"
+[[predicates.clauses]]
+all = ["atom=current", "property=current", "implementation=current", "assumption=current", "translator=current", "translator_config=current", "verifier=current", "verifier_config=current", "external_model=current", "generated_artifact=current", "proof_source=current", "verdict=current", "scope=current", "exclusions=current"]
+
+[[invariants]]
+id = "stale-atom-invalidates"
+if_all = ["atom=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-property-invalidates"
+if_all = ["property=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-implementation-invalidates"
+if_all = ["implementation=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-assumption-invalidates"
+if_all = ["assumption=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-translator-invalidates"
+if_all = ["translator=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-translator-config-invalidates"
+if_all = ["translator_config=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-verifier-invalidates"
+if_all = ["verifier=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-verifier-config-invalidates"
+if_all = ["verifier_config=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-external-model-invalidates"
+if_all = ["external_model=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-generated-artifact-invalidates"
+if_all = ["generated_artifact=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-proof-source-invalidates"
+if_all = ["proof_source=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-verdict-invalidates"
+if_all = ["verdict=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-scope-invalidates"
+if_all = ["scope=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-exclusions-invalidates"
+if_all = ["exclusions=stale"]
+then_all = ["proof_fresh=false"]

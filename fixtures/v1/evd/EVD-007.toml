@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-007"
+
+[[case]]
+id = "evd-007-positive-complete-reachable-exploration"
+scenario = "positive-complete-reachable-model-exploration"
+polarity = "positive"
+operation = "run-finite-model"
+baseline = "fixtures/v1/baselines/finite-model.toml"
+mutations = ["explore-model-to-fixed-point"]
+expected = { outcome = "accept", codes = [], facts = ["model:MODEL-LIFECYCLE=fixed-point", "model-reachable-states:MODEL-LIFECYCLE=4", "assurance:PROP-LIFECYCLE-TERMINAL=exhaustively-checked"] }
+
+[[case]]
+id = "evd-007-negative-undeclared-depth-cutoff"
+scenario = "negative-exploration-uses-an-undeclared-depth-cutoff"
+polarity = "negative"
+operation = "run-finite-model"
+baseline = "fixtures/v1/baselines/finite-model.toml"
+mutations = ["stop-model-at-depth-cutoff"]
+expected = { outcome = "accept", codes = ["EVD-MODEL-NOT-FIXED-POINT"], facts = ["model:MODEL-LIFECYCLE=incomplete", "assurance:PROP-LIFECYCLE-TERMINAL:exhaustively-checked=false"] }

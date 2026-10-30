@@ -1,0 +1,11 @@
+pub struct TypedModel {
+    scope: ScopeId,
+    schema: SchemaId,
+    prefix: NamespacePrefix,
+}
+
+impl TypedModel {
+    pub fn new(scope: ScopeId, schema: SchemaId, prefix: NamespacePrefix) -> Self {
+        Self { scope, schema, prefix }
+    }
+}

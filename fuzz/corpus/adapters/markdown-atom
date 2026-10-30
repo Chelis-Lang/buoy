@@ -1,0 +1,7 @@
+```spec-provenance-atom-v1
+id = "FUZZ-ATOM"
+state = "proposed"
+kind = "behavioral"
+scope = ["fuzz"]
+statement = "Fuzzing MUST remain bounded."
+```

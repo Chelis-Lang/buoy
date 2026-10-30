@@ -1,0 +1,29 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "SPG-011"
+
+[[case]]
+id = "spg-011-positive-total-disposition"
+scenario = "positive-ordinary-prose-is-explicitly-nonnormative"
+polarity = "positive"
+operation = "validate-adapter-totality"
+baseline = "fixtures/v2/baselines/atom-source.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["adapter-node:spec/requirements.md:atom=semantic", "adapter-node:spec/requirements.md:prose=nonnormative"] }
+
+[[case]]
+id = "spg-011-negative-unsupported-version"
+scenario = "negative-unsupported-syntax-version-is-skipped"
+polarity = "negative"
+operation = "validate-adapter-totality"
+baseline = "fixtures/v2/baselines/atom-source.toml"
+mutations = ["replace-adapter-version-with-unsupported"]
+expected = { outcome = "reject", codes = ["SPG-ADAPTER-UNSUPPORTED-VERSION"], facts = ["adapter-disposition:spec/requirements.md=diagnostic"] }
+
+[[case]]
+id = "spg-011-negative-empty-required-authority-root"
+scenario = "negative-expected-authority-root-is-empty"
+polarity = "negative"
+operation = "validate-adapter-totality"
+baseline = "fixtures/v2/baselines/atom-source.toml"
+mutations = ["remove-required-root-authorities"]
+expected = { outcome = "reject", codes = ["SPG-ADAPTER-EXPECTED-AUTHORITY-EMPTY"], facts = ["authority-count:SPG-001=0"] }

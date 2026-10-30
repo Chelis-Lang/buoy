@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-010"
+
+[[case]]
+id = "evd-010-positive-point-test-declared-scope"
+scenario = "positive-point-test-passes-in-its-declared-scope"
+polarity = "positive"
+operation = "aggregate-assurance"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["pass-point-corpus"]
+expected = { outcome = "accept", codes = [], facts = ["assurance:EVD-BASE=tested", "assurance-scope:EVD-BASE=point-a", "corpus:EVD-BASE=corpus-a"] }
+
+[[case]]
+id = "evd-010-negative-point-examples-as-property"
+scenario = "negative-point-examples-presented-as-property"
+polarity = "negative"
+operation = "aggregate-assurance"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["pass-point-corpus", "generalize-point-examples-to-property"]
+expected = { outcome = "accept", codes = ["EVD-SCOPE-OVERCLAIM"], facts = ["assurance:EVD-BASE=tested", "assurance:EVD-BASE:property=false", "assurance-scope:EVD-BASE=point-a"] }

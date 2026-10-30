@@ -1,0 +1,2 @@
+target_id	path	kind	platform	coverage_class	disposition	rationale
+declarations-only	declarations.rs	generated-production-data	portable	no-executable-regions	not-applicable	declarations only

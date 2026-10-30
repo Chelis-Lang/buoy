@@ -1,0 +1,62 @@
+schema = "buoy-adversarial-campaign-artifact/v1"
+campaign_id = "FUZZ-INITIAL-2026-07-22"
+kind = "fuzz"
+tool_id = "cargo-fuzz"
+tool_version = "0.13.2"
+tool_binding = "assurance/v1/toolchain.toml#cargo-fuzz@0.13.2"
+source_digest = "xxh3-128:df93d0ac32c99de3582973bf68c40261"
+configuration_digest = "xxh3-128:a615d8932650c1e1a667e3ce9dd602a7"
+generated_on = "2026-10-30"
+expires_on = "2026-11-29"
+command = "devenv tasks run buoy:fuzz-campaign"
+result = "pass"
+total_cases = 448
+duration_seconds = 763
+accepted_mutants = 0
+killed_mutants = 0
+score_basis_points = 0
+finding_count = 0
+unresolved_blocking_findings = 0
+assurance_scope = "bounded coverage-guided crash/panic/invariant search over seven declared harnesses; no proof, completeness, platform-effect, or long-duration claim"
+
+[[units]]
+id = "canonical_values"
+cases = 64
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "paths_globs"
+cases = 64
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "adapters"
+cases = 64
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "config_manifests"
+cases = 64
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "graphs_governance"
+cases = 64
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "reports"
+cases = 64
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication"
+cases = 64
+status = "pass"
+finding_count = 0

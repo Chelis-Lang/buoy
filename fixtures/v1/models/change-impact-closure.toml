@@ -1,0 +1,38 @@
+schema = "spec-provenance-reference-model/v1"
+id = "model-change-impact-closure-v1"
+requirement_ids = ["DET-009", "DET-010"]
+kind = "truth-table"
+expected_state_count = 256
+
+[[dimensions]]
+name = "carrier_disposition"
+values = ["valid", "missing", "duplicate", "stale"]
+[[dimensions]]
+name = "surface_disposition"
+values = ["valid", "missing", "duplicate", "stale"]
+[[dimensions]]
+name = "derivation_disposition"
+values = ["valid", "missing", "duplicate", "stale"]
+[[dimensions]]
+name = "proof_disposition"
+values = ["valid", "missing", "duplicate", "stale"]
+
+[[predicates]]
+name = "impact_closed"
+[[predicates.clauses]]
+all = ["carrier_disposition=valid", "surface_disposition=valid", "derivation_disposition=valid", "proof_disposition=valid"]
+
+[[invariants]]
+id = "missing-derivation-prevents-closure"
+if_all = ["derivation_disposition=missing"]
+then_all = ["impact_closed=false"]
+
+[[invariants]]
+id = "duplicate-carrier-prevents-closure"
+if_all = ["carrier_disposition=duplicate"]
+then_all = ["impact_closed=false"]
+
+[[invariants]]
+id = "stale-proof-prevents-closure"
+if_all = ["proof_disposition=stale"]
+then_all = ["impact_closed=false"]

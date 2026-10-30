@@ -1,0 +1,115 @@
+schema = "chelis-provenance-carrier-registrations/v1"
+chelis_revision = "c0d4caf16f557406f299f0989bab48fa0f924cbd"
+atomization_status = "pending; Chelis normative sources have no ratified atom revisions at the pinned revision"
+
+[[carrier]]
+id = "CHELIS-CARRIER-PR-GATE"
+inventory_id = "carrier-pr-gate"
+item = "scripts/gate.py"
+role = "structural"
+atoms = "pending-atomization"
+oracle = ".venv/bin/python scripts/gate.py --local"
+configuration = "chelis@c0d4caf16f557406f299f0989bab48fa0f924cbd"
+corpus = "per-PR command list"
+scope = "repository gate command inventory only"
+assumptions = ["local virtualenv matches the pinned interpreter"]
+exclusions = ["no behavioral claim for compiled output"]
+verdict = "not-run"
+
+[[carrier]]
+id = "CHELIS-CARRIER-CI"
+inventory_id = "carrier-ci"
+item = ".github/workflows/ci.yml"
+role = "structural"
+atoms = "pending-atomization"
+oracle = "cargo nextest run --workspace --profile ci"
+configuration = "chelis@c0d4caf16f557406f299f0989bab48fa0f924cbd"
+corpus = "split CI jobs invoking gate stages"
+scope = "workflow wiring only; provider execution state is noncanonical"
+assumptions = ["workflow file mirrors the local gate stages"]
+exclusions = ["provider run history supplies no authority"]
+verdict = "not-run"
+
+[[carrier]]
+id = "CHELIS-CARRIER-PHASE-ORACLES"
+inventory_id = "carrier-phase-oracles"
+item = "docs/phase_oracles.md"
+role = "structural"
+atoms = "pending-atomization"
+oracle = "manual index review"
+configuration = "chelis@c0d4caf16f557406f299f0989bab48fa0f924cbd"
+corpus = "default nightly manual and aspirational oracle index"
+scope = "index completeness only"
+assumptions = ["the index names every nightly oracle"]
+exclusions = ["listing an oracle asserts no execution result"]
+verdict = "not-run"
+
+[[carrier]]
+id = "CHELIS-CARRIER-MANUAL"
+inventory_id = "carrier-manual"
+item = "docs/manual_gates.md"
+role = "structural"
+atoms = "pending-atomization"
+oracle = "manual gate review"
+configuration = "chelis@c0d4caf16f557406f299f0989bab48fa0f924cbd"
+corpus = "ignored-test and external-prerequisite oracle inventory"
+scope = "inventory visibility only"
+assumptions = ["ignored tests stay listed until discharged"]
+exclusions = ["a listed manual gate is not satisfied evidence"]
+verdict = "not-run"
+
+[[carrier]]
+id = "CHELIS-CARRIER-CRATE-TESTS"
+inventory_id = "carrier-crate-tests"
+item = "crates/*/tests/"
+role = "positive"
+atoms = "pending-atomization"
+oracle = "cargo nextest run --workspace --profile ci"
+configuration = "chelis@c0d4caf16f557406f299f0989bab48fa0f924cbd"
+corpus = "workspace integration tests"
+scope = "exact test functions only; no generalization beyond executed inputs"
+assumptions = ["tests execute under the pinned toolchain"]
+exclusions = ["passing tests do not prove absent behaviors"]
+verdict = "not-run"
+
+[[carrier]]
+id = "CHELIS-CARRIER-INLINE-TESTS"
+inventory_id = "carrier-inline-tests"
+item = "crates/*/src/**/*.rs #[cfg(test)]"
+role = "positive"
+atoms = "pending-atomization"
+oracle = "cargo nextest run --workspace --profile ci"
+configuration = "chelis@c0d4caf16f557406f299f0989bab48fa0f924cbd"
+corpus = "inline Rust unit tests"
+scope = "exact test functions only; names do not imply role"
+assumptions = ["tests execute under the pinned toolchain"]
+exclusions = ["unit names supply no role or coverage claim"]
+verdict = "not-run"
+
+[[carrier]]
+id = "CHELIS-CARRIER-NATIVE-TESTS"
+inventory_id = "carrier-native-tests"
+item = "tests/**/*.ch"
+role = "positive"
+atoms = "pending-atomization"
+oracle = ".venv/bin/python scripts/gate.py --local"
+configuration = "chelis@c0d4caf16f557406f299f0989bab48fa0f924cbd"
+corpus = "Chelis-native test corpus"
+scope = "exact corpus files only"
+assumptions = ["the gate executes the full native corpus"]
+exclusions = ["corpus passes claim nothing about excluded inputs"]
+verdict = "not-run"
+
+[[carrier]]
+id = "CHELIS-CARRIER-EXAMPLES"
+inventory_id = "carrier-examples"
+item = "examples/**/*.ch"
+role = "positive"
+atoms = "pending-atomization"
+oracle = ".venv/bin/python scripts/gate.py --local"
+configuration = "chelis@c0d4caf16f557406f299f0989bab48fa0f924cbd"
+corpus = "executable example corpus"
+scope = "exact example files only; illustrative examples are excluded"
+assumptions = ["examples compile under the pinned toolchain"]
+exclusions = ["examples supply no negative or property evidence"]
+verdict = "not-run"

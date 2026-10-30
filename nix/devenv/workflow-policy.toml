@@ -1,0 +1,114 @@
+schema = "buoy-devenv-workflow-policy/v1"
+root_token = "<repository-root>"
+sink = "buoy:gate"
+lifecycle = "devenv:enterTest"
+post_phase = ["buoy:specs", "buoy:package-contract"]
+manual = ["buoy:coverage", "buoy:coverage-evidence", "buoy:mutation-campaign", "buoy:mutation-replay"]
+baseline = [
+  "devenv:rustup-links",
+  "buoy:versions",
+  "buoy:devenv",
+  "buoy:digest-member-oracle",
+  "buoy:format",
+  "buoy:clippy",
+  "buoy:test",
+  "buoy:chelis-compact-bindings",
+  "buoy:docs",
+  "buoy:product-identity",
+]
+
+[configuration]
+require_version = true
+rust_module = true
+rust_toolchain_file = "rust-toolchain.toml"
+rust_channel = "nightly-2026-04-16"
+rust_profile = "minimal"
+rust_components = ["clippy", "llvm-tools-preview", "miri", "rust-analyzer", "rust-src", "rustc-dev", "rustfmt"]
+rust_targets = ["thumbv7em-none-eabi"]
+module_files = [
+  "nix/devenv/environment.nix",
+  "nix/devenv/hooks.nix",
+  "nix/devenv/tasks.nix",
+  "nix/devenv/scripts/core.nix",
+  "nix/devenv/scripts/assurance.nix",
+  "nix/devenv/scripts/adversarial.nix",
+  "nix/devenv/scripts/acceptance.nix",
+]
+hooks = ["buoy-nixfmt", "buoy-openspec", "buoy-rustfmt"]
+common_packages = ["cargo-nextest", "git", "nixfmt", "openspec", "openssl", "pkg-config", "prek", "rustup", "zlib"]
+
+[[phase]]
+name = "buoy:p0"
+children = ["buoy:schema", "buoy:reference", "buoy:fixtures", "buoy:properties"]
+
+[[phase]]
+name = "buoy:p1"
+children = ["buoy:hashing-policy", "buoy:identifier-policy", "buoy:core", "buoy:fcis", "buoy:core-proofs"]
+
+[[phase]]
+name = "buoy:p2"
+children = ["buoy:unicode", "buoy:adapters", "buoy:integration", "buoy:examples", "buoy:deny", "buoy:offline-acceptance", "buoy:closure-size", "buoy:adversarial"]
+
+[[phase]]
+name = "buoy:p3"
+children = ["buoy:obligations", "buoy:gate-wiring", "buoy:quality", "buoy:ledger-green"]
+
+[[script_owner]]
+module = "core"
+scripts = ["buoy-compile-fail", "buoy-digest-member-oracle", "buoy-fcis", "buoy-fixtures", "buoy-hashing-policy", "buoy-identifier-policy", "buoy-obligations", "buoy-product-identity", "buoy-quality", "buoy-reference", "buoy-schema", "buoy-unicode"]
+
+[[script_owner]]
+module = "assurance"
+scripts = ["buoy-closure-size", "buoy-core-proofs", "buoy-coverage", "buoy-coverage-evidence", "buoy-deny", "buoy-formal-spikes", "buoy-gate-wiring", "buoy-offline-acceptance", "buoy-properties"]
+
+[[script_owner]]
+module = "adversarial"
+scripts = ["buoy-adapters", "buoy-adversarial", "buoy-adversarial-evidence", "buoy-core", "buoy-faults", "buoy-fuzz-campaign", "buoy-fuzz-replay", "buoy-integration", "buoy-miri", "buoy-mutation-campaign", "buoy-mutation-replay", "buoy-platform-corpus", "buoy-platform-result", "buoy-sanitizer"]
+
+[[script_owner]]
+module = "acceptance"
+scripts = ["buoy-devenv", "buoy-examples", "buoy-format", "buoy-gate", "buoy-ledger-green", "buoy-p0", "buoy-p1", "buoy-p2", "buoy-p3", "buoy-phase-result", "buoy-versions"]
+
+[[runtime_package]]
+script = "buoy-fcis"
+packages = ["dylint"]
+
+[[runtime_package]]
+script = "buoy-formal-spikes"
+packages = ["aeneas", "lean-aeneas", "verus", "z3-standalone"]
+
+[[runtime_package]]
+script = "buoy-core-proofs"
+packages = ["verus"]
+
+[[runtime_package]]
+script = "buoy-coverage"
+packages = ["cargo-llvm-cov", "dylint"]
+
+[[runtime_package]]
+script = "buoy-fuzz-replay"
+packages = ["cargo-fuzz"]
+
+[[runtime_package]]
+script = "buoy-fuzz-campaign"
+packages = ["cargo-fuzz"]
+
+[[runtime_package]]
+script = "buoy-mutation-campaign"
+packages = ["cargo-mutants"]
+
+[[runtime_package]]
+script = "buoy-deny"
+packages = ["cargo-deny"]
+
+[[runtime_package]]
+script = "buoy-offline-acceptance"
+packages = ["clean-cargo-runner"]
+
+[[runtime_package]]
+script = "buoy-closure-size"
+packages = ["closure-report-runner"]
+
+[[runtime_package]]
+script = "buoy-versions"
+packages = ["aeneas", "cargo-deny", "cargo-fuzz", "cargo-llvm-cov", "cargo-mutants", "dylint", "lean-aeneas", "verus", "z3-standalone"]

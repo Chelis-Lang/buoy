@@ -1,0 +1,114 @@
+schema = "chelis-provenance-integration-boundary/v1"
+captured_on = "2026-07-22"
+snapshot_policy = "tracked Git trees only; ambient worktree state is excluded"
+
+[chelis]
+repository = "git@github.com:Chelis-Lang/chelis.git"
+revision = "c0d4caf16f557406f299f0989bab48fa0f924cbd"
+tree = "389a4a38be8d6f1b2bc381e405b5d8dede1acca8"
+cargo_lock_blob = "60f8f86e1df4977a21f876fb3ab2503368d71388"
+rust_toolchain_blob = "73cb934de4706a914c15e8db2a3c037ce75699d9"
+version = "0.16.1"
+license = "MIT"
+rust_toolchain_channel = "stable"
+build_environment_status = "not-exactly-pinned"
+build_environment_record = "rust-toolchain.toml declares channel stable; the exact revision-bound inputs are the pinned tree, Cargo.lock blob, and rust-toolchain.toml blob above"
+tracked_worktree_changes_excluded = [".gitignore"]
+untracked_worktree_paths_excluded = [".devenv/"]
+canonical_pr_gate = ".venv/bin/python scripts/gate.py --local"
+ci_workspace_oracle = "cargo nextest run --workspace --profile ci"
+release_workflow = ".github/workflows/release.yml"
+release_trigger = "pushed v* tag"
+
+[integration_ownership]
+library_crate = "chelis-provenance"
+command_crate = "chelis-cli"
+command_namespace = "chelis provenance"
+status = "chelis-provenance implemented in the Buoy workspace; chelis-cli command wiring stays reserved for a separate Chelis-side change"
+
+[integration_environment]
+worktree = "Buoy Chelis-integration worktree for change integrate-spec-provenance-with-chelis"
+final_oracle = "devenv test"
+build_environment = "devenv.lock at the Buoy integration revision pins the exact toolchain for every integration check"
+chelis_inputs = "saved tracked bytes of the pinned Chelis tree only; no Chelis build products enter canonical checks"
+
+[buoy]
+repository_revision = "61b2c25afd55f8295715868cb854d2b4777de9a2"
+crate = "buoy"
+crate_version = "0.2.0"
+publish = false
+adapter_sdk_schema = "buoy.adapter-sdk/v3"
+configuration_schema = "chelis-adapter-config/v1"
+dependency_direction = "chelis shell -> buoy shell/core"
+
+[[adapters]]
+adapter_id = "chelis-surf/v1"
+parser_id = "chelis-surf"
+parser_version = "0.18.5+grammar.fc3232ff"
+syntax_schema_id = "chelis-surf-syntax/v2"
+configuration_schema_id = "chelis-adapter-config/v1"
+syntax_capabilities = ["chelis-surf-comment/v1", "chelis-surf-declaration/v1"]
+input_extensions = [".ch"]
+status = "parser-backed over the pinned vendored tree-sitter grammar"
+
+[adapters.grammar]
+repository = "git@github.com:Chelis-Lang/chelis.git"
+revision = "fc3232ffe085d15b213bb7457b69a22063a200b9"
+tag = "v0.18.5"
+source_prefix = "grammars/tree-sitter-chelis-surf/src"
+vendor_prefix = "crates/chelis-surf-sitter/vendor"
+generator = "tree-sitter generate"
+runtime_crate = "tree-sitter"
+runtime_version = "0.26.8"
+identity_rule = "item identity derives from the parsed declaration node's exact source bytes and byte span"
+rejection_rule = "an ERROR or MISSING node in a selected source fails extraction with CHELIS-PROV-PARSE-ERROR before any record check"
+
+[[adapters.grammar.artifacts]]
+path = "parser.c"
+digest = "xxh3-128:5ca671a6a2ea06676c9027d499183c66"
+
+[[adapters.grammar.artifacts]]
+path = "scanner.cc"
+digest = "xxh3-128:c76fc81e26da4cf4e15f30d2b5c13124"
+
+[[adapters.grammar.artifacts]]
+path = "grammar.json"
+digest = "xxh3-128:c80504dda514eb12b3ec0ee841dcaeaf"
+
+[[adapters.grammar.artifacts]]
+path = "node-types.json"
+digest = "xxh3-128:fd9b532232ceb5ded1d6cedfa0f1b258"
+
+[[adapters.grammar.artifacts]]
+path = "tree_sitter/alloc.h"
+digest = "xxh3-128:8abfbf6fc9d58f8049f25d2c5f532a27"
+
+[[adapters.grammar.artifacts]]
+path = "tree_sitter/array.h"
+digest = "xxh3-128:980c4b1fc408fffecde54f3d28a015c5"
+
+[[adapters.grammar.artifacts]]
+path = "tree_sitter/parser.h"
+digest = "xxh3-128:6c1e6fb99fafc8eff246896165cc4f36"
+
+[[adapters]]
+adapter_id = "chelis-deep/v1"
+parser_id = "chelis-deep"
+parser_version = "0.16.1"
+syntax_schema_id = "chelis-deep-syntax/v1"
+configuration_schema_id = "chelis-adapter-config/v1"
+syntax_capabilities = ["chelis-deep-comment/v1", "chelis-deep-node/v1"]
+input_extensions = [".dp"]
+status = "lexical anchoring retained until the Deep grammar is adopted"
+
+[item_protocol]
+status = "approved"
+current_schema = "buoy schema v3 with validated SourceItemKind values"
+current_item_kinds = ["chelis/surf-declaration/v1", "chelis/deep-node/v1"]
+approved_host_item_schema = "descriptor-declared SourceItemKind set"
+legacy_reader = "absent"
+identity_transition = "source reingestion under schema v3"
+protocol_check = "exact descriptor membership"
+blocking_diagnostic = "SPG-ADAPTER-UNDECLARED-SOURCE-ITEM-KIND"
+forbidden_substitutions = ["raw-string-kind", "opaque-payload", "host-specific-core-enum"]
+discharge = "complete"

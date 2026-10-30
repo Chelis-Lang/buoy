@@ -1,0 +1,5 @@
+schema = "spec-provenance-change-manifest/v1"
+id = "CHANGE-FUZZ-001"
+base_graph = "xxh3-128:00000000000000000000000000000000"
+head_graph = "xxh3-128:00000000000000000000000000000000"
+dispositions = []

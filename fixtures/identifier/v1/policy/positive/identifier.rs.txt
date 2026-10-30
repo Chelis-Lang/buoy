@@ -1,0 +1,47 @@
+// Conforming identifier module: the one allowed home for the stable-ID grammar.
+
+pub enum IdentifierError {
+    StableIdGrammar,
+}
+
+impl IdentifierError {
+    pub const fn code(self) -> &'static str {
+        match self {
+            Self::StableIdGrammar => "SCF-CONSTRUCT-STABLE-ID",
+        }
+    }
+}
+
+pub struct StableId(String);
+
+impl StableId {
+    pub fn new(input: &str) -> Result<Self, IdentifierError> {
+        let normalized = input.nfc().collect::<String>();
+        if stable_id_grammar(&normalized) {
+            Ok(Self(normalized))
+        } else {
+            Err(IdentifierError::StableIdGrammar)
+        }
+    }
+
+    pub fn as_str(&self) -> &str {
+        &self.0
+    }
+}
+
+fn stable_id_grammar(text: &str) -> bool {
+    if !(3..=128).contains(&text.len()) {
+        return false;
+    }
+    let mut components = text.split('-');
+    let first = components.next().unwrap_or_default();
+    !first.is_empty() && first.as_bytes()[0].is_ascii_uppercase()
+}
+
+fn require_stable_id(text: &str) -> Result<(), IdentifierError> {
+    if stable_id_grammar(text) {
+        Ok(())
+    } else {
+        Err(IdentifierError::StableIdGrammar)
+    }
+}

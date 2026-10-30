@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "FPR-006"
+
+[[case]]
+id = "fpr-006-positive-pure-lifecycle-function"
+scenario = "positive-pure-lifecycle-function"
+polarity = "positive"
+operation = "evaluate-proof-eligibility"
+baseline = "fixtures/v2/baselines/proof-eligibility.toml"
+mutations = ["select-pure-lifecycle-function"]
+expected = { outcome = "accept", codes = [], facts = ["proof-target:TARGET-PURE-LIFECYCLE=eligible", "effects:TARGET-PURE-LIFECYCLE=none"] }
+
+[[case]]
+id = "fpr-006-negative-unsupported-effect"
+scenario = "negative-proof-target-uses-an-unsupported-effect"
+polarity = "negative"
+operation = "evaluate-proof-eligibility"
+baseline = "fixtures/v2/baselines/proof-eligibility.toml"
+mutations = ["target-unsupported-effect"]
+expected = { outcome = "reject", codes = ["FPR-TARGET-UNSUPPORTED-EFFECT"], facts = ["proof-target:TARGET-EFFECTFUL-LIFECYCLE=ineligible", "effects:TARGET-EFFECTFUL-LIFECYCLE=filesystem"] }

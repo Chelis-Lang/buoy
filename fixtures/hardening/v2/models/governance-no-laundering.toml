@@ -1,0 +1,80 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-governance-no-laundering-hardening-v2"
+requirement_ids = ["DGA-005"]
+kind = "truth-table"
+expected_state_count = 3200
+
+[[dimensions]]
+name = "technical_obligation"
+values = ["satisfied", "unsatisfied"]
+[[dimensions]]
+name = "debt"
+values = ["none", "active", "discharged", "superseded"]
+[[dimensions]]
+name = "waiver"
+values = ["none", "active", "discharged", "revoked", "superseded"]
+[[dimensions]]
+name = "reaffirmation"
+values = ["none", "valid"]
+[[dimensions]]
+name = "carrier"
+values = ["current", "stale"]
+[[dimensions]]
+name = "verdict"
+values = ["not-run", "pass", "fail", "error", "timeout"]
+[[dimensions]]
+name = "migration_approval"
+values = ["none", "valid"]
+[[dimensions]]
+name = "terminal_history"
+values = ["current", "stale"]
+
+[[predicates]]
+name = "tested"
+[[predicates.clauses]]
+all = ["technical_obligation=satisfied", "carrier=current", "verdict=pass"]
+
+[[predicates]]
+name = "process_authorized"
+[[predicates.clauses]]
+all = ["technical_obligation=satisfied"]
+[[predicates.clauses]]
+all = ["waiver=active"]
+
+[[predicates]]
+name = "review_only"
+[[predicates.clauses]]
+all = ["reaffirmation=valid"]
+
+[[invariants]]
+id = "debt-never-satisfies"
+if_all = ["technical_obligation=unsatisfied", "debt!=none"]
+then_all = ["tested=false"]
+[[invariants]]
+id = "waiver-never-satisfies"
+if_all = ["technical_obligation=unsatisfied", "waiver!=none"]
+then_all = ["tested=false"]
+[[invariants]]
+id = "active-waiver-authorizes-process-only"
+if_all = ["technical_obligation=unsatisfied", "waiver=active"]
+then_all = ["process_authorized=true", "tested=false"]
+[[invariants]]
+id = "terminal-waiver-does-not-authorize"
+if_all = ["technical_obligation=unsatisfied", "waiver!=active"]
+then_all = ["process_authorized=false"]
+[[invariants]]
+id = "reaffirmation-never-freshens"
+if_all = ["carrier=stale", "reaffirmation=valid"]
+then_all = ["tested=false", "review_only=true"]
+[[invariants]]
+id = "migration-approval-never-satisfies"
+if_all = ["technical_obligation=unsatisfied", "migration_approval=valid"]
+then_all = ["tested=false"]
+[[invariants]]
+id = "stale-terminal-history-never-satisfies"
+if_all = ["technical_obligation=unsatisfied", "terminal_history=stale"]
+then_all = ["tested=false"]
+[[invariants]]
+id = "nonpass-never-tested"
+if_all = ["verdict!=pass"]
+then_all = ["tested=false"]

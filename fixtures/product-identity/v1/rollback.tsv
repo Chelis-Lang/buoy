@@ -1,0 +1,4 @@
+schema	case	operation	frozen_input	expected_digest
+buoy-rollback-fixture/v1	ROLLBACK-001	restore-primary-alias	fixtures/hardening/v2/canonical-vectors.tsv	xxh3-128:730332e0563a924d602e2d1839b17918
+buoy-rollback-fixture/v1	ROLLBACK-002	restore-core-alias	fixtures/hardening/v1/canonical-report-goldens.tsv	xxh3-128:648b86e395114a2bf07733ce583fbd40
+buoy-rollback-fixture/v1	ROLLBACK-003	read-historical-v1	fixtures/xxh3/v2/migration/complete-v1-input.toml	xxh3-128:23d808d4ee0074aed9ff3d29398ccf73

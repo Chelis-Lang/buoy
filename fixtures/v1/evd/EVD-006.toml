@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-006"
+
+[[case]]
+id = "evd-006-positive-structural-invariant-enforced"
+scenario = "positive-structural-invariant-enforced"
+polarity = "positive"
+operation = "aggregate-assurance"
+baseline = "fixtures/v1/baselines/structural-assurance.toml"
+mutations = ["accept-structural-checker"]
+expected = { outcome = "accept", codes = [], facts = ["assurance:EVD-006=structurally-enforced", "assurance-scope:EVD-006=syntax-invariant"] }
+
+[[case]]
+id = "evd-006-negative-exhaustive-labeled-formal"
+scenario = "negative-exhaustive-model-labeled-formal-proof"
+polarity = "negative"
+operation = "aggregate-assurance"
+baseline = "fixtures/v1/baselines/finite-model.toml"
+mutations = ["explore-model-to-fixed-point", "label-exhaustive-model-as-formal"]
+expected = { outcome = "accept", codes = ["EVD-ASSURANCE-CLASS-UPGRADE"], facts = ["assurance:PROP-LIFECYCLE-TERMINAL=exhaustively-checked", "assurance:PROP-LIFECYCLE-TERMINAL:formally-proved=false"] }

@@ -1,0 +1,28 @@
+[package]
+name = "chelis-provenance"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+description = "Shell-side Chelis host integration over the repository-independent Buoy interfaces"
+
+[features]
+default = ["xxh3-128"]
+xxh3-128 = ["buoy/xxh3-128"]
+blake3-256 = ["buoy/blake3-256"]
+sha-256 = ["buoy/sha-256"]
+
+[dependencies]
+buoy = { path = "../..", version = "=0.2.0", default-features = false }
+chelis-surf-sitter = { path = "../chelis-surf-sitter", version = "=0.2.0" }
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = "=1.0.150"
+toml = "=0.9.5"
+
+[dev-dependencies]
+hegeltest = "=0.28.0"
+tempfile = "=3.27.0"
+
+[lints]
+workspace = true

@@ -1,0 +1,3 @@
+[[exceptions]]
+path = "nix/"
+allow_all_hash_strings = true

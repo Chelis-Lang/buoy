@@ -1,0 +1,39 @@
+component	max_closure_bytes	rationale
+aggregate	30000000000	union of declared current-host Nix closure components
+advisory-db	1000000000	pinned RustSec source snapshot
+aeneas-source	2000000000	pinned Aeneas source snapshot
+aeneas	17000000000	Aeneas Charon OCaml and Rust runtime closure
+bash	1000000000	blocking wrapper shell closure
+cargo-deny	2000000000	dependency-policy executable closure
+cargo-fuzz	2000000000	fuzz runner executable closure
+cargo-llvm-cov	3000000000	coverage tool and LLVM runtime closure
+cargo-mutants	2000000000	mutation runner executable closure
+cargo-nextest	2000000000	nonblocking test runner closure
+cargo-vendor	1000000000	all root Dylint and nested Hegel build Cargo sources
+coreutils	1000000000	deterministic wrapper file and sorting utilities
+dylint-driver-source	10000000	pinned Dylint driver source archive
+dylint-driver-vendor	2000000000	pinned Dylint driver Cargo dependency vendor
+dylint-tools	3000000000	Dylint runner linker and native dependencies
+git	2000000000	declared source-control executable closure
+git-hooks-source	2000000000	pinned Git hook module source snapshot
+gnugrep	1000000000	fail-closed policy log matching closure
+gnused	1000000000	policy path substitution closure
+jq	1000000000	closure report JSON reader closure
+lean-aeneas	5000000000	Lean backend compiler and runtime closure
+native-cc	5000000000	host C compiler linker SDK and native runtime closure
+nix	3000000000	Nix realization and path-info executable closure
+nixfmt	1000000000	Nix source formatter closure
+nixpkgs-source	2000000000	pinned Nixpkgs source snapshot
+openspec	2000000000	strict planning validator closure
+openssl	2000000000	Dylint native TLS build input closure
+pkg-config	1000000000	native build metadata helper closure
+prek	1000000000	Git hook runner closure
+rust-clippy-source	1000000000	pinned rust-clippy source snapshot
+rust-overlay-source	1000000000	pinned Rust toolchain recipe source
+rust-toolchain	7000000000	project Rust Miri source compiler targets and LLVM tools
+rustup	1000000000	pinned toolchain routing wrapper closure
+unicode-casefold-data	100000000	pinned Unicode case-fold source data
+verus	5000000000	Verus distribution and bundled solver closure
+verus-rust-toolchain	5000000000	Verus-compatible Rust toolchain closure
+z3-standalone	3000000000	standalone solver closure distinct from bundled Z3
+zlib	1000000000	native compression build input closure

@@ -1,0 +1,111 @@
+schema = "chelis-provenance-derivation-registrations/v1"
+chelis_revision = "c0d4caf16f557406f299f0989bab48fa0f924cbd"
+untracked_duplicates = "none observed in the pinned tracked tree; the advisory report keeps possible copies visible"
+
+[[derivation]]
+id = "CHELIS-DERIV-STD-BUNDLE"
+inventory_id = "deriv-std-bundle"
+sources = "packages/chelis-std/"
+targets = "crates/chelis-std-bundle/dist/"
+tool = "scripts/regenerate_chelis_std_bundle.py"
+configuration = "default regeneration flags at the pinned revision"
+relation = "generated-from"
+consistency_oracle = "regenerate and byte-compare the bundle"
+scope = "bundle bytes only"
+exclusions = ["consistency asserts no runtime behavior"]
+
+[[derivation]]
+id = "CHELIS-DERIV-CONFORMANCE-SKILLS"
+inventory_id = "deriv-conformance-skills"
+sources = "agent-skills/"
+targets = "crates/chelis-conformance/assets/skills/"
+tool = "scripts/regenerate_conformance_assets.py"
+configuration = "default regeneration flags at the pinned revision"
+relation = "byte-equal"
+consistency_oracle = "regenerate and byte-compare embedded skills"
+scope = "embedded copies only"
+exclusions = ["consistency asserts no skill quality"]
+
+[[derivation]]
+id = "CHELIS-DERIV-CONFORMANCE-CANONICAL"
+inventory_id = "deriv-conformance-canonical"
+sources = "AGENTS.md and shell surface templates"
+targets = "crates/chelis-conformance/assets/canonical/"
+tool = "conformance tripwire checker"
+configuration = "default tripwire configuration at the pinned revision"
+relation = "byte-equal"
+consistency_oracle = "conformance tripwires compare canonical assets"
+scope = "embedded canonical assets only"
+exclusions = ["consistency asserts no agent behavior"]
+
+[[derivation]]
+id = "CHELIS-DERIV-ERF-PROOF"
+inventory_id = "deriv-erf-proof"
+sources = "scripts/generate_erf_proof.py"
+targets = "crates/chelis-prove/data/erf_proof/"
+tool = "scripts/generate_erf_proof.py with Sollya and Gappa"
+configuration = "generator flags recorded in the bundle manifest"
+relation = "generated-from"
+consistency_oracle = "regenerate and compare the proof-source bundle"
+scope = "proof-source bytes only"
+exclusions = ["bundle consistency is not proof acceptance"]
+
+[[derivation]]
+id = "CHELIS-DERIV-SPECIAL-ENVELOPE"
+inventory_id = "deriv-special-envelope"
+sources = "scripts/generate_special_fn_envelope.py"
+targets = "crates/chelis-prove/data/special_fn_envelopes/"
+tool = "scripts/generate_special_fn_envelope.py"
+configuration = "generator flags recorded per envelope"
+relation = "generated-from"
+consistency_oracle = "regenerate and compare envelope records"
+scope = "envelope records only"
+exclusions = ["envelope consistency is not numerical soundness"]
+
+[[derivation]]
+id = "CHELIS-DERIV-TREE-SITTER-SURF"
+inventory_id = "deriv-tree-sitter-surf"
+sources = "grammars/tree-sitter-chelis-surf/grammar.js"
+targets = "grammars/tree-sitter-chelis-surf/src/"
+tool = "tree-sitter generate"
+configuration = "pinned tree-sitter CLI at the pinned revision"
+relation = "generated-from"
+consistency_oracle = "regenerate and byte-compare parser sources"
+scope = "generated parser sources only"
+exclusions = ["consistency asserts no parser correctness"]
+
+[[derivation]]
+id = "CHELIS-DERIV-TREE-SITTER-DEEP"
+inventory_id = "deriv-tree-sitter-deep"
+sources = "grammars/tree-sitter-chelis-deep/grammar.js"
+targets = "grammars/tree-sitter-chelis-deep/src/"
+tool = "tree-sitter generate"
+configuration = "pinned tree-sitter CLI at the pinned revision"
+relation = "generated-from"
+consistency_oracle = "regenerate and byte-compare parser sources"
+scope = "generated parser sources only"
+exclusions = ["consistency asserts no parser correctness"]
+
+[[derivation]]
+id = "CHELIS-DERIV-COVERAGE"
+inventory_id = "deriv-coverage"
+sources = "scripts/prove_corpus/harvest_coverage.py"
+targets = "scripts/prove_corpus/coverage_map.json and coverage_summary.md"
+tool = "scripts/prove_corpus/harvest_coverage.py"
+configuration = "default harvest flags at the pinned revision"
+relation = "generated-from"
+consistency_oracle = "reharvest and compare the coverage inventory"
+scope = "coverage inventory bytes only"
+exclusions = ["coverage inventory asserts no proof coverage"]
+
+[[derivation]]
+id = "CHELIS-DERIV-BENCHMARK"
+inventory_id = "deriv-benchmark"
+sources = "benchmark runners"
+targets = "benchmarks/results/latest.json"
+tool = "benchmark runner suite"
+configuration = "recorded runner flags and explicit skip reasons"
+relation = "host-consistency"
+consistency_oracle = "rerun benchmarks and compare recorded shape"
+scope = "recorded result shape only; timing values stay noncanonical"
+exclusions = ["benchmark records assert no performance guarantee"]

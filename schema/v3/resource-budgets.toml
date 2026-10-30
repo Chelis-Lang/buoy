@@ -1,0 +1,156 @@
+schema = "spec-provenance-resource-budgets/v3"
+identity_policy = "acceptance-affecting-limits-are-bound-to-owning-semantic-configuration"
+unit_policy = "bytes-and-counts-are-u64-timeouts-are-milliseconds"
+
+[[budget]]
+id = "configuration-bytes"
+unit = "bytes"
+default = 1048576
+maximum = 1048576
+diagnostic = "REH-BUDGET-CONFIG-BYTES"
+identity = "configuration-schema-id"
+check_before = "configuration-byte-retention"
+
+[[budget]]
+id = "path-depth"
+unit = "components"
+default = 64
+maximum = 256
+diagnostic = "REH-BUDGET-PATH-DEPTH"
+identity = "repository-config"
+check_before = "directory-descent"
+
+[[budget]]
+id = "directory-entries"
+unit = "entries"
+default = 100000
+maximum = 1000000
+diagnostic = "REH-BUDGET-DIRECTORY-ENTRIES"
+identity = "repository-config"
+check_before = "entry-retention"
+
+[[budget]]
+id = "selected-files"
+unit = "files"
+default = 10000
+maximum = 100000
+diagnostic = "REH-BUDGET-SELECTED-FILES"
+identity = "repository-config"
+check_before = "snapshot-file-retention"
+
+[[budget]]
+id = "file-bytes"
+unit = "bytes"
+default = 16777216
+maximum = 268435456
+diagnostic = "REH-BUDGET-FILE-BYTES"
+identity = "repository-config"
+check_before = "complete-file-allocation"
+
+[[budget]]
+id = "total-bytes"
+unit = "bytes"
+default = 536870912
+maximum = 4294967296
+diagnostic = "REH-BUDGET-TOTAL-BYTES"
+identity = "repository-config"
+check_before = "snapshot-byte-retention"
+
+[[budget]]
+id = "graph-objects"
+unit = "objects"
+default = 200000
+maximum = 1000000
+diagnostic = "REH-BUDGET-GRAPH-OBJECTS"
+identity = "repository-config"
+check_before = "object-retention"
+
+[[budget]]
+id = "graph-references"
+unit = "references"
+default = 2000000
+maximum = 10000000
+diagnostic = "REH-BUDGET-GRAPH-REFERENCES"
+identity = "repository-config"
+check_before = "reference-index-retention"
+
+[[budget]]
+id = "canonical-nesting"
+unit = "levels"
+default = 128
+maximum = 512
+diagnostic = "REH-BUDGET-CANONICAL-NESTING"
+identity = "encoding-config"
+check_before = "recursive-decode"
+
+[[budget]]
+id = "canonical-values"
+unit = "values"
+default = 5000000
+maximum = 20000000
+diagnostic = "REH-BUDGET-CANONICAL-VALUES"
+identity = "encoding-config"
+check_before = "decoded-value-allocation"
+
+[[budget]]
+id = "diagnostics"
+unit = "diagnostics"
+default = 100000
+maximum = 1000000
+diagnostic = "REH-BUDGET-DIAGNOSTICS"
+identity = "repository-config"
+check_before = "diagnostic-retention"
+
+[[budget]]
+id = "oracle-stdout"
+unit = "bytes"
+default = 8388608
+maximum = 67108864
+diagnostic = "REH-BUDGET-ORACLE-STDOUT"
+identity = "oracle-config"
+check_before = "stream-retention"
+
+[[budget]]
+id = "oracle-stderr"
+unit = "bytes"
+default = 8388608
+maximum = 67108864
+diagnostic = "REH-BUDGET-ORACLE-STDERR"
+identity = "oracle-config"
+check_before = "stream-retention"
+
+[[budget]]
+id = "oracle-output-combined"
+unit = "bytes"
+default = 16777216
+maximum = 134217728
+diagnostic = "REH-BUDGET-ORACLE-OUTPUT"
+identity = "oracle-config"
+check_before = "combined-stream-retention"
+
+[[budget]]
+id = "oracle-concurrency"
+unit = "processes"
+default = 8
+maximum = 64
+diagnostic = "REH-BUDGET-ORACLE-CONCURRENCY"
+identity = "execution-config"
+check_before = "process-spawn"
+
+[[budget]]
+id = "oracle-timeout"
+unit = "milliseconds"
+default = 300000
+maximum = 3600000
+diagnostic = "REH-BUDGET-ORACLE-TIMEOUT"
+identity = "oracle-config"
+check_before = "process-spawn"
+
+[[budget]]
+id = "raw-log-retention"
+unit = "bytes"
+default = 1048576
+maximum = 8388608
+diagnostic = "REH-BUDGET-RAW-LOG"
+identity = "noncanonical-only"
+check_before = "raw-log-retention"

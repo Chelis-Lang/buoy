@@ -1,0 +1,28 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "finite-model"
+
+[[formal_properties]]
+id = "PROP-LIFECYCLE-TERMINAL"
+statement = "$payload:property:terminality"
+domain = "$payload:domain:atom-lifecycle"
+assumptions = []
+
+[[finite_models]]
+id = "MODEL-LIFECYCLE"
+revision = "$digest:finite-model-revision:MODEL-LIFECYCLE"
+states = ["proposed", "ratified", "superseded", "withdrawn"]
+events = ["ratify", "supersede", "withdraw"]
+initial = ["proposed"]
+transition = "$payload:transition:atom-lifecycle"
+bounds = "$payload:bounds:four-states"
+invariants = ["$object:formal-property:PROP-LIFECYCLE-TERMINAL"]
+
+[[oracles]]
+id = "ORC-MODEL"
+kind = "exhaustive-model"
+runner = "$tool:fixture-fixed-point-runner"
+selection = "$payload:selection:MODEL-LIFECYCLE"
+normalization = "$payload:verdict:five-state"
+configuration = "$digest:raw-artifact:model-config"
+scope = "$payload:scope:MODEL-LIFECYCLE"
+exclusions = []

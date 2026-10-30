@@ -1,0 +1,38 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "DET-008"
+
+[[case]]
+id = "det-008-positive-core-boundary-enforced"
+scenario = "positive-core-boundary-structurally-enforced"
+polarity = "positive"
+operation = "architecture-gate"
+baseline = "fixtures/dylint/allowed-boundaries"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["fcis-no-std=pass", "fcis-ambient-state=pass", "fcis-callable-interface=pass", "assurance=structural-only"] }
+
+[[case]]
+id = "det-008-negative-core-enables-std"
+scenario = "negative-core-enables-standard-library"
+polarity = "negative"
+operation = "architecture-gate"
+baseline = "fixtures/dylint/missing-no-std"
+mutations = []
+expected = { outcome = "reject", codes = ["FCIS_CORE_MUST_BE_NO_STD"], facts = ["assurance=structural-only"] }
+
+[[case]]
+id = "det-008-negative-ambient-mutable-state"
+scenario = "negative-core-owns-ambient-mutable-state"
+polarity = "negative"
+operation = "architecture-gate"
+baseline = "fixtures/dylint/ambient-state"
+mutations = []
+expected = { outcome = "reject", codes = ["FCIS_CORE_MUST_NOT_OWN_AMBIENT_STATE"], facts = ["assurance=structural-only"] }
+
+[[case]]
+id = "det-008-negative-public-callable-interface"
+scenario = "negative-public-core-interface-accepts-callable-behavior"
+polarity = "negative"
+operation = "architecture-gate"
+baseline = "fixtures/dylint/callable-public-interface"
+mutations = []
+expected = { outcome = "reject", codes = ["FCIS_CORE_MUST_NOT_EXPOSE_CALLABLE_INTERFACES"], facts = ["assurance=structural-only"] }

@@ -1,0 +1,8 @@
+use buoy_core::{ActiveAlgorithm, DigestAlgorithm};
+
+pub fn sole_hash(input: &[u8]) -> String {
+    ActiveAlgorithm::new(DigestAlgorithm::Xxh3_128)
+        .and_then(|active| active.compute(DigestAlgorithm::Xxh3_128, input))
+        .map(|digest| digest.canonical_text())
+        .unwrap_or_default()
+}

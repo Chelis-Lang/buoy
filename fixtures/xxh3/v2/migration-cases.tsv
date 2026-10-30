@@ -1,0 +1,10 @@
+schema	case	polarity	baseline	mutation	expected_outcome	expected_codes	required_invariants
+spec-provenance-migration-case/v2	complete-migration	positive	fixtures/xxh3/v2/migration/complete-v1-input.toml	none	accept	-	stable-ids,lifecycle,tombstones,approvals,impact-closure,v2-only
+spec-provenance-migration-case/v2	complete-migration-replay	positive	fixtures/xxh3/v2/migration/complete-v1-input.toml	replay-twice	accept	-	byte-identical,idempotent,stable-ids,lifecycle,v2-only
+spec-provenance-migration-case/v2	missing-authoritative-bytes	negative	fixtures/xxh3/v2/migration/complete-v1-input.toml	remove-authoritative-bytes:ATOM-MIGRATION-001	reject	XXH-MIGRATION-MISSING-AUTHORITATIVE-BYTES	fail-closed,no-relabel
+spec-provenance-migration-case/v2	missing-approval	negative	fixtures/xxh3/v2/migration/complete-v1-input.toml	remove-approval:APPROVAL-MIGRATION-PROOF-001	reject	XXH-MIGRATION-MISSING-APPROVAL	fail-closed,no-invented-approval
+spec-provenance-migration-case/v2	stale-nested-binding	negative	fixtures/xxh3/v2/migration/complete-v1-input.toml	retain-v1-binding:PROOF-MIGRATION-001:ATOM-MIGRATION-001	reject	XXH-MIGRATION-STALE-NESTED-BINDING	fail-closed,v2-only
+spec-provenance-migration-case/v2	illegal-lifecycle-change	negative	fixtures/xxh3/v2/migration/complete-v1-input.toml	set-lifecycle:ATOM-MIGRATION-RETIRED:ratified	reject	XXH-MIGRATION-ILLEGAL-LIFECYCLE	terminal-remains-terminal,tombstone-preserved
+spec-provenance-migration-case/v2	mixed-schema-versions	negative	fixtures/xxh3/v2/migration/complete-v1-input.toml	set-target-schema:PROOF-MIGRATION-001:spec-provenance/v1	reject	XXH-MIGRATION-MIXED-VERSION	v2-only,no-relabel
+spec-provenance-migration-case/v2	duplicate-stable-id	negative	fixtures/xxh3/v2/migration/complete-v1-input.toml	duplicate-object:ATOM-MIGRATION-001	reject	XXH-MIGRATION-DUPLICATE-ID	stable-id-unique
+spec-provenance-migration-case/v2	partial-impact-closure	negative	fixtures/xxh3/v2/migration/complete-v1-input.toml	remove-disposition:PROOF-MIGRATION-001	reject	XXH-MIGRATION-INCOMPLETE-IMPACT	complete-impact-closure

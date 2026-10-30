@@ -1,0 +1,6 @@
+schema	case_id	root_kind	entry_kind	replacement	expected
+buoy-mount-descriptor-fixture/v1	regular-root	regular-directory	regular-file	none	accept
+buoy-mount-descriptor-fixture/v1	link-root	symlink	regular-file	none	REH-MOUNT-ROOT
+buoy-mount-descriptor-fixture/v1	link-entry	regular-directory	symlink	none	DET-PATH-LINK
+buoy-mount-descriptor-fixture/v1	nested-repository	regular-directory	.git-directory	none	DET-PATH-SUBMODULE
+buoy-mount-descriptor-fixture/v1	root-replacement	regular-directory	regular-file	symlink-after-open	original-bytes

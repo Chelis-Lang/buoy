@@ -1,0 +1,54 @@
+schema = "spec-provenance-reference-model/v1"
+id = "model-coverage-policy-adoption-v1"
+requirement_ids = ["EVD-009"]
+kind = "truth-table"
+expected_state_count = 108
+
+[[dimensions]]
+name = "scope_relation"
+values = ["equal", "grows", "shrinks"]
+[[dimensions]]
+name = "role_relation"
+values = ["equal", "grows", "shrinks"]
+[[dimensions]]
+name = "mode_relation"
+values = ["equal", "promotes", "weakens"]
+[[dimensions]]
+name = "ratchet"
+values = ["same", "changed"]
+[[dimensions]]
+name = "weakening_disposition"
+values = ["valid", "missing"]
+
+[[predicates]]
+name = "weakening"
+[[predicates.clauses]]
+all = ["scope_relation=shrinks"]
+[[predicates.clauses]]
+all = ["role_relation=shrinks"]
+[[predicates.clauses]]
+all = ["mode_relation=weakens"]
+[[predicates.clauses]]
+all = ["ratchet=changed"]
+
+[[predicates]]
+name = "monotonic"
+[[predicates.clauses]]
+all = ["scope_relation!=shrinks", "role_relation!=shrinks", "mode_relation!=weakens", "ratchet=same"]
+
+[[predicates]]
+name = "change_accepted"
+[[predicates.clauses]]
+all = ["weakening=false"]
+[[predicates.clauses]]
+all = ["weakening=true", "weakening_disposition=valid"]
+
+[[invariants]]
+id = "undispositioned-weakening-fails"
+if_all = ["weakening=true", "weakening_disposition=missing"]
+then_all = ["change_accepted=false"]
+
+[[invariants]]
+id = "monotonic-is-not-weakening"
+if_all = ["monotonic=true"]
+then_all = ["weakening=false", "change_accepted=true"]

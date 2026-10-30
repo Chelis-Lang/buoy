@@ -1,0 +1,20 @@
+{
+  "schema": "buoy/trace-report/v1",
+  "note": "One row satisfies exact plan expectations together.",
+  "rows": [
+    {
+      "relation": "TRACE-RELATION",
+      "record": "blake3-256:aaaa",
+      "requirement_id": "DEMO-001",
+      "atom_revision": "blake3-256:bbbb",
+      "requirement_node": "blake3-256:node-req",
+      "implementation_node": "blake3-256:node-impl",
+      "requirement_path": "openspec/specs/demo/spec.md",
+      "implementation_path": "src/lib.rs",
+      "state": "current",
+      "freshness": { "record": true, "attachment": true, "implementation": true, "requirement": true, "authority": true },
+      "diagnostics": []
+    }
+  ],
+  "expected_row_count": 1
+}

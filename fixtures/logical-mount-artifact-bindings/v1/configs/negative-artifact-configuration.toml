@@ -1,0 +1,20 @@
+schema = "buoy/repository-config/v3"
+digest_algorithms = ["xxh3-128"]
+
+[adapter_configurations]
+"artifact/v1" = '''
+language = "nix"
+normalize_text = true
+'''
+
+[[mounts]]
+id = "project"
+prefix = "project"
+
+[[selectors]]
+mount = "project"
+root = "src"
+adapter = "artifact/v1"
+include = ["**/*"]
+exclude = []
+authority_expectation = "forbidden"

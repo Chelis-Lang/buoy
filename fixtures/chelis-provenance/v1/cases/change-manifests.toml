@@ -1,0 +1,73 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "change-base-head-transitive"
+requirement = "CHELIS-PROV-007"
+scenario = "neutral-base-to-head-transitive-closure"
+polarity = "positive"
+operation = "change-check"
+input = "committed base and head snapshots plus one neutral change manifest with one exact disposition for every one-hop and two-hop impact"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["impact-closure=true", "provider-inputs=absent", "clock-inputs=absent"]
+execution = "integration"
+
+[[case]]
+id = "change-base-head-provider-neutral"
+requirement = "CHELIS-PROV-004"
+scenario = "base-to-head-provider-noise"
+polarity = "negative-control"
+operation = "change-check"
+input = "identical canonical base and head inputs with different labels users review timestamps and issue state"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["report-bytes-identical=true", "provider-noise", "provider-authority=excluded"]
+execution = "integration"
+
+[[case]]
+id = "change-weakening-missing-migration"
+requirement = "CHELIS-PROV-007"
+scenario = "weakening-protocol-missing-migration"
+polarity = "negative"
+operation = "policy-ratchet"
+input = "a blocking policy narrows coverage with approval debt and waiver records but no repository-owned migration record"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-POLICY-WEAKENING"]
+facts = ["change-accepted=false", "protocol-step-missing=migration"]
+execution = "integration"
+
+[[case]]
+id = "change-weakening-missing-approval"
+requirement = "CHELIS-PROV-007"
+scenario = "weakening-protocol-missing-approval"
+polarity = "negative"
+operation = "policy-ratchet"
+input = "a blocking policy narrows coverage with migration debt and waiver records but no repository-owned approval record"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-POLICY-WEAKENING"]
+facts = ["change-accepted=false", "protocol-step-missing=approval"]
+execution = "integration"
+
+[[case]]
+id = "change-weakening-missing-debt"
+requirement = "CHELIS-PROV-007"
+scenario = "weakening-protocol-missing-debt"
+polarity = "negative"
+operation = "policy-ratchet"
+input = "a blocking policy narrows coverage with migration approval and waiver records but no visible debt record"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-POLICY-WEAKENING"]
+facts = ["change-accepted=false", "protocol-step-missing=debt"]
+execution = "integration"
+
+[[case]]
+id = "change-weakening-missing-waiver"
+requirement = "CHELIS-PROV-007"
+scenario = "weakening-protocol-missing-waiver"
+polarity = "negative"
+operation = "policy-ratchet"
+input = "a blocking policy narrows coverage with migration approval and debt records but no applicable process waiver"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-POLICY-WEAKENING"]
+facts = ["change-accepted=false", "protocol-step-missing=waiver"]
+execution = "integration"

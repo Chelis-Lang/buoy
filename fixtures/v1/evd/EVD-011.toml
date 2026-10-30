@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-011"
+
+[[case]]
+id = "evd-011-positive-known-failing-carrier-debt"
+scenario = "positive-known-failing-carrier-has-explicit-debt"
+polarity = "positive"
+operation = "report-evidence"
+baseline = "fixtures/v1/baselines/debt-waiver.toml"
+mutations = ["attach-debt-to-failing-carrier"]
+expected = { outcome = "accept", codes = ["EVD-REQUIRED-VERDICT-FAIL"], facts = ["carrier:CAR-POSITIVE=fresh", "verdict:ORC-POSITIVE=fail", "debt:DEBT-FAILING-CARRIER=active", "assurance:EVD-BASE:tested=false"] }
+
+[[case]]
+id = "evd-011-negative-waiver-aggregated-passing"
+scenario = "negative-waiver-aggregated-as-passing-evidence"
+polarity = "negative"
+operation = "aggregate-assurance"
+baseline = "fixtures/v1/baselines/debt-waiver.toml"
+mutations = ["waive-missing-passing-carrier"]
+expected = { outcome = "accept", codes = ["EVD-REQUIRED-VERDICT-NOT-RUN"], facts = ["waiver:WAIVER-MISSING-PASS=active", "obligation:OBL-PASSING-POSITIVE=unsatisfied", "verdict:ORC-POSITIVE=not-run", "assurance:EVD-BASE:tested=false"] }

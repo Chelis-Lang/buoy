@@ -1,0 +1,10 @@
+[package]
+name = "clean-buoy-shell"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+buoy = { path = "../../../../..", version = "=0.2.0" }

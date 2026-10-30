@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-008"
+
+[[case]]
+id = "evd-008-positive-cli-lsp-same-snapshot"
+scenario = "positive-cli-and-lsp-inspect-the-same-saved-snapshot"
+polarity = "positive"
+operation = "compare-frontends"
+baseline = "fixtures/v1/baselines/frontend-parity.toml"
+mutations = ["compare-cli-lsp-saved-snapshot"]
+expected = { outcome = "accept", codes = [], facts = ["semantic-diagnostics:cli=lsp", "authoritative-input=saved-snapshot"] }
+
+[[case]]
+id = "evd-008-negative-unsaved-buffer-green"
+scenario = "negative-unsaved-editor-buffer-green"
+polarity = "negative"
+operation = "compare-frontends"
+baseline = "fixtures/v1/baselines/frontend-parity.toml"
+mutations = ["supply-unsaved-green-editor-result"]
+expected = { outcome = "accept", codes = ["EVD-CI-UNSAVED-RESULT-NONAUTHORITATIVE"], facts = ["editor-result=noncanonical", "authoritative-input=saved-snapshot", "ci-acceptance=false"] }

@@ -1,0 +1,49 @@
+schema = "buoy-product-compatibility/v1"
+product = "Buoy"
+first_buoy_release = "0.2.0"
+alias_window = ">=0.2.0,<0.3.0"
+alias_removal_release = "0.3.0"
+canonical_messages_include_deprecations = false
+aliases_are_authoritative = false
+
+[[alias]]
+kind = "cargo-package"
+old = "spec-provenance"
+primary = "buoy"
+owner = "buoy-maintainers"
+removal = "0.3.0"
+
+[[alias]]
+kind = "rust-crate"
+old = "spec_provenance"
+primary = "buoy"
+owner = "buoy-maintainers"
+removal = "0.3.0"
+
+[[alias]]
+kind = "cargo-package"
+old = "spec-provenance-core"
+primary = "buoy-core"
+owner = "buoy-maintainers"
+removal = "0.3.0"
+
+[[alias]]
+kind = "rust-crate"
+old = "spec_provenance_core"
+primary = "buoy_core"
+owner = "buoy-maintainers"
+removal = "0.3.0"
+
+[[alias]]
+kind = "binary"
+old = "spec-provenance"
+primary = "buoy"
+owner = "buoy-maintainers"
+removal = "0.3.0"
+
+[[alias]]
+kind = "devenv-task-prefix"
+old = "spec-provenance:"
+primary = "buoy:"
+owner = "buoy-maintainers"
+removal = "0.3.0"

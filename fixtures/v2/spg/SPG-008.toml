@@ -1,0 +1,38 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "SPG-008"
+
+[[case]]
+id = "spg-008-positive-complete-domain"
+scenario = "positive-every-declared-member-has-one-disposition"
+polarity = "positive"
+operation = "validate-surface"
+baseline = "fixtures/v2/baselines/surface-graph.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["surface:SURFACE-001=complete", "surface-member:member-a=authority", "surface-member:member-b=authority"] }
+
+[[case]]
+id = "spg-008-negative-missing-member"
+scenario = "negative-expected-member-is-absent"
+polarity = "negative"
+operation = "validate-surface"
+baseline = "fixtures/v2/baselines/surface-graph.toml"
+mutations = ["remove-surface-member"]
+expected = { outcome = "reject", codes = ["SPG-SURFACE-MISSING-MEMBER"], facts = ["surface:SURFACE-001=incomplete", "surface-member:member-b=undecided"] }
+
+[[case]]
+id = "spg-008-negative-duplicate-member"
+scenario = "negative-duplicate-member"
+polarity = "negative"
+operation = "validate-surface"
+baseline = "fixtures/v2/baselines/surface-graph.toml"
+mutations = ["duplicate-surface-member"]
+expected = { outcome = "reject", codes = ["SPG-SURFACE-DUPLICATE-MEMBER"], facts = ["surface:SURFACE-001=incomplete"] }
+
+[[case]]
+id = "spg-008-negative-unknown-and-missing"
+scenario = "negative-undeclared-member-is-substituted"
+polarity = "negative"
+operation = "validate-surface"
+baseline = "fixtures/v2/baselines/surface-graph.toml"
+mutations = ["replace-surface-member-with-unknown"]
+expected = { outcome = "reject", codes = ["SPG-SURFACE-MISSING-MEMBER", "SPG-SURFACE-UNKNOWN-MEMBER"], facts = ["surface:SURFACE-001=incomplete", "surface-member:member-b=undecided"] }

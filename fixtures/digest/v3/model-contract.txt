@@ -1,0 +1,10 @@
+model_id=buoy-digest-transition/v1
+state_spaces=digest-acceptance:64,active-member-resolution:12,transition-index-lifecycle:4096
+event_alphabet=parse,compute,resolve-active,regenerate,verify-index,delete-index
+transition_relation=model_digest_acceptance,model_active_resolution,model_identity_transition,model_index_verification
+implementation_relation=implementation_digest_acceptance,implementation_active_resolution,implementation_identity_transition,implementation_index_verification
+bounds=tag-class:4,payload-length:2,text-case:2,hex-validity:2,operation:2,declared-count:3,registration:2,feature:2,transition-bits:12
+invariants=regeneration-soundness,index-non-authority,index-verification,preservation,idempotence
+fixed_point=accepted-target-rerun-until-equal,max-iterations:2
+claim_scope=model-internal-exhaustive-only
+production_correspondence=separate-focused-controls

@@ -1,0 +1,10 @@
+{
+  "schema": "buoy-trace-publication-package-fixtures/v1",
+  "cases": [
+    { "name": "xxh3-128", "features": ["xxh3-128"], "expected": "accept" },
+    { "name": "blake3-256", "features": ["blake3-256"], "expected": "accept" },
+    { "name": "sha-256", "features": ["sha-256"], "expected": "accept" },
+    { "name": "missing-source-identity", "features": ["blake3-256"], "source_revision": "", "expected": "reject", "diagnostic": "TPT-PACKAGE-SOURCE-IDENTITY" },
+    { "name": "ambient-tool-leakage", "features": ["blake3-256"], "ambient_cargo_home": "/home/user/.cargo", "expected": "reject", "diagnostic": "TPT-PACKAGE-AMBIENT-TOOL" }
+  ]
+}

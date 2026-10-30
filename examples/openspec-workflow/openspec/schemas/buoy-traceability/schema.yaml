@@ -1,0 +1,37 @@
+name: buoy-traceability
+version: 1
+description: Reusable Buoy traceability workflow
+artifacts:
+  - id: proposal
+    generates: proposal.md
+    description: Change motivation, scope, goals, and non-goals
+    template: proposal.md
+    requires: []
+  - id: specs
+    generates: specs/**/*.md
+    description: Requirements with stable IDs and scenarios
+    template: specs/spec.md
+    requires:
+      - proposal
+  - id: design
+    generates: design.md
+    description: Technical decisions and trust boundaries
+    template: design.md
+    requires:
+      - specs
+  - id: traceability
+    generates: traceability.md
+    description: Planned code, evidence, and external link actions
+    template: traceability.md
+    requires:
+      - design
+  - id: tasks
+    generates: tasks.md
+    description: Ordered implementation and validation tasks
+    template: tasks.md
+    requires:
+      - traceability
+apply:
+  requires:
+    - tasks
+  tracks: tasks.md

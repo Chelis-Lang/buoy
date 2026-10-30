@@ -1,0 +1,11 @@
+schema	case	surface	value	expected_code
+spec-provenance-malformed-digest/v2	sha256-text	text	sha256:0000000000000000000000000000000000000000000000000000000000000000	DET-DIGEST-ALGORITHM
+spec-provenance-malformed-digest/v2	blake3-text	text	blake3:0000000000000000000000000000000000000000000000000000000000000000	DET-DIGEST-ALGORITHM
+spec-provenance-malformed-digest/v2	unknown-binary-algorithm-tag	binary	0c00000000000000140005001099aa06d3014798d86001c324468d497f	DET-DIGEST-ALGORITHM
+spec-provenance-malformed-digest/v2	wrong-binary-length	binary	0c00000000000000130002000f000000000000000000000000000000	DET-DIGEST-LENGTH
+spec-provenance-malformed-digest/v2	uppercase-prefix	text	XXH3-128:99aa06d3014798d86001c324468d497f	DET-DIGEST-ALGORITHM
+spec-provenance-malformed-digest/v2	uppercase-hexadecimal	text	xxh3-128:99AA06D3014798D86001C324468D497F	DET-DIGEST-HEX
+spec-provenance-malformed-digest/v2	nonhexadecimal	text	xxh3-128:99aa06d3014798d86001c324468d497g	DET-DIGEST-HEX
+spec-provenance-malformed-digest/v2	truncated-text	text	xxh3-128:99aa06d3014798d86001c324468d497	DET-DIGEST-LENGTH
+spec-provenance-malformed-digest/v2	padded-text	text	xxh3-128:99aa06d3014798d86001c324468d497f0	DET-DIGEST-LENGTH
+spec-provenance-malformed-digest/v2	observed-collision	collision	left=00;right=01;digest=99aa06d3014798d86001c324468d497f	DET-DIGEST-OBSERVED-COLLISION

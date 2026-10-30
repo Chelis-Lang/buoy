@@ -1,0 +1,3 @@
+schema = "quality-assurance-fixture-configuration/v1"
+cases = 4
+seed = 7

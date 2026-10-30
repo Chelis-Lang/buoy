@@ -1,0 +1,6 @@
+target_id	path	kind	platform	coverage_class	disposition	rationale
+covered-source	src/covered.rs	production-library	portable	cargo-llvm-cov	included	workspace source
+dylint-source	dylint/src/lib.rs	local-dylint-detector	portable	separate-manifest-cargo-llvm-cov	included-assurance	separate manifest source
+generated-source	generated.rs	generated-executable-source	portable	cargo-llvm-cov	included-assurance	generated executable source
+platform-source	platform.rs	production-platform-backend	macos	aggregate-platform-cargo-llvm-cov	included	required platform source
+standalone-validator	tools/validator.rs	standalone-validator	portable	cargo-harness-llvm-cov	included-assurance	Cargo reachable validator

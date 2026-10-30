@@ -1,0 +1,30 @@
+[package]
+name = "chelis-surf-sitter"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+description = "Pinned vendored tree-sitter grammar binding for the Chelis Surf dialect"
+
+[dependencies]
+tree-sitter = "=0.26.8"
+
+[build-dependencies]
+cc = "=1.4.0"
+
+[lints.rust]
+missing_docs = "deny"
+# The grammar binding is the workspace's only sanctioned FFI boundary. The
+# two audited unsafe expressions carry item-level allows; everything else
+# stays denied.
+unsafe_code = "deny"
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+expect_used = "deny"
+panic = "deny"
+todo = "deny"
+unimplemented = "deny"
+unwrap_used = "deny"

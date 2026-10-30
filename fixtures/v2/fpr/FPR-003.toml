@@ -1,0 +1,137 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "FPR-003"
+
+[[case]]
+id = "fpr-003-positive-all-bindings-equal"
+scenario = "positive-all-proof-bindings-remain-equal"
+polarity = "positive"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["proof:PROOF-TERMINALITY=fresh"] }
+
+[[case]]
+id = "fpr-003-negative-atom-binding"
+scenario = "negative-atom-binding-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-atom-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-ATOM"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-property-binding"
+scenario = "negative-property-binding-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-property-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-PROPERTY"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-implementation-binding"
+scenario = "negative-implementation-representation-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-implementation-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-IMPLEMENTATION"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-assumption-binding"
+scenario = "negative-assumption-binding-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-assumption-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-ASSUMPTION"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-translator-binding"
+scenario = "negative-translator-identity-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-translator-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-TRANSLATOR"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-translator-configuration"
+scenario = "negative-translator-configuration-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-translator-configuration"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-TRANSLATOR-CONFIG"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-verifier-binding"
+scenario = "negative-verifier-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-verifier-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-VERIFIER"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-verifier-configuration"
+scenario = "negative-verifier-configuration-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-verifier-configuration"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-VERIFIER-CONFIG"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-external-model-binding"
+scenario = "negative-external-model-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-external-model-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-EXTERNAL-MODEL"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-generated-artifact-binding"
+scenario = "negative-generated-artifact-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-generated-artifact-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-GENERATED-ARTIFACT"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-proof-source-binding"
+scenario = "negative-proof-source-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-source-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-SOURCE"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-verdict-binding"
+scenario = "negative-normalized-verdict-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-verdict-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-VERDICT"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-scope-binding"
+scenario = "negative-proof-scope-changes"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-scope-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-SCOPE"], facts = ["proof:PROOF-TERMINALITY=stale"] }
+
+[[case]]
+id = "fpr-003-negative-exclusions-binding"
+scenario = "negative-proof-exclusions-change"
+polarity = "negative"
+operation = "evaluate-proof-freshness"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["mutate-proof-exclusions-binding"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-EXCLUSIONS"], facts = ["proof:PROOF-TERMINALITY=stale"] }

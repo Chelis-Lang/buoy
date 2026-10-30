@@ -1,0 +1,22 @@
+schema = "spec-provenance-config/v2"
+digest_algorithms = ["blake3-256"]
+
+[adapter_configurations]
+"openspec/v1" = '''
+schema = "buoy.openspec-authority/v1"
+
+[[capabilities]]
+name = "demo"
+format = "openspec/standing-spec/v1"
+scope = "openspec.demo"
+atom_kind = "behavioral"
+lifecycle = "proposed"
+reserved_ids = ["RQS-001", "RQS-002"]
+'''
+
+[[selectors]]
+root = "openspec/specs/demo"
+adapter = "openspec/v1"
+include = ["**/spec.md"]
+exclude = []
+authority_expectation = "required"

@@ -1,0 +1,6 @@
+case	expected_error
+wrong-kind	Skipped
+absent-node	MissingNode
+absent-atom	MissingAtom
+duplicate-atom	DuplicateAtom
+revision-mismatch	RevisionMismatch

@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "SPG-010"
+
+[[case]]
+id = "spg-010-positive-derivation-current"
+scenario = "positive-generated-target-has-current-bindings"
+polarity = "positive"
+operation = "evaluate-freshness"
+baseline = "fixtures/v2/baselines/derivation-graph.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["reference-closure=closed", "derivation:DERIV-001=fresh"] }
+
+[[case]]
+id = "spg-010-negative-stale-derived-target"
+scenario = "negative-mirrored-target-changes-alone"
+polarity = "negative"
+operation = "evaluate-freshness"
+baseline = "fixtures/v2/baselines/derivation-graph.toml"
+mutations = ["change-derivation-target-keep-binding"]
+expected = { outcome = "accept", codes = ["SPG-DERIVATION-STALE-TARGET"], facts = ["derivation:DERIV-001=stale"] }

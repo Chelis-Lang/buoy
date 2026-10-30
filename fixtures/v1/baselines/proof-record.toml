@@ -1,0 +1,108 @@
+schema = "spec-provenance-fixture-baseline/v1"
+id = "proof-record"
+
+[[atoms]]
+id = "FPR-BASE"
+state = "ratified"
+kind = "constraint"
+scope = ["spec-provenance.integrity-kernel"]
+statement = "A terminal lifecycle state MUST NOT transition to a live state."
+authority = "$source:spec/lifecycle.md:0"
+approval = "$approval:spec-provenance-maintainers:FPR-BASE"
+
+[[assumptions]]
+id = "ASM-SAFE-SEQUENTIAL"
+statement = "The bound function executes as safe sequential Rust with mathematical memory semantics."
+owner = "formal-methods"
+discharge = "$payload:condition:verified-subset"
+
+[[formal_properties]]
+id = "PROP-TERMINALITY"
+atoms = ["$atom:FPR-BASE:$digest:atom-revision:FPR-BASE"]
+property = "$payload:property:terminal-state-absorbing"
+implementation_abstraction = "$payload:implementation-abstraction:rust-lifecycle-v1"
+assumptions = ["$object:assumption:ASM-SAFE-SEQUENTIAL"]
+exclusions = ["rustc translation", "LLVM optimization", "machine code"]
+approval = "$approval:spec-provenance-maintainers:PROP-TERMINALITY"
+
+[[tools]]
+id = "TOOL-CHARON"
+name = "charon"
+version = "pinned-fixture"
+provenance = "archive"
+locator = "fixture://charon"
+artifact = "$digest:raw-artifact:charon"
+configuration = "$digest:raw-artifact:charon-config"
+
+[[tools]]
+id = "TOOL-AENEAS"
+name = "aeneas"
+version = "pinned-fixture"
+provenance = "archive"
+locator = "fixture://aeneas"
+artifact = "$digest:raw-artifact:aeneas"
+configuration = "$digest:raw-artifact:aeneas-config"
+
+[[tools]]
+id = "TOOL-LEAN"
+name = "lean"
+version = "pinned-fixture"
+provenance = "archive"
+locator = "fixture://lean"
+artifact = "$digest:raw-artifact:lean"
+configuration = "$digest:raw-artifact:lean-config"
+
+[[artifact_bindings]]
+id = "IMPL-LIFECYCLE"
+kind = "repository-artifact"
+path = "crates/spec-provenance-core/src/lifecycle.rs"
+digest = "$digest:raw-artifact:implementation-lifecycle"
+representation = "rust-source/v1"
+
+[[artifact_bindings]]
+id = "MODEL-U8"
+kind = "repository-artifact"
+path = "proofs/models/u8.lean"
+digest = "$digest:raw-artifact:model-u8"
+representation = "lean-source/v1"
+
+[[artifact_bindings]]
+id = "GENERATED-LLBC"
+kind = "repository-artifact"
+path = "proofs/generated/lifecycle.llbc"
+digest = "$digest:raw-artifact:generated-llbc"
+representation = "charon-llbc/v1"
+
+[[artifact_bindings]]
+id = "PROOF-SOURCE"
+kind = "repository-artifact"
+path = "proofs/lifecycle.lean"
+digest = "$digest:raw-artifact:proof-source"
+representation = "lean-source/v1"
+
+[[proof_records]]
+id = "PROOF-TERMINALITY"
+atoms = ["$atom:FPR-BASE:$digest:atom-revision:FPR-BASE"]
+property = "$object:formal-property:PROP-TERMINALITY"
+implementation = "$artifact:IMPL-LIFECYCLE"
+assumptions = ["$object:assumption:ASM-SAFE-SEQUENTIAL"]
+translators = ["$tool:TOOL-CHARON", "$tool:TOOL-AENEAS"]
+verifier = "$tool:TOOL-LEAN"
+verifier_configuration = "$digest:raw-artifact:lean-verifier-config"
+external_models = ["$artifact:MODEL-U8"]
+generated_artifacts = ["$artifact:GENERATED-LLBC"]
+proof_sources = ["$artifact:PROOF-SOURCE"]
+verdict = "pass"
+scope = "$payload:scope:terminal-lifecycle-function"
+exclusions = ["rustc translation", "LLVM optimization", "machine code"]
+
+[[proof_controls]]
+id = "PROOF-TERMINALITY-POSITIVE"
+kind = "positive"
+expected = "pass"
+
+[[proof_controls]]
+id = "PROOF-TERMINALITY-NEGATIVE"
+kind = "negative"
+mutation = "allow-terminal-to-proposed"
+expected = "fail"

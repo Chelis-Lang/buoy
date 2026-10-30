@@ -1,0 +1,159 @@
+schema = "spec-provenance-hardening-tools/v1"
+status = "selected-pins-require-closure-realization-before-blocking"
+
+[[tool]]
+id = "rust"
+version = "nightly-2026-04-16"
+source = "rustup-toolchain-file"
+role = "build-format-clippy-miri-sanitizer-coverage"
+
+[[tool]]
+id = "unicode-normalization"
+version = "0.1.24"
+source = "crates.io-lockfile"
+data = "Unicode-16.0.0"
+role = "nfc"
+
+[[tool]]
+id = "unicode-casefold-data"
+version = "16.0.0"
+source = "https://www.unicode.org/Public/16.0.0/ucd/CaseFolding.txt"
+path = "unicode/16.0.0/CaseFolding.txt"
+hash = "sha256-lr2+yRIFh2jaXWPPEJ+sk5HgtAf5fQDVBVKA8BLs4xk="
+status = "C-plus-F-default-non-Turkic"
+role = "full-default-case-fold"
+
+[[tool]]
+id = "portable-glob"
+version = "spec-provenance-glob/v1"
+source = "repository-owned-closed-parser"
+role = "selector-parse-match-overlap"
+
+[[tool]]
+id = "rustix"
+version = "1.1.4"
+source = "crates.io-lockfile"
+role = "unix-openat-no-follow-process-group"
+
+[[tool]]
+id = "windows-sys"
+version = "0.61.2"
+source = "crates.io-lockfile"
+role = "windows-handle-reparse-job-object"
+
+[[tool]]
+id = "cargo-llvm-cov"
+version = "0.8.5"
+source = "devenv-lock-nixpkgs"
+role = "line-region-function-branch-coverage"
+
+[[tool]]
+id = "cargo-fuzz"
+version = "0.13.2"
+source = "devenv-lock-nixpkgs"
+role = "coverage-guided-fuzz"
+
+[[tool]]
+id = "cargo-mutants"
+version = "27.1.0"
+source = "devenv-lock-nixpkgs"
+role = "automated-mutation"
+
+[[tool]]
+id = "cargo-deny"
+version = "0.19.9"
+source = "nixpkgs-pinned"
+role = "advisory-license-source-yank-duplicate-policy"
+
+[[tool]]
+id = "nixfmt"
+version = "1.3.1"
+source = "devenv-lock-nixpkgs"
+role = "commit-time-Nix-format"
+
+[[tool]]
+id = "prek"
+version = "0.3.11"
+source = "devenv-lock-nixpkgs"
+role = "commit-time-Git-hook-runner"
+
+[[tool]]
+id = "trybuild"
+version = "1.0.114"
+source = "crates.io-exact-pin-selected"
+role = "compile-fail-public-api"
+
+[[tool]]
+id = "hegeltest"
+version = "0.28.0"
+source = "crates.io-lockfile"
+role = "deterministic-differential-properties"
+
+[[tool]]
+id = "dylint"
+version = "6.0.1"
+source = "nix-fixed-crate"
+role = "functional-core-structural-enforcement"
+
+[[tool]]
+id = "verus"
+version = "0.2026.07.12.0b42f4c"
+revision = "0b42f4cee92a178937608cf55e512371d2fd8cd4"
+source = "nix-fixed-release-archive"
+role = "primary-formal-lane"
+
+[[tool]]
+id = "aeneas"
+version = "nightly-2026.07.01"
+revision = "678ffd3b797b2a6d8e3568a0bfdd5d027038afad"
+source = "devenv-lock"
+role = "translation-sentinel"
+
+[[tool]]
+id = "charon"
+version = "74166d896db4ae4f63101c13c22072fb2022092e"
+source = "devenv-lock"
+role = "aeneas-rust-to-llbc"
+
+[[tool]]
+id = "lean"
+version = "nixpkgs-f205b5574fd0cb7da5b702a2da51507b7f4fdd1b"
+source = "devenv-lock"
+role = "aeneas-proof-backend"
+
+[[tool]]
+id = "z3-standalone"
+version = "nixpkgs-b3d51a0365f6695e7dd5cdf3e180604530ed33b4"
+source = "devenv-lock"
+role = "standalone-model-and-formal-tool"
+
+[[tool]]
+id = "z3-verus-bundled"
+version = "verus-0.2026.07.12.0b42f4c-bundled"
+source = "verus-fixed-release-archive"
+role = "verus-bundled-solver-distinct-from-standalone"
+
+[[platform_api]]
+id = "unix-snapshot"
+platforms = ["linux", "macos"]
+strategy = "descriptor-relative-openat-with-no-follow-and-post-open-fstat"
+
+[[platform_api]]
+id = "linux-snapshot-strengthening"
+platforms = ["linux"]
+strategy = "openat2-beneath-no-symlink-when-available-with-openat-fallback-policy"
+
+[[platform_api]]
+id = "windows-snapshot"
+platforms = ["windows"]
+strategy = "CreateFileW-FILE_FLAG_OPEN_REPARSE_POINT-handle-relative-validation"
+
+[[platform_api]]
+id = "unix-process"
+platforms = ["linux", "macos"]
+strategy = "new-process-group-killpg-wait-and-reap"
+
+[[platform_api]]
+id = "windows-process"
+platforms = ["windows"]
+strategy = "job-object-kill-on-close-and-explicit-wait"

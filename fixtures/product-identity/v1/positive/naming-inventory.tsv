@@ -1,0 +1,6 @@
+schema	id	path	line	column	form	lexeme	context_digest	disposition	rationale	owner	rule
+buoy-naming-inventory/v1	OLD-NAME-000001	docs/current.md	1	1	display	Spec Provenance	xxh3-128:00000000000000000000000000000001	rename-product	current product label migrates	buoy-maintainers	replace-with-buoy
+buoy-naming-inventory/v1	OLD-NAME-000002	crates/compat/Cargo.toml	2	9	kebab	spec-provenance	xxh3-128:00000000000000000000000000000002	compatibility-alias	bounded facade	buoy-maintainers	remove-at-0.3.0
+buoy-naming-inventory/v1	OLD-NAME-000003	schema/frozen.tsv	3	1	kebab	spec-provenance	xxh3-128:00000000000000000000000000000003	frozen-v1-identifier	canonical protocol	buoy-maintainers	retain-exact-bytes
+buoy-naming-inventory/v1	OLD-NAME-000004	docs/migration.md	4	1	display	Spec Provenance	xxh3-128:00000000000000000000000000000004	historical-reference	migration prose	buoy-maintainers	retain-as-history
+buoy-naming-inventory/v1	OLD-NAME-000005	generated/metadata.rs	5	1	snake	spec_provenance	xxh3-128:00000000000000000000000000000005	generated-or-external	generator-owned symbol	buoy-maintainers	regenerate-or-retain-by-authority

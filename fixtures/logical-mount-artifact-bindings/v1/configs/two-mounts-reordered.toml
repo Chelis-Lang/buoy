@@ -1,0 +1,39 @@
+schema = "buoy/repository-config/v3"
+digest_algorithms = ["xxh3-128"]
+
+[adapter_configurations]
+"openspec/v1" = '''
+schema = "buoy.openspec-authority/v1"
+
+[[capabilities]]
+name = "demo"
+format = "openspec/standing-spec/v1"
+scope = "openspec.demo"
+atom_kind = "behavioral"
+lifecycle = "proposed"
+reserved_ids = ["OSA-900"]
+'''
+
+[[mounts]]
+id = "project"
+prefix = "project"
+
+[[mounts]]
+id = "authority"
+prefix = "authority"
+
+[[selectors]]
+mount = "project"
+root = "src"
+adapter = "artifact/v1"
+include = ["**/*"]
+exclude = []
+authority_expectation = "forbidden"
+
+[[selectors]]
+mount = "authority"
+root = "openspec/specs"
+adapter = "openspec/v1"
+include = ["**/spec.md"]
+exclude = []
+authority_expectation = "required"

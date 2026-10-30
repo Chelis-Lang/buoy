@@ -1,0 +1,19 @@
+error[E0451]: fields `meta`, `revision`, `active_approval`, `lifecycle`, `replacements`, `terminal_approval` and `materialized_subjects` of struct `buoy_core::CoveragePolicy` are private
+  --> tests/ui/direct_field_construction.rs:7:9
+   |
+ 6 |     let _ = CoveragePolicy {
+   |             -------------- in this type
+ 7 |         meta: unreachable!(),
+   |         ^^^^ private field
+ 8 |         revision: unreachable!(),
+   |         ^^^^^^^^ private field
+ 9 |         active_approval: unreachable!(),
+   |         ^^^^^^^^^^^^^^^ private field
+10 |         lifecycle: unreachable!(),
+   |         ^^^^^^^^^ private field
+11 |         replacements: Vec::new(),
+   |         ^^^^^^^^^^^^ private field
+12 |         terminal_approval: None,
+   |         ^^^^^^^^^^^^^^^^^ private field
+13 |         materialized_subjects: Vec::new(),
+   |         ^^^^^^^^^^^^^^^^^^^^^ private field

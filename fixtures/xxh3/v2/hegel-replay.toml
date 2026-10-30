@@ -1,0 +1,36 @@
+schema = "spec-provenance-hegel-replay/v2"
+runner = "hegeltest-0.28.0"
+test_cases_per_property = 256
+derandomize = true
+database = false
+command = "cargo test --test xxh3_hegel_properties"
+
+[[properties]]
+name = "hegel_xxh3_one_shot_is_deterministic"
+seed_hex = "0x5350563100000065"
+last_replay = "pass"
+
+[[properties]]
+name = "hegel_xxh3_incremental_matches_one_shot"
+seed_hex = "0x5350563100000066"
+last_replay = "pass"
+
+[[properties]]
+name = "hegel_xxh3_text_and_binary_forms_round_trip"
+seed_hex = "0x5350563100000067"
+last_replay = "pass"
+
+[[properties]]
+name = "hegel_xxh3_is_sensitive_to_domain_field_and_order_changes"
+seed_hex = "0x5350563100000068"
+last_replay = "pass"
+
+[[properties]]
+name = "hegel_xxh3_parser_rejects_noncanonical_forms"
+seed_hex = "0x5350563100000069"
+last_replay = "pass"
+
+[[properties]]
+name = "hegel_xxh3_complete_migration_is_idempotent"
+seed_hex = "0x535056310000006a"
+last_replay = "pass"

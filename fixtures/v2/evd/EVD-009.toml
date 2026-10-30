@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "EVD-009"
+
+[[case]]
+id = "evd-009-positive-blocking-scope-grows"
+scenario = "positive-blocking-scope-grows"
+polarity = "positive"
+operation = "compare-policy-adoption"
+baseline = "fixtures/v2/baselines/policy-adoption.toml"
+mutations = ["grow-blocking-policy-scope"]
+expected = { outcome = "accept", codes = [], facts = ["policy-ratchet:POL-ADOPTION=strengthened", "policy-mode:POL-ADOPTION=blocking", "policy-scope:SURFACE-ADOPTION=blocking"] }
+
+[[case]]
+id = "evd-009-negative-required-role-silently-removed"
+scenario = "negative-required-role-silently-removed"
+polarity = "negative"
+operation = "compare-policy-adoption"
+baseline = "fixtures/v2/baselines/policy-adoption.toml"
+mutations = ["remove-required-role-without-disposition"]
+expected = { outcome = "reject", codes = ["EVD-POLICY-RATCHET-WEAKENING-UNDISPOSITIONED"], facts = ["policy-ratchet:POL-ADOPTION=weakened", "removed-obligation:negative=visible"] }

@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "DET-007"
+
+[[case]]
+id = "det-007-positive-invalid-graph-separate-roots"
+scenario = "positive-same-invalid-graph-separate-roots"
+polarity = "positive"
+operation = "render-diagnostics"
+baseline = "fixtures/v1/baselines/invalid-diagnostics.toml"
+mutations = ["relocate-invalid-repository"]
+expected = { outcome = "reject", codes = ["SPG-AUTH-DUPLICATE"], facts = ["diagnostic-bytes=same", "diagnostics=total-order"] }
+
+[[case]]
+id = "det-007-negative-raw-log-host-data"
+scenario = "negative-raw-verifier-log-contains-host-data"
+polarity = "negative"
+operation = "render-diagnostics"
+baseline = "fixtures/v1/baselines/invalid-diagnostics.toml"
+mutations = ["add-raw-log-host-data"]
+expected = { outcome = "reject", codes = ["SPG-AUTH-DUPLICATE"], facts = ["canonical-diagnostic-host-data=absent", "noncanonical-diagnostic-host-data=present"] }

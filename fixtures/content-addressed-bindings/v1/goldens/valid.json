@@ -1,0 +1,1 @@
+{"schema":"buoy/binding-diagnostic-golden/v1","case":"valid","accepted":true,"source_graph":"blake3-256:0bc2290271d97ed1a3079051033c8a785986f8b5825c0337541ea201a1de6877","binding":"blake3-256:2f3bed4591cd0847d1b3cd7f37b0e41c766b31e4e8fadefe349ab354f76573f8","diagnostics":[]}

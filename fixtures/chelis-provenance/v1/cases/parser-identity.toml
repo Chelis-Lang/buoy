@@ -1,0 +1,121 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "parser-node-identity-stable"
+requirement = "CHELIS-PROV-012"
+scenario = "positive-identity-survives-reformatting"
+polarity = "positive"
+operation = "static-extraction"
+input = "one Surf declaration whose surrounding lines move without changing the declaration node's canonical bytes"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["identity-bytes-stable=true", "span-tracks-location=true", "parser-backed-anchoring"]
+execution = "integration"
+
+[[case]]
+id = "parser-multi-line-node"
+requirement = "CHELIS-PROV-012"
+scenario = "positive-multi-line-node-binding"
+polarity = "positive"
+operation = "static-extraction"
+input = "one record above a multi-line declaration whose body spans several lines"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["identity-covers-whole-node=true", "body-bytes-participate=true"]
+execution = "integration"
+
+[[case]]
+id = "parser-reject-error-node"
+requirement = "CHELIS-PROV-012"
+scenario = "negative-parse-error-fails-loudly"
+polarity = "negative"
+operation = "static-extraction"
+input = "a selected Surf source the pinned grammar cannot parse"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-PARSE-ERROR"]
+facts = ["empty-successful-graph=forbidden", "static-exit-class", "parse-error"]
+execution = "integration"
+
+[[case]]
+id = "parser-reject-inside-declaration"
+requirement = "CHELIS-PROV-012"
+scenario = "negative-record-inside-declaration-body"
+polarity = "negative"
+operation = "static-extraction"
+input = "a provenance marker inside an anchored declaration body"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-UNATTACHED-METADATA"]
+facts = ["inside-declaration", "marker-stays-visible=true"]
+execution = "integration"
+
+[[case]]
+id = "parser-vendor-drift-rejected"
+requirement = "CHELIS-PROV-012"
+scenario = "negative-vendored-grammar-drift"
+polarity = "negative-control"
+operation = "derivation-drift"
+input = "a vendored grammar file whose bytes differ from the registered derivation digests"
+expected_outcome = "reject"
+diagnostics = []
+facts = ["registered-derivation", "digest-per-file", "fail-closed=true"]
+execution = "preimplementation-contract"
+
+[[case]]
+id = "report-revision-bearing"
+requirement = "CHELIS-PROV-013"
+scenario = "positive-host-binds-from-report"
+polarity = "positive"
+operation = "static-report"
+input = "a static report over registered authority records"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["atom-revision-exposed=true", "object-digest-exposed=true", "no-helper-build-required"]
+execution = "integration"
+
+[[case]]
+id = "report-canonical-across-roots"
+requirement = "CHELIS-PROV-013"
+scenario = "negative-report-bytes-stay-canonical"
+polarity = "negative-control"
+operation = "static-report"
+input = "identical saved inputs under two distinct absolute roots"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["report-bytes-identical=true", "separate-roots"]
+execution = "integration"
+
+[[case]]
+id = "command-package-exposes-chelis"
+requirement = "CHELIS-PROV-014"
+scenario = "positive-package-exposes-command"
+polarity = "positive"
+operation = "package-contract"
+input = "the realized consumer package binary set"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["chelis-provenance-binary=exposed", "per-package-feature-selection=true"]
+execution = "preimplementation-contract"
+
+[[case]]
+id = "command-advisory-through-cli"
+requirement = "CHELIS-PROV-014"
+scenario = "positive-advisory-through-cli"
+polarity = "positive"
+operation = "advisory-report"
+input = "an advisory invocation over a repository with registered records"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["advisory-deterministic=true", "exit-class-preserved=true"]
+execution = "integration"
+
+[[case]]
+id = "command-usage-exit-preserved"
+requirement = "CHELIS-PROV-014"
+scenario = "negative-usage-exit-class"
+polarity = "negative-control"
+operation = "advisory-report"
+input = "an advisory invocation without its required arguments"
+expected_outcome = "reject"
+diagnostics = []
+facts = ["usage-exit-class=64", "exit-class-preserved=true"]
+execution = "integration"

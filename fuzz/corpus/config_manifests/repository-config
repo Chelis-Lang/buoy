@@ -1,0 +1,7 @@
+schema = "spec-provenance-config/v1"
+[[selectors]]
+root = "spec"
+adapter = "markdown/v1"
+include = ["**/*.md"]
+exclude = []
+authority_expectation = "optional"

@@ -1,0 +1,7 @@
+command: static
+graph: blake3-256:83b10b4e08a456f46b9cacae12e911674ca3001af9edd9231a7c3a9acdefbedd
+diagnostics: 0
+mount repository: repository
+requirement subject RQS-001: blake3-256:1d18aa0cf2e205f73ac2099f22b63e647cd358f025fb6825c407131c0108551d atom=blake3-256:01e923a4c362564a69c25167e891c8eb0df5e5f2baf224a734653a69cf7cfc94 path=repository/openspec/specs/demo/spec.md scopes=openspec.demo
+requirement subject RQS-002: blake3-256:5731c8688ca16ca82772eea50ad11489007c632757a8eba50fbef2613f9f755f atom=blake3-256:ce68cf564ece89c6a9371a078a49f375b74e11bac6d80ad7c19deeebd2f1c7a4 path=repository/openspec/specs/demo/spec.md scopes=openspec.demo
+opaque subject repository/artifact.bin: blake3-256:b6a90cf13b1a382d13a688ea8fc82399782aede66f4bea41cd9e02853ce80c67

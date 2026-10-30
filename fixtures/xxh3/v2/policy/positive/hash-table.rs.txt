@@ -1,0 +1,3 @@
+use std::collections::BTreeMap;
+
+pub type StableTable<K, V> = BTreeMap<K, V>;

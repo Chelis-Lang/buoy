@@ -1,0 +1,13 @@
+error[E0308]: mismatched types
+  --> tests/ui/raw_source_item_kind.rs:14:24
+   |
+14 |     construct_identity("rust/item/v1");
+   |     ------------------ ^^^^^^^^^^^^^^ expected `SourceItemKind`, found `&str`
+   |     |
+   |     arguments to this function are incorrect
+   |
+note: function defined here
+  --> tests/ui/raw_source_item_kind.rs:3:4
+   |
+ 3 | fn construct_identity(kind: SourceItemKind) {
+   |    ^^^^^^^^^^^^^^^^^^ --------------------

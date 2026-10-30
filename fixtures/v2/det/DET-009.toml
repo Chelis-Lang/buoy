@@ -1,0 +1,29 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "DET-009"
+
+[[case]]
+id = "det-009-positive-identical-graph-pair-separate-roots"
+scenario = "positive-identical-graph-pair-separate-repositories"
+polarity = "positive"
+operation = "compute-impact"
+baseline = "fixtures/v2/baselines/change-impact.toml"
+mutations = ["relocate-graph-pair"]
+expected = { outcome = "accept", codes = [], facts = ["impact-report-bytes=same", "impact-count=4"] }
+
+[[case]]
+id = "det-009-negative-provider-metadata-alters-impact"
+scenario = "negative-provider-metadata-alters-impact"
+polarity = "negative"
+operation = "compute-impact"
+baseline = "fixtures/v2/baselines/change-impact.toml"
+mutations = ["vary-provider-metadata"]
+expected = { outcome = "accept", codes = [], facts = ["impact-report-bytes=same", "provider-inputs-consumed=0"] }
+
+[[case]]
+id = "det-009-positive-impact-input-permutations"
+scenario = "positive-base-head-impact-permutations"
+polarity = "positive"
+operation = "compute-impact"
+baseline = "fixtures/v2/baselines/change-impact.toml"
+mutations = ["permute-impact-inputs"]
+expected = { outcome = "accept", codes = [], facts = ["impact-report-bytes=same", "impact-order=canonical", "impact-count=4"] }

@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "SPG-007"
+
+[[case]]
+id = "spg-007-positive-multibyte-prefix-span"
+scenario = "positive-unicode-span-is-precise"
+polarity = "positive"
+operation = "extract-markdown"
+baseline = "fixtures/v1/baselines/atom-source.toml"
+mutations = ["prefix-authority-with-multibyte-unicode"]
+expected = { outcome = "accept", codes = [], facts = ["authority-count:SPG-001=1", "source-span:SPG-001=exact"] }
+
+[[case]]
+id = "spg-007-negative-literal-fenced-example"
+scenario = "negative-fence-contains-atom-like-syntax"
+polarity = "negative"
+operation = "extract-markdown"
+baseline = "fixtures/v1/baselines/atom-source.toml"
+mutations = ["replace-authority-with-literal-fenced-example"]
+expected = { outcome = "accept", codes = [], facts = ["authority-count:SPG-001=0", "adapter-node:spec/requirements.md:fenced-example=nonnormative"] }

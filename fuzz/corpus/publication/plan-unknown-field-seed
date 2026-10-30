@@ -1,0 +1,1 @@
+{"schema":"buoy/trace-publication-plan/v1","publication_id":"demo","selector":{"requirement_id":"DEMO-001"},"expected_rows":1,"source_set":[],"outputs":[],"unexpected":true}

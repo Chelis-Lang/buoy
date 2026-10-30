@@ -1,0 +1,47 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "DET-002"
+
+[[case]]
+id = "det-002-positive-valid-relative-path"
+scenario = "positive-valid-relative-path"
+polarity = "positive"
+operation = "normalize-snapshot"
+baseline = "fixtures/v1/baselines/path-snapshot.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["normalized-path:a/spec.md=a/spec.md", "normalized-path:b/code.rs=b/code.rs"] }
+
+[[case]]
+id = "det-002-negative-normalized-path-collision"
+scenario = "negative-normalized-path-collision"
+polarity = "negative"
+operation = "normalize-snapshot"
+baseline = "fixtures/v1/baselines/path-snapshot.toml"
+mutations = ["collide-normalized-paths"]
+expected = { outcome = "reject", codes = ["DET-PATH-NORMALIZED-COLLISION"], facts = ["path-selection=none"] }
+
+[[case]]
+id = "det-002-negative-absolute-path"
+scenario = "negative-absolute-path"
+polarity = "negative"
+operation = "normalize-snapshot"
+baseline = "fixtures/v1/baselines/path-snapshot.toml"
+mutations = ["replace-path-with-absolute"]
+expected = { outcome = "reject", codes = ["DET-PATH-ABSOLUTE"], facts = ["path-selection=none"] }
+
+[[case]]
+id = "det-002-negative-escaping-parent"
+scenario = "negative-escaping-parent"
+polarity = "negative"
+operation = "normalize-snapshot"
+baseline = "fixtures/v1/baselines/path-snapshot.toml"
+mutations = ["replace-path-with-escaping-parent"]
+expected = { outcome = "reject", codes = ["DET-PATH-ESCAPES-ROOT"], facts = ["path-selection=none"] }
+
+[[case]]
+id = "det-002-negative-platform-ambiguous"
+scenario = "negative-platform-ambiguous-form"
+polarity = "negative"
+operation = "normalize-snapshot"
+baseline = "fixtures/v1/baselines/path-snapshot.toml"
+mutations = ["replace-path-with-platform-ambiguous-form"]
+expected = { outcome = "reject", codes = ["DET-PATH-PLATFORM-AMBIGUOUS"], facts = ["path-selection=none"] }

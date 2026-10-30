@@ -1,0 +1,54 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-chelis-impact-closure-v1"
+requirement_ids = ["CHELIS-PROV-007"]
+kind = "truth-table"
+expected_state_count = 64
+
+[[dimensions]]
+name = "direct_change"
+values = ["present", "absent"]
+[[dimensions]]
+name = "first_edge"
+values = ["present", "missing"]
+[[dimensions]]
+name = "second_edge"
+values = ["present", "missing"]
+[[dimensions]]
+name = "traversal"
+values = ["fixed-point", "one-hop"]
+[[dimensions]]
+name = "dispositions"
+values = ["exact", "missing"]
+[[dimensions]]
+name = "duplicates"
+values = ["none", "present"]
+
+[[predicates]]
+name = "closure"
+[[predicates.clauses]]
+all = ["direct_change=present", "first_edge=present", "second_edge=present", "traversal=fixed-point", "dispositions=exact", "duplicates=none"]
+
+[[invariants]]
+id = "absent-change-has-no-closure"
+if_all = ["direct_change=absent"]
+then_all = ["closure=false"]
+[[invariants]]
+id = "missing-first-edge-prevents-closure"
+if_all = ["first_edge=missing"]
+then_all = ["closure=false"]
+[[invariants]]
+id = "missing-second-edge-prevents-closure"
+if_all = ["second_edge=missing"]
+then_all = ["closure=false"]
+[[invariants]]
+id = "one-hop-is-not-fixed-point"
+if_all = ["traversal=one-hop"]
+then_all = ["closure=false"]
+[[invariants]]
+id = "missing-disposition-prevents-closure"
+if_all = ["dispositions=missing"]
+then_all = ["closure=false"]
+[[invariants]]
+id = "duplicate-disposition-prevents-closure"
+if_all = ["duplicates=present"]
+then_all = ["closure=false"]

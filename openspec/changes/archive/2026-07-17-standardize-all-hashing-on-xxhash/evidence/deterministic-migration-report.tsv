@@ -1,0 +1,30 @@
+schema	order	stable_id	kind	lifecycle	references	digest
+spec-provenance/v2	0	ATOM-MIGRATION-001	atom	ratified		xxh3-128:4f22fbda0fa04fd019ab34cf6ea6fe77
+spec-provenance/v2	1	ATOM-MIGRATION-RETIRED	tombstone	superseded		xxh3-128:15ed1f220bfb08e23b0a1d842506f149
+spec-provenance/v2	2	ASSUMPTION-MIGRATION-001	assumption	ratified		xxh3-128:2f7541788940fa441de6e7576a8c2235
+spec-provenance/v2	3	CARRIER-MIGRATION-001	evidence-carrier	ratified	ATOM-MIGRATION-001	xxh3-128:3e25bf2a502b6ecbf751d0a76828e37c
+spec-provenance/v2	4	DERIVATION-MIGRATION-001	derivation	ratified	ATOM-MIGRATION-001	xxh3-128:103e0d928f5363dca93e22eecf19f71b
+spec-provenance/v2	5	FORMAL-PROPERTY-MIGRATION-001	formal-property	ratified	ASSUMPTION-MIGRATION-001	xxh3-128:6ed42d8abcf8f84488aa74e6c5ee58bd
+spec-provenance/v2	6	POLICY-MIGRATION-001	coverage-policy	ratified	ATOM-MIGRATION-001	xxh3-128:df70061624e6d014ff47a237f9a2a9d5
+spec-provenance/v2	7	PROOF-MIGRATION-001	proof-record	ratified	ASSUMPTION-MIGRATION-001,FORMAL-PROPERTY-MIGRATION-001	xxh3-128:7db601bcfb080edf8a6789c3181ec655
+spec-provenance/v2	8	GRAPH-MIGRATION-001	spec-graph	ratified	ASSUMPTION-MIGRATION-001,ATOM-MIGRATION-001,ATOM-MIGRATION-RETIRED,CARRIER-MIGRATION-001,DERIVATION-MIGRATION-001,FORMAL-PROPERTY-MIGRATION-001,POLICY-MIGRATION-001,PROOF-MIGRATION-001	xxh3-128:a39c3dfcb2b1ff35856fb67eaae5edbf
+spec-provenance/v2	9	IMPACT-REPORT-MIGRATION-001	impact-report	ratified	GRAPH-MIGRATION-001	xxh3-128:993f350a3f4b26ff53d2899bcf730f5c
+spec-provenance/v2	10	STATIC-REPORT-MIGRATION-001	static-report	ratified	GRAPH-MIGRATION-001	xxh3-128:fb45b64cc2ed929f02b668a94add2bf8
+spec-provenance/v2	11	EXECUTION-REPORT-MIGRATION-001	execution-report	ratified	STATIC-REPORT-MIGRATION-001	xxh3-128:b0e8f1070249454e4d57a3f8e99ac8fe
+impact_schema	stable_id	disposition	old_digest	new_digest
+spec-provenance-migration-impact/v2	APPROVAL-MIGRATION-ATOM-001	reaffirmed	sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee	xxh3-128:14a6e61e4878fcc3f530d618f6f552ea
+spec-provenance-migration-impact/v2	APPROVAL-MIGRATION-PROOF-001	reaffirmed	sha256:0000000000000000000000000000000000000000000000000000000000000000	xxh3-128:d06a4196eec662ed0f24dee06628c738
+spec-provenance-migration-impact/v2	APPROVAL-MIGRATION-RETIRED	reaffirmed	sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff	xxh3-128:23c608f81e4ec1d764accabe50d58657
+spec-provenance-migration-impact/v2	ASSUMPTION-MIGRATION-001	waived	sha256:8888888888888888888888888888888888888888888888888888888888888888	xxh3-128:2f7541788940fa441de6e7576a8c2235
+spec-provenance-migration-impact/v2	ATOM-MIGRATION-001	revised	sha256:1111111111111111111111111111111111111111111111111111111111111111	xxh3-128:4f22fbda0fa04fd019ab34cf6ea6fe77
+spec-provenance-migration-impact/v2	ATOM-MIGRATION-RETIRED	retired	sha256:2222222222222222222222222222222222222222222222222222222222222222	xxh3-128:15ed1f220bfb08e23b0a1d842506f149
+spec-provenance-migration-impact/v2	CARRIER-MIGRATION-001	revised	sha256:5555555555555555555555555555555555555555555555555555555555555555	xxh3-128:3e25bf2a502b6ecbf751d0a76828e37c
+spec-provenance-migration-impact/v2	CONFIG-MIGRATION-001	revised	sha256:4444444444444444444444444444444444444444444444444444444444444444	xxh3-128:a3b27b9d58110e049b8e54a4b1d297e1
+spec-provenance-migration-impact/v2	DERIVATION-MIGRATION-001	revised	sha256:7777777777777777777777777777777777777777777777777777777777777777	xxh3-128:103e0d928f5363dca93e22eecf19f71b
+spec-provenance-migration-impact/v2	EXECUTION-REPORT-MIGRATION-001	revised	sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc	xxh3-128:b0e8f1070249454e4d57a3f8e99ac8fe
+spec-provenance-migration-impact/v2	FORMAL-PROPERTY-MIGRATION-001	revised	sha256:9999999999999999999999999999999999999999999999999999999999999999	xxh3-128:6ed42d8abcf8f84488aa74e6c5ee58bd
+spec-provenance-migration-impact/v2	GRAPH-MIGRATION-001	revised	sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	xxh3-128:a39c3dfcb2b1ff35856fb67eaae5edbf
+spec-provenance-migration-impact/v2	IMPACT-REPORT-MIGRATION-001	revised	sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd	xxh3-128:993f350a3f4b26ff53d2899bcf730f5c
+spec-provenance-migration-impact/v2	POLICY-MIGRATION-001	revised	sha256:6666666666666666666666666666666666666666666666666666666666666666	xxh3-128:df70061624e6d014ff47a237f9a2a9d5
+spec-provenance-migration-impact/v2	PROOF-MIGRATION-001	reaffirmed	sha256:3333333333333333333333333333333333333333333333333333333333333333	xxh3-128:7db601bcfb080edf8a6789c3181ec655
+spec-provenance-migration-impact/v2	STATIC-REPORT-MIGRATION-001	revised	sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb	xxh3-128:fb45b64cc2ed929f02b668a94add2bf8

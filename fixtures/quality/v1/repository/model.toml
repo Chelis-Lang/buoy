@@ -1,0 +1,4 @@
+schema = "quality-assurance-fixture-model/v1"
+states = ["planned", "available", "implemented", "retired"]
+events = ["strengthen", "retire"]
+fixed_point = true

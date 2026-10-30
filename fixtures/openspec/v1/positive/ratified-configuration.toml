@@ -1,0 +1,14 @@
+schema = "buoy.openspec-authority/v1"
+
+[[capabilities]]
+name = "demo"
+format = "openspec/standing-spec/v1"
+scope = "openspec.demo"
+atom_kind = "behavioral"
+lifecycle = "ratified"
+reserved_ids = ["OSA-900"]
+
+[capabilities.approval]
+authority = "maintainers"
+record = "approvals/osa-900.toml"
+digest = "xxh3-128:09090909090909090909090909090909"

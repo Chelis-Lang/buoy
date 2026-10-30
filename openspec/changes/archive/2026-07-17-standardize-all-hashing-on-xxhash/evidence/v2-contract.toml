@@ -1,0 +1,77 @@
+schema = "spec-provenance-xxh3-contract/v1"
+status = "frozen"
+
+[semantic_schema]
+id = "spec-provenance/v2"
+encoding_version = 2
+active_algorithm_count = 1
+algorithm_negotiation = false
+dual_read = false
+dual_write = false
+obsolete_values_require_authoritative_regeneration = true
+
+[algorithm]
+name = "XXH3-128"
+upstream_function = "XXH3_128bits"
+rust_function = "xxhash_rust::xxh3::xxh3_128"
+seed = 0
+secret = "standard-default"
+output_bits = 128
+output_bytes = 16
+cryptographic = false
+
+[preimage]
+magic_ascii = "SPEC-PROVENANCE\u0000"
+magic_hex = "535045432d50524f56454e414e434500"
+field_order = [
+  "magic",
+  "encoding-version-u16-be",
+  "canonical-text-schema-id",
+  "canonical-enum-algorithm-id",
+  "canonical-text-domain",
+  "canonical-record-payload",
+]
+domain_names = "preserve-v1-names-unless-separately-versioned"
+field_encoding = "canonical-value-v2"
+
+[binary_digest]
+canonical_value_type_tag = 12
+algorithm_tag = 2
+algorithm_tag_encoding = "u16-be"
+length = 16
+length_encoding = "u16-be"
+payload_order = "high64-be-then-low64-be"
+u128_conversion = "to_be_bytes"
+
+[text_digest]
+prefix = "xxh3-128:"
+hex_digits = 32
+hex_case = "lowercase"
+regex = '^xxh3-128:[0-9a-f]{32}$'
+truncated_identity_allowed = false
+
+[parser]
+accept_active_only = true
+reject_prefixes = ["sha256:", "sha512:", "blake3:"]
+reject_uppercase = true
+reject_unknown_algorithm = true
+reject_wrong_length = true
+reject_nonhexadecimal = true
+reject_truncated = true
+reject_padded = true
+guess_or_reinterpret = false
+
+[collision]
+when_both_preimages_available = "reject-equal-digest-for-unequal-canonical-preimages"
+claim = "observed-collision-detection-only"
+
+[assurance]
+permitted = ["deterministic-change-detection", "freshness-binding"]
+forbidden = [
+  "collision-resistance",
+  "preimage-resistance",
+  "authenticity",
+  "tamper-evidence",
+  "signature-strength",
+  "mathematical-proof",
+]

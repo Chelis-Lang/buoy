@@ -1,0 +1,55 @@
+schema = "spec-provenance-derivation-binding/v2"
+id = "DERIV-LOGICAL-MOUNT-REPRESENTATION-V1"
+relation = "reviewed-manual-formalization-correspondence"
+status = "current"
+assurance_effect = "The derivation records path-segment sequence correspondence. It does not prove parser, filesystem, or hash behavior."
+
+[correspondence_approval]
+id = "APPROVAL-LOGICAL-MOUNT-CORRESPONDENCE-V1"
+path = "proofs/logical-mounts/correspondence-approval.toml"
+status = "approved"
+
+[[source]]
+representation = "rust-source/v1"
+path = "crates/buoy-core/src/mount.rs"
+digest = "xxh3-128:94ed5fb6b8038c699fb0927af9a6fb23"
+
+[[source]]
+representation = "rust-source/v1"
+path = "crates/buoy-core/src/attachment.rs"
+digest = "xxh3-128:5a955a49e9768ffe26e2246dd629a95d"
+
+[target]
+representation = "rust-verus-source/v1"
+path = "proofs/spikes/verus/logical_mounts.rs"
+digest = "xxh3-128:ac75a34d7a89adaf5406860998353a3f"
+
+[tool]
+name = "human-reviewed-formalization"
+version = "v1"
+configuration = "segment-sequence-projection-and-relation-preimage-only"
+
+[consistency_oracle]
+command = "devenv shell -- buoy-formal-spikes"
+verifier = "verus 0.2026.07.12.0b42f4c"
+solver = "bundled-z3"
+negative_control = "proofs/spikes/verus/logical_mounts_negative.rs"
+expected_negative_diagnostic = "postcondition not satisfied"
+
+[[correspondence]]
+obligation = "disjoint logical prefixes produce distinct projected paths"
+production_symbols = ["LogicalMount", "project_logical_path"]
+proof_symbols = ["logical_projection", "disjoint_prefixes_make_projection_injective"]
+status = "approved-review-only"
+
+[[correspondence]]
+obligation = "one prefix preserves distinct relative paths"
+production_symbols = ["project_logical_path"]
+proof_symbols = ["logical_projection", "one_prefix_preserves_relative_identity"]
+status = "approved-review-only"
+
+[[correspondence]]
+obligation = "distinct relations produce distinct attachment-key preimages"
+production_symbols = ["binding_attachment_key"]
+proof_symbols = ["attachment_key_preimage", "attachment_key_preimage_binds_the_relation"]
+status = "approved-review-only"

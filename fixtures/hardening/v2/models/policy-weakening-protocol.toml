@@ -1,0 +1,59 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-policy-weakening-protocol-v2"
+requirement_ids = ["DGA-002", "DGA-004"]
+kind = "truth-table"
+expected_state_count = 320
+
+[[dimensions]]
+name = "weakening_dimension"
+values = ["scope", "role", "mode", "authority", "derivation", "surface", "waiver-class", "lineage", "supersession", "retirement"]
+[[dimensions]]
+name = "approval"
+values = ["valid", "missing"]
+[[dimensions]]
+name = "migration"
+values = ["valid", "missing"]
+[[dimensions]]
+name = "debt"
+values = ["valid", "missing"]
+[[dimensions]]
+name = "waiver"
+values = ["valid", "missing"]
+[[dimensions]]
+name = "disposition"
+values = ["valid", "missing"]
+
+[[predicates]]
+name = "protocol_complete"
+[[predicates.clauses]]
+all = ["approval=valid", "migration=valid", "debt=valid", "waiver=valid", "disposition=valid"]
+
+[[predicates]]
+name = "change_accepted"
+[[predicates.clauses]]
+all = ["protocol_complete=true"]
+
+[[invariants]]
+id = "missing-approval-rejects"
+if_all = ["approval=missing"]
+then_all = ["protocol_complete=false", "change_accepted=false"]
+[[invariants]]
+id = "missing-migration-rejects"
+if_all = ["migration=missing"]
+then_all = ["protocol_complete=false", "change_accepted=false"]
+[[invariants]]
+id = "missing-debt-rejects"
+if_all = ["debt=missing"]
+then_all = ["protocol_complete=false", "change_accepted=false"]
+[[invariants]]
+id = "missing-waiver-rejects"
+if_all = ["waiver=missing"]
+then_all = ["protocol_complete=false", "change_accepted=false"]
+[[invariants]]
+id = "missing-disposition-rejects"
+if_all = ["disposition=missing"]
+then_all = ["protocol_complete=false", "change_accepted=false"]
+[[invariants]]
+id = "complete-protocol-accepts-every-dimension"
+if_all = ["approval=valid", "migration=valid", "debt=valid", "waiver=valid", "disposition=valid"]
+then_all = ["protocol_complete=true", "change_accepted=true"]

@@ -1,0 +1,78 @@
+schema = "buoy-coverage-command/v1"
+tool = "cargo-llvm-cov"
+tool_version = "0.8.5"
+offline = true
+workspace = true
+all_targets = true
+all_features = true
+branch = true
+broad_exclusions = false
+result_semantics = "covered-equals-count-and-count-positive-for-lines-regions-functions-branches"
+source_inventory = "assurance/v1/source-inventory.tsv"
+
+[workspace_export]
+artifact_class = "workspace"
+command = "cargo llvm-cov --workspace --all-targets --all-features --branch --no-report --offline"
+report = "cargo llvm-cov report --branch --json --output-path <ephemeral> --offline"
+
+[chelis_feature_matrix]
+artifact_class = "chelis-feature-matrix"
+environment = [
+  "RUSTC_WRAPPER=",
+  "CARGO_BUILD_RUSTC_WRAPPER=",
+  "CARGO_LLVM_COV_TARGET_DIR=<isolated>",
+  "CARGO_LLVM_COV_BUILD_DIR=<isolated>",
+]
+commands = [
+  "cargo llvm-cov test --branch --all-features --locked --offline -p chelis-provenance -p chelis-surf-sitter --all-targets --no-report",
+  "command cargo llvm-cov run --branch --all-features --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- static --root <ephemeral> --config <ephemeral>",
+  "cargo llvm-cov test --branch --no-default-features --features <blake3-256|sha-256> --locked --offline -p chelis-provenance --test bind_conversion --test binding_regeneration --test compact_bindings --test trace_projection --no-report",
+  "command cargo llvm-cov run --branch --no-default-features --features <blake3-256|sha-256> --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- static --root <ephemeral> --config <ephemeral>",
+  "command cargo llvm-cov run --branch --no-default-features --features <blake3-256|sha-256> --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- bind --root <ephemeral> --config <ephemeral> --link CLI-LINK --write",
+  "command cargo llvm-cov run --branch --no-default-features --features <blake3-256|sha-256> --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- rebind --root <ephemeral> --config <ephemeral>",
+  "command cargo llvm-cov run --branch --no-default-features --features <blake3-256|sha-256> --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- rebind --root <ephemeral> --config <ephemeral> --write",
+  "command cargo llvm-cov run --branch --all-features --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- static --root <oversized-config> --config <oversized-config>",
+  "command cargo llvm-cov run --branch --all-features --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- change --base <oversized-config> --head <oversized-config> --config <oversized-config> --manifest <ephemeral>",
+  "command cargo llvm-cov run --branch --all-features --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- trace --root <oversized-config> --config <oversized-config> --id CLI-ATOM",
+  "command cargo llvm-cov run --branch --all-features --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- advisory --root <oversized-config> --config <oversized-config>",
+  "command cargo llvm-cov run --branch --all-features --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- execute --root <oversized-config> --config <oversized-config> --oracles <ephemeral>",
+  "command cargo llvm-cov run --branch --no-default-features --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- rebind --root <ephemeral> --config <ephemeral> --write",
+  "command cargo llvm-cov run --branch --no-default-features --locked --offline -p chelis-provenance --bin chelis-provenance --no-report -- bind --root <ephemeral> --config <ephemeral> --link CLI-LINK --write",
+  "cargo llvm-cov report --branch --include-build-script --json -p chelis-provenance -p chelis-surf-sitter --output-path <ephemeral> --locked --offline",
+]
+strategy = "One isolated target retains all Chelis profiles and the existing binding contracts. Separate CLI roots check identical objects, successor replacement, collisions, read-only sources, blocked stores, and self-referential runner divergence. Controls verify exits, diagnostics, saved bytes, convergence, rejected missing or malformed authorities, and unchanged cross-image markers. Oversized valid configuration returns exit 70 through static, change, trace, advisory, and execute. No-feature bind and rebind return exit 70 without source changes. Cargo executes the native grammar build script, and the final report owns only Chelis production and build-script paths."
+
+[standalone_validators]
+artifact_class = "workspace"
+strategy = "Cargo binary targets invoked with focused positive and negative controls under preserved profiles"
+
+[generator_controls]
+artifact_class = "workspace"
+command = "cargo llvm-cov run --branch --no-report --example generator_coverage_controls"
+strategy = "run isolated temp-repository write, stale, missing-binding, and I/O failure controls against instrumented generator binaries"
+
+[focused_standalone_exports]
+artifact_class = "standalone"
+commands = [
+  "cargo llvm-cov run --branch --no-clean --json --bin <registered-validator-or-generator> -- <focused-args>",
+  "cargo llvm-cov run --branch --no-clean --json --bin check-exact-coverage -- --self-test",
+]
+strategy = "snapshot every controlled standalone binary independently so all-target helper objects cannot inflate source denominators; assign shared content-digest code to the exact-coverage self-test artifact"
+
+[examples_export]
+artifact_class = "examples"
+command = "cargo llvm-cov run --branch --no-report --example <registered> -- <coverage-control>; run the same instrumented example under preserved LLVM_PROFILE_FILE controls; cargo llvm-cov report --branch --no-default-ignore-filename-regex --json --output-path <ephemeral>"
+strategy = "execute success, usage, malformed-input, stale, and write controls in one isolated example object/profile family, snapshot it with the default source filter disabled, then merge only its owned generator path"
+
+[dylint_export]
+artifact_class = "dylint"
+manifest = "dylint_lints/fcis_core/Cargo.toml"
+command = "cargo llvm-cov show-env --branch --manifest-path dylint_lints/fcis_core/Cargo.toml --sh; build the Dylint cdylib in its isolated coverage target; execute all positive and negative lint fixtures through DYLINT_LIBRARY_PATH; cargo llvm-cov report --branch --json"
+
+[platform_policy]
+portable = "required"
+linux = "required-on-linux"
+macos = "required-on-macos"
+windows = "blocked-by-assurance/v1/platform-blockers.toml"
+deduplication = "identical-source-metrics-and-segments"
+incompatible_duplicate = "LCOV-PLATFORM-INCOMPATIBLE"

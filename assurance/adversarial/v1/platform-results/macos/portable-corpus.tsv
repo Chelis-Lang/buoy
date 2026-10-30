@@ -1,0 +1,7 @@
+schema	scope	digest
+buoy-adversarial-portable-corpus/v1	canonical-values	xxh3-128:56650079ae94275d20b5d9b3fdcadfcd
+buoy-adversarial-portable-corpus/v1	paths-globs	xxh3-128:e1d05f7d328f968b113046e05311a31b
+buoy-adversarial-portable-corpus/v1	adapters	xxh3-128:247ec19224be6184e69b35a4798dfd40
+buoy-adversarial-portable-corpus/v1	config-manifests	xxh3-128:e45a4c03f55741610ec0feb30825af57
+buoy-adversarial-portable-corpus/v1	graphs-governance	xxh3-128:04b2fd59b5025490d38650677a9dfd49
+buoy-adversarial-portable-corpus/v1	reports	xxh3-128:17c620685a899f7777ca99a390a4110f

@@ -1,0 +1,52 @@
+schema = "spec-provenance-red-baseline/v1"
+source_commit = "763d7f084aac569ceafcf21a95a2d1f2f46797b9"
+review_status = "accepted-red-baseline"
+measurement_scope = "cargo-instrumented-production-files"
+measurement_tool = "cargo-llvm-cov"
+measurement_semantics = "exact-unrounded-percentages"
+final_oracle_at_source = "devenv test"
+
+[coverage]
+line_percent = "75.29"
+function_percent = "71.43"
+branch_percent = "50.68"
+region_percent = "unreported"
+complete = false
+
+[[measured_class]]
+id = "cargo-workspace-production"
+paths = ["crates/spec-provenance-core/src/**/*.rs", "src/**/*.rs"]
+status = "measured-in-red-baseline"
+
+[[unmeasured_class]]
+id = "standalone-fixture-model-checker"
+paths = ["tools/check_fixture_manifest.rs"]
+reason = "compiled directly with rustc outside the Cargo coverage aggregate"
+disposition = "unmeasured-not-excluded"
+
+[[unmeasured_class]]
+id = "local-dylint-detector"
+paths = ["dylint_lints/fcis_core/src/lib.rs"]
+reason = "built and loaded through cargo-dylint outside the Cargo coverage aggregate"
+disposition = "unmeasured-not-excluded"
+
+[[known_false_green]]
+id = "fixtures-manifest-only"
+count = 112
+reason = "fixture records were shape-checked but operations and mutations were not behaviorally dispatched"
+
+[[known_false_green]]
+id = "properties-reference-only"
+reason = "sampled Hegel properties did not uniformly compare production with a dependency-independent authority"
+
+[[known_false_green]]
+id = "models-reference-only"
+reason = "finite models checked model-local invariants without uniformly evaluating production at every reachable state and transition"
+
+[[known_false_green]]
+id = "mutation-handcrafted-only"
+reason = "named illustrative mutants did not establish a source-bound automated mutation score"
+
+[[known_false_green]]
+id = "formal-drift-only"
+reason = "source digests detected drift but did not independently establish representation correspondence"

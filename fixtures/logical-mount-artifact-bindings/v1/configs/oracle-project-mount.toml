@@ -1,0 +1,20 @@
+schema = "buoy/repository-config/v3"
+digest_algorithms = ["xxh3-128"]
+
+[[mounts]]
+id = "project"
+prefix = "project"
+
+[[selectors]]
+mount = "project"
+root = "src"
+adapter = "artifact/v1"
+include = ["**/*"]
+exclude = []
+authority_expectation = "forbidden"
+
+[[oracles]]
+id = "ORC-MOUNT-CONTROL"
+program = "builtin:pass"
+working_root = "project"
+timeout_ms = 1000

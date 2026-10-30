@@ -1,0 +1,61 @@
+schema = "buoy-adversarial-campaign-policy/v1"
+id = "MUTATION-INITIAL-2026-07-22"
+kind = "mutation"
+tool_id = "cargo-mutants"
+tool_version = "27.1.0"
+tool_binding = "assurance/v1/toolchain.toml#cargo-mutants@27.1.0"
+source_paths = [
+  "crates/buoy-core/src/value.rs",
+  "crates/buoy-core/src/algorithms.rs",
+  "crates/buoy-core/src/report.rs",
+  "src/repository.rs",
+  "src/oracle.rs",
+  "src/publication.rs",
+  "src/publication_fs.rs",
+  "src/publication_models.rs",
+]
+configuration_paths = [
+  "Cargo.toml",
+  "Cargo.lock",
+  "crates/buoy-core/Cargo.toml",
+  "tests",
+  "crates/buoy-core/tests",
+  ".cargo/mutants.toml",
+  "assurance/v1/toolchain.toml",
+  "assurance/adversarial/v1/named-mutants.tsv",
+  "assurance/adversarial/v1/mutation-policy.toml",
+  "nix/devenv/scripts/adversarial.nix",
+]
+required_units = [
+  "artifact-freshness",
+  "strict-decoding",
+  "complete-impacts",
+  "policy-derivation",
+  "process-cleanup",
+  "output-enforcement",
+  "budget-enforcement",
+  "publication-row-check",
+  "publication-source-guard",
+  "publication-write-prevention",
+  "publication-cycle-rejection",
+  "publication-target-base-normalization",
+  "publication-projection-conformance",
+  "publication-lock-identity",
+  "publication-parity-rendering",
+]
+minimum_cases = 15
+minimum_duration_seconds = 1
+minimum_score_basis_points = 9000
+maximum_age_days = 30
+campaign_command = "devenv tasks run buoy:mutation-campaign"
+replay_command = "devenv shell -- buoy-mutation-replay"
+assurance_scope = "cargo-mutants baseline over explicitly selected deterministic core, shell-validator, and publication symbols plus individually blocking named tripwires; no whole-repository mutation claim"
+exclusions = [
+  "generated Unicode case-fold data is checked by source regeneration and conformance rather than source mutation",
+  "adapters and unrelated migration/product-identity code are outside this initial explicitly selected automated mutation baseline",
+  "equivalent or tool-unsupported mutants never count as killed and require exact reviewed nonpassing disposition",
+  "the campaign execution skips only its two self-referential committed-artifact tests; post-campaign replay validates the frozen result and all freshness negative controls",
+  "The cargo-mutants campaign excludes eight unrelated tests because its copied tree lacks Git metadata and complete active-change files.",
+  "Dedicated assurance gates remain mandatory outside mutation execution.",
+  "the trybuild UI snapshot test is skipped during cargo-mutants execution because copied-source diagnostics contain tool workspace locations; the dedicated compile-fail gate remains mandatory outside mutation execution",
+]

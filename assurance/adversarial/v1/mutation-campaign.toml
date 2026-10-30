@@ -1,0 +1,110 @@
+schema = "buoy-adversarial-campaign-artifact/v1"
+campaign_id = "MUTATION-INITIAL-2026-07-22"
+kind = "mutation"
+tool_id = "cargo-mutants"
+tool_version = "27.1.0"
+tool_binding = "assurance/v1/toolchain.toml#cargo-mutants@27.1.0"
+source_digest = "xxh3-128:09d2db1d4308b55ecf5e7fb45b8ad81e"
+configuration_digest = "xxh3-128:f29e9a83f861894f8acfa5997a6a3ee9"
+generated_on = "2026-10-30"
+expires_on = "2026-11-29"
+command = "devenv tasks run buoy:mutation-campaign"
+result = "pass"
+total_cases = 19
+duration_seconds = 668
+accepted_mutants = 19
+killed_mutants = 19
+score_basis_points = 10000
+finding_count = 0
+unresolved_blocking_findings = 0
+assurance_scope = "cargo-mutants baseline over explicitly selected deterministic core, shell-validator, and publication symbols plus individually blocking named tripwires; no whole-repository mutation claim"
+
+[[units]]
+id = "artifact-freshness"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "strict-decoding"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "complete-impacts"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "policy-derivation"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "process-cleanup"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "output-enforcement"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "budget-enforcement"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication-row-check"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication-source-guard"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication-write-prevention"
+cases = 2
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication-cycle-rejection"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication-target-base-normalization"
+cases = 3
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication-projection-conformance"
+cases = 1
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication-lock-identity"
+cases = 2
+status = "pass"
+finding_count = 0
+
+[[units]]
+id = "publication-parity-rendering"
+cases = 1
+status = "pass"
+finding_count = 0

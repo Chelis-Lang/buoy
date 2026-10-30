@@ -1,0 +1,6 @@
+kind = "upstream-release-metadata"
+tag = "v1.2.3"
+asset = "tool-v1.2.3.tar.gz"
+checksum_algorithm = "sha256"
+checksum = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+signature = "tool-v1.2.3.tar.gz.asc"

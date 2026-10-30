@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "FPR-008"
+
+[[case]]
+id = "fpr-008-positive-both-spikes-compared"
+scenario = "positive-both-spikes-compared"
+polarity = "positive"
+operation = "select-formal-lane"
+baseline = "fixtures/v1/baselines/formal-lane-selection.toml"
+mutations = ["compare-verus-aeneas-spikes"]
+expected = { outcome = "accept", codes = [], facts = ["spike:verus=complete", "spike:aeneasverif=complete", "lane-decision=evidence-eligible"] }
+
+[[case]]
+id = "fpr-008-negative-preference-only"
+scenario = "negative-primary-lane-selected-by-preference-alone"
+polarity = "negative"
+operation = "select-formal-lane"
+baseline = "fixtures/v1/baselines/formal-lane-selection.toml"
+mutations = ["select-lane-by-preference-only"]
+expected = { outcome = "reject", codes = ["FPR-LANE-SELECTION-MISSING-SPIKE-EVIDENCE"], facts = ["lane-decision=incomplete", "production-formal-claims=blocked"] }

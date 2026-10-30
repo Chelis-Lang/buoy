@@ -1,0 +1,866 @@
+category	parent	name	tag	shape	cardinality	collection	rule
+schema	-	spec-provenance/v2	2	schema	required	scalar	frozen semantic schema
+collection-rule	-	record	-	fields	required	record	ascending unique u16 field tags and every declared field present
+collection-rule	-	sequence	-	values	required	sequence	semantic order preserved
+collection-rule	-	set	-	values	required	set	complete encoded bytes sorted unique and duplicates rejected
+collection-rule	-	option	-	value	required	option	explicit none or exactly one some value
+collection-rule	-	object-set	-	objects	required	set	kind then stable ID then digest then bytes; duplicate kind and ID rejected
+collection-rule	-	diagnostic-set	-	diagnostics	required	set	path span code kind ID fields total order and exact duplicate coalescing
+collection-rule	-	path-set	-	paths	required	set	canonical and full case-fold portable collisions rejected
+collection-rule	-	reference-set	-	references	required	set	kind ID digest canonical order and exact duplicate rejection
+type-tag	canonical-value	false	0	empty	required	scalar	payload length zero
+type-tag	canonical-value	true	1	empty	required	scalar	payload length zero
+type-tag	canonical-value	u64	2	u64-be	required	scalar	payload length eight
+type-tag	canonical-value	i64	3	i64-twos-complement-be	required	scalar	payload length eight
+type-tag	canonical-value	bytes	4	bytes	required	scalar	arbitrary bytes
+type-tag	canonical-value	text	5	nfc-utf8	required	scalar	pinned Unicode NFC
+type-tag	canonical-value	record	6	record	required	record	field count and fields
+type-tag	canonical-value	sequence	7	sequence	required	sequence	element count and values
+type-tag	canonical-value	set	8	set	required	set	element count sorted unique values
+type-tag	canonical-value	option-none	9	empty	required	option	payload length zero
+type-tag	canonical-value	option-some	10	canonical-value	required	option	exactly one encoded value
+type-tag	canonical-value	enum	11	enum	required	scalar	u16 variant and explicit option payload
+type-tag	canonical-value	digest	12	digest	required	scalar	u16 algorithm u16 length bytes
+enum	enums	digest-algorithm	-	enum	required	scalar	closed
+enum-variant	digest-algorithm	xxh3-128	2	unit	required	scalar	16 bytes; seed 0; standard default secret; high64-be then low64-be
+enum	enums	object-kind	-	enum	required	scalar	closed
+enum-variant	object-kind	atom	1	unit	required	scalar	graph object
+enum-variant	object-kind	tombstone	2	unit	required	scalar	graph object
+enum-variant	object-kind	decision-surface	3	unit	required	scalar	graph object
+enum-variant	object-kind	evidence-carrier	4	unit	required	scalar	graph object
+enum-variant	object-kind	implementation-link	5	unit	required	scalar	graph object
+enum-variant	object-kind	derivation	6	unit	required	scalar	graph object
+enum-variant	object-kind	coverage-policy	7	unit	required	scalar	graph object
+enum-variant	object-kind	debt-record	8	unit	required	scalar	graph object
+enum-variant	object-kind	waiver	9	unit	required	scalar	graph object
+enum-variant	object-kind	oracle	10	unit	required	scalar	graph object
+enum-variant	object-kind	finite-model	11	unit	required	scalar	graph object
+enum-variant	object-kind	formal-property	12	unit	required	scalar	graph object
+enum-variant	object-kind	assumption	13	unit	required	scalar	graph object
+enum-variant	object-kind	proof-record	14	unit	required	scalar	graph object
+enum-variant	object-kind	parsed-item	15	unit	required	scalar	source object
+enum-variant	object-kind	reaffirmation	16	unit	required	scalar	change review object
+enum-variant	object-kind	change-manifest	17	unit	required	scalar	change object
+enum-variant	object-kind	change-disposition	18	unit	required	scalar	change object
+enum	enums	atom-kind	-	enum	required	scalar	closed
+enum-variant	atom-kind	behavioral	1	unit	required	scalar	-
+enum-variant	atom-kind	structural	2	unit	required	scalar	-
+enum-variant	atom-kind	constraint	3	unit	required	scalar	-
+enum	enums	live-lifecycle	-	enum	required	scalar	closed
+enum-variant	live-lifecycle	proposed	1	unit	required	scalar	-
+enum-variant	live-lifecycle	ratified	2	unit	required	scalar	-
+enum	enums	terminal-lifecycle	-	enum	required	scalar	closed
+enum-variant	terminal-lifecycle	superseded	3	unit	required	scalar	-
+enum-variant	terminal-lifecycle	withdrawn	4	unit	required	scalar	-
+enum	enums	evidence-role	-	enum	required	scalar	closed
+enum-variant	evidence-role	positive	1	unit	required	scalar	-
+enum-variant	evidence-role	negative	2	unit	required	scalar	-
+enum-variant	evidence-role	property	3	unit	required	scalar	-
+enum-variant	evidence-role	exhaustive-model	4	unit	required	scalar	-
+enum-variant	evidence-role	formal-property	5	unit	required	scalar	-
+enum-variant	evidence-role	structural	6	unit	required	scalar	-
+enum	enums	enforcement-mode	-	enum	required	scalar	closed
+enum-variant	enforcement-mode	advisory	1	unit	required	scalar	-
+enum-variant	enforcement-mode	blocking	2	unit	required	scalar	-
+enum	enums	policy-lifecycle	-	enum	required	scalar	closed
+enum-variant	policy-lifecycle	active	1	unit	required	scalar	-
+enum-variant	policy-lifecycle	superseded	2	unit	required	scalar	terminal
+enum-variant	policy-lifecycle	retired	3	unit	required	scalar	terminal
+enum	enums	debt-lifecycle	-	enum	required	scalar	closed
+enum-variant	debt-lifecycle	active	1	unit	required	scalar	-
+enum-variant	debt-lifecycle	discharged	2	unit	required	scalar	terminal
+enum-variant	debt-lifecycle	superseded	3	unit	required	scalar	terminal
+enum	enums	waiver-lifecycle	-	enum	required	scalar	closed
+enum-variant	waiver-lifecycle	active	1	unit	required	scalar	-
+enum-variant	waiver-lifecycle	discharged	2	unit	required	scalar	terminal
+enum-variant	waiver-lifecycle	revoked	3	unit	required	scalar	terminal
+enum-variant	waiver-lifecycle	superseded	4	unit	required	scalar	terminal
+enum	enums	surface-disposition	-	enum	required	scalar	closed
+enum-variant	surface-disposition	normative	1	unit	required	scalar	-
+enum-variant	surface-disposition	prohibited	2	unit	required	scalar	-
+enum-variant	surface-disposition	deferred	3	unit	required	scalar	-
+enum-variant	surface-disposition	not-applicable	4	unit	required	scalar	-
+enum	enums	navigation-kind	-	enum	required	scalar	closed
+enum-variant	navigation-kind	implements	1	unit	required	scalar	-
+enum-variant	navigation-kind	owns	2	unit	required	scalar	-
+enum-variant	navigation-kind	consumes	3	unit	required	scalar	-
+enum-variant	navigation-kind	configures	4	unit	required	scalar	-
+enum	enums	artifact-binding-kind	-	enum	required	scalar	closed
+enum-variant	artifact-binding-kind	object	1	unit	required	scalar	-
+enum-variant	artifact-binding-kind	repository-artifact	2	unit	required	scalar	-
+enum	enums	derivation-relation	-	enum	required	scalar	closed
+enum-variant	derivation-relation	byte-equal	1	unit	required	scalar	-
+enum-variant	derivation-relation	generated-from	2	unit	required	scalar	-
+enum-variant	derivation-relation	structurally-equivalent	3	unit	required	scalar	-
+enum-variant	derivation-relation	host-consistency	4	unit	required	scalar	-
+enum	enums	oracle-kind	-	enum	required	scalar	closed
+enum-variant	oracle-kind	test	1	unit	required	scalar	-
+enum-variant	oracle-kind	property	2	unit	required	scalar	-
+enum-variant	oracle-kind	exhaustive-model	3	unit	required	scalar	-
+enum-variant	oracle-kind	structural	4	unit	required	scalar	-
+enum-variant	oracle-kind	formal	5	unit	required	scalar	-
+enum-variant	oracle-kind	derivation-consistency	6	unit	required	scalar	-
+enum-variant	oracle-kind	host	7	unit	required	scalar	-
+enum	enums	verdict	-	enum	required	scalar	closed
+enum-variant	verdict	not-run	1	unit	required	scalar	-
+enum-variant	verdict	pass	2	unit	required	scalar	-
+enum-variant	verdict	fail	3	unit	required	scalar	-
+enum-variant	verdict	error	4	unit	required	scalar	-
+enum-variant	verdict	timeout	5	unit	required	scalar	-
+enum	enums	source-role	-	enum	required	scalar	closed
+enum-variant	source-role	authority	1	unit	required	scalar	-
+enum-variant	source-role	carrier	2	unit	required	scalar	-
+enum-variant	source-role	implementation	3	unit	required	scalar	-
+enum-variant	source-role	surface	4	unit	required	scalar	-
+enum-variant	source-role	policy	5	unit	required	scalar	-
+enum-variant	source-role	derivation	6	unit	required	scalar	-
+enum-variant	source-role	model	7	unit	required	scalar	-
+enum-variant	source-role	property	8	unit	required	scalar	-
+enum-variant	source-role	assumption	9	unit	required	scalar	-
+enum-variant	source-role	proof	10	unit	required	scalar	-
+enum-variant	source-role	debt	11	unit	required	scalar	-
+enum-variant	source-role	waiver	12	unit	required	scalar	-
+enum	enums	change-disposition	-	enum	required	scalar	closed
+enum-variant	change-disposition	reaffirmed	1	unit	required	scalar	-
+enum-variant	change-disposition	revised	2	unit	required	scalar	-
+enum-variant	change-disposition	retired	3	unit	required	scalar	-
+enum-variant	change-disposition	waived	4	unit	required	scalar	-
+enum	enums	obligation-kind	-	enum	required	scalar	closed
+enum-variant	obligation-kind	authority	1	unit	required	scalar	-
+enum-variant	obligation-kind	surface-completeness	2	unit	required	scalar	-
+enum-variant	obligation-kind	surface-authority	3	unit	required	scalar	-
+enum-variant	obligation-kind	required-role	4	unit	required	scalar	-
+enum-variant	obligation-kind	freshness	5	unit	required	scalar	-
+enum-variant	obligation-kind	oracle-selection	6	unit	required	scalar	-
+enum-variant	obligation-kind	execution	7	unit	required	scalar	-
+enum-variant	obligation-kind	derivation-consistency	8	unit	required	scalar	-
+enum-variant	obligation-kind	proof	9	unit	required	scalar	-
+enum-variant	obligation-kind	change-impact	10	unit	required	scalar	-
+enum	enums	assurance-class	-	enum	required	scalar	orthogonal not ranked
+enum-variant	assurance-class	linked	1	unit	required	scalar	-
+enum-variant	assurance-class	tested	2	unit	required	scalar	-
+enum-variant	assurance-class	exhaustively-checked	3	unit	required	scalar	-
+enum-variant	assurance-class	formally-proved	4	unit	required	scalar	-
+enum-variant	assurance-class	structurally-enforced	5	unit	required	scalar	-
+enum-variant	assurance-class	review-only	6	unit	required	scalar	-
+enum	enums	validity	-	enum	required	scalar	closed
+enum-variant	validity	valid	1	unit	required	scalar	-
+enum-variant	validity	invalid	2	unit	required	scalar	-
+enum	enums	completeness	-	enum	required	scalar	closed
+enum-variant	completeness	complete	1	unit	required	scalar	-
+enum-variant	completeness	incomplete	2	unit	required	scalar	-
+enum-variant	completeness	invalid	3	unit	required	scalar	-
+enum	enums	freshness	-	enum	required	scalar	closed
+enum-variant	freshness	fresh	1	unit	required	scalar	-
+enum-variant	freshness	stale	2	unit	required	scalar	-
+enum-variant	freshness	invalid	3	unit	required	scalar	-
+enum	enums	satisfaction	-	enum	required	scalar	closed
+enum-variant	satisfaction	satisfied	1	unit	required	scalar	-
+enum-variant	satisfaction	unsatisfied	2	unit	required	scalar	-
+enum-variant	satisfaction	not-applicable	3	unit	required	scalar	-
+enum	enums	selection	-	enum	required	scalar	closed
+enum-variant	selection	selected	1	unit	required	scalar	-
+enum-variant	selection	not-selected	2	unit	required	scalar	-
+enum-variant	selection	invalid	3	unit	required	scalar	-
+enum	enums	closure	-	enum	required	scalar	closed
+enum-variant	closure	closed	1	unit	required	scalar	-
+enum-variant	closure	open	2	unit	required	scalar	-
+enum-variant	closure	invalid	3	unit	required	scalar	-
+enum	enums	consistency	-	enum	required	scalar	closed
+enum-variant	consistency	not-run	1	unit	required	scalar	-
+enum-variant	consistency	consistent	2	unit	required	scalar	-
+enum-variant	consistency	inconsistent	3	unit	required	scalar	-
+enum-variant	consistency	error	4	unit	required	scalar	-
+enum-variant	consistency	timeout	5	unit	required	scalar	-
+enum	enums	diagnostic-severity	-	enum	required	scalar	closed
+enum-variant	diagnostic-severity	advisory	1	unit	required	scalar	-
+enum-variant	diagnostic-severity	blocking	2	unit	required	scalar	-
+enum	enums	impact-distance	-	enum	required	scalar	closed
+enum-variant	impact-distance	direct	1	unit	required	scalar	-
+enum-variant	impact-distance	transitive	2	unit	required	scalar	-
+enum	enums	entry-kind	-	enum	required	scalar	closed
+enum-variant	entry-kind	regular-file	1	unit	required	scalar	selected v2 snapshot entry
+enum-variant	entry-kind	symlink	2	unit	required	scalar	rejected observation
+enum-variant	entry-kind	directory	3	unit	required	scalar	descent observation
+enum-variant	entry-kind	submodule	4	unit	required	scalar	rejected observation
+enum-variant	entry-kind	nested-repository	5	unit	required	scalar	rejected observation
+enum-variant	entry-kind	other	6	unit	required	scalar	rejected observation
+enum	enums	item-kind	-	enum	required	scalar	closed
+enum-variant	item-kind	markdown-fence	1	unit	required	scalar	Markdown semantic item
+enum-variant	item-kind	rust-item	2	unit	required	scalar	Rust semantic item
+enum	enums	authority-expectation	-	enum	required	scalar	closed
+enum-variant	authority-expectation	forbidden	1	unit	required	scalar	any authority invalid
+enum-variant	authority-expectation	optional	2	unit	required	scalar	zero or more valid
+enum-variant	authority-expectation	required	3	unit	required	scalar	selector must produce authority
+enum	enums	governance-lifecycle	-	enum	required	scalar	closed union
+enum-variant	governance-lifecycle	active	1	unit	required	scalar	-
+enum-variant	governance-lifecycle	discharged	2	unit	required	scalar	-
+enum-variant	governance-lifecycle	revoked	3	unit	required	scalar	waiver only
+enum-variant	governance-lifecycle	superseded	4	unit	required	scalar	-
+enum	enums	lifecycle	-	enum	required	scalar	closed union
+enum-variant	lifecycle	proposed	1	unit	required	scalar	-
+enum-variant	lifecycle	ratified	2	unit	required	scalar	-
+enum-variant	lifecycle	superseded	3	unit	required	scalar	-
+enum-variant	lifecycle	withdrawn	4	unit	required	scalar	-
+enum	enums	id-allocation-class	-	enum	required	scalar	closed permanent reservation class
+enum-variant	id-allocation-class	live	1	unit	required	scalar	current live allocation
+enum-variant	id-allocation-class	terminal	2	unit	required	scalar	permanently reserved terminal allocation
+object	objects	atom	1	domain:atom-object	required	scalar	kind-specific validated construction
+object	objects	tombstone	2	domain:tombstone	required	scalar	terminal reservation
+object	objects	decision-surface	3	domain:decision-surface	required	scalar	complete finite surface
+object	objects	evidence-carrier	4	domain:evidence-carrier	required	scalar	exact scoped carrier
+object	objects	implementation-link	5	domain:implementation-link	required	scalar	navigational only
+object	objects	derivation	6	domain:derivation	required	scalar	intentional duplicate relation
+object	objects	coverage-policy	7	domain:coverage-policy-object	required	scalar	versioned obligation authority
+object	objects	debt-record	8	domain:debt-record	required	scalar	irreversible governance history
+object	objects	waiver	9	domain:waiver	required	scalar	process authorization only
+object	objects	oracle	10	domain:oracle	required	scalar	explicit execution semantics
+object	objects	finite-model	11	domain:finite-model	required	scalar	bounded model registration
+object	objects	formal-property	12	domain:formal-property	required	scalar	approved correspondence
+object	objects	assumption	13	domain:assumption	required	scalar	explicit dependency
+object	objects	proof-record	14	domain:proof-record	required	scalar	complete formal binding
+object	objects	parsed-item	15	domain:parsed-item-identity	required	scalar	parser-canonical identity
+object	objects	reaffirmation	16	domain:reaffirmation	required	scalar	review-only
+object	objects	change-manifest	17	domain:change-manifest	required	scalar	provider-neutral change input
+object	objects	change-disposition	18	domain:change-disposition	required	scalar	exact impact disposition
+nested	nested-values	object-reference	-	record	required	record	exact kind ID digest
+field	object-reference	object-kind	1	enum:object-kind	required	scalar	-
+field	object-reference	stable-id	2	text	required	scalar	-
+field	object-reference	expected-object-digest	3	digest	required	scalar	-
+nested	nested-values	atom-revision-reference	-	record	required	record	exact atom revision
+field	atom-revision-reference	atom-id	1	text	required	scalar	-
+field	atom-revision-reference	expected-revision	2	digest	required	scalar	-
+nested	nested-values	source-reference	-	record	required	record	original byte extent
+field	source-reference	canonical-path	1	text	required	scalar	-
+field	source-reference	start	2	u64	required	scalar	inclusive
+field	source-reference	end	3	u64	required	scalar	exclusive
+nested	nested-values	approval-binding	-	record	required	record	repository-owned review
+field	approval-binding	authority-id	1	text	required	scalar	-
+field	approval-binding	record-path	2	text	required	scalar	-
+field	approval-binding	record-digest	3	digest:raw-artifact	required	scalar	-
+nested	nested-values	tool-identity	-	record	required	record	pinned semantic tool
+field	tool-identity	tool-id	1	text	required	scalar	-
+field	tool-identity	version	2	text	required	scalar	-
+field	tool-identity	executable-digest	3	digest:raw-artifact	required	scalar	-
+field	tool-identity	configuration-digest	4	digest	required	scalar	-
+nested	nested-values	typed-payload	-	record	required	record	declared host schema
+field	typed-payload	host-schema-id	1	text	required	scalar	-
+field	typed-payload	canonical-payload-bytes	2	bytes	required	scalar	-
+nested	nested-values	typed-selector	-	record	required	record	closed portable selector
+field	typed-selector	root	1	text	required	scalar	canonical repository path
+field	typed-selector	adapter-id	2	text	required	scalar	declared syntax schema
+field	typed-selector	include-patterns	3	set:text	nonempty	set	portable-glob/v1
+field	typed-selector	exclude-patterns	4	set:text	required	set	portable-glob/v1
+field	typed-selector	authority-expectation	5	enum:authority-expectation	required	scalar	-
+nested	nested-values	id-namespace	-	record	required	record	permanent stable ID namespace
+field	id-namespace	namespace-id	1	text	required	scalar	-
+field	id-namespace	prefix	2	text	required	scalar	ASCII stable ID prefix
+field	id-namespace	allocation-policy	3	nested:typed-payload	required	scalar	pinned policy
+field	id-namespace	approval-authorities	4	set:text	required	set	configured authority IDs
+nested	nested-values	id-allocation	-	record	required	record	append-only allocation
+field	id-allocation	namespace-id	1	text	required	scalar	-
+field	id-allocation	stable-id	2	text	required	scalar	-
+field	id-allocation	allocation-digest	3	digest:raw-artifact	required	scalar	repository-owned allocation record
+field	id-allocation	allocation-ordinal	4	u64	required	scalar	positive; unique within namespace; orders history but does not derive ID
+field	id-allocation	allocation-class	5	enum:id-allocation-class	required	scalar	live may become terminal; terminal remains permanently reserved
+nested	nested-values	approval-authority	-	record	required	record	closed review authority
+field	approval-authority	authority-id	1	text	required	scalar	-
+field	approval-authority	allowed-kind-actions	2	set:nested:typed-payload	nonempty	set	closed action vocabulary
+field	approval-authority	allowed-namespaces	3	set:text	nonempty	set	-
+field	approval-authority	review-record-selector	4	nested:typed-selector	required	scalar	-
+field	approval-authority	separation-of-duty	5	option:nested:typed-payload	required	option	-
+field	approval-authority	declaration-approval	6	nested:approval-binding	required	scalar	-
+nested	nested-values	rejected-entry-observation	-	record	required	record	deterministic rejected path evidence
+field	rejected-entry-observation	canonical-path	1	text	required	scalar	-
+field	rejected-entry-observation	entry-kind	2	enum:entry-kind	required	scalar	-
+field	rejected-entry-observation	diagnostic-code	3	text	required	scalar	stable code
+nested	nested-values	policy-ratchet-impact	-	record	required	record	derived adoption monotonicity
+field	policy-ratchet-impact	ratchet-id	1	text	required	scalar	-
+field	policy-ratchet-impact	base-policy	2	nested:object-reference	required	scalar	-
+field	policy-ratchet-impact	head-policy	3	nested:object-reference	required	scalar	-
+field	policy-ratchet-impact	weakened-obligations	4	set:domain:obligation-reference	required	set	-
+nested	nested-values	environment-binding	-	record	required	record	explicit cleared-environment binding
+field	environment-binding	name	1	text	required	scalar	ASCII uppercase environment name
+field	environment-binding	value	2	text	required	scalar	exact UTF-8 value
+nested	nested-values	snapshot-budgets	-	record	required	record	acceptance-affecting snapshot limits
+field	snapshot-budgets	path-depth	1	u64	required	scalar	component count
+field	snapshot-budgets	directory-entries	2	u64	required	scalar	entry count
+field	snapshot-budgets	selected-files	3	u64	required	scalar	file count
+field	snapshot-budgets	file-bytes	4	u64	required	scalar	bytes
+field	snapshot-budgets	total-bytes	5	u64	required	scalar	bytes
+nested	nested-values	oracle-command	-	record	required	record	complete effectful oracle semantic configuration
+field	oracle-command	oracle-id	1	text	required	scalar	stable ID
+field	oracle-command	executable	2	text	required	scalar	exact configured program
+field	oracle-command	arguments	3	sequence:text	required	sequence	ordered arguments
+field	oracle-command	environment	4	set:nested:environment-binding	required	set	explicit allowlist and values
+field	oracle-command	working-root	5	text	required	scalar	closed repository-root identity
+field	oracle-command	input	6	option:text	required	scalar	explicit absence
+field	oracle-command	result-protocol	7	text	required	scalar	spec-provenance-result/v1
+field	oracle-command	stdout-limit	8	u64	required	scalar	bytes
+field	oracle-command	stderr-limit	9	u64	required	scalar	bytes
+field	oracle-command	combined-output-limit	10	u64	required	scalar	bytes
+field	oracle-command	raw-log-retention	11	u64	required	scalar	bytes noncanonical
+field	oracle-command	timeout-ms	12	u64	required	scalar	milliseconds
+field	oracle-command	derivation	13	option:text	required	scalar	explicit absence
+field	oracle-command	concurrency-class	14	option:text	required	scalar	reserved explicit absence in v2
+domain	domains	repository-execution-config	-	record	required	record	shell selector snapshot and oracle configuration identity
+field	repository-execution-config	configuration-schema-id	1	text	required	scalar	-
+field	repository-execution-config	selectors	2	set:nested:typed-selector	nonempty	set	-
+field	repository-execution-config	oracles	3	set:nested:oracle-command	required	set	-
+field	repository-execution-config	snapshot-budgets	4	nested:snapshot-budgets	required	scalar	-
+field	repository-execution-config	oracle-concurrency	5	u64	required	scalar	process count
+domain	domains	raw-artifact	-	record	required	record	semantic digest domain
+field	raw-artifact	media-type	1	text	required	scalar	-
+field	raw-artifact	raw-bytes	2	bytes	required	scalar	-
+domain	domains	repository-config	-	record	required	record	semantic digest domain
+field	repository-config	configuration-schema-id	1	text	required	scalar	-
+field	repository-config	selectors	2	set:typed-selector	required	set	explicit empty forbidden
+field	repository-config	id-namespaces	3	set:id-namespace	required	set	-
+field	repository-config	approval-authorities	4	set:approval-authority	required	set	-
+field	repository-config	policy-references	5	set:nested:object-reference	required	set	-
+field	repository-config	semantic-tools	6	set:nested:tool-identity	required	set	-
+domain	domains	repository-snapshot	-	record	required	record	semantic digest domain
+field	repository-snapshot	repository-config-digest	1	digest:repository-config	required	scalar	-
+field	repository-snapshot	schema-tool-lock-digest	2	digest:schema-tool-lock	required	scalar	-
+field	repository-snapshot	snapshot-files	3	set:domain:snapshot-file	required	set	explicit empty allowed by selector policy
+field	repository-snapshot	rejected-entry-observations	4	set:typed-observation	required	set	-
+domain	domains	snapshot-file	-	record	required	record	semantic digest domain
+field	snapshot-file	canonical-path	1	text	required	scalar	-
+field	snapshot-file	entry-kind	2	enum:entry-kind	required	scalar	-
+field	snapshot-file	raw-artifact-digest	3	digest:raw-artifact	required	scalar	-
+domain	domains	schema-tool-lock	-	record	required	record	semantic digest domain
+field	schema-tool-lock	encoding-schema-id	1	text	required	scalar	-
+field	schema-tool-lock	unicode-data-identity	2	nested:tool-identity	required	scalar	-
+field	schema-tool-lock	commonmark-parser	3	nested:tool-identity	required	scalar	-
+field	schema-tool-lock	toml-parser	4	nested:tool-identity	required	scalar	-
+field	schema-tool-lock	rust-parser	5	option:nested:tool-identity	required	option	-
+field	schema-tool-lock	additional-semantic-tools	6	set:nested:tool-identity	required	set	-
+domain	domains	atom-revision	-	record	required	record	semantic digest domain
+field	atom-revision	atom-kind	1	enum:atom-kind	required	scalar	-
+field	atom-revision	scope-ids	2	set:text	nonempty	set	-
+field	atom-revision	statement	3	text	nonempty	scalar	normative NFC text
+domain	domains	atom-object	-	record	required	record	semantic digest domain
+field	atom-object	atom-id	1	text	required	scalar	-
+field	atom-object	atom-revision-digest	2	digest:atom-revision	required	scalar	-
+field	atom-object	lifecycle	3	enum:live-lifecycle	required	scalar	-
+field	atom-object	approval	4	option:nested:approval-binding	required	option	state dependent
+domain	domains	tombstone	-	record	required	record	semantic digest domain
+field	tombstone	atom-id	1	text	required	scalar	-
+field	tombstone	terminal-state	2	enum:terminal-lifecycle	required	scalar	-
+field	tombstone	final-revision	3	digest:atom-revision	required	scalar	-
+field	tombstone	replacements	4	set:nested:atom-revision-reference	required	set	nonempty for superseded
+field	tombstone	approval	5	nested:approval-binding	required	scalar	-
+domain	domains	id-registry	-	record	required	record	semantic digest domain
+field	id-registry	namespace-declarations	1	set:id-namespace	required	set	-
+field	id-registry	allocated-id-entries	2	set:id-allocation	required	set	append only
+domain	domains	decision-surface-domain	-	record	required	record	semantic digest domain
+field	decision-surface-domain	surface-id	1	text	required	scalar	-
+field	decision-surface-domain	member-key-schema	2	nested:typed-payload	required	scalar	-
+field	decision-surface-domain	disposition-vocabulary	3	nested:typed-payload	required	scalar	-
+field	decision-surface-domain	member-keys	4	set:nested:typed-payload	nonempty	set	complete enumerated or product
+field	decision-surface-domain	generation	5	u64	required	scalar	positive monotonic
+domain	domains	surface-disposition	-	record	required	record	semantic digest domain
+field	surface-disposition	member-key	1	nested:typed-payload	required	scalar	-
+field	surface-disposition	disposition	2	enum:surface-disposition	required	scalar	-
+field	surface-disposition	host-payload	3	option:nested:typed-payload	required	option	variant dependent
+field	surface-disposition	authority	4	option:nested:atom-revision-reference	required	option	policy dependent
+domain	domains	decision-surface	-	record	required	record	semantic digest domain
+field	decision-surface	surface-id	1	text	required	scalar	-
+field	decision-surface	domain-digest	2	digest:decision-surface-domain	required	scalar	-
+field	decision-surface	dispositions	3	set:domain:surface-disposition	nonempty	set	exact member set
+field	decision-surface	policies	4	set:nested:object-reference	required	set	coverage-policy only
+domain	domains	evidence-carrier	-	record	required	record	semantic digest domain
+field	evidence-carrier	carrier-id	1	text	required	scalar	-
+field	evidence-carrier	role	2	enum:evidence-role	required	scalar	-
+field	evidence-carrier	atoms	3	set:nested:atom-revision-reference	nonempty	set	-
+field	evidence-carrier	parsed-item-digest	4	digest:parsed-item-identity	required	scalar	-
+field	evidence-carrier	oracle	5	nested:object-reference	required	scalar	-
+field	evidence-carrier	execution-config	6	digest	required	scalar	-
+field	evidence-carrier	corpora	7	set:digest	required	set	explicit empty allowed
+field	evidence-carrier	claim-scope	8	nested:typed-payload	required	scalar	-
+field	evidence-carrier	assumptions	9	set:nested:object-reference	required	set	-
+field	evidence-carrier	exclusions	10	set:text	required	set	explicit empty allowed
+domain	domains	parsed-item-identity	-	record	required	record	semantic digest domain
+field	parsed-item-identity	language-schema-id	1	text	required	scalar	-
+field	parsed-item-identity	canonical-path	2	text	required	scalar	-
+field	parsed-item-identity	item-kind	3	enum:item-kind	required	scalar	-
+field	parsed-item-identity	semantic-bytes	4	bytes	required	scalar	-
+field	parsed-item-identity	enclosing-item	5	option:digest:parsed-item-identity	required	option	-
+domain	domains	implementation-link	-	record	required	record	semantic digest domain
+field	implementation-link	link-id	1	text	required	scalar	-
+field	implementation-link	atoms	2	set:nested:atom-revision-reference	nonempty	set	-
+field	implementation-link	parsed-item-digest	3	digest:parsed-item-identity	required	scalar	-
+field	implementation-link	navigation-kind	4	enum:navigation-kind	required	scalar	-
+domain	domains	derivation	-	record	required	record	semantic digest domain
+field	derivation	derivation-id	1	text	required	scalar	-
+field	derivation	sources	2	set:nested:artifact-binding	nonempty	set	disjoint from targets
+field	derivation	targets	3	set:nested:artifact-binding	nonempty	set	disjoint from sources
+field	derivation	tool	4	nested:tool-identity	required	scalar	-
+field	derivation	configuration-digest	5	digest	required	scalar	-
+field	derivation	consistency-oracle	6	nested:object-reference	required	scalar	-
+field	derivation	relation	7	enum:derivation-relation	required	scalar	-
+field	derivation	relation-scope	8	nested:typed-payload	required	scalar	-
+field	derivation	exclusions	9	set:text	required	set	-
+domain	domains	artifact-binding	-	record	required	record	semantic digest domain
+field	artifact-binding	binding-kind	1	enum:artifact-binding-kind	required	scalar	-
+field	artifact-binding	object-reference	2	option:nested:object-reference	required	option	-
+field	artifact-binding	canonical-path	3	option:text	required	option	-
+field	artifact-binding	artifact-digest	4	digest	required	scalar	-
+field	artifact-binding	raw-domain	5	option:text	required	option	repository artifact must be raw-artifact and object must be absent
+field	artifact-binding	media-type	6	option:text	required	option	repository artifact only and nonempty
+field	artifact-binding	representation	7	option:text	required	option	repository artifact only and nonempty
+nested	nested-values	artifact-entry	-	record	required	record	exact current selected repository artifact
+field	artifact-entry	canonical-path	1	text	required	scalar	normalized repository-relative path
+field	artifact-entry	raw-domain	2	text	required	scalar	exact raw-artifact domain
+field	artifact-entry	media-type	3	text	nonempty	scalar	declared raw-artifact media type
+field	artifact-entry	representation	4	text	nonempty	scalar	exact saved or generated representation identity
+field	artifact-entry	raw-artifact-digest	5	digest:raw-artifact	required	scalar	current selected bytes
+domain	domains	artifact-index	-	record	required	record	canonical explicit current repository artifact index
+field	artifact-index	entries	1	set:nested:artifact-entry	required	set	canonical path order with duplicate and portable-collision rejection
+domain	domains	coverage-policy-revision	-	record	required	record	semantic digest domain
+field	coverage-policy-revision	scope	1	nested:typed-payload	required	scalar	finite predicate
+field	coverage-policy-revision	required-roles	2	set:enum:evidence-role	required	set	-
+field	coverage-policy-revision	enforcement	3	enum:enforcement-mode	required	scalar	-
+field	coverage-policy-revision	ratchet-id	4	text	required	scalar	stable lineage
+field	coverage-policy-revision	authority-selectors	5	set:typed-selector	required	set	-
+field	coverage-policy-revision	derivation-requirements	6	option:nested:typed-payload	required	option	-
+domain	domains	coverage-policy-object	-	record	required	record	semantic digest domain
+field	coverage-policy-object	policy-id	1	text	required	scalar	-
+field	coverage-policy-object	revision-digest	2	digest:coverage-policy-revision	required	scalar	-
+field	coverage-policy-object	active-approval	3	nested:approval-binding	required	scalar	-
+field	coverage-policy-object	lifecycle	4	enum:policy-lifecycle	required	scalar	-
+field	coverage-policy-object	replacements	5	set:nested:object-reference	required	set	-
+field	coverage-policy-object	terminal-approval	6	option:nested:approval-binding	required	option	-
+domain	domains	debt-record	-	record	required	record	semantic digest domain
+field	debt-record	debt-id	1	text	required	scalar	-
+field	debt-record	obligations	2	set:nested:obligation-reference	nonempty	set	-
+field	debt-record	objects	3	set:nested:object-reference	required	set	-
+field	debt-record	rationale	4	text	nonempty	scalar	-
+field	debt-record	owner	5	text	nonempty	scalar	-
+field	debt-record	remediation	6	text	nonempty	scalar	-
+field	debt-record	discharge-condition	7	nested:typed-payload	required	scalar	-
+field	debt-record	external-references	8	set:text	required	set	informational only
+field	debt-record	lifecycle	9	enum:debt-lifecycle	required	scalar	-
+field	debt-record	discharge-evidence	10	set:nested:object-reference	required	set	state dependent
+field	debt-record	replacements	11	set:nested:object-reference	required	set	state dependent
+field	debt-record	terminal-approval	12	option:nested:approval-binding	required	option	state dependent
+domain	domains	waiver	-	record	required	record	semantic digest domain
+field	waiver	waiver-id	1	text	required	scalar	-
+field	waiver	obligations	2	set:nested:obligation-reference	nonempty	set	-
+field	waiver	objects	3	set:nested:object-reference	required	set	-
+field	waiver	rationale	4	text	nonempty	scalar	-
+field	waiver	owner	5	text	nonempty	scalar	-
+field	waiver	discharge-condition	6	nested:typed-payload	required	scalar	-
+field	waiver	active-approval	7	nested:approval-binding	required	scalar	-
+field	waiver	external-references	8	set:text	required	set	informational only
+field	waiver	lifecycle	9	enum:waiver-lifecycle	required	scalar	-
+field	waiver	discharge-evidence	10	set:nested:object-reference	required	set	state dependent
+field	waiver	replacements	11	set:nested:object-reference	required	set	state dependent
+field	waiver	terminal-approval	12	option:nested:approval-binding	required	option	state dependent
+domain	domains	reaffirmation	-	record	required	record	semantic digest domain
+field	reaffirmation	reaffirmation-id	1	text	required	scalar	-
+field	reaffirmation	affected-object-kind	2	enum:object-kind	required	scalar	-
+field	reaffirmation	base-object-digest	3	digest	required	scalar	different from head
+field	reaffirmation	head-object-digest	4	digest	required	scalar	different from base
+field	reaffirmation	review-approval	5	nested:approval-binding	required	scalar	-
+field	reaffirmation	review-statement	6	text	nonempty	scalar	-
+field	reaffirmation	affected-object-id	7	text	required	scalar	exact stable ID paired with affected object kind and base head digests
+domain	domains	obligation-reference	-	record	required	record	semantic digest domain
+field	obligation-reference	policy-id	1	text	required	scalar	-
+field	obligation-reference	obligation-kind	2	enum:obligation-kind	required	scalar	-
+field	obligation-reference	subject	3	nested:object-reference	required	scalar	-
+field	obligation-reference	required-role	4	option:enum:evidence-role	required	option	variant dependent
+domain	domains	oracle	-	record	required	record	semantic digest domain
+field	oracle	oracle-id	1	text	required	scalar	-
+field	oracle	oracle-kind	2	enum:oracle-kind	required	scalar	-
+field	oracle	runner-tool	3	nested:tool-identity	required	scalar	-
+field	oracle	selection-semantics	4	nested:typed-payload	required	scalar	-
+field	oracle	verdict-normalization	5	nested:typed-payload	required	scalar	-
+field	oracle	configuration-digest	6	digest	required	scalar	-
+field	oracle	scope	7	nested:typed-payload	required	scalar	-
+field	oracle	exclusions	8	set:text	required	set	-
+domain	domains	normalized-verdict	-	record	required	record	semantic digest domain
+field	normalized-verdict	oracle	1	nested:object-reference	required	scalar	-
+field	normalized-verdict	selected-subjects	2	set:nested:object-reference	required	set	-
+field	normalized-verdict	verdict	3	enum:verdict	required	scalar	-
+field	normalized-verdict	semantic-result	4	option:nested:typed-payload	required	option	protocol bound
+domain	domains	verdict-set	-	record	required	record	semantic digest domain
+field	verdict-set	verdicts	1	set:domain:normalized-verdict	required	set	unique oracle subject tuple
+domain	domains	assumption	-	record	required	record	semantic digest domain
+field	assumption	assumption-id	1	text	required	scalar	-
+field	assumption	statement	2	text	nonempty	scalar	-
+field	assumption	scope	3	nested:typed-payload	required	scalar	-
+field	assumption	exclusions	4	set:text	required	set	-
+field	assumption	approval	5	nested:approval-binding	required	scalar	-
+domain	domains	finite-model	-	record	required	record	semantic digest domain
+field	finite-model	model-id	1	text	required	scalar	-
+field	finite-model	state-space	2	nested:typed-payload	required	scalar	-
+field	finite-model	event-alphabet	3	nested:typed-payload	required	scalar	-
+field	finite-model	transition-relation	4	nested:typed-payload	required	scalar	-
+field	finite-model	initial-states	5	set:nested:typed-payload	nonempty	set	-
+field	finite-model	bound	6	nested:typed-payload	required	scalar	-
+field	finite-model	checked-invariants	7	set:nested:atom-revision-reference	required	set	-
+field	finite-model	assumptions	8	set:nested:object-reference	required	set	-
+field	finite-model	exclusions	9	set:text	required	set	-
+domain	domains	formal-property	-	record	required	record	semantic digest domain
+field	formal-property	property-id	1	text	required	scalar	-
+field	formal-property	atoms	2	set:nested:atom-revision-reference	nonempty	set	-
+field	formal-property	property-payload	3	nested:typed-payload	required	scalar	-
+field	formal-property	implementation-abstraction	4	nested:typed-payload	required	scalar	-
+field	formal-property	assumptions	5	set:nested:object-reference	required	set	-
+field	formal-property	exclusions	6	set:text	required	set	-
+field	formal-property	correspondence-approval	7	nested:approval-binding	required	scalar	-
+domain	domains	proof-record	-	record	required	record	semantic digest domain
+field	proof-record	proof-id	1	text	required	scalar	-
+field	proof-record	atoms	2	set:nested:atom-revision-reference	nonempty	set	-
+field	proof-record	formal-property	3	nested:object-reference	required	scalar	-
+field	proof-record	implementation-representation	4	nested:artifact-binding	required	scalar	-
+field	proof-record	assumptions	5	set:nested:object-reference	required	set	-
+field	proof-record	translators	6	set:nested:tool-identity	required	set	lane dependent
+field	proof-record	verifier	7	nested:tool-identity	required	scalar	-
+field	proof-record	verifier-configuration	8	digest	required	scalar	-
+field	proof-record	external-models	9	set:nested:artifact-binding	required	set	-
+field	proof-record	generated-artifacts	10	set:nested:artifact-binding	required	set	-
+field	proof-record	proof-sources	11	set:nested:artifact-binding	nonempty	set	-
+field	proof-record	normalized-verdict	12	enum:verdict	required	scalar	-
+field	proof-record	scope	13	nested:typed-payload	required	scalar	-
+field	proof-record	exclusions	14	set:text	required	set	-
+domain	domains	source-map-entry	-	record	required	record	semantic digest domain
+field	source-map-entry	object	1	nested:object-reference	required	scalar	-
+field	source-map-entry	sources	2	set:nested:source-reference	nonempty	set	-
+field	source-map-entry	source-role	3	enum:source-role	required	scalar	-
+domain	domains	source-map	-	record	required	record	semantic digest domain
+field	source-map	entries	1	set:domain:source-map-entry	required	set	-
+domain	domains	spec-graph-semantic	-	record	required	record	semantic digest domain
+field	spec-graph-semantic	atoms	1	set:domain:atom-object	required	set	-
+field	spec-graph-semantic	tombstones	2	set:domain:tombstone	required	set	-
+field	spec-graph-semantic	decision-surfaces	3	set:domain:decision-surface	required	set	-
+field	spec-graph-semantic	evidence-carriers	4	set:domain:evidence-carrier	required	set	-
+field	spec-graph-semantic	implementation-links	5	set:domain:implementation-link	required	set	-
+field	spec-graph-semantic	derivations	6	set:domain:derivation	required	set	-
+field	spec-graph-semantic	coverage-policies	7	set:domain:coverage-policy-object	required	set	-
+field	spec-graph-semantic	debt-records	8	set:domain:debt-record	required	set	-
+field	spec-graph-semantic	waivers	9	set:domain:waiver	required	set	-
+field	spec-graph-semantic	oracles	10	set:domain:oracle	required	set	-
+field	spec-graph-semantic	finite-models	11	set:domain:finite-model	required	set	-
+field	spec-graph-semantic	formal-properties	12	set:domain:formal-property	required	set	-
+field	spec-graph-semantic	assumptions	13	set:domain:assumption	required	set	-
+field	spec-graph-semantic	proof-records	14	set:domain:proof-record	required	set	-
+field	spec-graph-semantic	reaffirmations	15	set:domain:reaffirmation	required	set	review-only change records retained in semantic graph
+domain	domains	spec-graph-complete	-	record	required	record	semantic digest domain
+field	spec-graph-complete	semantic-graph-digest	1	digest:spec-graph-semantic	required	scalar	-
+field	spec-graph-complete	source-map-digest	2	digest:source-map	required	scalar	-
+field	spec-graph-complete	repository-config-digest	3	digest:repository-config	required	scalar	-
+field	spec-graph-complete	schema-tool-lock-digest	4	digest:schema-tool-lock	required	scalar	-
+domain	domains	change-manifest	-	record	required	record	semantic digest domain
+field	change-manifest	manifest-id	1	text	required	scalar	-
+field	change-manifest	base-graph	2	digest:spec-graph-complete	required	scalar	-
+field	change-manifest	head-graph	3	digest:spec-graph-complete	required	scalar	-
+field	change-manifest	dispositions	4	set:domain:change-disposition	required	set	-
+field	change-manifest	approval	5	option:nested:approval-binding	required	option	-
+domain	domains	change-disposition	-	record	required	record	semantic digest domain
+field	change-disposition	disposition-id	1	text	required	scalar	-
+field	change-disposition	object-kind	2	enum:object-kind	required	scalar	-
+field	change-disposition	stable-id	3	text	required	scalar	-
+field	change-disposition	base-digest	4	option:digest	required	option	variant dependent
+field	change-disposition	head-digest	5	option:digest	required	option	variant dependent
+field	change-disposition	disposition	6	enum:change-disposition	required	scalar	-
+field	change-disposition	reaffirmation-digest	7	option:digest:reaffirmation	required	option	variant dependent
+field	change-disposition	waiver	8	option:nested:object-reference	required	option	variant dependent
+field	change-disposition	replacements	9	set:nested:object-reference	required	set	variant dependent
+domain	domains	impact-set	-	record	required	record	semantic digest domain
+field	impact-set	direct-changes	1	set:nested:object-reference	required	set	-
+field	impact-set	transitive-impacts	2	set:nested:object-reference	required	set	fixed point
+field	impact-set	policy-ratchets	3	set:policy-ratchet-impact	required	set	derived only
+report-fact	report-facts	authority-fact	-	record	required	record	orthogonal static fact
+field	authority-fact	subject	1	nested:object-reference	required	scalar	atom or tombstone
+field	authority-fact	validity	2	enum:validity	required	scalar	-
+field	authority-fact	lifecycle	3	enum:lifecycle	required	scalar	-
+field	authority-fact	authority-source-count	4	u64	required	scalar	-
+field	authority-fact	approval-validity	5	enum:validity	required	scalar	-
+field	authority-fact	diagnostic-codes	6	set:text	required	set	-
+report-fact	report-facts	surface-fact	-	record	required	record	orthogonal static fact
+field	surface-fact	surface	1	nested:object-reference	required	scalar	-
+field	surface-fact	domain-digest	2	digest:decision-surface-domain	required	scalar	-
+field	surface-fact	completeness	3	enum:completeness	required	scalar	-
+field	surface-fact	expected-count	4	u64	required	scalar	-
+field	surface-fact	actual-count	5	u64	required	scalar	-
+field	surface-fact	missing-keys	6	set:nested:typed-payload	required	set	-
+field	surface-fact	duplicate-keys	7	set:nested:typed-payload	required	set	-
+field	surface-fact	unknown-keys	8	set:nested:typed-payload	required	set	-
+field	surface-fact	unauthorized-keys	9	set:nested:typed-payload	required	set	-
+field	surface-fact	diagnostic-codes	10	set:text	required	set	-
+report-fact	report-facts	registration-fact	-	record	required	record	orthogonal static fact
+field	registration-fact	carrier	1	nested:object-reference	required	scalar	-
+field	registration-fact	parsed-item-digest	2	digest:parsed-item-identity	required	scalar	-
+field	registration-fact	role	3	enum:evidence-role	required	scalar	-
+field	registration-fact	atoms	4	set:nested:atom-revision-reference	required	set	-
+field	registration-fact	scope-digest	5	digest	required	scalar	-
+field	registration-fact	validity	6	enum:validity	required	scalar	-
+field	registration-fact	diagnostic-codes	7	set:text	required	set	-
+report-fact	report-facts	policy-fact	-	record	required	record	orthogonal static fact
+field	policy-fact	policy	1	nested:object-reference	required	scalar	-
+field	policy-fact	subject	2	nested:object-reference	required	scalar	-
+field	policy-fact	obligation	3	nested:obligation-reference	required	scalar	-
+field	policy-fact	enforcement	4	enum:enforcement-mode	required	scalar	-
+field	policy-fact	applicability	5	enum:validity	required	scalar	-
+field	policy-fact	satisfaction	6	enum:satisfaction	required	scalar	-
+field	policy-fact	satisfying-references	7	set:nested:object-reference	required	set	-
+field	policy-fact	active-debt	8	set:nested:object-reference	required	set	-
+field	policy-fact	active-waivers	9	set:nested:object-reference	required	set	-
+field	policy-fact	diagnostic-codes	10	set:text	required	set	-
+report-fact	report-facts	freshness-fact	-	record	required	record	orthogonal static fact
+field	freshness-fact	subject	1	nested:object-reference	required	scalar	-
+field	freshness-fact	freshness	2	enum:freshness	required	scalar	-
+field	freshness-fact	expected-bindings	3	set:digest	required	set	-
+field	freshness-fact	current-bindings	4	set:digest	required	set	-
+field	freshness-fact	stale-binding-keys	5	set:text	required	set	-
+field	freshness-fact	diagnostic-codes	6	set:text	required	set	-
+report-fact	report-facts	debt-waiver-fact	-	record	required	record	orthogonal static fact
+field	debt-waiver-fact	subject	1	nested:object-reference	required	scalar	-
+field	debt-waiver-fact	validity	2	enum:validity	required	scalar	-
+field	debt-waiver-fact	lifecycle	3	enum:governance-lifecycle	required	scalar	-
+field	debt-waiver-fact	obligations	4	set:nested:obligation-reference	required	set	-
+field	debt-waiver-fact	unsatisfied-obligations	5	set:nested:obligation-reference	required	set	-
+field	debt-waiver-fact	owner	6	text	required	scalar	-
+field	debt-waiver-fact	discharge-condition-digest	7	digest	required	scalar	-
+field	debt-waiver-fact	discharge-evidence	8	set:nested:object-reference	required	set	-
+field	debt-waiver-fact	replacements	9	set:nested:object-reference	required	set	-
+field	debt-waiver-fact	diagnostic-codes	10	set:text	required	set	-
+report-fact	report-facts	derivation-fact	-	record	required	record	orthogonal static fact
+field	derivation-fact	derivation	1	nested:object-reference	required	scalar	-
+field	derivation-fact	freshness	2	enum:freshness	required	scalar	-
+field	derivation-fact	sources	3	set:nested:artifact-binding	required	set	-
+field	derivation-fact	targets	4	set:nested:artifact-binding	required	set	-
+field	derivation-fact	relation	5	enum:derivation-relation	required	scalar	-
+field	derivation-fact	consistency-oracle	6	nested:object-reference	required	scalar	-
+field	derivation-fact	consistency	7	enum:consistency	required	scalar	-
+field	derivation-fact	scope-digest	8	digest	required	scalar	-
+field	derivation-fact	exclusions	9	set:text	required	set	-
+field	derivation-fact	diagnostic-codes	10	set:text	required	set	-
+report-fact	report-facts	proof-fact	-	record	required	record	orthogonal static fact
+field	proof-fact	proof	1	nested:object-reference	required	scalar	-
+field	proof-fact	registration-validity	2	enum:validity	required	scalar	-
+field	proof-fact	correspondence-validity	3	enum:validity	required	scalar	-
+field	proof-fact	binding-completeness	4	enum:completeness	required	scalar	-
+field	proof-fact	freshness	5	enum:freshness	required	scalar	-
+field	proof-fact	verifier-selection	6	enum:selection	required	scalar	-
+field	proof-fact	verifier-verdict	7	enum:verdict	required	scalar	-
+field	proof-fact	negative-fixture-satisfaction	8	enum:satisfaction	required	scalar	-
+field	proof-fact	scope-digest	9	digest	required	scalar	-
+field	proof-fact	assumptions-exclusions	10	nested:typed-payload	required	scalar	-
+field	proof-fact	formally-proved	11	enum:satisfaction	required	scalar	-
+field	proof-fact	diagnostic-codes	12	set:text	required	set	-
+report-fact	report-facts	evidence-fact	-	record	required	record	orthogonal execution fact
+field	evidence-fact	obligation	1	nested:obligation-reference	required	scalar	-
+field	evidence-fact	carriers	2	set:nested:object-reference	required	set	-
+field	evidence-fact	registration-validity	3	enum:validity	required	scalar	-
+field	evidence-fact	freshness	4	enum:freshness	required	scalar	-
+field	evidence-fact	selection	5	enum:selection	required	scalar	-
+field	evidence-fact	verdicts	6	set:domain:normalized-verdict	required	set	-
+field	evidence-fact	claim-scope-digest	7	digest	required	scalar	-
+field	evidence-fact	assumptions-exclusions	8	nested:typed-payload	required	scalar	-
+field	evidence-fact	assurance-classes	9	set:enum:assurance-class	required	set	orthogonal
+field	evidence-fact	satisfaction	10	enum:satisfaction	required	scalar	-
+field	evidence-fact	diagnostic-codes	11	set:text	required	set	-
+report-fact	report-facts	disposition-closure-fact	-	record	required	record	orthogonal impact fact
+field	disposition-closure-fact	object-kind	1	enum:object-kind	required	scalar	-
+field	disposition-closure-fact	stable-id	2	text	required	scalar	-
+field	disposition-closure-fact	base-digest	3	option:digest	required	option	-
+field	disposition-closure-fact	head-digest	4	option:digest	required	option	-
+field	disposition-closure-fact	distance	5	enum:impact-distance	required	scalar	-
+field	disposition-closure-fact	required-classes	6	set:enum:change-disposition	required	set	-
+field	disposition-closure-fact	matching-disposition	7	option:nested:object-reference	required	option	-
+field	disposition-closure-fact	closure	8	enum:closure	required	scalar	-
+field	disposition-closure-fact	reaffirmation	9	option:nested:object-reference	required	option	review only
+field	disposition-closure-fact	waiver	10	option:nested:object-reference	required	option	process only
+field	disposition-closure-fact	diagnostic-codes	11	set:text	required	set	-
+report-fact	report-facts	diagnostic	-	record	required	record	stable canonical diagnostic
+field	diagnostic	code	1	text	required	scalar	ASCII stable code
+field	diagnostic	location	2	option:nested:source-reference	required	option	-
+field	diagnostic	primary-kind	3	option:enum:object-kind	required	option	-
+field	diagnostic	primary-id	4	option:text	required	option	-
+field	diagnostic	structured-fields	5	nested:typed-payload	required	scalar	code-specific schema
+field	diagnostic	severity	6	enum:diagnostic-severity	required	scalar	-
+field	diagnostic	raw-detail-handle	7	option:bytes	required	option	noncanonical excluded from report bytes
+domain	domains	static-report	-	record	required	record	authoritative binary report
+field	static-report	complete-graph-digest	1	digest:spec-graph-complete	required	scalar	-
+field	static-report	authority-facts	2	set:report-fact:authority-fact	required	set	-
+field	static-report	surface-facts	3	set:report-fact:surface-fact	required	set	-
+field	static-report	registration-facts	4	set:report-fact:registration-fact	required	set	-
+field	static-report	policy-facts	5	set:report-fact:policy-fact	required	set	-
+field	static-report	freshness-facts	6	set:report-fact:freshness-fact	required	set	-
+field	static-report	debt-waiver-facts	7	set:report-fact:debt-waiver-fact	required	set	-
+field	static-report	derivation-facts	8	set:report-fact:derivation-fact	required	set	-
+field	static-report	proof-facts	9	set:report-fact:proof-fact	required	set	-
+field	static-report	diagnostics	10	set:report-fact:diagnostic	required	set	-
+domain	domains	execution-report	-	record	required	record	authoritative binary report
+field	execution-report	static-graph-digest	1	digest	required	scalar	-
+field	execution-report	verdict-set-digest	2	digest:verdict-set	required	scalar	-
+field	execution-report	evidence-facts	3	set:report-fact:evidence-fact	required	set	-
+field	execution-report	diagnostics	4	set:report-fact:diagnostic	required	set	-
+domain	domains	impact-report	-	record	required	record	authoritative binary report
+field	impact-report	base-graph	1	digest:spec-graph-complete	required	scalar	-
+field	impact-report	head-graph	2	digest:spec-graph-complete	required	scalar	-
+field	impact-report	change-manifest	3	digest:change-manifest	required	scalar	-
+field	impact-report	impact-set	4	digest:impact-set	required	scalar	-
+field	impact-report	disposition-closure-facts	5	set:report-fact:disposition-closure-fact	required	set	-
+field	impact-report	diagnostics	6	set:report-fact:diagnostic	required	set	-
+reference-kind	references	object-reference	-	nested:object-reference	required	scalar	current exact kind ID and digest unless containing schema permits historical
+reference-kind	references	atom-revision-reference	-	nested:atom-revision-reference	required	scalar	live exact revision or explicitly permitted tombstone history
+reference-kind	references	source-reference	-	nested:source-reference	required	scalar	selected snapshot path and bounded original-byte span
+reference-kind	references	approval-binding	-	nested:approval-binding	required	scalar	configured authority and repository-owned record digest
+reference-kind	references	object-artifact-binding	-	nested:artifact-binding	required	scalar	exact object and no path
+reference-kind	references	repository-artifact-binding	-	nested:artifact-binding	required	scalar	explicit snapshot path and raw artifact digest
+reference-kind	references	obligation-reference	-	nested:obligation-reference	required	scalar	exact policy subject kind and optional required role
+impact-edge	approval-binding	record-artifact	-	target:raw-artifact	required	scalar	source-field:record-digest; review record bytes changes invalidate approval
+impact-edge	approval-authority	declaration-approval	-	target:approval-binding	required	scalar	source-field:declaration-approval; declaration approval changes invalidate authority
+impact-edge	id-allocation	allocation-record	-	target:raw-artifact	required	scalar	source-field:allocation-digest; allocation record changes invalidate allocation
+impact-edge	repository-config	policies	-	target:object-reference	required	set	source-field:policy-references; policy changes invalidate repository configuration
+impact-edge	repository-config	tools	-	target:tool-identity	required	set	source-field:semantic-tools; tool changes invalidate repository configuration
+impact-edge	repository-config	approval-authorities	-	target:approval-authority	required	set	source-field:approval-authorities; authority changes invalidate repository configuration
+impact-edge	repository-config	id-namespaces	-	target:id-namespace	required	set	source-field:id-namespaces; namespace changes invalidate repository configuration
+impact-edge	repository-snapshot	repository-config	-	target:repository-config	required	scalar	source-field:repository-config-digest; configuration changes invalidate snapshot
+impact-edge	repository-snapshot	schema-tool-lock	-	target:schema-tool-lock	required	scalar	source-field:schema-tool-lock-digest; tool lock changes invalidate snapshot
+impact-edge	repository-snapshot	files	-	target:snapshot-file	required	set	source-field:snapshot-files; selected bytes changes invalidate snapshot
+impact-edge	snapshot-file	raw-artifact	-	target:raw-artifact	required	scalar	source-field:raw-artifact-digest; selected bytes changes invalidate snapshot file
+impact-edge	schema-tool-lock	unicode-tool	-	target:tool-identity	required	scalar	source-field:unicode-data-identity; Unicode authority changes invalidate tool lock
+impact-edge	schema-tool-lock	commonmark-tool	-	target:tool-identity	required	scalar	source-field:commonmark-parser; CommonMark parser changes invalidate tool lock
+impact-edge	schema-tool-lock	toml-tool	-	target:tool-identity	required	scalar	source-field:toml-parser; TOML parser changes invalidate tool lock
+impact-edge	schema-tool-lock	rust-tool	-	target:tool-identity	required	option	source-field:rust-parser; Rust parser changes invalidate tool lock
+impact-edge	schema-tool-lock	additional-tools	-	target:tool-identity	required	set	source-field:additional-semantic-tools; semantic tool changes invalidate tool lock
+impact-edge	atom-object	revision	-	target:atom-revision	required	scalar	source-field:atom-revision-digest; revision changes invalidate atom object and dependents
+impact-edge	atom-object	approval	-	target:approval-binding	required	option	source-field:approval; approval changes invalidate ratification
+impact-edge	tombstone	final-revision	-	target:atom-revision	required	scalar	source-field:final-revision; final revision changes invalidate tombstone
+impact-edge	tombstone	approval	-	target:approval-binding	required	scalar	source-field:approval; approval changes invalidate tombstone
+impact-edge	tombstone	replacement-atoms	-	target:atom-object	required	set	source-field:replacements; replacement revision changes invalidate the tombstone and dependents
+impact-edge	decision-surface	domain	-	target:decision-surface-domain	required	scalar	source-field:domain-digest; domain changes invalidate the complete surface
+impact-edge	decision-surface	dispositions	-	target:surface-disposition	nonempty	set	source-field:dispositions; member disposition changes invalidate the complete surface
+impact-edge	decision-surface	policies	-	target:coverage-policy-object	required	set	source-field:policies; policy changes invalidate governed surface facts
+impact-edge	surface-disposition	authority-atom	-	target:atom-object	required	option	source-field:authority; authority revision changes invalidate the disposition
+impact-edge	evidence-carrier	atoms	-	target:atom-object	nonempty	set	source-field:atoms; atom revision changes invalidate the carrier
+impact-edge	evidence-carrier	parsed-item	-	target:parsed-item-identity	required	scalar	source-field:parsed-item-digest; item identity changes invalidate attachment
+impact-edge	evidence-carrier	oracle	-	target:oracle	required	scalar	source-field:oracle; oracle changes invalidate execution binding
+impact-edge	evidence-carrier	assumptions	-	target:assumption	required	set	source-field:assumptions; assumption changes invalidate claim scope
+impact-edge	implementation-link	atoms	-	target:atom-object	nonempty	set	source-field:atoms; atom revision changes invalidate navigation
+impact-edge	implementation-link	parsed-item	-	target:parsed-item-identity	required	scalar	source-field:parsed-item-digest; item identity changes invalidate navigation
+impact-edge	parsed-item-identity	enclosing-item	-	target:parsed-item-identity	required	option	source-field:enclosing-item; enclosing item changes invalidate nested identity
+impact-edge	derivation	source-bindings	-	target:artifact-binding	nonempty	set	source-field:sources; source binding changes invalidate derivation freshness
+impact-edge	derivation	target-bindings	-	target:artifact-binding	nonempty	set	source-field:targets; target binding changes invalidate derivation freshness
+impact-edge	derivation	consistency-oracle	-	target:oracle	required	scalar	source-field:consistency-oracle; oracle changes invalidate consistency evidence
+impact-edge	derivation	tool	-	target:tool-identity	required	scalar	source-field:tool; generator tool changes invalidate derivation
+impact-edge	artifact-binding	object	-	target:object-reference	required	option	source-field:object-reference; referenced object changes invalidate object binding
+impact-edge	artifact-binding	repository-artifact	-	target:artifact-index	required	option	source-field:canonical-path; selected bytes changes invalidate repository binding
+impact-edge	artifact-entry	raw-artifact	-	target:raw-artifact	required	scalar	source-field:raw-artifact-digest; current bytes changes invalidate index entry
+impact-edge	artifact-index	entries	-	target:artifact-entry	required	set	source-field:entries; entry changes invalidate artifact index
+impact-edge	coverage-policy-object	revision	-	target:coverage-policy-revision	required	scalar	source-field:revision-digest; revision changes invalidate policy object
+impact-edge	coverage-policy-object	active-approval	-	target:approval-binding	required	scalar	source-field:active-approval; approval changes invalidate active policy
+impact-edge	coverage-policy-object	replacements	-	target:object-reference	required	set	source-field:replacements; replacement changes invalidate terminal policy
+impact-edge	coverage-policy-object	terminal-approval	-	target:approval-binding	required	option	source-field:terminal-approval; approval changes invalidate terminal policy
+impact-edge	debt-record	obligations	-	target:obligation-reference	nonempty	set	source-field:obligations; policy obligation changes invalidate debt
+impact-edge	debt-record	objects	-	target:object-reference	required	set	source-field:objects; governed object changes invalidate debt scope
+impact-edge	debt-record	discharge-evidence	-	target:object-reference	required	set	source-field:discharge-evidence; evidence changes invalidate discharge
+impact-edge	debt-record	replacements	-	target:object-reference	required	set	source-field:replacements; replacement changes invalidate terminal debt
+impact-edge	debt-record	terminal-approval	-	target:approval-binding	required	option	source-field:terminal-approval; approval changes invalidate terminal debt
+impact-edge	waiver	obligations	-	target:obligation-reference	nonempty	set	source-field:obligations; policy obligation changes invalidate waiver
+impact-edge	waiver	objects	-	target:object-reference	required	set	source-field:objects; governed object changes invalidate waiver scope
+impact-edge	waiver	active-approval	-	target:approval-binding	required	scalar	source-field:active-approval; approval changes invalidate active waiver
+impact-edge	waiver	discharge-evidence	-	target:object-reference	required	set	source-field:discharge-evidence; evidence changes invalidate discharge
+impact-edge	waiver	replacements	-	target:object-reference	required	set	source-field:replacements; replacement changes invalidate terminal waiver
+impact-edge	waiver	terminal-approval	-	target:approval-binding	required	option	source-field:terminal-approval; approval changes invalidate terminal waiver
+impact-edge	reaffirmation	affected-object	-	target:object-reference	required	scalar	source-field:affected-object-id; affected object changes invalidate review
+impact-edge	reaffirmation	review-approval	-	target:approval-binding	required	scalar	source-field:review-approval; approval changes invalidate review
+impact-edge	obligation-reference	policy	-	target:coverage-policy-object	required	scalar	source-field:policy-id; policy changes invalidate obligation
+impact-edge	obligation-reference	subject	-	target:object-reference	required	scalar	source-field:subject; subject changes invalidate obligation
+impact-edge	oracle	runner-tool	-	target:tool-identity	required	scalar	source-field:runner-tool; runner changes invalidate oracle
+impact-edge	normalized-verdict	oracle	-	target:oracle	required	scalar	source-field:oracle; oracle changes invalidate verdict
+impact-edge	normalized-verdict	subjects	-	target:object-reference	required	set	source-field:selected-subjects; subject changes invalidate verdict scope
+impact-edge	verdict-set	verdicts	-	target:normalized-verdict	required	set	source-field:verdicts; verdict changes invalidate execution identity
+impact-edge	assumption	approval	-	target:approval-binding	required	scalar	source-field:approval; approval changes invalidate assumption
+impact-edge	finite-model	checked-invariants	-	target:atom-object	required	set	source-field:checked-invariants; atom revision changes invalidate model claim
+impact-edge	finite-model	assumptions	-	target:assumption	required	set	source-field:assumptions; assumption changes invalidate model claim
+impact-edge	formal-property	atoms	-	target:atom-object	nonempty	set	source-field:atoms; atom revision changes invalidate property
+impact-edge	formal-property	assumptions	-	target:assumption	required	set	source-field:assumptions; assumption changes invalidate property
+impact-edge	formal-property	correspondence-approval	-	target:approval-binding	required	scalar	source-field:correspondence-approval; approval changes invalidate correspondence
+impact-edge	proof-record	atoms	-	target:atom-object	nonempty	set	source-field:atoms; atom revision changes invalidate proof
+impact-edge	proof-record	formal-property	-	target:formal-property	required	scalar	source-field:formal-property; property changes invalidate proof
+impact-edge	proof-record	implementation-representation	-	target:artifact-binding	required	scalar	source-field:implementation-representation; implementation changes invalidate proof
+impact-edge	proof-record	assumptions	-	target:assumption	required	set	source-field:assumptions; assumption changes invalidate proof
+impact-edge	proof-record	translators	-	target:tool-identity	required	set	source-field:translators; translator changes invalidate proof
+impact-edge	proof-record	verifier	-	target:tool-identity	required	scalar	source-field:verifier; verifier changes invalidate proof
+impact-edge	proof-record	external-models	-	target:artifact-binding	required	set	source-field:external-models; model changes invalidate proof
+impact-edge	proof-record	generated-artifacts	-	target:artifact-binding	required	set	source-field:generated-artifacts; generated artifact changes invalidate proof
+impact-edge	proof-record	proof-sources	-	target:artifact-binding	nonempty	set	source-field:proof-sources; proof source changes invalidate proof
+impact-edge	source-map-entry	object	-	target:object-reference	required	scalar	source-field:object; object changes invalidate source map entry
+impact-edge	source-map-entry	sources	-	target:source-reference	nonempty	set	source-field:sources; source movement changes complete graph identity
+impact-edge	source-map	entries	-	target:source-map-entry	required	set	source-field:entries; entry changes invalidate source map
+impact-edge	spec-graph-semantic	atoms	-	target:atom-object	required	set	source-field:atoms; graph contains atom objects
+impact-edge	spec-graph-semantic	tombstones	-	target:tombstone	required	set	source-field:tombstones; graph contains terminal atom history
+impact-edge	spec-graph-semantic	decision-surfaces	-	target:decision-surface	required	set	source-field:decision-surfaces; graph contains governed surfaces
+impact-edge	spec-graph-semantic	evidence-carriers	-	target:evidence-carrier	required	set	source-field:evidence-carriers; graph contains carriers
+impact-edge	spec-graph-semantic	implementation-links	-	target:implementation-link	required	set	source-field:implementation-links; graph contains navigation
+impact-edge	spec-graph-semantic	derivations	-	target:derivation	required	set	source-field:derivations; graph contains derivations
+impact-edge	spec-graph-semantic	coverage-policies	-	target:coverage-policy-object	required	set	source-field:coverage-policies; graph contains policy history
+impact-edge	spec-graph-semantic	debt-records	-	target:debt-record	required	set	source-field:debt-records; graph contains debt history
+impact-edge	spec-graph-semantic	waivers	-	target:waiver	required	set	source-field:waivers; graph contains waiver history
+impact-edge	spec-graph-semantic	oracles	-	target:oracle	required	set	source-field:oracles; graph contains oracles
+impact-edge	spec-graph-semantic	finite-models	-	target:finite-model	required	set	source-field:finite-models; graph contains finite models
+impact-edge	spec-graph-semantic	formal-properties	-	target:formal-property	required	set	source-field:formal-properties; graph contains formal properties
+impact-edge	spec-graph-semantic	assumptions	-	target:assumption	required	set	source-field:assumptions; graph contains assumptions
+impact-edge	spec-graph-semantic	proof-records	-	target:proof-record	required	set	source-field:proof-records; graph contains proof records
+impact-edge	spec-graph-semantic	reaffirmations	-	target:reaffirmation	required	set	source-field:reaffirmations; graph contains reaffirmation history
+impact-edge	spec-graph-complete	semantic-graph	-	target:spec-graph-semantic	required	scalar	source-field:semantic-graph-digest; semantic changes invalidate complete graph
+impact-edge	spec-graph-complete	source-map	-	target:source-map	required	scalar	source-field:source-map-digest; source map changes invalidate complete graph
+impact-edge	spec-graph-complete	repository-config	-	target:repository-config	required	scalar	source-field:repository-config-digest; configuration changes invalidate complete graph
+impact-edge	spec-graph-complete	schema-tool-lock	-	target:schema-tool-lock	required	scalar	source-field:schema-tool-lock-digest; tool lock changes invalidate complete graph
+impact-edge	change-manifest	base-graph	-	target:spec-graph-complete	required	scalar	source-field:base-graph; base changes invalidate impact analysis
+impact-edge	change-manifest	head-graph	-	target:spec-graph-complete	required	scalar	source-field:head-graph; head changes invalidate impact analysis
+impact-edge	change-manifest	dispositions	-	target:change-disposition	required	set	source-field:dispositions; disposition changes invalidate closure
+impact-edge	change-manifest	approval	-	target:approval-binding	required	option	source-field:approval; approval changes invalidate change authorization
+impact-edge	change-disposition	affected-object	-	target:object-reference	required	scalar	source-field:stable-id; affected object changes invalidate disposition
+impact-edge	change-disposition	reaffirmation	-	target:reaffirmation	required	option	source-field:reaffirmation-digest; reaffirmation changes invalidate disposition
+impact-edge	change-disposition	waiver	-	target:waiver	required	option	source-field:waiver; waiver changes invalidate disposition authorization
+impact-edge	change-disposition	replacements	-	target:object-reference	required	set	source-field:replacements; replacement changes invalidate disposition
+impact-edge	policy-ratchet-impact	base-policy	-	target:coverage-policy-object	required	scalar	source-field:base-policy; base policy changes invalidate ratchet
+impact-edge	policy-ratchet-impact	head-policy	-	target:coverage-policy-object	required	scalar	source-field:head-policy; head policy changes invalidate ratchet
+impact-edge	policy-ratchet-impact	weakened-obligations	-	target:obligation-reference	required	set	source-field:weakened-obligations; obligation changes invalidate ratchet
+impact-edge	impact-set	direct-changes	-	target:object-reference	required	set	source-field:direct-changes; direct object changes define impact roots
+impact-edge	impact-set	transitive-impacts	-	target:object-reference	required	set	source-field:transitive-impacts; dependent object changes define closure
+impact-edge	impact-set	policy-ratchets	-	target:policy-ratchet-impact	required	set	source-field:policy-ratchets; ratchet changes invalidate impact set
+lifecycle-transition	atom	proposed-to-ratified	1	transition	required	scalar	only approved live promotion
+lifecycle-transition	atom	proposed-to-withdrawn	2	transition	required	scalar	terminal tombstone
+lifecycle-transition	atom	ratified-to-superseded	3	transition	required	scalar	terminal tombstone with replacements
+lifecycle-transition	atom	ratified-to-withdrawn	4	transition	required	scalar	terminal tombstone
+lifecycle-transition	policy	active-to-superseded	1	transition	required	scalar	terminal approval and replacement closure
+lifecycle-transition	policy	active-to-retired	2	transition	required	scalar	terminal approval and applicability evidence
+lifecycle-transition	debt	active-to-discharged	1	transition	required	scalar	terminal evidence and approval
+lifecycle-transition	debt	active-to-superseded	2	transition	required	scalar	replacement covers every unsatisfied obligation
+lifecycle-transition	waiver	active-to-discharged	1	transition	required	scalar	obligations satisfied retired or inapplicable
+lifecycle-transition	waiver	active-to-revoked	2	transition	required	scalar	process authorization ends
+lifecycle-transition	waiver	active-to-superseded	3	transition	required	scalar	replacement covers continued exceptions
+diagnostic-family	diagnostics	SCF-APPROVAL-*	-	stable-code-family	required	set	approval authority action record freshness and repository ownership
+diagnostic-family	diagnostics	SCF-ARTIFACT-*	-	stable-code-family	required	set	explicit snapshot artifact index path identity and freshness
+diagnostic-family	diagnostics	SCF-CONSTRUCT-*	-	stable-code-family	required	set	validated construction field enum reference metadata kind and terminal shape
+diagnostic-family	diagnostics	SCF-LIFECYCLE-*	-	stable-code-family	required	set	terminal policy debt waiver history evidence approval and replacement closure
+diagnostic-family	diagnostics	SCF-REGISTRY-*	-	stable-code-family	required	set	append-only namespace allocation reservation and stable ID reuse
+diagnostic-family	diagnostics	SCF-SOURCE-MAP-*	-	stable-code-family	required	set	parsed item identity source role object reference and original byte span
+diagnostic-family	diagnostics	SPG-AUTH-*	-	stable-code-family	required	set	authority lifecycle tombstone
+diagnostic-family	diagnostics	SPG-REF-*	-	stable-code-family	required	set	dangling wrong-kind stale reference
+diagnostic-family	diagnostics	SPG-SURFACE-*	-	stable-code-family	required	set	domain member disposition authority
+diagnostic-family	diagnostics	SPG-DERIVATION-*	-	stable-code-family	required	set	binding relation freshness
+diagnostic-family	diagnostics	SPG-ADAPTER-*	-	stable-code-family	required	set	malformed unsupported vacuous input
+diagnostic-family	diagnostics	DET-PATH-*	-	stable-code-family	required	set	path and snapshot
+diagnostic-family	diagnostics	DET-ENC-*	-	stable-code-family	required	set	canonical encoding decoding
+diagnostic-family	diagnostics	DET-DIGEST-*	-	stable-code-family	required	set	active digest parsing and observed collision
+diagnostic-family	diagnostics	DET-DUP-*	-	stable-code-family	required	set	duplicate canonical key
+diagnostic-family	diagnostics	DET-ORDER-*	-	stable-code-family	required	set	canonical order
+diagnostic-family	diagnostics	EVD-POLICY-*	-	stable-code-family	required	set	policy obligation ratchet
+diagnostic-family	diagnostics	EVD-FRESH-*	-	stable-code-family	required	set	binding freshness
+diagnostic-family	diagnostics	EVD-EXEC-*	-	stable-code-family	required	set	execution selection verdict
+diagnostic-family	diagnostics	EVD-LAUNDER-*	-	stable-code-family	required	set	assurance no-laundering
+diagnostic-family	diagnostics	FPR-BIND-*	-	stable-code-family	required	set	formal binding completeness freshness
+diagnostic-family	diagnostics	FPR-TRUST-*	-	stable-code-family	required	set	formal trust scope exclusions
+diagnostic-family	diagnostics	FPR-VERDICT-*	-	stable-code-family	required	set	formal normalization acceptance
+diagnostic-family	diagnostics	CHG-IMPACT-*	-	stable-code-family	required	set	direct transitive impact
+diagnostic-family	diagnostics	CHG-DISPOSITION-*	-	stable-code-family	required	set	disposition closure
+diagnostic-family	diagnostics	CHG-RATCHET-*	-	stable-code-family	required	set	policy weakening protocol

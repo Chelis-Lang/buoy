@@ -1,0 +1,24 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "proof-eligibility"
+
+[[targets]]
+id = "TARGET-PURE-LIFECYCLE"
+path = "crates/spec-provenance-core/src/lifecycle.rs"
+item = "transition"
+safe = true
+sequential = true
+total = true
+effects = []
+unsupported_control_flow = []
+external_definitions = []
+
+[[targets]]
+id = "TARGET-EFFECTFUL-LIFECYCLE"
+path = "crates/spec-provenance-shell/src/lifecycle.rs"
+item = "transition_from_file"
+safe = true
+sequential = true
+total = true
+effects = ["filesystem"]
+unsupported_control_flow = []
+external_definitions = []

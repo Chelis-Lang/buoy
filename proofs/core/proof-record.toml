@@ -1,0 +1,59 @@
+schema = "spec-provenance-proof-binding/v2"
+id = "PROOF-CORE-INTEGRITY-V2"
+lane = "verus"
+verdict = "pass"
+negative_control = "expected-fail"
+derivation = "DERIV-CORE-INTEGRITY-REPRESENTATION-V2"
+correspondence_approval = "APPROVAL-CORE-INTEGRITY-CORRESPONDENCE-V2"
+scope = "Only the named lifecycle, surface, freshness, policy, impact, and aggregation obligations with approved symbol-level mappings."
+exclusions = [
+  "natural-language entailment",
+  "parser and filesystem behavior",
+  "rustc and LLVM correctness",
+  "machine code",
+  "host adapters",
+  "provider state",
+  "canonical encoder field-identity properties without an approved production mapping",
+]
+
+[property]
+id = "PROP-CORE-INTEGRITY-V2"
+correspondence = "explicit-consistency-derivation-plus-review-approval"
+obligations = [
+  "terminal lifecycle cannot reactivate",
+  "missing decision-surface members prevent completeness",
+  "stale bindings prevent freshness",
+  "coverage growth is monotonic",
+  "missing impact dispositions prevent closure",
+  "debt, waiver, and reaffirmation do not alter tested assurance",
+]
+blocked_obligations = []
+
+[implementation]
+representation = "rust-source/v1"
+path = "crates/buoy-core/src/algorithms.rs"
+digest = "xxh3-128:38e98ab3021f72b3a7a776795b08b311"
+
+[proof_source]
+path = "proofs/core/integrity.rs"
+digest = "xxh3-128:7147d76334ac8c4c3972b2cd166ec8a6"
+
+[negative_source]
+path = "proofs/core/integrity_negative.rs"
+digest = "xxh3-128:52c93dcdf0fc63e82872997ba0f3a1ab"
+expected_diagnostic = "postcondition not satisfied"
+
+[verifier]
+name = "verus"
+version = "0.2026.07.12.0b42f4c"
+source_commit = "0b42f4cee92a178937608cf55e512371d2fd8cd4"
+configuration = "release/macos_aarch64; rust=1.96.0-aarch64-apple-darwin"
+solver = "bundled-z3"
+
+[[assumptions]]
+id = "ASM-SAFE-SEQUENTIAL"
+statement = "The modeled functions execute as safe sequential Rust over mathematical value semantics."
+
+[[assumptions]]
+id = "ASM-REPRESENTATION-CORRESPONDENCE"
+statement = "The reviewed Verus representation matches the named Rust integrity functions; exact source digests and mutation controls detect drift but do not prove translation equivalence."

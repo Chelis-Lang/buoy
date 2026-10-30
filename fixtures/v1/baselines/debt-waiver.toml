@@ -1,0 +1,31 @@
+schema = "spec-provenance-fixture-baseline/v1"
+id = "debt-waiver"
+includes = ["fixtures/v1/baselines/evidence-assurance.toml"]
+
+[[obligations]]
+id = "OBL-PASSING-POSITIVE"
+kind = "execution"
+policy = "$object:coverage-policy:POL-EVIDENCE"
+subject = "$object:evidence-carrier:CAR-POSITIVE"
+
+[[debts]]
+id = "DEBT-FAILING-CARRIER"
+obligations = ["$obligation:OBL-PASSING-POSITIVE"]
+objects = ["$object:evidence-carrier:CAR-POSITIVE"]
+rationale = "The known failing point case is retained during remediation."
+owner = "team-evidence"
+remediation = "Correct the behavior and obtain a passing normalized verdict."
+discharge = "$payload:condition:OBL-PASSING-POSITIVE-satisfied"
+external_refs = ["issue:informational-17"]
+lifecycle = "active"
+
+[[waivers]]
+id = "WAIVER-MISSING-PASS"
+obligations = ["$obligation:OBL-PASSING-POSITIVE"]
+objects = ["$object:evidence-carrier:CAR-POSITIVE"]
+rationale = "Permit one process transition while retaining the failed obligation."
+owner = "team-evidence"
+discharge = "$payload:condition:OBL-PASSING-POSITIVE-satisfied"
+approval = "$approval:spec-provenance-maintainers:WAIVER-MISSING-PASS"
+external_refs = ["provider-label:informational-only"]
+lifecycle = "active"

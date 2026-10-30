@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "DET-006"
+
+[[case]]
+id = "det-006-positive-verdict-completion-order"
+scenario = "positive-same-normalized-verdicts-arrive-differently"
+polarity = "positive"
+operation = "render-execution"
+baseline = "fixtures/v2/baselines/execution-report.toml"
+mutations = ["permute-verdict-completion"]
+expected = { outcome = "accept", codes = [], facts = ["execution-report-bytes=same", "static-graph-identity=same"] }
+
+[[case]]
+id = "det-006-negative-timeout-changes-static-identity"
+scenario = "negative-timeout-changes-static-identity"
+polarity = "negative"
+operation = "render-execution"
+baseline = "fixtures/v2/baselines/execution-report.toml"
+mutations = ["timeout-one-oracle"]
+expected = { outcome = "accept", codes = [], facts = ["verdict:ORC-A=timeout", "execution-report-bytes=different", "static-graph-identity=same"] }

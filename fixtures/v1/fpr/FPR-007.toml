@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "FPR-007"
+
+[[case]]
+id = "fpr-007-positive-pinned-offline-verification"
+scenario = "positive-pinned-offline-verification"
+polarity = "positive"
+operation = "run-formal-oracle"
+baseline = "fixtures/v1/baselines/formal-lane-selection.toml"
+mutations = ["run-with-offline-pins"]
+expected = { outcome = "accept", codes = [], facts = ["formal-tools=fully-pinned", "network-consumed=false", "formal-verdict=pass", "proof-record=reproducible"] }
+
+[[case]]
+id = "fpr-007-negative-live-branch-dependency"
+scenario = "negative-live-branch-dependency"
+polarity = "negative"
+operation = "run-formal-oracle"
+baseline = "fixtures/v1/baselines/formal-lane-selection.toml"
+mutations = ["replace-pin-with-live-branch"]
+expected = { outcome = "reject", codes = ["FPR-TOOLCHAIN-UNPINNED"], facts = ["formal-tools=not-fully-pinned", "proof-record=nonreproducible", "assurance:PROP-TERMINALITY:formally-proved=false"] }

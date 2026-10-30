@@ -1,0 +1,29 @@
+schema = "spec-provenance-config/v2"
+digest_algorithms = ["xxh3-128"]
+
+[adapter_configurations]
+"openspec/v1" = '''
+schema = "buoy.openspec-authority/v1"
+
+[[capabilities]]
+name = "demo"
+format = "openspec/standing-spec/v1"
+scope = "example.openspec.demo"
+atom_kind = "behavioral"
+lifecycle = "proposed"
+reserved_ids = ["STALE-001"]
+'''
+
+[[selectors]]
+root = "openspec/specs"
+adapter = "openspec/v1"
+include = ["**/spec.md"]
+exclude = []
+authority_expectation = "required"
+
+[[selectors]]
+root = "docs"
+adapter = "markdown/v1"
+include = ["**/*.md"]
+exclude = []
+authority_expectation = "optional"

@@ -1,0 +1,65 @@
+[package]
+name = "buoy-fuzz"
+version = "0.0.0"
+edition = "2024"
+publish = false
+license = "MIT"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "=0.4.10"
+buoy = { path = "..", features = ["coverage-controls"] }
+
+[[bin]]
+name = "canonical_values"
+path = "fuzz_targets/canonical_values.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "paths_globs"
+path = "fuzz_targets/paths_globs.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "adapters"
+path = "fuzz_targets/adapters.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "config_manifests"
+path = "fuzz_targets/config_manifests.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "graphs_governance"
+path = "fuzz_targets/graphs_governance.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "reports"
+path = "fuzz_targets/reports.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "publication"
+path = "fuzz_targets/publication.rs"
+test = false
+doc = false
+bench = false
+
+[workspace]
+members = ["."]

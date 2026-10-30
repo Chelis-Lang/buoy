@@ -1,0 +1,9 @@
+schema	case	input_generator	input_length	attempt	seed	secret	candidate_hex	expected_code
+spec-provenance-xxh3-negative-vector/v1	wrong-variant-xxh3-64	xxhash-sanity-buffer/v0.8.3	0	xxh3-64	0	standard-default	2d06800538d394c2	XXH-PROFILE-VARIANT
+spec-provenance-xxh3-negative-vector/v1	wrong-variant-xxh64	xxhash-sanity-buffer/v0.8.3	0	xxh64	0	standard-default	-	XXH-PROFILE-VARIANT
+spec-provenance-xxh3-negative-vector/v1	wrong-variant-xxh32	xxhash-sanity-buffer/v0.8.3	0	xxh32	0	standard-default	-	XXH-PROFILE-VARIANT
+spec-provenance-xxh3-negative-vector/v1	wrong-seed	xxhash-sanity-buffer/v0.8.3	0	xxh3-128	2654435761	standard-default	92220ae55e14ab505444f7869c671ab0	XXH-PROFILE-SEED
+spec-provenance-xxh3-negative-vector/v1	wrong-secret	xxhash-sanity-buffer/v0.8.3	0	xxh3-128	0	upstream-sanity-custom	5f70f4ea232f1d38005923cceecbe8ae	XXH-PROFILE-SECRET
+spec-provenance-xxh3-negative-vector/v1	wrong-half-order	xxhash-sanity-buffer/v0.8.3	0	xxh3-128	0	standard-default	6001c324468d497f99aa06d3014798d8	XXH-CANONICAL-HALF-ORDER
+spec-provenance-xxh3-negative-vector/v1	wrong-per-half-byte-order	xxhash-sanity-buffer/v0.8.3	0	xxh3-128	0	standard-default	d8984701d306aa997f498d4624c30160	XXH-CANONICAL-BYTE-ORDER
+spec-provenance-xxh3-negative-vector/v1	wrong-u128-native-little-endian	xxhash-sanity-buffer/v0.8.3	0	xxh3-128	0	standard-default	7f498d4624c30160d8984701d306aa99	XXH-CANONICAL-BYTE-ORDER

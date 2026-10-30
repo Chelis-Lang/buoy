@@ -1,0 +1,3 @@
+[[exceptions]]
+substring = "sha256"
+classification = "always-external"

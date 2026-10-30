@@ -1,0 +1,2 @@
+id	category	version	source	digest	license	role	platform	trust_scope	exclusions	exposure_mode	status
+ambient-tool	formal-verifier	1	/nix/store/aaaaaaaa-ambient/bin/tool	sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=	MIT	negative-control	portable	none	none	internal-dependency	selected

@@ -1,0 +1,1 @@
+{"schema":"buoy/trace-publication-plan/v1","publication_id":"demo-unresolved-page","selector":{"requirement_id":"DEMO-001"},"expected_rows":1,"source_set":["openspec/specs/demo/spec.md"],"outputs":[{"id":"external-link","mount":"authority","path":"openspec/specs/demo/spec.md","kind":"external-link","lifecycle":"replaceable","relation":"documents","page":"missing-page"}]}

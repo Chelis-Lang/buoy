@@ -1,0 +1,9 @@
+schema	case	polarity	ecosystem	path	expected_outcome	expected_codes
+spec-provenance-external-integrity-case/v2	cargo-registry-checksum	positive	cargo	fixtures/xxh3/v2/external/positive/cargo-lock.toml	accept	-
+spec-provenance-external-integrity-case/v2	nix-fixed-output-hash	positive	nix	fixtures/xxh3/v2/external/positive/nix-fetch.nix	accept	-
+spec-provenance-external-integrity-case/v2	git-revision	positive	git	fixtures/xxh3/v2/external/positive/git-source.toml	accept	-
+spec-provenance-external-integrity-case/v2	upstream-release-metadata	positive	upstream	fixtures/xxh3/v2/external/positive/upstream-release.toml	accept	-
+spec-provenance-external-integrity-case/v2	path-wide-exception	negative	exception	fixtures/xxh3/v2/external/negative/path-wide-exception.toml	reject	XXH-EXTERNAL-BROAD-EXCEPTION
+spec-provenance-external-integrity-case/v2	substring-wide-exception	negative	exception	fixtures/xxh3/v2/external/negative/substring-wide-exception.toml	reject	XXH-EXTERNAL-BROAD-EXCEPTION
+spec-provenance-external-integrity-case/v2	cargo-checksum-semantic-promotion	negative	cargo	fixtures/xxh3/v2/external/negative/cargo-semantic-promotion.rs.txt	reject	XXH-EXTERNAL-SEMANTIC-PROMOTION
+spec-provenance-external-integrity-case/v2	nix-hash-semantic-promotion	negative	nix	fixtures/xxh3/v2/external/negative/nix-semantic-promotion.rs.txt	reject	XXH-EXTERNAL-SEMANTIC-PROMOTION

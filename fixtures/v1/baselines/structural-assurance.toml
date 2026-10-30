@@ -1,0 +1,33 @@
+schema = "spec-provenance-fixture-baseline/v1"
+id = "structural-assurance"
+
+[[atoms]]
+id = "EVD-006"
+state = "ratified"
+kind = "structural"
+scope = ["spec-provenance.syntax"]
+statement = "The selected syntax invariant MUST hold within the checker's declared scope."
+authority = "$source:spec/assurance.md:0"
+approval = "$approval:spec-provenance-maintainers:EVD-006"
+
+[[oracles]]
+id = "ORC-STRUCTURAL"
+kind = "structural"
+runner = "$tool:fixture-structural-checker"
+selection = "$payload:selection:syntax-invariant"
+normalization = "$payload:verdict:five-state"
+configuration = "$digest:raw-artifact:structural-config"
+scope = "$payload:scope:syntax-invariant"
+exclusions = []
+
+[[carriers]]
+id = "CAR-STRUCTURAL"
+role = "structural"
+atoms = ["$atom:EVD-006:$digest:atom-revision:EVD-006"]
+item = "$item:tools/checker.rs:check_invariant"
+oracle = "$object:oracle:ORC-STRUCTURAL"
+configuration = "$digest:raw-artifact:structural-config"
+corpora = ["$digest:raw-artifact:structural-fixtures"]
+scope = "$payload:scope:syntax-invariant"
+assumptions = []
+exclusions = []

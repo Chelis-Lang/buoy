@@ -1,0 +1,47 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "surface-graph"
+
+[[atoms]]
+id = "SPG-008"
+state = "ratified"
+kind = "structural"
+scope = ["spec-provenance.surface"]
+statement = "Every member of SURFACE-001 MUST have exactly one explicit disposition."
+authority = "$source:spec/surface.md:0"
+approval = "$approval:spec-provenance-maintainers:SPG-008"
+
+[[policies]]
+id = "POL-001"
+mode = "blocking"
+ratchet = "surface-completeness"
+scope = "$payload:policy:SURFACE-001"
+roles = ["structural"]
+expected_authority = ["required"]
+derivations = "none"
+approval = "$approval:spec-provenance-maintainers:POL-001"
+lifecycle = "active"
+
+[[surface_domains]]
+id = "SURFACE-001"
+generation = 1
+construction = "product"
+member_schema = "$payload:surface-key:two-values"
+disposition_schema = "$payload:surface-disposition:basic"
+members = ["member-a", "member-b"]
+
+[[surfaces]]
+id = "SURFACE-001"
+domain = "$digest:decision-surface-domain:SURFACE-001"
+policies = ["$object:coverage-policy:POL-001"]
+
+[[surfaces.dispositions]]
+member = "member-a"
+disposition = "normative"
+payload = "$payload:surface-disposition:supported"
+authority = "$atom:SPG-008:$digest:atom-revision:SPG-008"
+
+[[surfaces.dispositions]]
+member = "member-b"
+disposition = "prohibited"
+payload = "$payload:surface-disposition:rejected"
+authority = "$atom:SPG-008:$digest:atom-revision:SPG-008"

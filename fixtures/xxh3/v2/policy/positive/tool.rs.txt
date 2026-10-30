@@ -1,0 +1,3 @@
+pub fn inspect_canonical_text(value: &str) -> bool {
+    value.starts_with("xxh3-128:") && value.len() == 41
+}

@@ -1,0 +1,1 @@
+{"features":["xxh3-128"],"operational":true,"schema":"buoy/package-identity/v1","source_revision":"0000000000000000000000000000000000000000","supported_members":["blake3-256","sha-256","xxh3-128"],"toolchain":"nightly-2026-04-16","version":"0.2.0"}

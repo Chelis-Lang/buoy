@@ -1,0 +1,29 @@
+schema: buoy-traceability
+
+context: |
+  Buoy reads synchronized standing specifications from saved repository bytes.
+  Repository configuration owns authority, lifecycle, scope, atom kind,
+  reserved IDs, and approval bindings. Active OpenSpec changes are plans.
+  External trace links provide navigation only.
+
+rules:
+  proposal:
+    - State goals and non-goals.
+    - Separate deterministic static checks from effectful oracle execution.
+    - Do not describe tests, templates, annotations, or links as proof.
+  specs:
+    - Give every requirement a stable ID in its heading.
+    - Use RFC 2119 terms in normative statements.
+    - Add explicit positive and negative Given/When/Then scenarios.
+  design:
+    - Identify saved authoritative inputs and trust boundaries.
+    - Define deterministic output and stable diagnostic expectations.
+    - Keep static facts, execution verdicts, and assurance classes separate.
+  traceability:
+    - List every affected requirement and planned target action.
+    - Record each target class, action, owner, and focused Buoy command.
+    - Review each current link for a modified requirement.
+    - Exclude provider status, fetched titles, users, and timestamps.
+  tasks:
+    - Add positive and negative controls before implementation.
+    - Include focused OpenSpec and Buoy validation commands.

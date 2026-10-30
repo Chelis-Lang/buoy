@@ -1,0 +1,9 @@
+kind	id	package	version	scope	rationale	safety_effect	replacement
+advisory	RUSTSEC-2024-0436	paste	1.0.15	transitive Hegel and Dylint macro tooling	upstream archived and no safe upgrade exists in selected closures	none; unmaintained status remains visible	replace when pinned upstream closure removes paste
+duplicate	DUP-WINNOW-001	winnow	0.7.15,1.0.4	root Cargo closure	toml 0.9.5 and toml_parser 1.1.2 require incompatible reviewed parser lines	none; both versions remain separately inventoried	remove 0.7.15 when the direct toml pin supports winnow 1
+license	LICENSE-CBINDGEN-NESTED-001	cbindgen	0.29.2	Hegel vendored package metadata dependency	MPL-2.0 is approved only for this exact nested build-tool package	none; license approval is not correctness evidence	review when the Hegel nested lock changes
+license	LICENSE-CBINDGEN-001	cbindgen	0.29.4	Hegel C build dependency	MPL-2.0 is approved only for this exact build-tool package	none; no package safety claim	review again on any cbindgen update
+license	LICENSE-LIBLOADING-001	libloading	0.8.9	Hegel vendored package metadata dependency	ISC is approved only for this exact nested package	none; license approval is not correctness evidence	review when the Hegel nested lock changes
+license	LICENSE-ARRAYREF-001	arrayref	0.3.9	BLAKE3 hashing dependency	BSD-2-Clause is approved only for this exact pinned package	none. License approval supplies no correctness evidence	review on any arrayref update
+license	LICENSE-XXHASH-001	xxhash-rust	0.8.17	production and reference hashing dependency	BSL-1.0 is approved only for this exact pinned package	none; license approval is not correctness evidence	review again on any xxhash-rust update
+source	SOURCE-CLIPPY-001	clippy_utils	0.1.97	local Dylint implementation	exact rust-clippy revision and Nix NAR are required	none; source approval is not compiler correctness	review on every toolchain or clippy revision update

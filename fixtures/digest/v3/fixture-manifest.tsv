@@ -1,0 +1,34 @@
+schema	requirement	scenario	polarity	fixture_id	expected	focused_command
+buoy-digest-fixture-manifest/v3	DIG-001	the-schema-inventory-matches-the-registry	positive	registry-inventory-agree	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-001	an-obsolete-tag-is-reassigned	negative	obsolete-tag-zero	DIG-REGISTRY-OBSOLETE-TAG	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-002	every-member-round-trips-in-both-forms	positive	xxh3-roundtrip,blake3-roundtrip,sha256-roundtrip	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-002	a-payload-length-contradicts-its-algorithm-tag	negative	wrong-tag-length	DET-DIGEST-LENGTH	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-003	a-pinned-active-member-produces-stable-output	positive	one-active-available	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-003	the-configuration-names-an-unavailable-member	negative	feature-absent	DIG-ALGORITHM-UNAVAILABLE	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-004	all-repository-hashing-reaches-the-registry	positive	registry-only-boundary	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-004	a-second-hash-implementation-lives-outside-the-registry	negative	hand-written-hash	DIG-HASH-OUTSIDE-REGISTRY	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-005	an-algorithm-change-re-identifies-from-source-bytes	positive	regenerate-from-source	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-005	digests-from-two-members-are-compared	negative	compare-members	DIG-ALGORITHM-MISMATCH	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-006	a-report-states-only-the-declared-class	positive	declared-assurance-class	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-006	a-claim-exceeds-the-declared-class	negative	xxh-collision-resistance	DIG-UNSUPPORTED-ASSURANCE-CLAIM	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-007	the-index-is-regenerated-and-verified-from-source-bytes	positive	deterministic-index	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-007	an-index-row-contradicts-recomputation	negative	contradicted-row	DIG-INDEX-CORRESPONDENCE	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-008	deleting-the-index-leaves-identity-unchanged	positive	delete-index	pass	cargo test --quiet --test integration correspondence_index_is_non_authoritative_for_static_identity -- --exact
+buoy-digest-fixture-manifest/v3	DIG-008	the-index-is-used-to-supply-a-missing-identity	negative	missing-source-with-index	DIG-INCOMPLETE-MIGRATION	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	DIG-009	the-model-reaches-a-fixed-point-with-every-invariant-held	positive	model-full-space	pass	cargo run --quiet --bin check-digest-transition-model
+buoy-digest-fixture-manifest/v3	DIG-009	index-inputs-cannot-change-the-identity-outcome	positive	model-index-projection	pass	cargo run --quiet --bin check-digest-transition-model
+buoy-digest-fixture-manifest/v3	DIG-009	an-injected-divergence-is-not-detected	negative	model-negative-controls	DIG-MODEL-INDEX-AUTHORITY	cargo run --quiet --bin check-digest-transition-model -- --fault model-index-authority
+buoy-digest-fixture-manifest/v3	DIG-009	exploration-stops-before-a-fixed-point	negative	model-undeclared-cutoff	DIG-MODEL-CUTOFF	cargo run --quiet --bin check-digest-transition-model -- --cutoff 4095
+buoy-digest-fixture-manifest/v3	XXH-001	the-same-canonical-preimage-is-hashed-twice	positive	known-answer-vectors	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-001	a-project-path-selects-another-algorithm	negative	inactive-compute	DIG-INACTIVE-ALGORITHM	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-002	canonical-binary-and-text-forms-agree	positive	xxh3-roundtrip,blake3-roundtrip,sha256-roundtrip	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-002	obsolete-or-malformed-digest-is-supplied	negative	obsolete-tag	DET-DIGEST-ALGORITHM	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-002	observed-collision-has-both-preimages	negative	observed-collision	DET-DIGEST-OBSERVED-COLLISION	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-003	repository-uses-only-the-approved-hashing-profile	positive	registry-only-boundary	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-003	prohibited-hashing-is-hidden-in-a-non-core-path	negative	direct-crate-call	DIG-HASH-OUTSIDE-REGISTRY	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-004	complete-authoritative-inputs-are-migrated	positive	regenerate-from-source	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-004	only-an-obsolete-digest-is-available	negative	missing-source-with-index	DIG-INCOMPLETE-MIGRATION	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-005	package-manager-verifies-its-own-integrity-field	positive	cargo-opaque,nix-opaque,git-opaque	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-005	external-checksum-is-promoted-to-semantic-identity	negative	cargo-promotion,nix-promotion,git-promotion	XXH-EXTERNAL-SEMANTIC-PROMOTION	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-006	matching-digest-supports-freshness-only	positive	declared-assurance-class	pass	cargo run --quiet --bin check-digest-fixtures
+buoy-digest-fixture-manifest/v3	XXH-006	matching-digest-is-presented-as-security-or-proof	negative	proof-claim	DIG-UNSUPPORTED-ASSURANCE-CLAIM	cargo run --quiet --bin check-digest-fixtures

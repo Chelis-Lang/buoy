@@ -1,0 +1,1 @@
+{"schema":"buoy/binding-diagnostic-golden/v1","case":"stale-implementation","accepted":false,"source_graph":"blake3-256:e9ce5e776237d9308ad37dfd73ff94253748d0ed5d691dd5091a1a3ad1317444","binding":"blake3-256:2f3bed4591cd0847d1b3cd7f37b0e41c766b31e4e8fadefe349ab354f76573f8","diagnostics":["CAB-SUBJECT-STALE"]}

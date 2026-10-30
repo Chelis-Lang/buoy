@@ -1,0 +1,74 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "evidence-assurance"
+
+[[atoms]]
+id = "EVD-BASE"
+state = "ratified"
+kind = "behavioral"
+scope = ["spec-provenance.evidence"]
+statement = "Required fresh evidence MUST retain independent role, scope, selection, and verdict facts."
+authority = "$source:spec/evidence.md:0"
+approval = "$approval:spec-provenance-maintainers:EVD-BASE"
+
+[[oracles]]
+id = "ORC-POSITIVE"
+kind = "test"
+runner = "$tool:fixture-test-runner"
+selection = "$payload:selection:positive"
+normalization = "$payload:verdict:five-state"
+configuration = "$digest:raw-artifact:test-config"
+scope = "$payload:scope:point-a"
+exclusions = []
+
+[[oracles]]
+id = "ORC-NEGATIVE"
+kind = "test"
+runner = "$tool:fixture-test-runner"
+selection = "$payload:selection:negative"
+normalization = "$payload:verdict:five-state"
+configuration = "$digest:raw-artifact:test-config"
+scope = "$payload:scope:point-b"
+exclusions = []
+
+[[carriers]]
+id = "CAR-POSITIVE"
+role = "positive"
+atoms = ["$atom:EVD-BASE:$digest:atom-revision:EVD-BASE"]
+item = "$item:tests/evidence.rs:positive_case"
+oracle = "$object:oracle:ORC-POSITIVE"
+configuration = "$digest:raw-artifact:test-config"
+corpora = ["$digest:raw-artifact:corpus-a"]
+scope = "$payload:scope:point-a"
+assumptions = []
+exclusions = []
+
+[[carriers]]
+id = "CAR-NEGATIVE"
+role = "negative"
+atoms = ["$atom:EVD-BASE:$digest:atom-revision:EVD-BASE"]
+item = "$item:tests/evidence.rs:negative_case"
+oracle = "$object:oracle:ORC-NEGATIVE"
+configuration = "$digest:raw-artifact:test-config"
+corpora = ["$digest:raw-artifact:corpus-b"]
+scope = "$payload:scope:point-b"
+assumptions = []
+exclusions = []
+
+[[policies]]
+id = "POL-EVIDENCE"
+mode = "blocking"
+ratchet = "required-executable-roles"
+scope = "$payload:policy:EVD-BASE"
+roles = ["positive", "negative"]
+expected_authority = ["required"]
+derivations = "none"
+approval = "$approval:spec-provenance-maintainers:POL-EVIDENCE"
+lifecycle = "active"
+
+[[verdicts]]
+oracle = "$object:oracle:ORC-POSITIVE"
+verdict = "not-run"
+
+[[verdicts]]
+oracle = "$object:oracle:ORC-NEGATIVE"
+verdict = "not-run"

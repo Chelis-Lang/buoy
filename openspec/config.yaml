@@ -1,0 +1,55 @@
+schema: buoy-bridge
+
+context: |
+  Buoy is a Rust project for deterministic, repository-wide
+  traceability from normative requirement atoms to tests, finite models,
+  formal properties, proof records, and implementation locations. Chelis is
+  the first intended integration, but the core model is repository-independent.
+
+  The same repository bytes, project configuration, schema versions, and
+  pinned toolchain inputs must produce byte-identical canonical graph and
+  static report bytes without network access, timestamps, issue labels,
+  filesystem traversal order, locale, or host-specific absolute paths.
+
+  Static registration, freshness, execution verdict, and assurance class are
+  independent facts. Tests and annotations are evidence, not mathematical
+  proof. A formal proof binds exact atom, property, implementation
+  representation, assumptions, translators, verifier, configuration, and
+  proof-source digests. Natural-language to formal-property correspondence
+  remains human-approved.
+
+  Development is test-first. Every ratified requirement needs positive and
+  negative scenarios before production implementation. Property tests must use
+  the user-selected Hegel-rs upstream after its exact identity is resolved.
+  Finite-state claims name their bounded model. Formal verification targets a
+  small safe, sequential, pure `no_std` deterministic kernel using Verus
+  and/or AeneasVerif. The root package and adapters form the imperative shell,
+  depend inward on the core, and own all ambient effects.
+
+rules:
+  proposal:
+    - State goals and non-goals explicitly.
+    - Distinguish deterministic static checking from effectful oracle execution.
+    - Do not claim that scaffolding, tests, annotations, or discovered carriers are proof.
+  design:
+    - Define the functional-core and imperative-shell boundary, including the one-way crate dependency rule and `no_std` core constraint.
+    - Define authoritative inputs, deterministic total ordering, digest bindings, lifecycle transitions, and trust boundaries.
+    - Separate static registration, freshness, execution verdicts, and assurance classes.
+    - State Verus and AeneasVerif limitations and proof exclusions.
+    - Name one exact acceptance oracle and its expected success condition.
+  specs:
+    - Give every requirement a stable ID in its heading.
+    - Give every requirement explicit positive and negative Given/When/Then scenarios.
+    - Use RFC 2119 language for normative behavior.
+    - Require deterministic diagnostics and fail-closed aggregation.
+    - Scope exhaustive claims to an identified finite model and formal claims to exact proof bindings.
+  traceability:
+    - List every affected requirement ID and each planned code, evidence, or external link action.
+    - Record the target class, action, owner, and focused Buoy command for each action.
+    - Review every current link for a modified requirement.
+    - Do not record provider status, titles, users, or timestamps.
+  tasks:
+    - Put positive and negative fixtures before corresponding implementation tasks.
+    - Put Hegel-rs property tests and exhaustive reference models before production algorithms.
+    - Put proof spikes before selecting a primary formal-verification lane.
+    - Keep documentation, deterministic golden artifacts, and the final acceptance oracle explicit.

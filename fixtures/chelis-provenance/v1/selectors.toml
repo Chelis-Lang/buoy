@@ -1,0 +1,35 @@
+schema = "chelis-provenance-selector-policy/v1"
+status = "preimplementation; canonical Chelis publication pending"
+selector_order = ["root", "adapter_id", "include-bytes", "exclude-bytes", "authority_expectation"]
+overlap_policy = "reject"
+path_policy = "Buoy canonical repository-relative UTF-8 paths; reject absolute paths, symlinks, submodules, portable collisions, and selector overlap"
+link_policy = "reject symlinks and submodules before reading content"
+id_allocation = "append-only Chelis registry; never derive IDs from paths, labels, provider users, timestamps, or traversal order"
+approval_authorities = ["chelis-maintainers", "chelis-spec-owners", "chelis-release-managers"]
+noncanonical_inputs = ["openspec/**", ".github/** provider state", "Git refs and branch names", "daemon state", "editor buffers", "LSP observations", "MCP sessions", "wall clock", "locale"]
+
+[[selectors]]
+id = "chelis-surf-saved-source"
+root = "."
+adapter_id = "chelis-surf/v1"
+syntax_schema_id = "chelis-surf-syntax/v2"
+include = ["examples/**/*.ch", "packages/**/*.ch", "tests/**/*.ch"]
+exclude = ["target/**", ".devenv/**"]
+authority_expectation = "optional"
+status = "schema-v3 protocol approved. Parser-backed adapter implemented over the pinned vendored grammar."
+
+[[selectors]]
+id = "chelis-deep-saved-source"
+root = "."
+adapter_id = "chelis-deep/v1"
+syntax_schema_id = "chelis-deep-syntax/v1"
+include = ["examples/**/*.dp", "tests/**/*.dp"]
+exclude = ["target/**", ".devenv/**"]
+authority_expectation = "optional"
+status = "schema-v3 protocol approved. Lexical adapter implemented; grammar adoption pending."
+
+[[inventory_only]]
+id = "chelis-normative-markdown"
+include = ["spec/design/chelis_canonical_reference.md", "spec/00-context.md", "spec/01-nomenclature.md", "spec/02-surf-syntax.md", "spec/03-deep-syntax.md", "spec/04-type-system.md", "spec/05-risc-primitives.md", "spec/06-transformations.md", "spec/07-concurrency.md", "spec/08-backends.md", "spec/09-tide.md", "spec/10-serialization.md", "spec/11-ffi.md", "spec/12-roadmap.md", "spec/design/**/*.md"]
+direct_product_authority = false
+reason = "Inventory and review context only until Chelis publishes schema-owned authority records; OpenSpec state is never product authority."

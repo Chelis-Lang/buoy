@@ -1,0 +1,249 @@
+target_id	path	kind	platform	coverage_class	disposition	rationale
+core-lib	crates/buoy-core/src/lib.rs	production-library	portable	no-executable-regions	not-applicable	module declarations reexports attributes and comments only
+core-identifier	crates/buoy-core/src/identifier.rs	production-library	portable	cargo-llvm-cov	included-manual	validated identifier newtypes and frozen identifier grammars
+core-value	crates/buoy-core/src/value.rs	production-library	portable	cargo-llvm-cov	included-manual	canonical values paths and digests
+core-value-hash-dispatch	crates/buoy-core/src/value/hash.rs	production-library	portable	cargo-llvm-cov	included-manual	closed registry dispatch and feature availability diagnostics
+core-value-hash-xxh3	crates/buoy-core/src/value/hash/xxh3_128.rs	production-library	portable	cargo-llvm-cov	included-manual	private XXH3-128 adapter
+core-value-hash-blake3	crates/buoy-core/src/value/hash/blake3_256.rs	production-library	portable	cargo-llvm-cov	included-manual	private BLAKE3-256 adapter
+core-value-hash-sha256	crates/buoy-core/src/value/hash/sha_256.rs	production-library	portable	cargo-llvm-cov	included-manual	private SHA-256 adapter
+core-casefold-table	crates/buoy-core/src/casefold_table.rs	generated-production-data	portable	compiled-data-and-conformance	included-generated	generated C-plus-F Unicode table has no executable regions and is checked against pinned source
+core-model	crates/buoy-core/src/model.rs	production-library	portable	cargo-llvm-cov	included-manual	semantic model values
+core-attachment	crates/buoy-core/src/attachment.rs	production-library	portable	cargo-llvm-cov	included-manual	pure artifact sidecar key correspondence and transaction-plan values
+core-mount	crates/buoy-core/src/mount.rs	production-library	portable	cargo-llvm-cov	included-manual	parsed logical mount declarations disjoint prefixes and pure path projection
+core-report	crates/buoy-core/src/report.rs	production-library	portable	cargo-llvm-cov	included-manual	complete orthogonal fact and authoritative report encoding
+core-algorithms	crates/buoy-core/src/algorithms.rs	production-library	portable	cargo-llvm-cov	included-manual	deterministic semantic algorithms
+shell-lib	src/lib.rs	production-library	portable	no-executable-regions	not-applicable	module declarations reexports attributes and comments only
+shell-cli-library	src/cli.rs	production-library	portable	cargo-llvm-cov	included-manual	shared primary and compatibility CLI semantics
+shell-check	src/check.rs	production-library	portable	cargo-llvm-cov	included-manual	repository checks and presentations
+shell-adapter-sdk	src/adapter_sdk.rs	production-library	portable	cargo-llvm-cov	included-manual	versioned shell-side adapter descriptors registry saved-input bindings and total materialized outputs
+shell-adversarial	src/adversarial.rs	assurance-library	portable	cargo-llvm-cov	included-assurance-manual	campaign source tool configuration expiry discharge named-mutant and portable-corpus validation
+shell-external-integrity	src/external_integrity.rs	production-library	portable	cargo-llvm-cov	included-manual	external integrity boundary classification
+shell-glob	src/glob.rs	production-library	portable	cargo-llvm-cov	included-manual	closed versioned portable glob parser matcher and language-overlap checker
+shell-hashing-policy	src/hashing_policy.rs	production-library	portable	cargo-llvm-cov	included-manual	repository hashing policy
+shell-identifier-policy	src/identifier_policy.rs	production-library	portable	cargo-llvm-cov	included-manual	typed stable-ID boundary policy
+shell-migration	src/migration.rs	production-library	portable	cargo-llvm-cov	included-manual	frozen v1 to active v2 migration
+shell-oracle	src/oracle.rs	production-platform-backend	linux-macos;windows-blocked	aggregate-platform-cargo-llvm-cov	included-manual	Unix process-group supervisor and explicitly blocked Windows job backend
+shell-presentation	src/presentation.rs	production-library	portable	cargo-llvm-cov	included-manual	deterministic derived JSON and human presentations bound to binary identity
+shell-product-identity	src/product_identity.rs	assurance-library	portable	cargo-llvm-cov	included-assurance-manual	stale-name compatibility canonical parity and planning checker
+shell-quality	src/quality.rs	assurance-library	portable	cargo-llvm-cov	included-assurance-manual	quality registry parser validator deterministic binding and report generator
+shell-repository	src/repository.rs	production-platform-backend	linux-macos;windows-blocked	aggregate-platform-cargo-llvm-cov	included-manual	descriptor-relative Unix snapshot and explicitly blocked Windows fallback
+shell-traceability	src/traceability.rs	production-library	portable	cargo-llvm-cov	included-manual	external object and navigation report values
+shell-adapter-mod	src/adapters/mod.rs	production-library	portable	cargo-llvm-cov	included-manual	adapter support matrix types constants executable metadata dispatch module declarations and reexports
+shell-adapter-schema	src/adapters/schema.rs	production-library	portable	cargo-llvm-cov	included-manual	closed executable adapter schema parsing construction and validation bindings
+shell-adapter-artifact	src/adapters/artifact.rs	production-library	portable	cargo-llvm-cov	included-manual	fixed opaque saved-byte source adapter with complete full-file mapping
+shell-adapter-markdown	src/adapters/markdown.rs	production-library	portable	cargo-llvm-cov	included-manual	Markdown semantic adapter
+shell-adapter-binding	src/adapters/binding.rs	production-library	portable	cargo-llvm-cov	included-manual	immutable implementation binding object-store adapter
+shell-adapter-openspec	src/adapters/openspec.rs	production-library	portable	cargo-llvm-cov	included-manual	OpenSpec standing source graph and requirement authority adapter
+shell-adapter-rust	src/adapters/rust.rs	production-library	portable	cargo-llvm-cov	included-manual	Rust source graph and compact binding adapter
+shell-bin-buoy	src/bin/buoy.rs	production-binary	portable	cargo-llvm-cov	included-manual	primary Buoy command entry point
+shell-bin-hashing-policy	src/bin/buoy-hashing-policy.rs	maintainer-binary	portable	cargo-llvm-cov	included-assurance-manual	hashing policy command entry point
+shell-bin-identifier-policy	src/bin/buoy-identifier-policy.rs	assurance-binary	portable	cargo-llvm-cov	included-assurance-manual	identifier policy command entry point
+shell-bin-migrate	src/bin/buoy-migrate.rs	maintainer-binary	portable	cargo-llvm-cov	included-assurance-manual	migration command entry point
+shell-bin-product-identity	src/bin/buoy-product-identity.rs	assurance-binary	portable	cargo-llvm-cov	included-assurance-manual	product identity command entry point
+shell-bin-quality	src/bin/buoy-quality.rs	assurance-binary	portable	cargo-llvm-cov	included-assurance-manual	quality registry command entry point
+shell-bin-trace-projection-check	src/bin/check_trace_projection.rs	assurance-binary	portable	cargo-llvm-cov	included-assurance-manual	readable trace projection conformance command entry point
+compat-shell-lib	crates/spec-provenance/src/lib.rs	compatibility-facade	portable	cargo-llvm-cov	included-assurance-manual	bounded reexport-only facade to buoy
+compat-shell-bin	crates/spec-provenance/src/main.rs	compatibility-facade	portable	cargo-llvm-cov	included-assurance-manual	bounded CLI delegation with noncanonical warning
+compat-shell-test-cli	crates/spec-provenance/tests/cli.rs	compatibility-facade	portable	fixture-execution	included-fixture	compatibility package executes deprecation warning and delegated usage behavior
+compat-core-lib	crates/spec-provenance-core/src/lib.rs	compatibility-facade	portable	cargo-llvm-cov	included-assurance-manual	bounded no-std reexport-only facade to buoy-core
+fixture-checker	tools/check_fixture_manifest.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	fixture and finite-model validator
+hardening-manifest-checker	tools/check_hardening_manifest.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-assurance-manual	hardening scenario contract and fail-closed obligation-ledger command dispatcher
+hardening-ledger-library	tools/hardening_ledger.rs	standalone-validator-library	portable	focused-standalone-cargo-llvm-cov	included-assurance-manual	exact obligation discovery disposition proof-accounting and negative-control implementation
+adversarial-evidence-checker	tools/check_adversarial_evidence.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-assurance-manual	campaign freshness negative controls and portable platform corpus emitter
+devenv-task-graph-checker	tools/check_devenv_task_graph.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-assurance-manual	typed resolved-task graph workflow policy root and runtime-package validator
+schema-checker	tools/check_schema_inventory.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	schema inventory self-check and parity preflight
+property-evidence-checker	tools/check_property_evidence.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	property inventory and reproducible run ledger parity validator
+exact-coverage-checker	tools/check_exact_coverage.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	rejects rounded missing zero-denominator and nonexact Cargo metrics
+reference-independence-checker	tools/check_reference_independence.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	independent-authority dependency and API boundary
+xxh3-migration-model-checker	tools/check_xxh3_migration_model.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	finite migration model checker
+digest-fixture-checker	tools/check_digest_fixtures.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	registered-member vectors, boundary scenarios, and negative diagnostic checker
+xxh3-vector-compatibility-checker	tools/check_xxh3_vectors.rs	compatibility-facade	portable	fixture-execution	included-fixture	historical command wrapper executes the all-member digest fixture checker
+digest-correspondence-checker	tools/check_digest_correspondence.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	cross-member correspondence generator, verifier, and negative controls
+casefold-generator	tools/generate_casefold_table.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	pinned Unicode parser generator stale-table checker and negative self-test
+coverage-fixture-generator	tools/generate_coverage_fixtures.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	generates and stale-checks focused LLVM coverage fixtures
+property-evidence-generator	tools/generate_property_evidence.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	generates source-bound normalized Hegel inventory and run records
+property-fixture-generator	tools/generate_property_fixtures.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	generates and stale-checks focused Hegel property fixtures
+digest-binding-library	tools/digest_binding.rs	standalone-validator-library	portable	focused-standalone-cargo-llvm-cov	included-manual	registry-mediated version 3 evidence content binding with canonical controls
+execution-evidence-library	tools/execution_evidence.rs	standalone-validator-library	portable	focused-standalone-cargo-llvm-cov	included-manual	deterministic per-case source/tool/configuration/result binding and materialization validator
+v2-fixture-generator	tools/generate_v2_fixture_suite.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	frozen fixture migration generator and checker
+unicode-source-checker	examples/check_unicode_source.rs	maintainer-generator	portable	example-cargo-llvm-cov	included-assurance-manual	pinned Unicode source identity checker
+example-core-graph	examples/core_graph.rs	consumer-example	portable	fixture-execution	included-fixture	typed graph construction and stale relation demonstration compile and execute in the focused example gate
+example-repository-check	examples/repository_check.rs	consumer-example	linux-macos;windows-blocked	fixture-execution	included-fixture	saved repository static check demonstration executes on supported snapshot platforms
+report-golden-generator	examples/generate_report_goldens.rs	maintainer-generator	portable	example-cargo-llvm-cov	included-assurance-manual	reviewed authoritative report vector generator and stale golden tests
+presentation-golden-generator	examples/generate_presentation_goldens.rs	maintainer-generator	portable	example-cargo-llvm-cov	included-assurance-manual	reviewed JSON and human presentation generator and stale golden tests
+canonical-vector-generator	examples/generate_canonical_vectors.rs	independent-vector-generator	portable	example-cargo-llvm-cov	included-assurance-manual	expands every frozen inventory tag nested fact and domain through independent encoder
+malformed-vector-generator	examples/generate_malformed_vectors.rs	independent-vector-generator	portable	example-cargo-llvm-cov	included-assurance-manual	generates malformed boundaries without importing production decoder modules
+canonical-reference	crates/buoy-reference/src/lib.rs	independent-test-authority	portable	cargo-llvm-cov	included-assurance-manual	must not import production canonical modules
+test-adapters	tests/adapters.rs	test-evidence-source	portable	fixture-execution	included-fixture	Markdown and Rust adapter behavioral fixtures execute but test source is not an LLVM product target
+test-adversarial-faults	tests/adversarial_faults.rs	adversarial-test-source	linux-macos;windows-partial	fixture-execution	included-fixture	bounded filesystem parser allocation process pipe result timeout and cancellation fault dispatch
+test-adversarial-gates	tests/adversarial_gates.rs	adversarial-test-source	portable	fixture-execution	included-fixture	campaign freshness discharge named-mutant workflow and portable corpus controls
+test-assurance-coverage-controls	tests/assurance_coverage_controls.rs	test-evidence-source	portable	fixture-execution	included-fixture	assurance library and binary behavior controls execute outside product-source reporting
+test-bounded-source-traversal-model	tests/bounded_source_traversal_model.rs	property-source	portable	fixture-execution	included-fixture	bounded traversal properties and exhaustive four-node model execute as sampled and exhaustive evidence
+test-bounded-mount-binding-model	tests/bounded_mount_binding_model.rs	property-source	portable	fixture-execution	included-fixture	exhaustive three-mount four-file two-relation transaction model
+test-canonical-differential	tests/canonical_differential.rs	independent-test-authority	portable	fixture-execution	included-fixture	production versus independent canonical differential executes outside product-source reporting
+test-canonical-vectors	tests/canonical_vectors.rs	test-evidence-source	portable	fixture-execution	included-fixture	canonical vector contract executes outside product-source reporting
+test-chelis-preimplementation	tests/chelis_preimplementation.rs	test-evidence-source	portable	fixture-execution	included-fixture	separate active-change planning controls execute outside product-source reporting
+test-content-addressed-binding-spike	tests/content_addressed_binding_spike.rs	test-evidence-source	portable	fixture-execution	included-fixture	content-addressed binding spike reference model executes outside product-source reporting
+test-content-addressed-bindings	tests/content_addressed_bindings.rs	test-evidence-source	portable	fixture-execution	included-fixture	content-addressed binding integration mutations and deterministic goldens execute outside product-source reporting
+test-core-contract	tests/core_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	pure core behavioral contract executes outside product-source reporting
+test-core-report-coverage-controls	tests/core_report_coverage_controls.rs	test-evidence-source	portable	fixture-execution	included-fixture	complete report constructors and decoder failures execute outside product-source reporting
+test-external-integrity	tests/external_integrity.rs	test-evidence-source	portable	fixture-execution	included-fixture	opaque external integrity contract executes outside product-source reporting
+test-fixture-truthfulness	tests/fixture_truthfulness.rs	test-evidence-source	portable	fixture-execution	included-fixture	executable hardening fixture and ordered mutation witnesses execute outside product-source reporting
+test-glob	tests/glob.rs	test-evidence-source	portable	fixture-execution	included-fixture	portable glob parser and overlap contract executes outside product-source reporting
+example-generator-coverage	examples/generator_coverage_controls.rs	coverage-negative-control	portable	fixture-execution	included-fixture	isolated generator write stale and I/O failure controls execute outside product-source reporting
+test-hegel-controls	tests/hegel_controls.rs	property-negative-control	portable	fixture-execution	included-fixture	approved API pass probe and intentionally false property execute as sampled controls
+test-hegel-properties	tests/hegel_properties.rs	property-source	portable	fixture-execution	included-fixture	production versus independent Hegel properties execute as sampled evidence
+test-logical-mount-hegel-properties	tests/logical_mount_hegel_properties.rs	property-source	portable	fixture-execution	included-fixture	logical mount artifact key and transaction sampled differentials
+test-logical-mount-proof-bindings	tests/logical_mount_proof_bindings.rs	test-evidence-source	portable	fixture-execution	included-fixture	exact logical mount proof input assumption exclusion and negative-control bindings
+test-digest-hegel-properties	tests/digest_hegel_properties.rs	property-source	portable	fixture-execution	included-fixture	all-member fixed-seed digest properties
+test-digest-member-static	tests/digest_member_static.rs	test-evidence-source	portable	fixture-execution	included-fixture	all-member static-check structure and diagnostic parity
+test-hegel-settings	tests/support/hegel_settings.rs	property-configuration	portable	fixture-execution	included-fixture	authoritative deterministic Hegel settings are compiled into executed property targets
+test-integration	tests/integration.rs	test-evidence-source	linux-macos;windows-blocked	fixture-execution	included-fixture	repository CLI and process integration contract executes on supported hosts
+test-logical-mounts	tests/logical_mounts.rs	test-evidence-source	linux-macos;windows-blocked	fixture-execution	included-fixture	logical mount configuration projection budget order and physical-path independence controls
+test-artifact-bindings	tests/artifact_bindings.rs	test-evidence-source	linux-macos;windows-blocked	fixture-execution	included-fixture	opaque artifact sidecar freshness history and transaction controls
+test-identifier-policy	tests/identifier_policy.rs	test-evidence-source	portable	fixture-execution	included-fixture	typed identifier boundary policy controls execute outside product-source reporting
+test-openspec-traceability	tests/openspec_traceability.rs	test-evidence-source	portable	fixture-execution	included-fixture	source-item OpenSpec and external trace-link contracts
+test-openspec-workflow	tests/openspec_workflow.rs	test-evidence-source	portable	fixture-execution	included-fixture	project-local OpenSpec workflow structural controls
+test-usage-examples	tests/usage_examples.rs	test-evidence-source	linux-macos;windows-partial	fixture-execution	included-fixture	public example manifests boundaries outputs schema flow and repository command controls
+test-malformed-canonical-vectors	tests/malformed_canonical_vectors.rs	test-evidence-source	portable	fixture-execution	included-fixture	malformed canonical negative vectors execute outside product-source reporting
+test-migration	tests/migration.rs	test-evidence-source	portable	fixture-execution	included-fixture	frozen v1 to active v3 migration contract executes outside product-source reporting
+test-mutations	tests/mutations.rs	test-evidence-source	portable	fixture-execution	included-fixture	named deliberate mutation tripwires execute outside product-source reporting
+test-product-identity	tests/product_identity.rs	test-evidence-source	portable	fixture-execution	included-fixture	Buoy identity compatibility and stale evidence controls execute outside product-source reporting
+test-quality-assurance	tests/quality_assurance.rs	test-evidence-source	portable	fixture-execution	included-fixture	quality registry fixture completeness diagnostics determinism boundaries and live drift checks
+test-proof-bindings	tests/proof_bindings.rs	test-evidence-source	portable	fixture-execution	included-fixture	formal proof binding positive and negative controls execute outside product-source reporting
+test-report-encoding	tests/report_encoding.rs	test-evidence-source	portable	fixture-execution	included-fixture	authoritative binary and presentation report tests execute outside product-source reporting
+test-unicode-conformance	tests/unicode_conformance.rs	test-evidence-source	portable	fixture-execution	included-fixture	Unicode normalization and case folding conformance executes outside product-source reporting
+test-windows-snapshot-blocker	tests/windows_snapshot_blocker.rs	platform-blocker-test-source	windows	fixture-execution	included-fixture	Windows snapshot blocker and discharge preconditions remain explicit outside product-source reporting
+test-xxh3-hegel	tests/xxh3_hegel_properties.rs	property-source	portable	fixture-execution	included-fixture	XXH3 deterministic sampled properties execute outside product-source reporting
+core-test-canonical-differential	crates/buoy-core/tests/canonical_differential.rs	independent-test-authority	portable	fixture-execution	included-fixture	core-package differential executes production and independent reference under one instrumented owner
+core-test-contract	crates/buoy-core/tests/core_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package behavioral contracts execute under the core artifact owner
+core-test-graph-validation	crates/buoy-core/tests/graph_validation_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package registry authority source-map reference lifecycle role and host-schema contracts execute under the core artifact owner
+core-test-implementation-binding	crates/buoy-core/tests/implementation_binding_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package immutable binding identity freshness authority and impact contracts execute under the core artifact owner
+core-test-source-graph	crates/buoy-core/tests/source_graph_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package source graph construction closure cycle and budget contracts execute under the core artifact owner
+core-test-source-traversal-model	crates/buoy-core/tests/source_traversal_bounded_model.rs	independent-test-authority	portable	fixture-execution	included-fixture	bounded source traversal production and independent model comparison executes under the core artifact owner
+core-test-identifier	crates/buoy-core/tests/identifier_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package identifier newtype grammar parity and canonical encoding controls execute under the core artifact owner
+core-test-schema-impact	crates/buoy-core/tests/schema_impact_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package frozen edge-catalog parity propagation omission and fixed-point controls execute under the core artifact owner
+core-test-policy-ratchet	crates/buoy-core/tests/policy_ratchet_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package executes every frozen policy ratchet case against graph-derived obligations classifications and diagnostics
+core-test-disposition-protocol	crates/buoy-core/tests/disposition_protocol_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package executes every frozen disposition mutation against graph artifact approval debt waiver and replacement closure
+core-test-compile-fail-harness	crates/buoy-core/tests/compile_fail_contract.rs	compile-fail-harness	portable	fixture-execution	included-fixture	pinned trybuild harness executes exact public API positive and negative compile fixtures
+core-test-compile-pass-constructor	crates/buoy-core/tests/ui/valid_constructor.rs	compile-pass-fixture	portable	fixture-execution	included-fixture	validated public constructor remains usable by an external consumer
+core-test-compile-fail-direct-fields	crates/buoy-core/tests/ui/direct_field_construction.rs	compile-fail-fixture	portable	fixture-execution	included-fixture	private policy fields reject direct construction
+core-test-compile-fail-metadata-kind	crates/buoy-core/tests/ui/metadata_kind_substitution.rs	compile-fail-fixture	portable	fixture-execution	included-fixture	concrete carrier constructor rejects caller-supplied generic metadata
+core-test-compile-fail-callable-effect	crates/buoy-core/tests/ui/callable_effect_input.rs	compile-fail-fixture	portable	fixture-execution	included-fixture	value-only graph validation rejects an effectful caller-provided closure
+core-test-compile-fail-raw-source-item-kind	crates/buoy-core/tests/ui/raw_source_item_kind.rs	compile-fail-fixture	portable	fixture-execution	included-fixture	public core constructors reject raw source-item kind text
+core-test-algorithms-branch-coverage-controls	crates/buoy-core/tests/algorithms_branch_coverage_controls.rs	coverage-negative-control	portable	fixture-execution	included-fixture	core-package algorithm short-circuit and exact branch controls execute under the core artifact owner
+core-test-algorithms-model-coverage-controls	crates/buoy-core/tests/algorithms_model_coverage_controls.rs	coverage-negative-control	portable	fixture-execution	included-fixture	core-package algorithm and model constructor error controls execute under the core artifact owner
+core-test-model-constructor-error-controls	crates/buoy-core/tests/support/model_constructor_error_controls.rs	coverage-negative-control	portable	fixture-execution	included-fixture	shared model constructor duplicate invalid-shape and propagation controls execute through the algorithm-model harness
+core-test-report-coverage-controls	crates/buoy-core/tests/core_report_coverage_controls.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package complete report constructors and strict decoder controls execute under the core artifact owner
+core-test-value-coverage-controls	crates/buoy-core/tests/core_value_coverage_controls.rs	test-evidence-source	portable	fixture-execution	included-fixture	core-package canonical value malformed-input and public accessor controls execute under the core artifact owner
+core-test-xxh3-digest	crates/buoy-core/tests/xxh3_digest_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	core digest contract executes outside product-source reporting
+core-test-digest-registry	crates/buoy-core/tests/digest_registry_contract.rs	independent-test-authority	portable	fixture-execution	included-fixture	all registered members execute vectors, round trips, active-member rejection, and known-answer checks
+core-test-xxh3-hegel	crates/buoy-core/tests/xxh3_hegel_envelope.rs	property-source	portable	fixture-execution	included-fixture	core digest envelope sampled properties execute outside product-source reporting
+core-test-xxh3-official	crates/buoy-core/tests/xxh3_official.rs	independent-test-authority	portable	fixture-execution	included-fixture	core-package official vector and deterministic injected-collision controls execute under the core artifact owner
+reference-test-canonical-controls	crates/buoy-reference/tests/canonical_controls.rs	independent-test-authority	portable	fixture-execution	included-fixture	independent malformed canonical decoder and fallible encoder controls execute under reference package ownership
+reference-test-official-xxh3	crates/buoy-reference/tests/official_xxh3_vectors.rs	independent-test-authority	portable	fixture-execution	included-fixture	official XXH3 vector reference checks execute outside product-source reporting
+fuzz-canonical-values	fuzz/fuzz_targets/canonical_values.rs	coverage-guided-fuzz-target	portable	fixture-execution	included-fixture	bounded strict canonical decode encode round-trip harness
+fuzz-paths-globs	fuzz/fuzz_targets/paths_globs.rs	coverage-guided-fuzz-target	portable	fixture-execution	included-fixture	bounded portable path glob parse match overlap and collision harness
+fuzz-adapters	fuzz/fuzz_targets/adapters.rs	coverage-guided-fuzz-target	portable	fixture-execution	included-fixture	bounded Markdown TOML and Rust parser harness
+fuzz-config-manifests	fuzz/fuzz_targets/config_manifests.rs	coverage-guided-fuzz-target	portable	fixture-execution	included-fixture	bounded repository configuration and neutral change manifest harness
+fuzz-graphs-governance	fuzz/fuzz_targets/graphs_governance.rs	coverage-guided-fuzz-target	portable	fixture-execution	included-fixture	bounded impact fixed-point and no-laundering aggregation harness
+fuzz-reports	fuzz/fuzz_targets/reports.rs	coverage-guided-fuzz-target	portable	fixture-execution	included-fixture	bounded canonical static execution impact report decoder and presentation harness
+dylint-detector	dylint_lints/fcis_core/src/lib.rs	local-dylint-detector	portable	separate-manifest-cargo-llvm-cov	included-manual	functional-core structural detector
+dylint-fixture-allowed	fixtures/dylint/allowed-boundaries/src/lib.rs	dylint-fixture	portable	fixture-execution	included-fixture	positive detector fixture
+dylint-fixture-ambient	fixtures/dylint/ambient-state/src/lib.rs	dylint-fixture	portable	fixture-execution	included-fixture	negative ambient-state fixture
+dylint-fixture-callable	fixtures/dylint/callable-public-interface/src/lib.rs	dylint-fixture	portable	fixture-execution	included-fixture	negative callable-interface fixture
+dylint-fixture-no-std	fixtures/dylint/missing-no-std/src/lib.rs	dylint-fixture	portable	fixture-execution	included-fixture	negative no-std fixture
+product-identity-core-effect-negative	fixtures/product-identity/v1/negative/buoy-core-effect/src/lib.rs	compile-fail-fixture	portable	fixture-execution	included-fixture	negative outward shell dependency fixture
+product-identity-clean-shell	fixtures/product-identity/v1/positive/clean-buoy-shell/src/main.rs	install-fixture	portable	fixture-execution	included-fixture	clean Buoy shell package consumer
+product-identity-clean-core	fixtures/product-identity/v1/positive/clean-buoy-core/src/lib.rs	install-fixture	portable	fixture-execution	included-fixture	clean no-std Buoy core consumer
+product-identity-upgrade-shell	fixtures/product-identity/v1/positive/upgrade-spec-provenance/src/main.rs	upgrade-fixture	portable	fixture-execution	included-fixture	bounded former shell package consumer
+product-identity-upgrade-core	fixtures/product-identity/v1/positive/upgrade-spec-provenance-core/src/lib.rs	upgrade-fixture	portable	fixture-execution	included-fixture	bounded former no-std core package consumer
+proof-production-positive	proofs/core/integrity.rs	formal-source	portable	formal-binding	excluded-from-structural-coverage	selected Verus proof source has separate proof obligation
+proof-production-negative	proofs/core/integrity_negative.rs	formal-negative-control	portable	formal-binding	excluded-from-structural-coverage	intended Verus rejection has separate proof obligation
+proof-logical-mount-record	proofs/logical-mounts/proof-record.toml	formal-binding-record	portable	formal-binding	excluded-from-structural-coverage	selected logical projection proof input verdict assumption and exclusion record
+proof-logical-mount-derivation	proofs/logical-mounts/derivation-record.toml	formal-derivation-record	portable	formal-binding	excluded-from-structural-coverage	reviewed symbol-level production to Verus correspondence
+proof-logical-mount-approval	proofs/logical-mounts/correspondence-approval.toml	formal-review-record	portable	formal-binding	excluded-from-structural-coverage	review-only formalization correspondence approval
+proof-spike-verus-positive	proofs/spikes/verus/integrity.rs	formal-spike	portable	formal-spike	excluded-from-production-coverage	nonproduction lane comparison
+proof-spike-verus-negative	proofs/spikes/verus/integrity_negative.rs	formal-spike-negative	portable	formal-spike	excluded-from-production-coverage	nonproduction lane comparison
+proof-spike-verus-source-item-kind	proofs/spikes/verus/source_item_kind.rs	formal-spike	portable	formal-spike	excluded-from-production-coverage	source-item encoding comparison spike
+proof-spike-verus-logical-mounts	proofs/spikes/verus/logical_mounts.rs	formal-spike	portable	formal-spike	excluded-from-production-coverage	logical projection and attachment-key preimage obligations
+proof-spike-verus-logical-mounts-negative	proofs/spikes/verus/logical_mounts_negative.rs	formal-spike-negative	portable	formal-spike	excluded-from-production-coverage	intentionally false equal-input injection claim
+proof-spike-aeneas-source	proofs/spikes/aeneas/rust/src/lib.rs	formal-translation-source	portable	formal-spike	excluded-from-production-coverage	nonproduction translation input
+proof-spike-aeneas-source-item-kind	proofs/spikes/aeneas/rust/source_item_kind.rs	formal-translation-source	portable	formal-spike	excluded-from-production-coverage	source-item encoding comparison spike
+proof-spike-aeneas-logical-mounts	proofs/spikes/aeneas/rust/logical_mounts.rs	formal-translation-source	portable	formal-spike	excluded-from-production-coverage	logical projection and attachment-key translation source
+proof-spike-generated-lean	proofs/spikes/aeneas/generated/Integrity.lean	generated-formal-source	portable	derivation-and-formal-spike	excluded-from-structural-coverage	generated target governed by derivation consistency
+proof-spike-lean-proofs	proofs/spikes/aeneas/lean/IntegrityProofs.lean	formal-spike	portable	formal-spike	excluded-from-production-coverage	nonproduction comparative proof
+proof-spike-lean-negative	proofs/spikes/aeneas/lean/IntegrityNegative.lean	formal-spike-negative	portable	formal-spike	excluded-from-production-coverage	intended Lean rejection
+proof-spike-lean-model	proofs/spikes/aeneas/lean/Aeneas.lean	formal-external-model	portable	formal-spike	excluded-from-production-coverage	minimal bound external model distinct from full backend
+shell-publication	src/publication.rs	production-library	portable	cargo-llvm-cov	included-manual	typed publication plan row conformance report evidence basis and package identity
+shell-publication-fs	src/publication_fs.rs	production-library	portable	cargo-llvm-cov	included-manual	descriptor-relative no-follow atomic publication writer and output lock
+shell-publication-models	src/publication_models.rs	production-library	portable	cargo-llvm-cov	included-manual	bounded publication transaction and dependency reference models
+shell-external-link-generation	src/external_link_generation.rs	production-library	portable	cargo-llvm-cov	included-manual	cycle-safe OpenSpec publication-slot boundary detection rendering and authority comparison
+shell-adapters-external-trace	src/adapters/external_trace.rs	production-library	portable	cargo-llvm-cov	included-manual	shared external-trace document parser used by Markdown and OpenSpec adapters
+test-trace-publication-contract	tests/trace_publication_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	publication plan parsing basis diagnostics and budget contract tests
+test-trace-publication-extended	tests/trace_publication_extended.rs	test-evidence-source	portable	fixture-execution	included-fixture	row conformance page lifecycle package and completion evidence fixture tests
+test-trace-publication-fixture-manifest	tests/trace_publication_fixture_manifest.rs	test-evidence-source	portable	fixture-execution	included-fixture	fail-closed fixture manifest scenario coverage checker test
+test-publication-evidence	tests/publication_evidence.rs	test-evidence-source	portable	fixture-execution	included-fixture	publication report and evidence rendering contract tests
+test-publication-evidence-cli	tests/publication_evidence_cli.rs	test-evidence-source	portable	fixture-execution	included-fixture	publication evidence CLI parity and source-digest tests
+test-publication-filesystem	tests/publication_filesystem.rs	adversarial-test-source	portable	fixture-execution	included-fixture	no-follow atomic write symlink component-swap lock and cleanup filesystem tests
+test-publication-snapshot-guards	tests/publication_snapshot_guards.rs	test-evidence-source	portable	fixture-execution	included-fixture	retained-snapshot and source-edit guard contract tests
+test-publication-hegel-properties	tests/publication_hegel_properties.rs	property-source	portable	fixture-execution	included-fixture	seeded Hegel-rs properties for plan row lifecycle guard basis and URI domains
+test-publication-models-differential	tests/publication_models_differential.rs	independent-test-authority	portable	fixture-execution	included-fixture	bounded dependency model versus production path-substitution differential test
+test-publication-no-substitute-executable	tests/publication_no_substitute_executable.rs	test-evidence-source	portable	fixture-execution	included-fixture	structural proof that publication code paths spawn no substitute process
+test-publication-diagnostic-determinism	tests/publication_diagnostic_determinism.rs	test-evidence-source	portable	fixture-execution	included-fixture	equal publication diagnostics across roots locales timezones and operation order
+test-external-link-publication	tests/external_link_publication.rs	test-evidence-source	portable	fixture-execution	included-fixture	publication-slot boundary migration basis normalization and target contract tests
+test-external-link-closure	tests/external_link_closure.rs	test-evidence-source	portable	fixture-execution	included-fixture	full-graph closure and atom-object-digest rejection integration tests
+test-task-graph-contract	tests/task_graph_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	blocking and advisory package task-graph reachability tests
+test-package-identity	tests/package_identity.rs	test-evidence-source	portable	fixture-execution	included-fixture	package-identity schema and malformed-vector contract tests
+test-hardening-manifest-delta	tests/hardening_manifest_delta.rs	test-evidence-source	portable	fixture-execution	included-fixture	change-local REH-012 and REH-013 hardening scenario delta checker tests
+test-publication-mounted-containment	tests/publication_mounted_containment.rs	test-evidence-source	portable	fixture-execution	included-fixture	mounted end-to-end output-collision link-write and no-side-effect containment tests
+test-publication-diagnostic-codes-cli	tests/publication_diagnostic_codes_cli.rs	test-evidence-source	portable	fixture-execution	included-fixture	real CLI versioned diagnostic report contract tests for every required failure branch
+test-pinned-buoy-distribution	tests/pinned_buoy_distribution.rs	test-evidence-source	portable	fixture-execution	included-fixture	offline consumer-package structural and launcher-fetch contract tests
+test-publication-encoders-differential	tests/publication_encoders_differential.rs	independent-test-authority	portable	fixture-execution	included-fixture	independent report evidence plan URI and path-substitution encoder differential tests
+test-openspec-v2-identity	tests/openspec_v2_identity.rs	test-evidence-source	portable	fixture-execution	included-fixture	OpenSpec version 2 identity and closure contract tests
+test-support-traceability-control	tests/support/traceability_control.rs	test-evidence-source	portable	fixture-execution	included-fixture	shared traceability document validation support used by workflow tests
+test-support-manifest-invocation	tests/support/manifest_invocation.rs	test-evidence-source	portable	fixture-execution	included-fixture	shared real-command fixture-manifest invocation support
+test-bounded-trace-projection-model	tests/bounded_trace_projection_model.rs	property-source	portable	fixture-execution	included-fixture	bounded trace-projection exhaustive model test
+test-trace-hegel-properties	tests/trace_hegel_properties.rs	property-source	portable	fixture-execution	included-fixture	seeded Hegel-rs trace-projection property tests
+test-readable-trace-projections	tests/readable_trace_projections.rs	test-evidence-source	portable	fixture-execution	included-fixture	readable trace Markdown projection contract and workflow fixture tests
+test-requirement-subject-inventory	tests/requirement_subject_inventory.rs	property-source	portable	fixture-execution	included-fixture	current requirement subject bootstrap ordering root independence and fail-closed controls
+core-trace-query-properties	crates/buoy-core/tests/trace_query_properties.rs	property-source	portable	fixture-execution	included-fixture	trace-query root and permutation independence property tests
+package-contract-checker	tools/check_package_contract.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	blocking offline structural contract check for the consumer package interface
+consumer-package-checker	tools/check_consumer_package.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	advisory private git+ssh fixture and credential-detection checker
+publication-golden-generator	tools/generate_publication_goldens.rs	standalone-validator	portable	focused-standalone-cargo-llvm-cov	included-manual	generates and stale-checks publication report evidence and package-identity goldens
+test-compact-locator-forms	tests/compact_locator_forms.rs	test-evidence-source	portable	fixture-execution	included-fixture	compact-locator form and documentation-example production-reader fixture tests
+test-publication-cli-goldens	tests/publication_cli_goldens.rs	test-evidence-source	portable	fixture-execution	included-fixture	committed publication report and evidence golden byte-parity CLI tests
+test-publication-page-states	tests/publication_page_states.rs	test-evidence-source	portable	fixture-execution	included-fixture	page-state fixture production-writer outcome tests
+test-support-manifest-execution	tests/support/manifest_execution.rs	test-evidence-source	portable	fixture-execution	included-fixture	shared trace-publication manifest row-parsing support module
+test-trace-publication-manifest-execution	tests/trace_publication_manifest_execution.rs	test-evidence-source	portable	fixture-execution	included-fixture	real cargo-test subprocess execution of every trace-publication manifest row
+test-trace-publication-projection-conformance	tests/trace_publication_projection_conformance.rs	test-evidence-source	portable	fixture-execution	included-fixture	RTP-007 publication projection conformance over real rendered Markdown
+core-trace	crates/buoy-core/src/trace.rs	production-library	portable	cargo-llvm-cov	included-manual	pure read-only trace-query selector and projection module
+core-trace-query-contract	crates/buoy-core/tests/trace_query_contract.rs	test-evidence-source	portable	fixture-execution	included-fixture	trace-query selector and row-projection contract fixture tests
+chelis-host-lib	crates/chelis-provenance/src/lib.rs	production-library	portable	no-executable-regions	not-applicable	module declarations and comments only
+chelis-host-adapter	crates/chelis-provenance/src/adapter.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis source adapter and parser contract
+chelis-host-advisory	crates/chelis-provenance/src/advisory.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis advisory execution and authority separation
+chelis-host-bind	crates/chelis-provenance/src/bind.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis compact binding construction and conversion
+chelis-host-command	crates/chelis-provenance/src/command.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis host command dispatch and report output
+chelis-host-editor	crates/chelis-provenance/src/editor.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis editor navigation and saved authority boundaries
+chelis-host-execution	crates/chelis-provenance/src/execution.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis saved executable evidence contract
+chelis-host-bin	crates/chelis-provenance/src/main.rs	production-binary	portable	cargo-llvm-cov	included-manual	Chelis host command entry point
+chelis-host-map	crates/chelis-provenance/src/map.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis capability map validation
+chelis-host-rebind	crates/chelis-provenance/src/rebind.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis binding change detection and regeneration
+chelis-host-records	crates/chelis-provenance/src/records.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis saved host record validation
+chelis-host-snapshot	crates/chelis-provenance/src/snapshot.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis saved repository snapshots through Buoy
+chelis-host-trace	crates/chelis-provenance/src/trace.rs	production-library	portable	cargo-llvm-cov	included-manual	Chelis trace projections and freshness reports
+chelis-test-adapter-contract	crates/chelis-provenance/tests/adapter_contract.rs	test-evidence-source	linux-macos;windows-partial	fixture-execution	included-fixture	Chelis adapter syntax identity and filesystem contract tests
+chelis-test-bind-conversion	crates/chelis-provenance/tests/bind_conversion.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis compact binding conversion tests
+chelis-test-binding-change	crates/chelis-provenance/tests/binding_change_detection.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis binding change detection tests
+chelis-test-binding-regeneration	crates/chelis-provenance/tests/binding_regeneration.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis binding regeneration tests
+chelis-test-compact-bindings	crates/chelis-provenance/tests/compact_bindings.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis compact binding parser and validation tests
+chelis-test-goldens-mutations	crates/chelis-provenance/tests/goldens_and_mutations.rs	adversarial-test-source	portable	fixture-execution	included-fixture	Chelis frozen outputs and mutation tests
+chelis-test-grammar-vendor	crates/chelis-provenance/tests/grammar_vendor.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis grammar source identity and drift checks
+chelis-test-integration	crates/chelis-provenance/tests/integration.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis command integration tests
+chelis-test-rebind-regeneration	crates/chelis-provenance/tests/rebind_regeneration.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis rebind regeneration tests
+chelis-test-registrations	crates/chelis-provenance/tests/registrations.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis adapter registration tests
+chelis-test-trace-projection	crates/chelis-provenance/tests/trace_projection.rs	test-evidence-source	portable	fixture-execution	included-fixture	Chelis trace projection contract tests
+chelis-test-cli-contract	crates/chelis-provenance/tests/support/cli_contract.rs	test-evidence-source	linux-macos	fixture-execution	included-fixture	Chelis CLI saved-input effects and exit classes
+chelis-parser-build	crates/chelis-surf-sitter/build.rs	maintainer-generator	portable	cargo-llvm-cov	included-assurance-manual	pinned native grammar compilation under Cargo
+chelis-parser-lib	crates/chelis-surf-sitter/src/lib.rs	production-library	portable	cargo-llvm-cov	included-manual	pinned Chelis parser boundary and source regions
+chelis-parser-tests	crates/chelis-surf-sitter/tests/parse.rs	test-evidence-source	portable	fixture-execution	included-fixture	pinned Chelis parser contract tests

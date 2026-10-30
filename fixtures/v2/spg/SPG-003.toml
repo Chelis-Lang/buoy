@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "SPG-003"
+
+[[case]]
+id = "spg-003-positive-ratified-atom-superseded"
+scenario = "positive-ratified-atom-superseded"
+polarity = "positive"
+operation = "transition-lifecycle"
+baseline = "fixtures/v2/baselines/lifecycle-graph.toml"
+mutations = ["supersede-ratified-atom"]
+expected = { outcome = "accept", codes = [], facts = ["lifecycle:SPG-003=superseded", "replacement:SPG-003=SPG-003-REPLACEMENT"] }
+
+[[case]]
+id = "spg-003-negative-retired-id-reused"
+scenario = "negative-retired-id-reused"
+polarity = "negative"
+operation = "transition-lifecycle"
+baseline = "fixtures/v2/baselines/lifecycle-graph.toml"
+mutations = ["supersede-ratified-atom", "reuse-tombstoned-atom-id"]
+expected = { outcome = "reject", codes = ["SPG-AUTH-RETIRED-ID-REUSE"], facts = ["lifecycle:SPG-003=superseded"] }

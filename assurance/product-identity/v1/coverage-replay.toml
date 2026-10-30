@@ -1,0 +1,25 @@
+schema = "buoy-product-identity-coverage-replay/v1"
+command = "devenv tasks run buoy:coverage"
+identity_binding = "buoy-0.2.0-post-rename"
+source_inventory = "assurance/v1/source-inventory.tsv"
+metric_semantics = "exact-unrounded-counts"
+status = "blocked"
+blocker = "LCOV-P0-EXACT-CLOSURE"
+owner_change = "add-cargo-llvm-cov-hegel-rs-testing-requirements"
+rationale = "The rename replay instruments the renamed Cargo workspace without broad exclusions, but exact 100 percent closure is unfinished focused P0 work and is not claimed by the rename."
+
+[lines]
+covered = 5042
+count = 7833
+
+[regions]
+covered = 6998
+count = 10692
+
+[functions]
+covered = 515
+count = 791
+
+[branches]
+covered = 698
+count = 1434

@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "SPG-001"
+
+[[case]]
+id = "spg-001-positive-one-explicit-authority"
+scenario = "positive-one-explicit-authority"
+polarity = "positive"
+operation = "extract-markdown"
+baseline = "fixtures/v1/baselines/atom-source.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["authority-count:SPG-001=1"] }
+
+[[case]]
+id = "spg-001-negative-duplicate-authority"
+scenario = "negative-duplicate-authority"
+polarity = "negative"
+operation = "build-graph"
+baseline = "fixtures/v1/baselines/atom-source.toml"
+mutations = ["duplicate-atom-authority"]
+expected = { outcome = "reject", codes = ["SPG-AUTH-DUPLICATE"], facts = ["authority-count:SPG-001=2"] }

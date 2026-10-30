@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-001"
+
+[[case]]
+id = "evd-001-positive-fresh-test-not-run"
+scenario = "positive-fresh-test-is-not-run"
+polarity = "positive"
+operation = "report-evidence"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["leave-oracles-not-run"]
+expected = { outcome = "accept", codes = [], facts = ["carrier:CAR-POSITIVE=fresh", "assurance:EVD-BASE=linked", "verdict:ORC-POSITIVE=not-run"] }
+
+[[case]]
+id = "evd-001-negative-linked-reported-tested"
+scenario = "negative-linked-is-reported-as-tested"
+polarity = "negative"
+operation = "aggregate-assurance"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["leave-oracles-not-run", "attempt-linked-to-tested-upgrade"]
+expected = { outcome = "accept", codes = ["EVD-ASSURANCE-REQUIRED-NOT-RUN"], facts = ["assurance:EVD-BASE=linked", "assurance:EVD-BASE:tested=false"] }

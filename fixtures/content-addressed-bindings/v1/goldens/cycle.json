@@ -1,0 +1,1 @@
+{"schema":"buoy/binding-diagnostic-golden/v1","case":"cycle","accepted":false,"source_graph":null,"binding":null,"diagnostics":["SRG-SOURCE-CYCLE"]}

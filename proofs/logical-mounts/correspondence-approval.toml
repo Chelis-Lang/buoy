@@ -1,0 +1,24 @@
+schema = "spec-provenance-correspondence-approval/v1"
+id = "APPROVAL-LOGICAL-MOUNT-CORRESPONDENCE-V1"
+status = "approved"
+authority = "buoy-maintainers"
+derivation = "DERIV-LOGICAL-MOUNT-REPRESENTATION-V1"
+record = "openspec/changes/archive/2026-08-20-add-logical-mount-artifact-bindings/evidence/formal-spike-scope.md"
+scope = "Path-segment sequence projection and relation-key preimage construction only."
+rationale = "The review approves only the explicit segment-sequence and preimage mappings. Host effects and hash behavior remain excluded."
+approved_obligations = [
+  "disjoint logical prefixes produce distinct projected paths",
+  "one prefix preserves distinct relative paths",
+  "distinct relations produce distinct attachment-key preimages",
+]
+blocked_obligations = []
+assumptions = [
+  "parsed mount prefixes and relative paths correspond to the segment-sequence model",
+  "the relation value corresponds to the canonical key preimage field",
+]
+exclusions = [
+  "automatic or proved source-to-Verus translation",
+  "filesystem, descriptor, parser, TOML, CLI, and operating-system behavior",
+  "hash internals, collision resistance, rustc, LLVM, and native code",
+  "natural-language correspondence",
+]

@@ -1,0 +1,68 @@
+schema = "spec-provenance-derivation-binding/v2"
+id = "DERIV-CORE-INTEGRITY-REPRESENTATION-V2"
+relation = "reviewed-manual-formalization-correspondence"
+status = "current"
+assurance_effect = "The derivation makes duplicated representation explicit; it does not prove translation equivalence or add an assurance class."
+
+[correspondence_approval]
+id = "APPROVAL-CORE-INTEGRITY-CORRESPONDENCE-V2"
+path = "proofs/core/correspondence-approval.toml"
+status = "approved"
+
+[source]
+representation = "rust-source/v1"
+path = "crates/buoy-core/src/algorithms.rs"
+digest = "xxh3-128:38e98ab3021f72b3a7a776795b08b311"
+
+[target]
+representation = "rust-verus-source/v1"
+path = "proofs/core/integrity.rs"
+digest = "xxh3-128:7147d76334ac8c4c3972b2cd166ec8a6"
+
+[tool]
+name = "human-reviewed-formalization"
+version = "v1"
+configuration = "named-obligations-only"
+
+[consistency_oracle]
+command = "devenv shell -- buoy-core-proofs"
+verifier = "verus 0.2026.07.12.0b42f4c"
+solver = "bundled-z3"
+negative_control = "proofs/core/integrity_negative.rs"
+expected_negative_diagnostic = "postcondition not satisfied"
+
+[[correspondence]]
+obligation = "terminal lifecycle cannot reactivate"
+production_symbols = ["lifecycle_transition"]
+proof_symbols = ["transition_live", "terminal_lifecycle_cannot_reactivate"]
+status = "approved-review-only"
+
+[[correspondence]]
+obligation = "missing decision-surface members prevent completeness"
+production_symbols = ["surface_completeness"]
+proof_symbols = ["complete_surface", "missing_surface_member_is_incomplete"]
+status = "approved-review-only"
+
+[[correspondence]]
+obligation = "stale bindings prevent freshness"
+production_symbols = ["carrier_fresh", "derivation_fresh", "proof_fresh"]
+proof_symbols = ["all_current", "stale_binding_prevents_freshness"]
+status = "approved-review-only"
+
+[[correspondence]]
+obligation = "coverage growth is monotonic"
+production_symbols = ["materialize_policy_obligations", "compare_policy"]
+proof_symbols = ["policy_monotonic", "policy_growth_is_monotonic"]
+status = "approved-review-only"
+
+[[correspondence]]
+obligation = "missing impact dispositions prevent closure"
+production_symbols = ["schema_change_impacts", "disposition_closure"]
+proof_symbols = ["impacts_closed", "missing_impact_prevents_closure"]
+status = "approved-review-only"
+
+[[correspondence]]
+obligation = "debt, waiver, and reaffirmation do not alter tested assurance"
+production_symbols = ["aggregate_assurance"]
+proof_symbols = ["tested", "process_records_do_not_launder"]
+status = "approved-review-only"

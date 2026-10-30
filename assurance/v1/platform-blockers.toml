@@ -1,0 +1,45 @@
+schema = "spec-provenance-platform-blockers/v1"
+review_status = "accepted-blocking-disposition"
+reviewed_on = "2026-07-17"
+supported_platforms = ["linux", "macos"]
+out_of_scope_platforms = ["windows"]
+scope_reviewed_on = "2026-07-27"
+scope_rationale = "Linux and macOS implementations are available. Local acceptance claims only the current host and marks the noncurrent host not applicable. Windows is outside the production scope and fails closed."
+
+[[blocker]]
+id = "PLATFORM-WINDOWS-SNAPSHOT-001"
+platform = "windows"
+reviewed_on = "2026-07-22"
+requirements = ["repository-execution-hardening:windows-handle-relative-snapshot"]
+reason = "The current snapshot implementation does not provide a Windows handle-relative traversal or reparse-point defense. Treating a path-based fallback as production-safe on Windows would be a false assurance claim, so production snapshotting now fails closed with one stable blocker."
+current_behavior = "fail-closed-with-stable-platform-blocker"
+fixture_disposition = "reserved-name and portable-collision controls execute platform-neutrally; reparse selection deterministically returns the reviewed blocker until a native backend exists"
+required_discharge = [
+  "implement handle-relative traversal rooted at an opened repository directory",
+  "reject every unsupported reparse-point class without following it",
+  "run reserved-name, case-fold collision, reparse-race, and partial-I/O fixtures on Windows",
+  "add exact local Windows backend coverage before adding Windows to the supported scope",
+]
+acceptance_effect = "Windows is out of scope. Snapshotting fails closed on Windows, and acceptance for the supported platforms is unaffected."
+evidence = [
+  "src/repository.rs",
+  "schema/v1/resource-budgets.toml",
+  "fixtures/repository/windows-snapshot-v1.toml",
+  "tests/windows_snapshot_blocker.rs",
+]
+
+[[blocker]]
+id = "PLATFORM-WINDOWS-JOB-001"
+platform = "windows"
+requirements = ["repository-execution-hardening:windows-job-object-lifecycle"]
+reason = "The process supervisor currently has a Unix process-group backend only. A process-only kill on Windows cannot establish complete descendant termination and reaping."
+current_behavior = "unsupported-for-production-assurance"
+required_discharge = [
+  "create every oracle in a per-invocation Windows Job Object before user code can escape",
+  "apply kill-on-job-close and bounded process/memory policies",
+  "normalize timeout, cancellation, overflow, and abnormal-exit cleanup",
+  "run descendant, saturated-pipe, cancellation, and cleanup fixtures on Windows",
+  "add exact local Windows backend coverage before adding Windows to the supported scope",
+]
+acceptance_effect = "Windows is out of scope. Oracle execution is unsupported on Windows, and acceptance for the supported platforms is unaffected."
+evidence = ["src/oracle.rs", "schema/v1/resource-budgets.toml"]

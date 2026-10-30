@@ -1,0 +1,3 @@
+schema	source_path	snapshot_path	replay
+buoy-pre-rename-snapshot/v1	fixtures/hardening/v2/canonical-vectors.tsv	assurance/product-identity/v1/snapshots/canonical-vectors-v2.hex	canonical-vectors
+buoy-pre-rename-snapshot/v1	schema/v2/inventory.tsv	assurance/product-identity/v1/snapshots/protocol-inventory-v2.hex	line-subset

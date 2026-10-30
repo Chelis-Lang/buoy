@@ -1,0 +1,31 @@
+case_id	requirement	polarity	kind	input	command	expected_exit	expected_diagnostic	expected_output
+BUE-001-POSITIVE	BUE-001	positive	documentation	examples/README.md	devenv tasks run buoy:examples	0	none	none
+BUE-001-NEGATIVE	BUE-001	negative	documentation	examples/README.md	devenv tasks run buoy:examples	1	EXAMPLE-ASSURANCE-BOUNDARY	none
+BUE-002-POSITIVE	BUE-002	positive	rust	examples/core_graph.rs	devenv shell -- cargo run --quiet --example core_graph	0	none	examples/expected/core-graph.json
+BUE-002-NEGATIVE	BUE-002	negative	rust	examples/core_graph.rs	devenv shell -- cargo run --quiet --example core_graph -- --invalid	2	SPG-REF-DANGLING-OR-STALE	examples/expected/core-graph-invalid.json
+BUE-003-POSITIVE	BUE-003	positive	rust	examples/repository_check.rs	devenv shell -- cargo run --quiet --example repository_check -- --root examples/repositories/openspec-authority --config examples/repositories/openspec-authority/buoy.toml	0	none	examples/expected/openspec-static.json
+BUE-003-NEGATIVE	BUE-003	negative	configuration	examples/repositories/invalid-config.toml	devenv shell -- cargo run --quiet --example repository_check -- --root examples/repositories/openspec-authority --config examples/repositories/invalid-config.toml	70	REPO-CONFIG-SCHEMA	none
+BUE-004-POSITIVE	BUE-004	positive	openspec	examples/repositories/openspec-authority/openspec/specs/demo/spec.md	devenv tasks run buoy:examples	0	none	examples/expected/openspec-static.json
+BUE-004-NEGATIVE	BUE-004	negative	openspec	examples/repositories/openspec-active-change/openspec/changes/demo/spec.md	devenv tasks run buoy:examples	2	SPG-OPENSPEC-STANDING-PATH	none
+BUE-005-POSITIVE	BUE-005	positive	trace	examples/repositories/openspec-authority/docs/all-relations.md	devenv tasks run buoy:examples	0	none	none
+BUE-005-NEGATIVE	BUE-005	negative	trace	examples/repositories/stale-external-link/docs/trace.md	devenv tasks run buoy:examples	2	SPG-REF-DANGLING-OR-STALE	examples/expected/stale-static.json
+BUE-006-POSITIVE	BUE-006	positive	change	examples/repositories/change-check/complete.toml	devenv tasks run buoy:examples	0	none	examples/expected/change-complete.json
+BUE-006-NEGATIVE	BUE-006	negative	change	examples/repositories/change-check/incomplete.toml	devenv tasks run buoy:examples	3	CHG-DISPOSITION-MISSING	examples/expected/change-incomplete.json
+BUE-007-POSITIVE	BUE-007	positive	gate	examples/manifest.tsv	devenv tasks run buoy:examples	0	none	none
+BUE-007-NEGATIVE	BUE-007	negative	gate	examples/manifest.tsv	devenv tasks run buoy:examples	1	EXAMPLE-CASE-DRIFT	none
+BOT-001-POSITIVE	BOT-001	positive	workflow	examples/openspec-workflow/openspec/config.yaml	devenv tasks run buoy:examples	0	none	none
+BOT-001-NEGATIVE	BOT-001	negative	workflow	examples/openspec-workflow/openspec/config.yaml	devenv tasks run buoy:examples	1	EXAMPLE-INTERNAL-RULE	none
+BOT-002-POSITIVE	BOT-002	positive	workflow	examples/openspec-workflow/openspec/schemas/buoy-traceability/schema.yaml	devenv tasks run buoy:examples	0	none	none
+BOT-002-NEGATIVE	BOT-002	negative	workflow	examples/openspec-workflow/openspec/schemas/buoy-traceability/schema.yaml	devenv tasks run buoy:examples	1	EXAMPLE-ARTIFACT-ORDER	none
+BOT-003-POSITIVE	BOT-003	positive	template	examples/openspec-workflow/openspec/schemas/buoy-traceability/templates/specs/spec.md	devenv tasks run buoy:examples	0	none	none
+BOT-003-NEGATIVE	BOT-003	negative	template	examples/openspec-workflow/openspec/schemas/buoy-traceability/templates/specs/spec.md	devenv tasks run buoy:examples	1	EXAMPLE-REQUIREMENT-ID	none
+BOT-004-POSITIVE	BOT-004	positive	template	examples/openspec-workflow/openspec/schemas/buoy-traceability/templates/traceability.md	devenv tasks run buoy:examples	0	none	none
+BOT-004-NEGATIVE	BOT-004	negative	template	examples/openspec-workflow/openspec/schemas/buoy-traceability/templates/traceability.md	devenv tasks run buoy:examples	1	EXAMPLE-PROVIDER-STATE	none
+BOT-005-POSITIVE	BOT-005	positive	template	examples/openspec-workflow/openspec/schemas/buoy-traceability/templates/design.md	devenv tasks run buoy:examples	0	none	none
+BOT-005-NEGATIVE	BOT-005	negative	template	examples/openspec-workflow/openspec/schemas/buoy-traceability/templates/design.md	devenv tasks run buoy:examples	1	EXAMPLE-TEMPLATE-AUTHORITY	none
+BOT-006-POSITIVE	BOT-006	positive	documentation	examples/README.md	devenv tasks run buoy:examples	0	none	none
+BOT-006-NEGATIVE	BOT-006	negative	openspec	examples/repositories/openspec-active-change/openspec/changes/demo/spec.md	devenv tasks run buoy:examples	2	SPG-OPENSPEC-STANDING-PATH	none
+BOT-007-POSITIVE	BOT-007	positive	gate	examples/openspec-workflow/openspec/schemas/buoy-traceability/schema.yaml	devenv tasks run buoy:examples	0	none	none
+BOT-007-NEGATIVE	BOT-007	negative	gate	examples/openspec-workflow/openspec/schemas/buoy-traceability/schema.yaml	devenv tasks run buoy:examples	1	EXAMPLE-SCHEMA-DRIFT	none
+BUE-008-POSITIVE	BUE-008	positive	trace	examples/expected/trace-page.md	devenv tasks run buoy:examples	0	none	examples/expected/trace-page.md
+BUE-008-NEGATIVE	BUE-008	negative	trace	examples/expected/trace-page.md	devenv tasks run buoy:examples	1	EXAMPLE-TRACE-PAGE-DRIFT	none

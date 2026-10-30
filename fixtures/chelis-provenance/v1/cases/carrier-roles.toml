@@ -1,0 +1,97 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "roles-exact-positive"
+requirement = "CHELIS-PROV-005"
+scenario = "positive-role-explicit"
+polarity = "positive"
+operation = "carrier-role-scope"
+input = "role=positive scope=exact"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["role-inferred-from-name=false"]
+execution = "model"
+
+[[case]]
+id = "roles-exact-negative"
+requirement = "CHELIS-PROV-005"
+scenario = "negative-role-explicit"
+polarity = "positive"
+operation = "carrier-role-scope"
+input = "role=negative scope=exact"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["role-inferred-from-name=false"]
+execution = "model"
+
+[[case]]
+id = "roles-exact-property"
+requirement = "CHELIS-PROV-005"
+scenario = "property-role-explicit"
+polarity = "positive"
+operation = "carrier-role-scope"
+input = "role=property scope=exact seed=committed"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["role-inferred-from-name=false"]
+execution = "model"
+
+[[case]]
+id = "roles-exact-exhaustive"
+requirement = "CHELIS-PROV-005"
+scenario = "exhaustive-model-role-explicit"
+polarity = "positive"
+operation = "carrier-role-scope"
+input = "role=exhaustive-model scope=finite-model-and-bounds"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["role-inferred-from-name=false"]
+execution = "model"
+
+[[case]]
+id = "roles-exact-formal"
+requirement = "CHELIS-PROV-009"
+scenario = "formal-property-role-explicit"
+polarity = "positive"
+operation = "carrier-role-scope"
+input = "role=formal-property scope=property-and-proof-binding"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["role-inferred-from-name=false"]
+execution = "model"
+
+[[case]]
+id = "roles-exact-structural"
+requirement = "CHELIS-PROV-005"
+scenario = "structural-role-explicit"
+polarity = "positive"
+operation = "carrier-role-scope"
+input = "role=structural scope=declared-relation"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["role-inferred-from-name=false"]
+execution = "model"
+
+[[case]]
+id = "roles-name-only"
+requirement = "CHELIS-PROV-005"
+scenario = "negative-role-inferred-from-test-name"
+polarity = "negative"
+operation = "carrier-role-scope"
+input = "test name contains property but role field is absent"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-CARRIER-ROLE-MISSING"]
+facts = ["coverage=false"]
+execution = "model"
+
+[[case]]
+id = "roles-broad-scope"
+requirement = "CHELIS-PROV-005"
+scenario = "negative-carrier-scope-overclaims"
+polarity = "negative"
+operation = "carrier-role-scope"
+input = "single corpus result claims all configurations and backends"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-CARRIER-SCOPE-INVALID"]
+facts = ["coverage=false"]
+execution = "model"

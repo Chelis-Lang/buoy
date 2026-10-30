@@ -1,0 +1,21 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "reaffirmation"
+
+[base_carrier]
+id = "CAR-REAFFIRM"
+atom = "$atom:EVD-012:$digest:atom-revision:EVD-012:base"
+object_digest = "$digest:evidence-carrier:CAR-REAFFIRM:base"
+
+[head_carrier]
+id = "CAR-REAFFIRM"
+atom = "$atom:EVD-012:$digest:atom-revision:EVD-012:head"
+object_digest = "$digest:evidence-carrier:CAR-REAFFIRM:head"
+
+[[reaffirmations]]
+id = "REAFFIRM-CAR-REAFFIRM"
+kind = "evidence-carrier"
+object_id = "CAR-REAFFIRM"
+base = "$digest:evidence-carrier:CAR-REAFFIRM:base"
+head = "$digest:evidence-carrier:CAR-REAFFIRM:head"
+statement = "The carrier claim and exact new atom revision were reread."
+approval = "$approval:spec-provenance-maintainers:REAFFIRM-CAR-REAFFIRM"

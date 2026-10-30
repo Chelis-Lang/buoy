@@ -1,0 +1,63 @@
+schema = "chelis-provenance-exhaustive-reports/v1"
+model_oracle = "devenv shell -- cargo run --quiet --locked --offline --bin check-fixture-manifest"
+state_total = 7131
+
+[[report]]
+model = "fixtures/chelis-provenance/v1/models/impact-closure.toml"
+id = "model-chelis-impact-closure-v1"
+kind = "truth-table"
+states = 64
+dimensions = 6
+invariants = 6
+fixed_point = true
+digest = "xxh3-128:3599f0499bbb0f7c68ba886cfb0b5690"
+
+[[report]]
+model = "fixtures/chelis-provenance/v1/models/no-laundering.toml"
+id = "model-chelis-no-laundering-v1"
+kind = "truth-table"
+states = 1280
+dimensions = 9
+invariants = 6
+fixed_point = true
+digest = "xxh3-128:058c60584ca533ee3e0960bc88671569"
+
+[[report]]
+model = "fixtures/chelis-provenance/v1/models/policy-adoption.toml"
+id = "model-chelis-policy-adoption-v1"
+kind = "truth-table"
+states = 64
+dimensions = 6
+invariants = 6
+fixed_point = true
+digest = "xxh3-128:f218bbea83553307f6ac93d9f2189e64"
+
+[[report]]
+model = "fixtures/chelis-provenance/v1/models/proof-invalidation.toml"
+id = "model-chelis-proof-invalidation-v1"
+kind = "truth-table"
+states = 2048
+dimensions = 11
+invariants = 11
+fixed_point = true
+digest = "xxh3-128:097c5cfee9c3e15739734fccaafc5955"
+
+[[report]]
+model = "fixtures/chelis-provenance/v1/models/required-role-coverage.toml"
+id = "model-chelis-required-role-coverage-v1"
+kind = "truth-table"
+states = 3645
+dimensions = 7
+invariants = 7
+fixed_point = true
+digest = "xxh3-128:4c093cca90298c33610419033b91b3bf"
+
+[[report]]
+model = "fixtures/chelis-provenance/v1/models/surface-completeness.toml"
+id = "model-chelis-surface-completeness-v1"
+kind = "truth-table"
+states = 30
+dimensions = 3
+invariants = 5
+fixed_point = true
+digest = "xxh3-128:020f1eb57233ef3876fee842966c92a1"

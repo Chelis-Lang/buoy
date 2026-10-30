@@ -1,0 +1,76 @@
+schema = "spec-provenance-finite-migration-model/v2"
+status = "exhaustive"
+checker = "tools/check_xxh3_migration_model.rs"
+total_state_count = 260
+implementation_linkage = "operational acceptance and migration transitions in checker; replace with production adapters in task 4.4"
+
+[digest_acceptance_model]
+state_count = 4
+bounds = "one digest class from the complete finite class enumeration"
+classes = ["active", "obsolete", "malformed", "unknown"]
+accepted_classes = ["active"]
+rejected_classes = ["obsolete", "malformed", "unknown"]
+transition_relation = [
+  "active -> accept",
+  "obsolete -> DET-DIGEST-ALGORITHM",
+  "malformed -> exact DET-DIGEST-* parser diagnostic",
+  "unknown -> DET-DIGEST-ALGORITHM",
+]
+completeness_check = "for every class, require model_digest_acceptance == implementation_digest_acceptance"
+
+[migration_model]
+state_count = 256
+accepted_state_count = 1
+rejected_state_count = 255
+bounds = "eight independent Boolean source-state mutations"
+transition = "complete-v1-to-v2-or-reject"
+source_mask_range = "0x00..=0xff"
+source_mask_enumeration = "exhaustive"
+accepted_source_masks = ["0x00"]
+rejected_source_masks = "0x01..=0xff; each classified by the first violated invariant in diagnostic_precedence"
+transition_completeness_check = "for every source mask, require model_transition == implementation_transition"
+state_variables = [
+  "duplicate-stable-id",
+  "missing-authoritative-bytes",
+  "missing-approval",
+  "observed-collision",
+  "illegal-lifecycle-change",
+  "stale-reference",
+  "mixed-version",
+  "incomplete-impact-closure",
+]
+invariants = [
+  "authoritative-closure",
+  "approval-closure",
+  "stable-id-uniqueness",
+  "observed-collisions-rejected",
+  "lifecycle-preserved",
+  "references-preserved-and-rebound",
+  "single-version-output",
+  "impact-closure",
+  "successful-replay-idempotent",
+]
+diagnostic_precedence = [
+  "XXH-MIGRATION-DUPLICATE-ID",
+  "XXH-MIGRATION-MISSING-AUTHORITATIVE-BYTES",
+  "XXH-MIGRATION-MISSING-APPROVAL",
+  "DET-DIGEST-COLLISION",
+  "XXH-MIGRATION-ILLEGAL-LIFECYCLE",
+  "XXH-MIGRATION-STALE-NESTED-BINDING",
+  "XXH-MIGRATION-MIXED-VERSION",
+  "XXH-MIGRATION-INCOMPLETE-IMPACT",
+]
+
+[target_state]
+schema = "spec-provenance/v2"
+stable_ids = [1, 2, 3]
+lifecycle = [2, 4, 3]
+references = ["3->1"]
+digest_width = 16
+replay = "exact target-state equality"
+
+[negative_controls]
+execution_scope = "self-test-only injected faults; never active in normal verification"
+digest_injected_fault = "accept malformed digest class"
+migration_injected_fault = "skip missing-approval rejection"
+expected = "model/implementation outcome differs"

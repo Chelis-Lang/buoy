@@ -1,0 +1,64 @@
+schema = "spec-provenance-reference-model/v1"
+id = "model-carrier-derivation-freshness-v1"
+requirement_ids = ["SPG-002", "SPG-005", "SPG-010", "EVD-003"]
+kind = "truth-table"
+expected_state_count = 2048
+
+[[dimensions]]
+name = "carrier_atom"
+values = ["current", "stale"]
+[[dimensions]]
+name = "carrier_oracle"
+values = ["current", "stale"]
+[[dimensions]]
+name = "carrier_config"
+values = ["current", "stale"]
+[[dimensions]]
+name = "carrier_corpus"
+values = ["current", "stale"]
+[[dimensions]]
+name = "carrier_item"
+values = ["current", "stale"]
+[[dimensions]]
+name = "derivation_source"
+values = ["current", "stale"]
+[[dimensions]]
+name = "derivation_target"
+values = ["current", "stale"]
+[[dimensions]]
+name = "derivation_tool"
+values = ["current", "stale"]
+[[dimensions]]
+name = "derivation_config"
+values = ["current", "stale"]
+[[dimensions]]
+name = "derivation_oracle"
+values = ["current", "stale"]
+[[dimensions]]
+name = "derivation_receipt"
+values = ["pass", "not-pass"]
+
+[[predicates]]
+name = "carrier_fresh"
+[[predicates.clauses]]
+all = ["carrier_atom=current", "carrier_oracle=current", "carrier_config=current", "carrier_corpus=current", "carrier_item=current"]
+
+[[predicates]]
+name = "derivation_fresh"
+[[predicates.clauses]]
+all = ["derivation_source=current", "derivation_target=current", "derivation_tool=current", "derivation_config=current", "derivation_oracle=current", "derivation_receipt=pass"]
+
+[[invariants]]
+id = "stale-atom-prevents-carrier-freshness"
+if_all = ["carrier_atom=stale"]
+then_all = ["carrier_fresh=false"]
+
+[[invariants]]
+id = "stale-target-prevents-derivation-freshness"
+if_all = ["derivation_target=stale"]
+then_all = ["derivation_fresh=false"]
+
+[[invariants]]
+id = "nonpassing-consistency-prevents-derivation-freshness"
+if_all = ["derivation_receipt=not-pass"]
+then_all = ["derivation_fresh=false"]

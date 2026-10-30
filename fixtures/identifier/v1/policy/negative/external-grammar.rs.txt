@@ -1,0 +1,16 @@
+// Regression: the stable-ID grammar check escapes the identifier module.
+
+fn require_stable_id(text: &str) -> Result<(), ConstructionError> {
+    if stable_id_grammar(text) {
+        Ok(())
+    } else {
+        Err(ConstructionError::StableIdGrammar)
+    }
+}
+
+impl Tombstone {
+    pub fn new(id: StableId, state: LifecycleState) -> Result<Self, ConstructionError> {
+        require_stable_id(id.as_str())?;
+        Ok(Self { id, state })
+    }
+}

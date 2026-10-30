@@ -1,0 +1,45 @@
+schema = "spec-provenance-api-migration/v1"
+frozen_semantic_schema = "spec-provenance/v1"
+current_package_version = "0.2.0"
+compatibility_window = "one-minor-release-after-hardened-api-publication"
+
+[public_api]
+fields = "private"
+construction = "validated-kind-specific-constructors"
+generic_object_meta = "removed-from-public-concrete-object-construction"
+invalid_direct_construction = "compile-fail"
+legacy_conversion = "explicit-fallible-adapter"
+legacy_conversion_assurance = "migration-only-no-assurance-upgrade"
+
+[canonical_reports]
+authoritative_binary_schema = "spec-provenance-report/v1"
+json_presentation_schema = "spec-provenance-report-json/v1"
+human_presentation_schema = "spec-provenance-report-human/v1"
+identity_source = "authoritative-binary-digest"
+presentation_bytes_are_identity = false
+
+[historical_readers]
+v1_binary = "required-permanently-after-publication"
+v1_json = "required-through-compatibility-window"
+unknown_future_schema = "fail-closed"
+reinterpret_published_v1 = false
+
+[[breaking_rule]]
+id = "constructor-completeness"
+requirement = "callers supply every frozen required binding and explicit option or empty collection"
+
+[[breaking_rule]]
+id = "report-identity"
+requirement = "callers use canonical binary bytes or their bound digest for identity"
+
+[[breaking_rule]]
+id = "proof-binding-completeness"
+requirement = "legacy drift-only proof records do not migrate to formally-proved without correspondence evidence"
+
+[[migration_test]]
+id = "legacy-reader"
+expected = "published v1 bytes retain exact decode-encode identity"
+
+[[migration_test]]
+id = "future-reader"
+expected = "unknown schema and algorithm combinations fail without reinterpretation"

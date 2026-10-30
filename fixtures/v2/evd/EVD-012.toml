@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "EVD-012"
+
+[[case]]
+id = "evd-012-positive-current-carrier-reaffirmed"
+scenario = "positive-current-carrier-deliberately-reaffirmed"
+polarity = "positive"
+operation = "report-evidence"
+baseline = "fixtures/v2/baselines/reaffirmation.toml"
+mutations = ["update-carrier-and-reaffirm"]
+expected = { outcome = "accept", codes = [], facts = ["carrier:CAR-REAFFIRM=fresh", "reaffirmation:REAFFIRM-CAR-REAFFIRM=valid", "assurance:REAFFIRM-CAR-REAFFIRM=review-only"] }
+
+[[case]]
+id = "evd-012-negative-reaffirmation-launders-stale"
+scenario = "negative-reaffirmation-launders-stale-carrier"
+polarity = "negative"
+operation = "aggregate-assurance"
+baseline = "fixtures/v2/baselines/reaffirmation.toml"
+mutations = ["reaffirm-with-stale-carrier"]
+expected = { outcome = "accept", codes = ["EVD-FRESH-ATOM-REVISION"], facts = ["carrier:CAR-REAFFIRM=stale", "reaffirmation:REAFFIRM-CAR-REAFFIRM=valid", "assurance:REAFFIRM-CAR-REAFFIRM=review-only", "coverage:EVD-012:positive=unsatisfied"] }

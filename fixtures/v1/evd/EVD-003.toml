@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-003"
+
+[[case]]
+id = "evd-003-positive-every-binding-matches"
+scenario = "positive-every-carrier-binding-matches"
+polarity = "positive"
+operation = "evaluate-freshness"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["carrier:CAR-POSITIVE=fresh", "carrier:CAR-NEGATIVE=fresh"] }
+
+[[case]]
+id = "evd-003-negative-atom-revision-changes"
+scenario = "negative-atom-revision-changes"
+polarity = "negative"
+operation = "evaluate-freshness"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["edit-atom-statement-keep-bindings"]
+expected = { outcome = "accept", codes = ["EVD-FRESH-ATOM-REVISION"], facts = ["carrier:CAR-POSITIVE=stale", "coverage:EVD-BASE:positive=unsatisfied"] }

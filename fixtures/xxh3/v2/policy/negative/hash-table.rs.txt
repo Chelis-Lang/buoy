@@ -1,0 +1,4 @@
+use std::collections::HashMap;
+use std::collections::hash_map::RandomState;
+
+pub type ProhibitedTable<K, V> = HashMap<K, V, RandomState>;

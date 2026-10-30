@@ -1,0 +1,25 @@
+schema = "chelis-provenance-promotion-review/v1"
+chelis_revision = "c0d4caf16f557406f299f0989bab48fa0f924cbd"
+reviewed_on = "2026-08-28"
+enforcement = "advisory"
+ratchet_identity = "chelis-provenance-initial"
+promotion = "not-approved"
+
+unsatisfied_obligations = [
+    "Chelis normative sources are not atomized; every registered carrier binds pending-atomization",
+    "every registered carrier retains verdict not-run at the pinned revision",
+    "no Chelis finite blocking surface is declared in a saved Chelis tree",
+    "no accepted formal binding exists for any Chelis claim",
+]
+
+[waiver-policy]
+statement = "any process waiver stays orthogonal; a waived obligation stays visibly unsatisfied"
+synthesized_satisfaction = "forbidden"
+
+[promotion-conditions]
+ratchet = "promotion must keep ratchet identity chelis-provenance-initial unchanged"
+requirements = [
+    "every selected surface member is dispositioned and current",
+    "every required role is registered, selected, current, and passing",
+    "fixtures, deterministic integration checks, and selected formal bindings are green",
+]

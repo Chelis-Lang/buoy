@@ -1,0 +1,11 @@
+schema = "buoy-coverage-tool-binding/v1"
+tool_id = "cargo-llvm-cov"
+version = "0.8.5"
+executable_sha256 = "sha-256:b4bc546e05c7c63827cd7301149717380154c3f3f463c3237ead839f8c8e77c0"
+configuration = "assurance/v1/coverage-command.toml"
+configuration_sha256 = "sha-256:42619788a28110b6fa86b8b24368a68d5d11524e9534900399894ec0d2c09336"
+source_inventory = "assurance/v1/source-inventory.tsv"
+source_inventory_sha256 = "sha-256:7da9f8cb1883529fd947dfe13ba8bbb4ebc8724ca7bb224b4f1351824fa830ca"
+source = "devenv-lock-nixpkgs"
+offline = true
+ambient_resolution = false

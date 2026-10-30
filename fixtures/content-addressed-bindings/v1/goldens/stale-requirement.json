@@ -1,0 +1,1 @@
+{"schema":"buoy/binding-diagnostic-golden/v1","case":"stale-requirement","accepted":false,"source_graph":"blake3-256:fa0f537985bebe327a360051b719cd62a55304c8cc042e4bea7ce985727b6e0d","binding":"blake3-256:2f3bed4591cd0847d1b3cd7f37b0e41c766b31e4e8fadefe349ab354f76573f8","diagnostics":["CAB-REQUIREMENT-STALE"]}

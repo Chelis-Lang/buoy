@@ -1,0 +1,2 @@
+schema	property_id	seed	input	expected_diagnostic
+buoy-property-replay/v1	hegel-control-intentionally-false	6003393071738257663	false	HEGEL-NEGATIVE-CONTROL

@@ -1,0 +1,15 @@
+schema	case_id	polarity	mutation	expected
+buoy-devenv-config-case/v1	DEV-CONFIG-POSITIVE	positive	none	pass
+buoy-devenv-config-case/v1	DEV-CONFIG-VERSION	negative	missing-require-version	DEVENV-CONFIG-VERSION
+buoy-devenv-config-case/v1	DEV-CONFIG-RUST	negative	missing-rust-module	DEVENV-CONFIG-RUST
+buoy-devenv-config-case/v1	DEV-CONFIG-TOOLCHAIN	negative	wrong-toolchain-file	DEVENV-CONFIG-RUST
+buoy-devenv-config-case/v1	DEV-CONFIG-CHANNEL	negative	wrong-rust-channel	DEVENV-CONFIG-RUST
+buoy-devenv-config-case/v1	DEV-CONFIG-PROFILE	negative	wrong-rust-profile	DEVENV-CONFIG-RUST
+buoy-devenv-config-case/v1	DEV-CONFIG-LSP	negative	missing-rust-analyzer	DEVENV-CONFIG-RUST
+buoy-devenv-config-case/v1	DEV-CONFIG-TARGET	negative	wrong-rust-target	DEVENV-CONFIG-RUST
+buoy-devenv-config-case/v1	DEV-CONFIG-MODULE	negative	missing-module	DEVENV-CONFIG-MODULE
+buoy-devenv-config-case/v1	DEV-CONFIG-HOOK	negative	missing-hook	DEVENV-CONFIG-HOOK
+buoy-devenv-config-case/v1	DEV-CONFIG-HEAVY-HOOK	negative	heavy-hook	DEVENV-CONFIG-HOOK
+buoy-devenv-config-case/v1	DEV-CONFIG-OWNER	negative	duplicate-script-owner	DEVENV-CONFIG-SCRIPT-OWNER
+buoy-devenv-config-case/v1	DEV-CONFIG-OWNER-MODULE	negative	empty-script-module	DEVENV-CONFIG-SCRIPT-OWNER
+buoy-devenv-config-case/v1	DEV-CONFIG-OWNER-SCRIPTS	negative	empty-script-list	DEVENV-CONFIG-SCRIPT-OWNER

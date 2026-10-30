@@ -1,0 +1,157 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "adapter-cross-root"
+requirement = "CHELIS-PROV-011"
+scenario = "cross-root-equality"
+polarity = "positive"
+operation = "saved-snapshot-control"
+input = "same repository-relative path bytes and config from two absolute roots"
+expected_outcome = "equal"
+diagnostics = []
+facts = ["absolute-root-in-input=false"]
+execution = "sdk-control"
+
+[[case]]
+id = "adapter-registration-order"
+requirement = "CHELIS-PROV-011"
+scenario = "registration-order-equality"
+polarity = "positive"
+operation = "saved-snapshot-control"
+input = "same descriptors registered in reverse order"
+expected_outcome = "equal"
+diagnostics = []
+facts = ["descriptor-order=adapter-id"]
+execution = "sdk-control"
+
+[[case]]
+id = "adapter-ambient-state"
+requirement = "CHELIS-PROV-011"
+scenario = "daemon-editor-unsaved-state-excluded"
+polarity = "negative-control"
+operation = "saved-snapshot-control"
+input = "vary daemon editor unsaved LSP MCP and provider values"
+expected_outcome = "equal"
+diagnostics = []
+facts = ["ambient-fields-in-input=0"]
+execution = "sdk-control"
+
+[[case]]
+id = "adapter-unsupported-capability"
+requirement = "CHELIS-PROV-011"
+scenario = "unsupported-capability"
+polarity = "negative"
+operation = "saved-snapshot-control"
+input = "output row names undeclared syntax capability"
+expected_outcome = "reject"
+diagnostics = ["SPG-ADAPTER-SDK-CAPABILITY"]
+facts = ["materialized=false"]
+execution = "sdk-control"
+
+[[case]]
+id = "adapter-duplicate-identity"
+requirement = "CHELIS-PROV-011"
+scenario = "duplicate-adapter-identity"
+polarity = "negative"
+operation = "saved-snapshot-control"
+input = "two adapters register the same immutable ID"
+expected_outcome = "reject"
+diagnostics = ["SPG-ADAPTER-SDK-DUPLICATE"]
+facts = ["registered-count=1"]
+execution = "sdk-control"
+
+[[case]]
+id = "adapter-incomplete-disposition"
+requirement = "CHELIS-PROV-003"
+scenario = "selected-input-has-no-output-disposition"
+polarity = "negative"
+operation = "saved-snapshot-control"
+input = "adapter returns empty graph sources dispositions and diagnostics"
+expected_outcome = "reject"
+diagnostics = ["SPG-ADAPTER-SDK-MATERIALIZATION"]
+facts = ["materialized=false"]
+execution = "sdk-control"
+
+[[case]]
+id = "adapter-malformed-record"
+requirement = "CHELIS-PROV-003"
+scenario = "malformed-authority-record"
+polarity = "negative"
+operation = "saved-snapshot-control"
+input = "selected declaration omits required schema-owned fields"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-MALFORMED-RECORD"]
+facts = ["graph-constructed=false"]
+execution = "preimplementation-contract"
+
+[[case]]
+id = "adapter-stale-binding"
+requirement = "CHELIS-PROV-005"
+scenario = "stale-atom-or-configuration-binding"
+polarity = "negative"
+operation = "saved-snapshot-control"
+input = "carrier binds prior atom revision or configuration digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-CARRIER-STALE"]
+facts = ["assurance=tested-false"]
+execution = "model"
+
+[[case]]
+id = "adapter-unattached-metadata"
+requirement = "CHELIS-PROV-003"
+scenario = "unattached-metadata"
+polarity = "negative"
+operation = "saved-snapshot-control"
+input = "provenance annotation is not attached to an eligible parsed item"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-UNATTACHED-METADATA"]
+facts = ["carrier-created=false"]
+execution = "preimplementation-contract"
+
+[[case]]
+id = "adapter-core-coupling"
+requirement = "CHELIS-PROV-001"
+scenario = "core-depends-on-chelis-or-parser"
+polarity = "negative"
+operation = "saved-snapshot-control"
+input = "buoy-core dependency closure imports Chelis parser filesystem process provider clock or network"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-CORE-COUPLING"]
+facts = ["buoy-core-no-std=false"]
+execution = "architecture-control"
+
+[[case]]
+id = "adapter-chelis-as-rust"
+requirement = "CHELIS-PROV-011"
+scenario = "chelis-emitted-as-rust-item"
+polarity = "negative"
+operation = "host-item-protocol"
+input = "Chelis syntax plus rust/item/v1"
+expected_outcome = "reject"
+diagnostics = ["SPG-ADAPTER-UNDECLARED-SOURCE-ITEM-KIND"]
+facts = ["graph-constructed=false"]
+execution = "sdk-control"
+
+[[case]]
+id = "adapter-chelis-as-markdown"
+requirement = "CHELIS-PROV-011"
+scenario = "chelis-emitted-as-markdown-fence"
+polarity = "negative"
+operation = "host-item-protocol"
+input = "Chelis syntax plus markdown/fence/v1"
+expected_outcome = "reject"
+diagnostics = ["SPG-ADAPTER-UNDECLARED-SOURCE-ITEM-KIND"]
+facts = ["graph-constructed=false"]
+execution = "sdk-control"
+
+[[case]]
+id = "adapter-chelis-as-opaque"
+requirement = "CHELIS-PROV-011"
+scenario = "chelis-emitted-as-opaque-payload"
+polarity = "negative"
+operation = "host-item-protocol"
+input = "Chelis syntax hidden in TypedPayload without canonical item identity"
+expected_outcome = "reject"
+diagnostics = ["SPG-ADAPTER-UNDECLARED-SOURCE-ITEM-KIND"]
+facts = ["graph-constructed=false"]
+execution = "sdk-control"

@@ -1,0 +1,23 @@
+schema = "buoy.windows-snapshot-fixtures/v1"
+review_status = "accepted-blocking-disposition"
+reviewed_on = "2026-07-22"
+blocker_id = "PLATFORM-WINDOWS-SNAPSHOT-001"
+blocker_diagnostic = "REH-PLATFORM-WINDOWS-SNAPSHOT-BLOCKED"
+
+[[case]]
+id = "windows-reserved-device-name"
+operation = "portable-path"
+inputs = ["spec/CON.txt"]
+expected = "DET-PATH-RESERVED"
+
+[[case]]
+id = "windows-portable-casefold-collision"
+operation = "portable-collision"
+inputs = ["spec/Straße.md", "spec/STRASSE.md"]
+expected = "DET-PATH-SELECTION-COLLISION"
+
+[[case]]
+id = "windows-reparse-point-backend"
+operation = "platform-blocker"
+inputs = ["fixtures/repository/reparse-junction"]
+expected = "REH-PLATFORM-WINDOWS-SNAPSHOT-BLOCKED"

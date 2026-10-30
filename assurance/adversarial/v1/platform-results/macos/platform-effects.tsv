@@ -1,0 +1,3 @@
+schema	platform	effect	diagnostic
+buoy-platform-effect/v1	macos	snapshot	descriptor-relative-supported
+buoy-platform-effect/v1	macos	process	process-group-supported

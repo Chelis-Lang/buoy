@@ -1,0 +1,10 @@
+{
+  "schema": "buoy-trace-publication-page-fixtures/v1",
+  "states": [
+    { "name": "absent", "existing": null, "candidate": "candidate.md", "lifecycle": "immutable", "expected": "create" },
+    { "name": "equal", "existing": "candidate.md", "candidate": "candidate.md", "lifecycle": "immutable", "expected": "no-op" },
+    { "name": "stale", "existing": "candidate.md", "candidate": "stale-candidate.md", "lifecycle": "replaceable", "expected": "replace" },
+    { "name": "immutable-conflict", "existing": "stale-candidate.md", "candidate": "candidate.md", "lifecycle": "immutable", "expected": "reject", "diagnostic": "TPT-IMMUTABLE-CONFLICT" },
+    { "name": "failed-generation", "existing": "candidate.md", "candidate": "candidate.md", "lifecycle": "immutable", "expected": "reject", "diagnostic": "TPT-ROW-CONFORMANCE" }
+  ]
+}

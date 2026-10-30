@@ -1,0 +1,3 @@
+pub fn cache_key(identity: SemanticDigest) -> String {
+    identity.canonical_text()
+}

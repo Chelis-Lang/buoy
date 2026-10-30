@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "SPG-004"
+
+[[case]]
+id = "spg-004-positive-metadata-attached-to-test"
+scenario = "positive-metadata-is-attached-to-a-test-item"
+polarity = "positive"
+operation = "extract-rust"
+baseline = "fixtures/v2/baselines/carrier-source.toml"
+mutations = ["attach-carrier-to-test"]
+expected = { outcome = "accept", codes = [], facts = ["carrier-count:SPG-004=1", "carrier:CAR-001=attached-test"] }
+
+[[case]]
+id = "spg-004-negative-id-without-attachment"
+scenario = "negative-atom-text-appears-without-attachment"
+polarity = "negative"
+operation = "extract-rust"
+baseline = "fixtures/v2/baselines/carrier-source.toml"
+mutations = ["replace-carrier-with-mentions"]
+expected = { outcome = "accept", codes = [], facts = ["carrier-count:SPG-004=0"] }

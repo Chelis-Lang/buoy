@@ -1,0 +1,7 @@
+schema	case_id	polarity	mutation	expected
+buoy-devenv-runtime-case/v1	DEV-RUNTIME-POSITIVE	positive	none	pass
+buoy-devenv-runtime-case/v1	DEV-RUNTIME-MISSING	negative	missing-runtime-package	DEVENV-RUNTIME-MISSING
+buoy-devenv-runtime-case/v1	DEV-RUNTIME-COMMON	negative	specialized-in-common	DEVENV-RUNTIME-COMMON
+buoy-devenv-runtime-case/v1	DEV-RUNTIME-AMBIENT	negative	ambient-runtime-package	DEVENV-RUNTIME-AMBIENT
+buoy-devenv-runtime-case/v1	DEV-RUNTIME-VERSIONS	negative	missing-version-package	DEVENV-RUNTIME-VERSION
+buoy-devenv-runtime-case/v1	DEV-RUNTIME-VERSION-SET	negative	missing-version-runtime	DEVENV-RUNTIME-VERSION

@@ -1,0 +1,44 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-artifact-index-freshness-v2"
+requirement_ids = ["SCF-004", "DGA-001"]
+kind = "truth-table"
+expected_state_count = 16
+
+[[dimensions]]
+name = "path"
+values = ["selected", "missing"]
+[[dimensions]]
+name = "raw_digest"
+values = ["current", "stale"]
+[[dimensions]]
+name = "media_type"
+values = ["current", "stale"]
+[[dimensions]]
+name = "representation"
+values = ["current", "stale"]
+
+[[predicates]]
+name = "artifact_current"
+[[predicates.clauses]]
+all = ["path=selected", "raw_digest=current", "media_type=current", "representation=current"]
+
+[[invariants]]
+id = "missing-path-is-not-current"
+if_all = ["path=missing"]
+then_all = ["artifact_current=false"]
+[[invariants]]
+id = "stale-digest-is-not-current"
+if_all = ["raw_digest=stale"]
+then_all = ["artifact_current=false"]
+[[invariants]]
+id = "stale-media-type-is-not-current"
+if_all = ["media_type=stale"]
+then_all = ["artifact_current=false"]
+[[invariants]]
+id = "stale-representation-is-not-current"
+if_all = ["representation=stale"]
+then_all = ["artifact_current=false"]
+[[invariants]]
+id = "exact-index-binding-is-current"
+if_all = ["path=selected", "raw_digest=current", "media_type=current", "representation=current"]
+then_all = ["artifact_current=true"]

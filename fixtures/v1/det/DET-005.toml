@@ -1,0 +1,29 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "DET-005"
+
+[[case]]
+id = "det-005-positive-declared-line-ending-equivalence"
+scenario = "positive-declared-line-ending-equivalence"
+polarity = "positive"
+operation = "encode-canonical"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = ["replace-crlf-with-lf"]
+expected = { outcome = "accept", codes = [], facts = ["semantic-content-bytes=same", "raw-artifact-bytes=different"] }
+
+[[case]]
+id = "det-005-negative-prose-edit-guessed-equivalent"
+scenario = "negative-prose-edit-guessed-equivalent"
+polarity = "negative"
+operation = "encode-canonical"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = ["edit-normative-prose-by-one-byte"]
+expected = { outcome = "accept", codes = [], facts = ["semantic-content-bytes=different", "atom-revision:DET-001=changed"] }
+
+[[case]]
+id = "det-005-positive-declared-unicode-normalization"
+scenario = "positive-declared-unicode-normalization"
+polarity = "positive"
+operation = "encode-canonical"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = ["replace-nfc-with-decomposed-equivalent"]
+expected = { outcome = "accept", codes = [], facts = ["unicode-normalization=nfc", "semantic-content-bytes=same", "raw-artifact-bytes=different"] }

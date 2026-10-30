@@ -1,0 +1,265 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "prov-001-inward-boundary"
+requirement = "CHELIS-PROV-001"
+scenario = "positive-adapter-depends-inward"
+polarity = "positive"
+operation = "dependency-boundary"
+input = "chelis-provenance -> buoy -> buoy-core"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["buoy-core-no-std=true", "core-chelis-dependencies=0"]
+execution = "preimplementation"
+
+[[case]]
+id = "prov-001-core-coupling"
+requirement = "CHELIS-PROV-001"
+scenario = "negative-core-imports-chelis-semantics"
+polarity = "negative"
+operation = "dependency-boundary"
+input = "buoy-core -> chelis"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-CORE-COUPLING"]
+facts = ["graph-constructed=false"]
+execution = "preimplementation"
+
+[[case]]
+id = "prov-002-complete-product"
+requirement = "CHELIS-PROV-002"
+scenario = "positive-complete-capability-product"
+polarity = "positive"
+operation = "surface-completeness"
+input = "all semantic-surface and backend-surface Cartesian members dispositioned"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["surface-complete=true"]
+execution = "model"
+
+[[case]]
+id = "prov-002-missing-row"
+requirement = "CHELIS-PROV-002"
+scenario = "negative-unsupported-capability-row-omitted"
+polarity = "negative"
+operation = "surface-completeness"
+input = "one unsupported backend member omitted"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-SURFACE-MISSING-MEMBER"]
+facts = ["surface-complete=false"]
+execution = "model"
+
+[[case]]
+id = "prov-003-total-disposition"
+requirement = "CHELIS-PROV-003"
+scenario = "positive-selected-input-fully-dispositioned"
+polarity = "positive"
+operation = "adapter-totality"
+input = "selected saved source with semantic and ordinary syntax"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["undispositioned-nodes=0"]
+execution = "preimplementation-contract"
+
+[[case]]
+id = "prov-003-unknown-version"
+requirement = "CHELIS-PROV-003"
+scenario = "negative-unknown-schema-version-skipped"
+polarity = "negative"
+operation = "adapter-totality"
+input = "chelis-provenance/v999"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-UNSUPPORTED-SCHEMA"]
+facts = ["graph-constructed=false"]
+execution = "preimplementation-contract"
+
+[[case]]
+id = "prov-004-separate-roots"
+requirement = "CHELIS-PROV-004"
+scenario = "positive-separate-roots-produce-identical-reports"
+polarity = "positive"
+operation = "canonical-equality"
+input = "identical saved bytes under /root-a and /root-b"
+expected_outcome = "equal"
+diagnostics = []
+facts = ["absolute-root-in-canonical-input=false"]
+execution = "sdk-control"
+
+[[case]]
+id = "prov-004-provider-noise"
+requirement = "CHELIS-PROV-004"
+scenario = "negative-pull-request-metadata-differs"
+polarity = "negative-control"
+operation = "canonical-equality"
+input = "same snapshots with varied labels users timestamps and issue state"
+expected_outcome = "equal"
+diagnostics = []
+facts = ["provider-metadata-in-canonical-input=false"]
+execution = "model"
+
+[[case]]
+id = "prov-005-exact-carriers"
+requirement = "CHELIS-PROV-005"
+scenario = "positive-exact-required-carriers-pass"
+polarity = "positive"
+operation = "required-role-coverage"
+input = "all six explicit roles current selected pass and exactly scoped"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["assurance=tested"]
+execution = "model"
+
+[[case]]
+id = "prov-005-timeout-waiver"
+requirement = "CHELIS-PROV-005"
+scenario = "negative-waiver-covers-timed-out-carrier"
+polarity = "negative"
+operation = "no-laundering"
+input = "required timeout plus active process waiver"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-REQUIRED-EVIDENCE-UNSATISFIED"]
+facts = ["waiver-visible=true", "assurance=tested-false"]
+execution = "model"
+
+[[case]]
+id = "prov-006-current-derivation"
+requirement = "CHELIS-PROV-006"
+scenario = "positive-generated-artifact-current-and-checked"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "exact source target tool configuration relation and consistency receipt"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "preimplementation"
+
+[[case]]
+id = "prov-006-stale-target"
+requirement = "CHELIS-PROV-006"
+scenario = "negative-mirrored-table-changes-without-derivation-update"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "changed target with prior target digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-STALE"]
+facts = ["consistent=false", "behavior-correct=unassigned"]
+execution = "preimplementation"
+
+[[case]]
+id = "prov-007-complete-impacts"
+requirement = "CHELIS-PROV-007"
+scenario = "positive-every-transitive-impact-dispositioned"
+polarity = "positive"
+operation = "impact-closure"
+input = "fixed-point impact set with one exact disposition per impact"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["impact-closure=true"]
+execution = "model"
+
+[[case]]
+id = "prov-007-role-removed"
+requirement = "CHELIS-PROV-007"
+scenario = "negative-policy-role-silently-removed"
+polarity = "negative"
+operation = "policy-ratchet"
+input = "blocking policy removes negative role without full weakening protocol"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-POLICY-WEAKENING"]
+facts = ["impact-closure=false"]
+execution = "model"
+
+[[case]]
+id = "prov-008-verdict-order"
+requirement = "CHELIS-PROV-008"
+scenario = "positive-normalized-verdict-order-varies"
+polarity = "positive"
+operation = "execution-separation"
+input = "same verdict set in distinct completion orders"
+expected_outcome = "equal"
+diagnostics = []
+facts = ["static-graph-identity-unchanged=true"]
+execution = "model"
+
+[[case]]
+id = "prov-008-runner-crash"
+requirement = "CHELIS-PROV-008"
+scenario = "negative-runner-crash-treated-as-success"
+polarity = "negative"
+operation = "execution-separation"
+input = "runner exits without semantic receipt"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-ORACLE-ERROR"]
+facts = ["verdict=error"]
+execution = "preimplementation"
+
+[[case]]
+id = "prov-009-current-proof"
+requirement = "CHELIS-PROV-009"
+scenario = "positive-exact-formal-binding-current"
+polarity = "positive"
+operation = "proof-invalidation"
+input = "all bindings current with intended negative control failure"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["assurance=formally-proved", "scope=exact"]
+execution = "model"
+
+[[case]]
+id = "prov-009-backend-inference"
+requirement = "CHELIS-PROV-009"
+scenario = "negative-backend-correctness-inferred"
+polarity = "negative"
+operation = "proof-invalidation"
+input = "source proof without compiler backend chain"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-PROOF-SCOPE-EXCEEDED"]
+facts = ["backend-proof=false"]
+execution = "model"
+
+[[case]]
+id = "prov-010-advisory-promoted"
+requirement = "CHELIS-PROV-010"
+scenario = "positive-advisory-scope-promoted-intact"
+polarity = "positive"
+operation = "policy-adoption"
+input = "same ratchet scope and roles with every obligation green"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["enforcement=blocking"]
+execution = "model"
+
+[[case]]
+id = "prov-010-hidden-gap"
+requirement = "CHELIS-PROV-010"
+scenario = "negative-promotion-hides-uncovered-scope"
+polarity = "negative"
+operation = "policy-adoption"
+input = "blocking proposal drops undecided member or missing role"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-PROMOTION-INCOMPLETE"]
+facts = ["enforcement=advisory"]
+execution = "model"
+
+[[case]]
+id = "prov-011-approved-item-schema"
+requirement = "CHELIS-PROV-011"
+scenario = "positive-approved-chelis-item-schema-root-independent"
+polarity = "positive"
+operation = "host-item-protocol"
+input = "schema-v3 descriptor declares chelis/surf-declaration/v1 and chelis/deep-node/v1"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["prerequisite=satisfied", "legacy-reader=absent"]
+execution = "sdk-control"
+
+[[case]]
+id = "prov-011-rust-substitution"
+requirement = "CHELIS-PROV-011"
+scenario = "negative-chelis-declaration-mislabeled-as-rust"
+polarity = "negative"
+operation = "host-item-protocol"
+input = "Chelis declaration emitted with rust/item/v1"
+expected_outcome = "reject"
+diagnostics = ["SPG-ADAPTER-UNDECLARED-SOURCE-ITEM-KIND"]
+facts = ["graph-constructed=false"]
+execution = "sdk-control"

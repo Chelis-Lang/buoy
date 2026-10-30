@@ -1,0 +1,23 @@
+schema = "spec-provenance-hash-cutover/v2"
+status = "active"
+semantic_schema = "spec-provenance/v2"
+encoding_version = 2
+digest_algorithm = "xxh3-128"
+digest_algorithm_tag = 2
+digest_bytes = 16
+dual_read = false
+dual_write = false
+algorithm_negotiation = false
+
+active_schema_inventory = "schema/v2/inventory.tsv"
+active_fixture_root = "fixtures/v2"
+active_hardening_root = "fixtures/hardening/v2"
+active_hash_fixture_root = "fixtures/xxh3/v2"
+active_proof_record = "proofs/core/proof-record.toml"
+active_derivation_record = "proofs/core/derivation-record.toml"
+acceptance_oracle = "devenv tasks run spec-provenance:gate"
+
+rollback_mode = "whole-baseline-only"
+rollback_commit = "9b1b7740c390aeaa58b491b2cefc9ee8c694fce2"
+rollback_relabel_allowed = false
+mixed_version_allowed = false

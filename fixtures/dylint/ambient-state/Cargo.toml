@@ -1,0 +1,7 @@
+[package]
+name = "ambient-state"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]

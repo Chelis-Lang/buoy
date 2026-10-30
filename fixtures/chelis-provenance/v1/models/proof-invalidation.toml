@@ -1,0 +1,89 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-chelis-proof-invalidation-v1"
+requirement_ids = ["CHELIS-PROV-009"]
+kind = "truth-table"
+expected_state_count = 2048
+
+[[dimensions]]
+name = "atom"
+values = ["current", "stale"]
+[[dimensions]]
+name = "property"
+values = ["current", "stale"]
+[[dimensions]]
+name = "implementation"
+values = ["current", "stale"]
+[[dimensions]]
+name = "assumptions"
+values = ["current", "stale"]
+[[dimensions]]
+name = "toolchain"
+values = ["current", "stale"]
+[[dimensions]]
+name = "external_models"
+values = ["current", "stale"]
+[[dimensions]]
+name = "generated_artifacts"
+values = ["current", "stale"]
+[[dimensions]]
+name = "proof_sources"
+values = ["current", "stale"]
+[[dimensions]]
+name = "scope_exclusions"
+values = ["current", "stale"]
+[[dimensions]]
+name = "correspondence"
+values = ["current", "stale"]
+[[dimensions]]
+name = "negative_control"
+values = ["expected-fail", "unexpected"]
+
+[[predicates]]
+name = "formally_proved"
+[[predicates.clauses]]
+all = ["atom=current", "property=current", "implementation=current", "assumptions=current", "toolchain=current", "external_models=current", "generated_artifacts=current", "proof_sources=current", "scope_exclusions=current", "correspondence=current", "negative_control=expected-fail"]
+
+[[invariants]]
+id = "stale-atom-invalidates"
+if_all = ["atom=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-property-invalidates"
+if_all = ["property=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-implementation-invalidates"
+if_all = ["implementation=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-assumptions-invalidate"
+if_all = ["assumptions=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-toolchain-invalidates"
+if_all = ["toolchain=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-external-model-invalidates"
+if_all = ["external_models=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-generated-artifact-invalidates"
+if_all = ["generated_artifacts=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-proof-source-invalidates"
+if_all = ["proof_sources=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-scope-invalidates"
+if_all = ["scope_exclusions=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "stale-correspondence-invalidates"
+if_all = ["correspondence=stale"]
+then_all = ["formally_proved=false"]
+[[invariants]]
+id = "unexpected-negative-control-invalidates"
+if_all = ["negative_control=unexpected"]
+then_all = ["formally_proved=false"]

@@ -1,0 +1,5 @@
+schema = "buoy/binding-attachment/v1"
+relation = "BARNACLE-FLAKE-BINDING"
+artifact = "project/flake.nix"
+subject = "blake3-256:f47aff14bfef5793abb4dc854c81b2a99b8ec29106e22abc6281107227ef3c72"
+record = "blake3-256:2544b46a00fd61ea6b058294519b936c8e03ad906cd0d1efdc9db275eda30f30"

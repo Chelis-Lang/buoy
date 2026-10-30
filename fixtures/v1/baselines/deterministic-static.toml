@@ -1,0 +1,35 @@
+schema = "spec-provenance-fixture-baseline/v1"
+id = "deterministic-static"
+
+[configuration]
+schema = "spec-provenance.semantic/v1"
+repository_paths = ["spec/requirements.md", "src/lib.rs", "tests/carrier.rs"]
+markdown_adapter = "spec-provenance.markdown/v1"
+rust_adapter = "spec-provenance.rust/v1"
+digest_algorithm = "sha256"
+
+[[files]]
+path = "spec/requirements.md"
+adapter = "markdown/v1"
+authority_expectation = "required"
+content = "Requirement: deterministic output.\r\nUnicode label: café.\r\n"
+
+[[files]]
+path = "src/lib.rs"
+adapter = "rust/v1"
+authority_expectation = "forbidden"
+content = "pub fn deterministic() -> bool { true }\n"
+
+[[files]]
+path = "tests/carrier.rs"
+adapter = "rust/v1"
+authority_expectation = "forbidden"
+content = "#[test]\nfn deterministic_output() { assert!(true); }\n"
+
+[[atoms]]
+id = "DET-001"
+state = "proposed"
+kind = "constraint"
+scope = ["spec-provenance.determinism"]
+statement = "Identical explicit inputs MUST produce byte-identical canonical outputs."
+authority = "$source:spec/requirements.md:0"

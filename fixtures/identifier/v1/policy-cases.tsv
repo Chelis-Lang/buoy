@@ -1,0 +1,7 @@
+schema	case	polarity	role	path	expected_outcome	expected_codes
+buoy-identifier-policy-case/v1	model-typed-boundary	positive	core-model	fixtures/identifier/v1/policy/positive/model.rs.txt	accept	-
+buoy-identifier-policy-case/v1	identifier-module-grammar-home	positive	identifier-module	fixtures/identifier/v1/policy/positive/identifier.rs.txt	accept	-
+buoy-identifier-policy-case/v1	model-untyped-stable-id-parameter	negative	core-model	fixtures/identifier/v1/policy/negative/untyped-parameter.rs.txt	reject	SID-BOUNDARY-UNTYPED-PARAMETER
+buoy-identifier-policy-case/v1	model-stable-id-string-bypass	negative	core-model	fixtures/identifier/v1/policy/negative/string-bypass.rs.txt	reject	SID-BOUNDARY-STRING-BYPASS,SID-BOUNDARY-UNTYPED-PARAMETER
+buoy-identifier-policy-case/v1	model-external-grammar-check	negative	core-model	fixtures/identifier/v1/policy/negative/external-grammar.rs.txt	reject	SID-BOUNDARY-EXTERNAL-GRAMMAR
+buoy-identifier-policy-case/v1	model-scope-schema-prefix-boundaries	negative	core-model	fixtures/identifier/v1/policy/negative/scope-schema-prefix-boundaries.rs.txt	reject	SID-BOUNDARY-EXTERNAL-GRAMMAR,SID-BOUNDARY-UNTYPED-PARAMETER

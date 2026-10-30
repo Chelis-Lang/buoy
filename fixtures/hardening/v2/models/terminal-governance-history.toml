@@ -1,0 +1,89 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-terminal-governance-history-v2"
+requirement_ids = ["SCF-003", "DGA-004"]
+kind = "transition-system"
+expected_reachable_count = 10
+initial = ["policy-active", "debt-active", "waiver-active"]
+
+[[states]]
+name = "policy-active"
+terminal = false
+id_reserved = true
+[[states]]
+name = "policy-superseded"
+terminal = true
+id_reserved = true
+[[states]]
+name = "policy-retired"
+terminal = true
+id_reserved = true
+[[states]]
+name = "debt-active"
+terminal = false
+id_reserved = true
+[[states]]
+name = "debt-discharged"
+terminal = true
+id_reserved = true
+[[states]]
+name = "debt-superseded"
+terminal = true
+id_reserved = true
+[[states]]
+name = "waiver-active"
+terminal = false
+id_reserved = true
+[[states]]
+name = "waiver-discharged"
+terminal = true
+id_reserved = true
+[[states]]
+name = "waiver-revoked"
+terminal = true
+id_reserved = true
+[[states]]
+name = "waiver-superseded"
+terminal = true
+id_reserved = true
+
+[[transitions]]
+from = "policy-active"
+event = "supersede"
+to = "policy-superseded"
+[[transitions]]
+from = "policy-active"
+event = "retire"
+to = "policy-retired"
+[[transitions]]
+from = "debt-active"
+event = "discharge"
+to = "debt-discharged"
+[[transitions]]
+from = "debt-active"
+event = "supersede"
+to = "debt-superseded"
+[[transitions]]
+from = "waiver-active"
+event = "discharge"
+to = "waiver-discharged"
+[[transitions]]
+from = "waiver-active"
+event = "revoke"
+to = "waiver-revoked"
+[[transitions]]
+from = "waiver-active"
+event = "supersede"
+to = "waiver-superseded"
+
+[[invariants]]
+id = "governance-all-states-reachable"
+relation = "all-states-reachable"
+[[invariants]]
+id = "governance-terminal-no-outgoing"
+relation = "terminal-has-no-outgoing"
+[[invariants]]
+id = "governance-terminal-no-live-return"
+relation = "terminal-never-reaches-live"
+[[invariants]]
+id = "governance-ids-permanently-reserved"
+relation = "id-remains-reserved"

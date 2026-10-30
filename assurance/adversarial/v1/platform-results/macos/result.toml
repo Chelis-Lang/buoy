@@ -1,0 +1,7 @@
+schema = "buoy-platform-result/v1"
+platform = "macos"
+command = "devenv shell -- buoy-platform-result"
+status = "green"
+provenance = "local-host-execution"
+portable_corpus = "portable-corpus.tsv"
+platform_effects = "platform-effects.tsv"

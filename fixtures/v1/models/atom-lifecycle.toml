@@ -1,0 +1,62 @@
+schema = "spec-provenance-reference-model/v1"
+id = "model-atom-lifecycle-v1"
+requirement_ids = ["SPG-003"]
+kind = "transition-system"
+expected_reachable_count = 4
+initial = ["proposed"]
+
+[[states]]
+name = "proposed"
+terminal = false
+id_reserved = true
+
+[[states]]
+name = "ratified"
+terminal = false
+id_reserved = true
+
+[[states]]
+name = "superseded"
+terminal = true
+id_reserved = true
+
+[[states]]
+name = "withdrawn"
+terminal = true
+id_reserved = true
+
+[[transitions]]
+from = "proposed"
+event = "ratify"
+to = "ratified"
+
+[[transitions]]
+from = "proposed"
+event = "withdraw"
+to = "withdrawn"
+
+[[transitions]]
+from = "ratified"
+event = "supersede"
+to = "superseded"
+
+[[transitions]]
+from = "ratified"
+event = "withdraw"
+to = "withdrawn"
+
+[[invariants]]
+id = "atom-all-states-reachable"
+relation = "all-states-reachable"
+
+[[invariants]]
+id = "atom-terminal-no-outgoing"
+relation = "terminal-has-no-outgoing"
+
+[[invariants]]
+id = "atom-terminal-no-live-return"
+relation = "terminal-never-reaches-live"
+
+[[invariants]]
+id = "atom-id-permanently-reserved"
+relation = "id-remains-reserved"

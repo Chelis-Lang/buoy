@@ -1,0 +1,66 @@
+schema = "spec-provenance-proof-binding/v2"
+id = "PROOF-LOGICAL-MOUNT-PROJECTION-V1"
+lane = "verus"
+verdict = "pass"
+negative_control = "expected-fail"
+derivation = "DERIV-LOGICAL-MOUNT-REPRESENTATION-V1"
+correspondence_approval = "APPROVAL-LOGICAL-MOUNT-CORRESPONDENCE-V1"
+scope = "Path-segment sequence projection under disjoint prefixes and relation-key preimage construction only."
+exclusions = [
+  "filesystem and descriptor behavior",
+  "repository path parsing",
+  "TOML and CLI parsing",
+  "hash internals and collision resistance",
+  "operating systems",
+  "natural-language correspondence",
+  "rustc, LLVM, and native code",
+]
+
+[property]
+id = "PROP-LOGICAL-MOUNT-PROJECTION-V1"
+correspondence = "explicit-consistency-derivation-plus-review-approval"
+obligations = [
+  "disjoint logical prefixes produce distinct projected paths",
+  "one prefix preserves distinct relative paths",
+  "distinct relations produce distinct attachment-key preimages",
+]
+blocked_obligations = []
+
+[implementation]
+representation = "rust-source/v1"
+path = "crates/buoy-core/src/mount.rs"
+digest = "xxh3-128:94ed5fb6b8038c699fb0927af9a6fb23"
+
+[[additional_inputs]]
+role = "attachment-key-production"
+path = "crates/buoy-core/src/attachment.rs"
+digest = "xxh3-128:5a955a49e9768ffe26e2246dd629a95d"
+
+[[additional_inputs]]
+role = "scope-and-exclusions"
+path = "openspec/changes/archive/2026-08-20-add-logical-mount-artifact-bindings/evidence/formal-spike-scope.md"
+digest = "xxh3-128:378c8c8ca4ed48a383bf1509568a4fcd"
+
+[proof_source]
+path = "proofs/spikes/verus/logical_mounts.rs"
+digest = "xxh3-128:ac75a34d7a89adaf5406860998353a3f"
+
+[negative_source]
+path = "proofs/spikes/verus/logical_mounts_negative.rs"
+digest = "xxh3-128:c57ac7dedd4da2b34a4774a884b78ff7"
+expected_diagnostic = "postcondition not satisfied"
+
+[verifier]
+name = "verus"
+version = "0.2026.07.12.0b42f4c"
+source_commit = "0b42f4cee92a178937608cf55e512371d2fd8cd4"
+configuration = "release/macos_aarch64; rust=1.96.0-aarch64-apple-darwin"
+solver = "bundled-z3"
+
+[[assumptions]]
+id = "ASM-LOGICAL-SEGMENT-REPRESENTATION"
+statement = "The reviewed sequence model represents canonical path segments from one parsed mount prefix and mount-relative path."
+
+[[assumptions]]
+id = "ASM-RELATION-PREIMAGE-REPRESENTATION"
+statement = "The reviewed relation model represents the canonical field before the digest algorithm runs."

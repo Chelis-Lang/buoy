@@ -1,0 +1,19 @@
+[advisories]
+ignore = [{ id = "RUSTSEC-2024-0436", reason = "exact fixture exception" }]
+
+[licenses]
+exceptions = [
+  { allow = ["MPL-2.0"], crate = "cbindgen@0.29.2" },
+  { allow = ["MPL-2.0"], crate = "cbindgen@0.29.4" },
+  { allow = ["ISC"], crate = "libloading@0.8.9" },
+  { allow = ["BSL-1.0"], crate = "xxhash-rust@0.8.17" },
+]
+
+[bans]
+multiple-versions = "deny"
+wildcards = "deny"
+skip = [{ crate = "winnow@0.7.15", reason = "exact reviewed duplicate" }]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "allow"

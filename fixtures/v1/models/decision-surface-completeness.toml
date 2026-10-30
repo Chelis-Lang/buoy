@@ -1,0 +1,68 @@
+schema = "spec-provenance-reference-model/v1"
+id = "model-decision-surface-completeness-v1"
+requirement_ids = ["SPG-008", "SPG-009"]
+kind = "truth-table"
+expected_state_count = 128
+
+[[dimensions]]
+name = "domain"
+values = ["closed", "invalid"]
+
+[[dimensions]]
+name = "member_a"
+values = ["exact", "missing", "duplicate", "unknown"]
+
+[[dimensions]]
+name = "member_b"
+values = ["exact", "missing", "duplicate", "unknown"]
+
+[[dimensions]]
+name = "authority_a"
+values = ["valid", "missing"]
+
+[[dimensions]]
+name = "authority_b"
+values = ["valid", "missing"]
+
+[[predicates]]
+name = "surface_complete"
+[[predicates.clauses]]
+all = ["domain=closed", "member_a=exact", "member_b=exact", "authority_a=valid", "authority_b=valid"]
+
+[[predicates]]
+name = "has_missing_member"
+[[predicates.clauses]]
+all = ["member_a=missing"]
+[[predicates.clauses]]
+all = ["member_b=missing"]
+
+[[predicates]]
+name = "has_duplicate_member"
+[[predicates.clauses]]
+all = ["member_a=duplicate"]
+[[predicates.clauses]]
+all = ["member_b=duplicate"]
+
+[[predicates]]
+name = "has_unknown_member"
+[[predicates.clauses]]
+all = ["member_a=unknown"]
+[[predicates.clauses]]
+all = ["member_b=unknown"]
+
+[[predicates]]
+name = "has_missing_authority"
+[[predicates.clauses]]
+all = ["authority_a=missing"]
+[[predicates.clauses]]
+all = ["authority_b=missing"]
+
+[[invariants]]
+id = "complete-has-no-member-error"
+if_all = ["surface_complete=true"]
+then_all = ["has_missing_member=false", "has_duplicate_member=false", "has_unknown_member=false", "has_missing_authority=false"]
+
+[[invariants]]
+id = "invalid-domain-never-complete"
+if_all = ["domain=invalid"]
+then_all = ["surface_complete=false"]

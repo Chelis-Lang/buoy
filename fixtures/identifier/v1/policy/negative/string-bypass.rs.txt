@@ -1,0 +1,11 @@
+// Regression: a stable-ID role regains an unchecked bypass constructor.
+
+impl ObjectRef {
+    pub fn new(kind: ObjectKind, id: StableId, digest: SemanticDigest) -> Self {
+        Self::from_validated(kind, id.as_str().to_string(), digest)
+    }
+
+    pub(crate) fn from_validated(kind: ObjectKind, id: String, digest: SemanticDigest) -> Self {
+        Self { kind, id, digest }
+    }
+}

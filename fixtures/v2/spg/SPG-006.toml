@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "SPG-006"
+
+[[case]]
+id = "spg-006-positive-implementation-link-reported"
+scenario = "positive-implementation-link-reported"
+polarity = "positive"
+operation = "build-graph"
+baseline = "fixtures/v2/baselines/minimal-graph.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["implementation-link:IMPL-001=navigational", "coverage:SPG-002:positive=satisfied"] }
+
+[[case]]
+id = "spg-006-negative-implementation-only"
+scenario = "negative-implementation-link-is-only-link"
+polarity = "negative"
+operation = "evaluate-coverage"
+baseline = "fixtures/v2/baselines/minimal-graph.toml"
+mutations = ["remove-all-evidence-carriers"]
+expected = { outcome = "accept", codes = ["EVD-POLICY-MISSING-ROLE"], facts = ["implementation-link:IMPL-001=navigational", "coverage:SPG-002:positive=unsatisfied"] }

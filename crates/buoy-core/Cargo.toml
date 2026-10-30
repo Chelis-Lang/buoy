@@ -1,0 +1,29 @@
+[package]
+name = "buoy-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+description = "Pure no-std deterministic kernel for Buoy"
+
+[features]
+default = ["xxh3-128"]
+coverage-controls = []
+xxh3-128 = ["dep:xxhash-rust"]
+blake3-256 = ["dep:blake3"]
+sha-256 = ["dep:sha2"]
+
+[dependencies]
+blake3 = { version = "=1.8.2", default-features = false, optional = true }
+sha2 = { version = "=0.10.9", default-features = false, optional = true }
+unicode-normalization = { version = "=0.1.24", default-features = false }
+xxhash-rust = { version = "=0.8.17", default-features = false, features = ["xxh3"], optional = true }
+
+[dev-dependencies]
+hegeltest = "=0.28.0"
+buoy-reference = { path = "../buoy-reference", version = "=0.2.0" }
+trybuild = "=1.0.114"
+
+[lints]
+workspace = true

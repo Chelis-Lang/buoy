@@ -1,0 +1,23 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "frontend-parity"
+
+[[files]]
+path = "spec/invalid.md"
+adapter = "markdown/v1"
+authority_expectation = "required"
+content = "unsupported semantic input for one stable diagnostic\n"
+
+[saved_snapshot]
+digest = "$digest:repository-snapshot:frontend-parity"
+
+[cli]
+semantic_library = "$tool:spec-provenance-semantics"
+input = "$snapshot:saved"
+
+[lsp]
+semantic_library = "$tool:spec-provenance-semantics"
+input = "$snapshot:saved"
+
+[editor_buffer]
+saved = false
+content = "locally corrected but uncommitted input\n"

@@ -1,0 +1,9 @@
+schema = "buoy/implementation-binding/v1"
+id = "BGLC-RENDER-CATALOG"
+relation = "implements"
+subject = "blake3-256:686f70dca776da0eb0c9159ffb1eb1eb04adeb83ecb8e81f3435d1dedbd71915"
+requirement = "blake3-256:a07ec0fdd5f3250af9d18ba6025f9788ccb2f98df6c4538d16e0c695ccff34b7"
+
+[atom]
+id = "BGLC-003"
+revision = "blake3-256:a352b07c143fff7a0aa8e2a57d65fba2ee2d59635fdb20191f68fe93ef21c87f"

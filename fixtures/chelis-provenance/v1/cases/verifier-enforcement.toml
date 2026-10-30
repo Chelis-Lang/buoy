@@ -1,0 +1,121 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "enforce-current-bindings-pass"
+requirement = "CHELIS-PROV-015"
+scenario = "positive-current-bindings-pass"
+polarity = "positive"
+operation = "static-enforcement"
+input = "records whose item digests and declared runner digests match the current saved bytes"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["item-digest-enforced=true", "runner-digest-enforced=true"]
+execution = "integration"
+
+[[case]]
+id = "enforce-item-stale"
+requirement = "CHELIS-PROV-015"
+scenario = "negative-body-edit-invalidates-item"
+polarity = "negative"
+operation = "static-enforcement"
+input = "a bound declaration whose body bytes changed after the item digest was recorded"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-ITEM-STALE"]
+facts = ["static-exit-class", "no-decorative-fields=true"]
+execution = "integration"
+
+[[case]]
+id = "enforce-runner-stale"
+requirement = "CHELIS-PROV-015"
+scenario = "negative-runner-config-drift"
+polarity = "negative"
+operation = "static-enforcement"
+input = "an oracle with runner-config-paths whose referenced artifact bytes changed"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-ORACLE-RUNNER-STALE"]
+facts = ["declared-artifact-binding", "static-exit-class"]
+execution = "integration"
+
+[[case]]
+id = "context-bound-and-current"
+requirement = "CHELIS-PROV-016"
+scenario = "positive-context-names-both-values"
+polarity = "positive"
+operation = "static-enforcement"
+input = "any staleness diagnostic from the static check"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["context-format=bound-and-current", "no-out-of-band-recomputation"]
+execution = "integration"
+
+[[case]]
+id = "context-canonical-across-roots"
+requirement = "CHELIS-PROV-016"
+scenario = "negative-contexts-stay-canonical"
+polarity = "negative-control"
+operation = "static-enforcement"
+input = "identical stale inputs under two distinct absolute roots"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["context-bytes-identical=true", "separate-roots"]
+execution = "integration"
+
+[[case]]
+id = "trace-full-chain-verifies"
+requirement = "CHELIS-PROV-017"
+scenario = "positive-full-chain-verifies"
+polarity = "positive"
+operation = "trace-projection"
+input = "a repository whose bindings are current"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["every-hop-recomputed=true", "canonical-machine-bytes"]
+execution = "integration"
+
+[[case]]
+id = "trace-tampered-hop-rejected"
+requirement = "CHELIS-PROV-017"
+scenario = "negative-tampered-hop-fails"
+polarity = "negative-control"
+operation = "trace-projection"
+input = "one changed byte in the statement or a bound declaration body"
+expected_outcome = "reject"
+diagnostics = []
+facts = ["mismatched-hop-named=true", "static-exit-class"]
+execution = "integration"
+
+[[case]]
+id = "rebind-review-then-write"
+requirement = "CHELIS-PROV-018"
+scenario = "positive-review-then-write-converges"
+polarity = "positive"
+operation = "rebind-regeneration"
+input = "records left stale by a reviewed spec edit"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["field-level-diff", "idempotent-after-write=true", "static-accepts-after-write=true"]
+execution = "integration"
+
+[[case]]
+id = "rebind-dry-run-immutable"
+requirement = "CHELIS-PROV-018"
+scenario = "negative-dry-run-cannot-mutate"
+polarity = "negative-control"
+operation = "rebind-regeneration"
+input = "any repository state without the write flag"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["saved-bytes-unchanged=true"]
+execution = "integration"
+
+[[case]]
+id = "rebind-declarations-untouched"
+requirement = "CHELIS-PROV-018"
+scenario = "negative-declarations-never-rewritten"
+polarity = "negative-control"
+operation = "rebind-regeneration"
+input = "a stale binding on a declaration under the write flag"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["only-record-fields-change=true", "declaration-bytes-identical=true", "parse-rejection-refusal"]
+execution = "integration"

@@ -1,0 +1,11 @@
+class	text	rationale
+required	requirement:	the view leads with the readable requirement
+required	implementation:	the view names the readable implementation
+required	relation:	the view names the stable relation ID
+required	state:	the view states current or historical
+required	record:	the view names the selected record
+required	freshness:	the view states each freshness fact
+required	navigation and impact only	the view keeps the assurance boundary visible
+forbidden	coverage established	a trace establishes no coverage
+forbidden	proved	a trace establishes no proof
+forbidden	approved	a trace establishes no approval

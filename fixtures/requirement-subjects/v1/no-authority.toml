@@ -1,0 +1,14 @@
+schema = "buoy/repository-config/v3"
+digest_algorithms = ["blake3-256"]
+
+[[mounts]]
+id = "repository"
+prefix = "repository"
+
+[[selectors]]
+mount = "repository"
+root = "artifact.bin"
+adapter = "artifact/v1"
+include = ["artifact.bin"]
+exclude = []
+authority_expectation = "forbidden"

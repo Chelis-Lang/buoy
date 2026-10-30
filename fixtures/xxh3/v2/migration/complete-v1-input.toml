@@ -1,0 +1,231 @@
+schema = "spec-provenance-migration-input/v1"
+source_schema = "spec-provenance/v1"
+target_schema = "spec-provenance/v3"
+encoding_version = 1
+target_encoding_version = 3
+algorithm = "sha256"
+target_algorithm = "xxh3-128"
+terminal_stable_ids = ["ATOM-MIGRATION-RETIRED"]
+
+[[configurations]]
+id = "CONFIG-MIGRATION-001"
+schema_id = "spec-provenance-config/v1"
+authoritative_path = "config/spec-provenance.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "736368656d61203d2022737065632d70726f76656e616e63652d636f6e6669672f7631220a"
+old_digest = "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+
+[[objects]]
+stable_id = "ATOM-MIGRATION-001"
+kind = "atom"
+lifecycle = "ratified"
+authoritative_path = "authority/atoms/ATOM-MIGRATION-001.md"
+authoritative_media_type = "text/markdown"
+authoritative_bytes_hex = "232041544f4d2d4d4947524154494f4e2d3030310a"
+old_digest = "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+approval = "APPROVAL-MIGRATION-ATOM-001"
+
+[[objects]]
+stable_id = "ATOM-MIGRATION-RETIRED"
+kind = "tombstone"
+lifecycle = "superseded"
+authoritative_path = "authority/atoms/ATOM-MIGRATION-RETIRED.md"
+authoritative_media_type = "text/markdown"
+authoritative_bytes_hex = "232041544f4d2d4d4947524154494f4e2d524554495245440a"
+old_digest = "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+approval = "APPROVAL-MIGRATION-RETIRED"
+replacement = "ATOM-MIGRATION-001"
+
+[[objects]]
+stable_id = "PROOF-MIGRATION-001"
+kind = "proof-record"
+lifecycle = "ratified"
+authoritative_path = "authority/proofs/PROOF-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "736368656d61203d202270726f6f662f7631220a"
+old_digest = "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["FORMAL-PROPERTY-MIGRATION-001", "ASSUMPTION-MIGRATION-001"]
+
+[[objects]]
+stable_id = "CARRIER-MIGRATION-001"
+kind = "evidence-carrier"
+lifecycle = "ratified"
+authoritative_path = "authority/carriers/CARRIER-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "01"
+old_digest = "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["ATOM-MIGRATION-001"]
+
+[[objects]]
+stable_id = "POLICY-MIGRATION-001"
+kind = "coverage-policy"
+lifecycle = "ratified"
+authoritative_path = "authority/policies/POLICY-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "02"
+old_digest = "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["ATOM-MIGRATION-001"]
+
+[[objects]]
+stable_id = "DERIVATION-MIGRATION-001"
+kind = "derivation"
+lifecycle = "ratified"
+authoritative_path = "authority/derivations/DERIVATION-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "03"
+old_digest = "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["ATOM-MIGRATION-001"]
+
+[[objects]]
+stable_id = "ASSUMPTION-MIGRATION-001"
+kind = "assumption"
+lifecycle = "ratified"
+authoritative_path = "authority/assumptions/ASSUMPTION-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "04"
+old_digest = "sha256:8888888888888888888888888888888888888888888888888888888888888888"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+
+[[objects]]
+stable_id = "FORMAL-PROPERTY-MIGRATION-001"
+kind = "formal-property"
+lifecycle = "ratified"
+authoritative_path = "authority/properties/FORMAL-PROPERTY-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "05"
+old_digest = "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["ASSUMPTION-MIGRATION-001"]
+
+[[objects]]
+stable_id = "GRAPH-MIGRATION-001"
+kind = "spec-graph"
+lifecycle = "ratified"
+authoritative_path = "authority/graphs/GRAPH-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "06"
+old_digest = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["ATOM-MIGRATION-001", "ATOM-MIGRATION-RETIRED", "CARRIER-MIGRATION-001", "POLICY-MIGRATION-001", "DERIVATION-MIGRATION-001", "ASSUMPTION-MIGRATION-001", "FORMAL-PROPERTY-MIGRATION-001", "PROOF-MIGRATION-001"]
+
+[[objects]]
+stable_id = "STATIC-REPORT-MIGRATION-001"
+kind = "static-report"
+lifecycle = "ratified"
+authoritative_path = "authority/reports/STATIC-REPORT-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "07"
+old_digest = "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["GRAPH-MIGRATION-001"]
+
+[[objects]]
+stable_id = "EXECUTION-REPORT-MIGRATION-001"
+kind = "execution-report"
+lifecycle = "ratified"
+authoritative_path = "authority/reports/EXECUTION-REPORT-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "08"
+old_digest = "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["STATIC-REPORT-MIGRATION-001"]
+
+[[objects]]
+stable_id = "IMPACT-REPORT-MIGRATION-001"
+kind = "impact-report"
+lifecycle = "ratified"
+authoritative_path = "authority/reports/IMPACT-REPORT-MIGRATION-001.toml"
+authoritative_media_type = "application/toml"
+authoritative_bytes_hex = "09"
+old_digest = "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+approval = "APPROVAL-MIGRATION-PROOF-001"
+nested_bindings = ["GRAPH-MIGRATION-001"]
+
+[[approvals]]
+id = "APPROVAL-MIGRATION-ATOM-001"
+authority = "spec-provenance-maintainers"
+record_path = "reviews/ATOM-MIGRATION-001.md"
+record_bytes_hex = "617070726f7665643a2041544f4d2d4d4947524154494f4e2d3030310a"
+old_digest = "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+
+[[approvals]]
+id = "APPROVAL-MIGRATION-RETIRED"
+authority = "spec-provenance-maintainers"
+record_path = "reviews/ATOM-MIGRATION-RETIRED.md"
+record_bytes_hex = "617070726f7665643a2041544f4d2d4d4947524154494f4e2d524554495245440a"
+old_digest = "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+
+[[approvals]]
+id = "APPROVAL-MIGRATION-PROOF-001"
+authority = "formal-reviewers"
+record_path = "reviews/PROOF-MIGRATION-001.md"
+record_bytes_hex = "617070726f7665643a2050524f4f462d4d4947524154494f4e2d3030310a"
+old_digest = "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+
+[[impact_dispositions]]
+stable_id = "APPROVAL-MIGRATION-ATOM-001"
+disposition = "reaffirmed"
+
+[[impact_dispositions]]
+stable_id = "APPROVAL-MIGRATION-RETIRED"
+disposition = "reaffirmed"
+
+[[impact_dispositions]]
+stable_id = "APPROVAL-MIGRATION-PROOF-001"
+disposition = "reaffirmed"
+
+[[impact_dispositions]]
+stable_id = "CARRIER-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "POLICY-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "DERIVATION-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "ASSUMPTION-MIGRATION-001"
+disposition = "waived"
+
+[[impact_dispositions]]
+stable_id = "FORMAL-PROPERTY-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "GRAPH-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "STATIC-REPORT-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "EXECUTION-REPORT-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "IMPACT-REPORT-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "CONFIG-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "ATOM-MIGRATION-001"
+disposition = "revised"
+
+[[impact_dispositions]]
+stable_id = "ATOM-MIGRATION-RETIRED"
+disposition = "retired"
+
+[[impact_dispositions]]
+stable_id = "PROOF-MIGRATION-001"
+disposition = "reaffirmed"

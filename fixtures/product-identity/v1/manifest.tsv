@@ -1,0 +1,23 @@
+schema	id	requirement	scenario	polarity	operation	mutation	expected_diagnostic	expected_count	focused_command	final_oracle
+buoy-product-identity-fixtures/v1	PID-001-POS	PID-001	primary-interfaces-use-buoy	positive	primary-identities-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-001-NEG	PID-001	current-interface-retains-old-brand	negative	primary-identities-stale	single-reviewed-target	PID-STALE-PRODUCT-IDENTITY	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-002-POS	PID-002	canonical-corpus-byte-identical	positive	canonical-parity-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-002-NEG	PID-002	global-replacement-changes-frozen-identifier	negative	canonical-global-replacement	single-reviewed-target	PID-CANONICAL-PARITY	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-003-POS	PID-003	former-cli-delegates	positive	compatibility-alias-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-003-NEG	PID-003	alias-outlives-window	negative	compatibility-alias-expired	single-reviewed-target	PID-COMPATIBILITY-EXPIRED	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-004-POS	PID-004	old-name-inventory-total	positive	inventory-total-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-004-NEG	PID-004	hidden-old-name-occurrence	negative	inventory-missing	single-reviewed-target	PID-INVENTORY-MISSING	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-005-POS	PID-005	renamed-dependencies-one-way	positive	dependency-boundary-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-005-NEG	PID-005	compatibility-wrapper-enters-core	negative	dependency-core-coupling	single-reviewed-target	PID-DEPENDENCY-BOUNDARY	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-006-POS	PID-006	command-alias-canonical-parity	positive	command-parity-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-006-NEG	PID-006	brand-enters-canonical-report	negative	command-brand-in-canonical	single-reviewed-target	PID-CANONICAL-PARITY	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-007-POS	PID-007	exact-evidence-replayed	positive	evidence-replay-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-007-NEG	PID-007	pre-rename-evidence-copied-forward	negative	evidence-stale-path	single-reviewed-target	PID-EVIDENCE-STALE	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-008-FOCUSED-POS	PID-008	focused-testing-maps-once-to-p0	positive	focused-mapping-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-008-FOCUSED-NEG	PID-008	focused-evidence-duplicated	negative	focused-mapping-duplicate	single-reviewed-target	PID-DUPLICATE-OBLIGATION	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-008-CHELIS-POS	PID-008	chelis-shell-dependency-one-way	positive	chelis-boundary-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-008-CHELIS-NEG	PID-008	chelis-compiler-core-coupled	negative	chelis-core-coupling	single-reviewed-target	PID-DEPENDENCY-BOUNDARY	1	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-002-CLEAN-INSTALL	PID-002	clean-buoy-install-fixtures	positive	primary-identities-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-003-UPGRADE	PID-003	old-package-upgrade-fixtures	positive	compatibility-alias-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-003-ROLLBACK	PID-003	alias-rollback-preserves-frozen-bytes	positive	canonical-parity-pass	none	-	0	devenv tasks run buoy:product-identity	devenv test --no-tui
+buoy-product-identity-fixtures/v1	PID-003-REMOVAL	PID-003	point-three-alias-removal	negative	compatibility-alias-expired	single-reviewed-target	PID-COMPATIBILITY-EXPIRED	1	devenv tasks run buoy:product-identity	devenv test --no-tui

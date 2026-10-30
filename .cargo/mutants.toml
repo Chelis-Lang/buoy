@@ -1,0 +1,99 @@
+# cargo-mutants 27.1.0; score/expiry policy is assurance/adversarial/v1/mutation-policy.toml.
+examine_globs = [
+  "crates/buoy-core/src/value.rs",
+  "crates/buoy-core/src/algorithms.rs",
+  "crates/buoy-core/src/report.rs",
+  "src/repository.rs",
+  "src/oracle.rs",
+  "src/publication.rs",
+  "src/publication_fs.rs",
+  "src/publication_models.rs",
+]
+examine_re = [
+  "^crates/buoy-core/src/algorithms\\.rs:1253:5: replace derivation_fresh_with_artifacts -> bool with true$",
+  "^crates/buoy-core/src/value\\.rs:681:27: replace != with == in CanonicalValue::decode$",
+  "^crates/buoy-core/src/algorithms\\.rs:3087:5: replace schema_change_impacts -> Vec<SchemaImpact> with vec!\\[\\]$",
+  "^crates/buoy-core/src/algorithms\\.rs:1927:5: replace derive_policy_ratchets -> Result<Vec<DerivedPolicyRatchet>, PolicyAnalysisError> with Ok\\(vec!\\[\\]\\)$",
+  "^src/oracle\\.rs:384:72: replace & with \\| in run_oracle_internal$",
+  "^src/oracle\\.rs:385:21: replace == with != in run_oracle_internal$",
+  "^src/repository\\.rs:93:24: replace > with < in RepositoryConfig::parse_internal$",
+  "^src/publication\\.rs:1589:41: replace != with == in row_conformance$",
+  "^src/publication\\.rs:1671:25: replace == with != in require_source_edit_conforms$",
+  "^src/publication_fs\\.rs:315:43: replace == with != in unix::write_output_with_fault$",
+  "^src/publication_fs\\.rs:396:40: replace == with != in unix::write_output_with_fault$",
+  "^src/publication_models\\.rs:118:9: replace DependencyKind::is_pre_link -> bool with true$",
+  # Round-4 additions. Each names one NEW write-prevention or normalization
+  # branch introduced by this change, so the campaign covers them rather than
+  # only the branches that existed before.
+  "^src/publication\\.rs:323:5: replace validate_target_base -> Result<\\(\\), PublicationError> with Ok\\(\\(\\)\\)$",
+  "^src/publication\\.rs:283:5: replace decodes_to_dot_segment -> bool with false$",
+  "^src/publication\\.rs:297:5: replace contains_encoded_separator -> bool with false$",
+  "^src/publication\\.rs:1774:5: replace render_parity_diff -> String with String::new\\(\\)$",
+  "^src/publication\\.rs:1989:5: replace validate_markdown_projection -> Result<\\(\\), ProjectionError> with Ok\\(\\(\\)\\)$",
+  "^src/publication_fs\\.rs:502:47: replace == with != in unix::OutputLock::release_and_unlink$",
+  "^src/publication_fs\\.rs:512:9: replace unix::entry_inode -> Option<u64> with None$",
+]
+exclude_globs = []
+exclude_re = []
+skip_calls = []
+skip_calls_defaults = false
+all_features = true
+test_workspace = true
+test_tool = "cargo"
+minimum_test_timeout = 60.0
+timeout_multiplier = 4.0
+build_timeout_multiplier = 5.0
+additional_cargo_args = ["--locked", "--offline"]
+additional_cargo_test_args = [
+  "--",
+  # Round-5: these two are MANIFEST BOOKKEEPING, not behavioral oracles.
+  # `every_manifest_row_focused_test_passes` spawns 78 nested `cargo test`
+  # processes and `..._executes_its_declared_command_in_an_isolated_fixture`
+  # spawns 78 real CLI invocations, so under a mutant build they turn every
+  # mutant into an inconclusive TIMEOUT rather than a caught/missed verdict.
+  # Every mutant in scope is caught by a behavioral test either way.
+  "--skip",
+  "every_manifest_row_focused_test_passes",
+  "--skip",
+  "every_manifest_row_executes_its_declared_command_in_an_isolated_fixture",
+  "--skip",
+  "committed_fuzz_and_mutation_campaigns_are_current_in_their_exact_scopes",
+  "--skip",
+  "stale_expired_or_discharged_campaign_evidence_cannot_satisfy_an_obligation",
+  "--skip",
+  "assurance_binary_entry_points_execute_success_and_usage_paths",
+  "--skip",
+  "live_generation_cli_and_binary_cover_success_and_usage_contracts",
+  "--skip",
+  "product_identity_assurance_paths_execute_inside_the_instrumented_harness",
+  # Binds the real repository tree; the mutants scratch copy omits fixture
+  # trees, so this authority check runs only in normal acceptance.
+  "--skip",
+  "render_fixture_execution_evidence_bound_to_binds_the_real_tree_and_fails_closed_for_invalid_authority_paths",
+  "--skip",
+  "product_identity_full_check_reaches_current_inventory_success",
+  "--skip",
+  "product_identity_scanner_and_classification_controls_cover_closed_rules",
+  "--skip",
+  "product_identity_planning_controls_reject_each_substitution",
+  "--skip",
+  "snapshot_manifest_and_frozen_parity_negative_paths_are_closed",
+  "--skip",
+  "parsed_item_protocol_blocker_is_explicit",
+  "--skip",
+  "frozen_public_api_rejects_invalid_construction_and_callable_effects",
+  "--skip",
+  "clean_install_and_package_upgrade_fixtures_compile",
+  "--skip",
+  "primary_cli_uses_buoy_help_and_stable_usage_exit",
+  # Real Nix realization controls run in normal acceptance. They do not cover
+  # any selected mutation symbol and would rebuild three variants per mutant.
+  "--skip",
+  "the_real_nix_package_satisfies_the_derivation_contract",
+  "--skip",
+  "every_package_fixture_case_is_bound_to_the_real_realized_package",
+  "--skip",
+  "the_real_gate_rejects_every_fetch_primitive_reachable_from_the_pinned_nixpkgs",
+  "--skip",
+  "every_manifest_row_focused_test_passes",
+]

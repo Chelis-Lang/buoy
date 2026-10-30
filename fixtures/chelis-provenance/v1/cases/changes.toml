@@ -1,0 +1,121 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "change-reaffirmed"
+requirement = "CHELIS-PROV-007"
+scenario = "exact-reaffirmed-disposition"
+polarity = "positive"
+operation = "impact-closure"
+input = "one exact reaffirmed disposition plus repository review"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["technical-freshness-unchanged=true", "review-only=true"]
+execution = "model"
+
+[[case]]
+id = "change-revised"
+requirement = "CHELIS-PROV-007"
+scenario = "exact-revised-disposition"
+polarity = "positive"
+operation = "impact-closure"
+input = "one exact revised disposition bound to head object"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["impact-closure=true"]
+execution = "model"
+
+[[case]]
+id = "change-retired"
+requirement = "CHELIS-PROV-007"
+scenario = "exact-retired-disposition"
+polarity = "positive"
+operation = "impact-closure"
+input = "one exact retired disposition with terminal record"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["impact-closure=true"]
+execution = "model"
+
+[[case]]
+id = "change-waived"
+requirement = "CHELIS-PROV-007"
+scenario = "exact-waived-disposition"
+polarity = "positive"
+operation = "impact-closure"
+input = "one exact waived disposition with active process waiver and visible debt"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["impact-closure=true", "technical-obligation-satisfied=false"]
+execution = "model"
+
+[[case]]
+id = "change-missing-impact"
+requirement = "CHELIS-PROV-007"
+scenario = "transitive-impact-undispositioned"
+polarity = "negative"
+operation = "impact-closure"
+input = "one two-hop impact has no disposition"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-IMPACT-DISPOSITION-MISSING"]
+facts = ["impact-closure=false"]
+execution = "model"
+
+[[case]]
+id = "change-duplicate-impact"
+requirement = "CHELIS-PROV-007"
+scenario = "transitive-impact-dispositioned-twice"
+polarity = "negative"
+operation = "impact-closure"
+input = "one impact has reaffirmed and waived dispositions"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-IMPACT-DISPOSITION-DUPLICATE"]
+facts = ["impact-closure=false"]
+execution = "model"
+
+[[case]]
+id = "change-reaffirmation-freshens"
+requirement = "CHELIS-PROV-007"
+scenario = "reaffirmation-used-as-freshness"
+polarity = "negative"
+operation = "no-laundering"
+input = "stale carrier plus reaffirmation review"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-REAFFIRMATION-REVIEW-ONLY"]
+facts = ["carrier-current=false"]
+execution = "model"
+
+[[case]]
+id = "change-scope-weakened"
+requirement = "CHELIS-PROV-007"
+scenario = "policy-scope-weakened"
+polarity = "negative"
+operation = "policy-ratchet"
+input = "scope removed without complete weakening protocol"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-POLICY-WEAKENING"]
+facts = ["change-accepted=false"]
+execution = "model"
+
+[[case]]
+id = "change-role-weakened"
+requirement = "CHELIS-PROV-007"
+scenario = "policy-role-weakened"
+polarity = "negative"
+operation = "policy-ratchet"
+input = "required role removed without complete weakening protocol"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-POLICY-WEAKENING"]
+facts = ["change-accepted=false"]
+execution = "model"
+
+[[case]]
+id = "change-mode-weakened"
+requirement = "CHELIS-PROV-007"
+scenario = "policy-mode-weakened"
+polarity = "negative"
+operation = "policy-ratchet"
+input = "blocking changed to advisory without complete weakening protocol"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-POLICY-WEAKENING"]
+facts = ["change-accepted=false"]
+execution = "model"

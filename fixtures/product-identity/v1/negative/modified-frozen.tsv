@@ -1,0 +1,2 @@
+schema	id	path	line	column	form	lexeme	context_digest	disposition	rationale	owner	rule
+buoy-naming-inventory/v1	OLD-NAME-000001	schema/v1/inventory.tsv	1	1	kebab	buoy-provenance	xxh3-128:00000000000000000000000000000000	frozen-v1-identifier	modified frozen token	buoy-maintainers	retain-exact-bytes

@@ -1,0 +1,179 @@
+[workspace]
+members = [
+    ".",
+    "crates/buoy-core",
+    "crates/buoy-reference",
+    "crates/chelis-provenance",
+    "crates/chelis-surf-sitter",
+    "crates/spec-provenance",
+    "crates/spec-provenance-core",
+]
+exclude = [
+    "dylint_lints/fcis_core",
+    "fixtures/dylint/allowed-boundaries",
+    "fixtures/dylint/ambient-state",
+    "fixtures/dylint/callable-public-interface",
+    "fixtures/dylint/missing-no-std",
+    "fixtures/product-identity/v1/negative/buoy-core-effect",
+    "proofs/spikes/aeneas/rust",
+]
+resolver = "3"
+
+[workspace.package]
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+license = "MIT"
+
+[workspace.lints.rust]
+missing_docs = "deny"
+unsafe_code = "forbid"
+unexpected_cfgs = { level = "deny", check-cfg = ["cfg(dylint_lib, values(any()))"] }
+
+[workspace.lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+expect_used = "deny"
+panic = "deny"
+todo = "deny"
+unimplemented = "deny"
+unwrap_used = "deny"
+
+[workspace.metadata.dylint]
+libraries = [{ path = "dylint_lints/*" }]
+
+[package]
+name = "buoy"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+description = "Imperative shell and public facade for deterministic specification provenance"
+
+[features]
+default = ["xxh3-128"]
+coverage-controls = ["buoy-core/coverage-controls"]
+xxh3-128 = ["buoy-core/xxh3-128"]
+blake3-256 = ["buoy-core/blake3-256"]
+sha-256 = ["buoy-core/sha-256"]
+
+[dependencies]
+proc-macro2 = { version = "=1.0.101", features = ["span-locations"] }
+pulldown-cmark = "=0.13.5"
+quote = "=1.0.40"
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = "=1.0.150"
+buoy-core = { path = "crates/buoy-core", version = "=0.2.0", default-features = false }
+syn = { version = "=2.0.106", features = ["full", "parsing"] }
+toml = "=0.9.5"
+unicode-normalization = { version = "=0.1.24", default-features = false }
+
+[target.'cfg(unix)'.dependencies]
+rustix = { version = "=1.1.4", features = ["fs", "process"] }
+
+[dev-dependencies]
+hegeltest = "=0.28.0"
+buoy-reference = { path = "crates/buoy-reference", version = "=0.2.0" }
+tempfile = "=3.27.0"
+
+[[bin]]
+name = "check-adversarial-evidence"
+path = "tools/check_adversarial_evidence.rs"
+test = false
+
+[[bin]]
+name = "check-exact-coverage"
+path = "tools/check_exact_coverage.rs"
+test = false
+
+[[bin]]
+name = "check-fixture-manifest"
+path = "tools/check_fixture_manifest.rs"
+test = false
+
+[[bin]]
+name = "check-digest-fixtures"
+path = "tools/check_digest_fixtures.rs"
+test = false
+
+[[bin]]
+name = "check-digest-correspondence"
+path = "tools/check_digest_correspondence.rs"
+test = false
+
+[[bin]]
+name = "check-hardening-manifest"
+path = "tools/check_hardening_manifest.rs"
+test = false
+
+[[bin]]
+name = "check-package-contract"
+path = "tools/check_package_contract.rs"
+
+[[bin]]
+name = "check-consumer-package"
+path = "tools/check_consumer_package.rs"
+
+[[bin]]
+name = "check-property-evidence"
+path = "tools/check_property_evidence.rs"
+test = false
+
+[[bin]]
+name = "check-reference-independence"
+path = "tools/check_reference_independence.rs"
+test = false
+
+[[bin]]
+name = "check-schema-inventory"
+path = "tools/check_schema_inventory.rs"
+test = false
+
+[[bin]]
+name = "check-digest-transition-model"
+path = "tools/check_xxh3_migration_model.rs"
+test = false
+
+[[bin]]
+name = "check-devenv-task-graph"
+path = "tools/check_devenv_task_graph.rs"
+test = false
+
+[[bin]]
+name = "check-xxh3-vectors"
+path = "tools/check_xxh3_vectors.rs"
+test = false
+
+[[bin]]
+name = "generate-casefold-table"
+path = "tools/generate_casefold_table.rs"
+test = false
+
+[[bin]]
+name = "generate-coverage-fixtures"
+path = "tools/generate_coverage_fixtures.rs"
+test = false
+
+[[bin]]
+name = "generate-property-evidence"
+path = "tools/generate_property_evidence.rs"
+test = false
+
+[[bin]]
+name = "generate-property-fixtures"
+path = "tools/generate_property_fixtures.rs"
+test = false
+
+[[bin]]
+name = "generate-v2-fixture-suite"
+path = "tools/generate_v2_fixture_suite.rs"
+
+[[bin]]
+name = "generate-publication-goldens"
+path = "tools/generate_publication_goldens.rs"
+test = false
+
+[lints]
+workspace = true

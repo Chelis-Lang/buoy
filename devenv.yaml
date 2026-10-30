@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://devenv.sh/devenv.schema.json
+require_version: true
+inputs:
+  nixpkgs:
+    url: github:cachix/devenv-nixpkgs/rolling
+  rust-overlay:
+    url: github:oxalica/rust-overlay
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
+  git-hooks:
+    url: github:cachix/git-hooks.nix
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
+  aeneas:
+    url: github:AeneasVerif/aeneas/nightly-2026.07.01
+  advisory-db:
+    url: github:RustSec/advisory-db/ee1a49a2769a24a596afc1c20cb33748d2769586
+    flake: false
+  rust-clippy:
+    url: github:rust-lang/rust-clippy/f6d310692116e9a527ce6d0b3526c965d9c5d7b9
+    flake: false
+  # CProof package overlay; supplies pkgs.dylint-tools. Private: Nix needs a
+  # GitHub access token (`access-tokens` locally).
+  atoll:
+    url: github:Chelis-Lang/atoll/dfd00e6fe3a794709e20a50964a40ff24f88b4e6
+    overlays:
+      - default

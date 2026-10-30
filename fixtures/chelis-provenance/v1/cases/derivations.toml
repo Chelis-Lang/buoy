@@ -1,0 +1,73 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "derivation-current"
+requirement = "CHELIS-PROV-006"
+scenario = "current-confirmed-derivation"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["fresh=true", "behavior-correct=unassigned"]
+execution = "preimplementation"
+
+[[case]]
+id = "derivation-source-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "source-digest-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "source changed target and record unchanged"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-SOURCE-STALE"]
+facts = ["consistent=false"]
+execution = "preimplementation"
+
+[[case]]
+id = "derivation-target-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "target-digest-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "target changed record unchanged"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-TARGET-STALE"]
+facts = ["consistent=false"]
+execution = "preimplementation"
+
+[[case]]
+id = "derivation-tool-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "tool-identity-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "generator version changed record unchanged"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-TOOL-STALE"]
+facts = ["consistent=false"]
+execution = "preimplementation"
+
+[[case]]
+id = "derivation-config-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "configuration-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "generator flags changed record unchanged"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-CONFIGURATION-STALE"]
+facts = ["consistent=false"]
+execution = "preimplementation"
+
+[[case]]
+id = "derivation-consistency-only"
+requirement = "CHELIS-PROV-006"
+scenario = "consistency-does-not-prove-behavior"
+polarity = "negative-control"
+operation = "derivation-freshness"
+input = "current structural mirror with passing consistency oracle"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["consistent=true", "behavior-correct=unassigned"]
+execution = "preimplementation"

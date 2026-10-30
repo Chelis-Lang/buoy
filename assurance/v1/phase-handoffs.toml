@@ -1,0 +1,72 @@
+schema = "spec-provenance-phase-handoffs/v1"
+final_command = "devenv test"
+ordering = ["P0", "P1", "P2", "P3"]
+# The exact local final command executes each phase once in order. Separate
+# provider records are optional exported attestations, not acceptance inputs.
+execution_policy = "local-final-command"
+ledger_blocking_phases = []
+self_certifying_phases = ["P0", "P1", "P2", "P3", "FINAL"]
+no_cross_phase_inference = true
+non_duplicative_execution = true
+phase_scripts_must_not_nest = true
+result_schema = "spec-provenance-phase-result/v2"
+result_provenance = "independent-external-execution"
+result_required_fields = [
+  "schema",
+  "phase",
+  "command",
+  "status",
+  "execution",
+  "provenance",
+  "provider",
+  "run_id",
+  "run_url",
+  "revision",
+  "phase_handoffs_digest",
+  "gate_source_digest",
+]
+
+[[phase]]
+id = "P0"
+name = "stop-false-greens"
+command = "devenv tasks run buoy:p0"
+executes = ["buoy-schema", "buoy-reference", "buoy-fixtures", "buoy-properties", "buoy-coverage-evidence"]
+requires = ["schema-inventory", "executable-fixtures", "production-properties", "production-models", "coverage-freshness", "coverage-100"]
+blocking_diagnostics = ["P0-MISSING", "P0-STALE", "P0-FIXTURE-NOT-EXECUTED", "P0-PRODUCTION-DIFFERENTIAL-MISSING", "P0-COVERAGE-STALE", "P0-COVERAGE-NOT-EXACT"]
+success = "every fixture and pure obligation is current; recorded coverage binds current sources and all four exact metrics equal 100 percent"
+
+[[phase]]
+id = "P1"
+name = "complete-pure-core-assurance"
+command = "devenv tasks run buoy:p1"
+executes = ["buoy-hashing-policy", "buoy-core", "buoy-fcis", "buoy-mutation-replay", "buoy-core-proofs"]
+requires = ["P0", "schema-api-parity", "strict-canonical-roundtrip", "independent-canonical-authority", "derived-governance", "mutation-threshold", "selected-production-proof-bindings"]
+blocking_diagnostics = ["P1-MISSING", "P1-STALE", "P1-PARITY", "P1-CANONICAL", "P1-GOVERNANCE", "P1-MUTATION", "P1-PROOF"]
+success = "complete validated v1 values, strict canonical bytes, graph-derived governance, independent mutation resistance, and selected safe-kernel proof bindings all pass"
+
+[[phase]]
+id = "P2"
+name = "adversarial-systems-assurance"
+command = "devenv tasks run buoy:p2"
+executes = ["buoy-unicode", "buoy-adapters", "buoy-integration", "buoy-deny", "buoy-offline-acceptance", "buoy-closure-size", "buoy-adversarial"]
+requires = ["P1", "complete-adapters", "snapshot-faults", "process-faults", "fuzz-replay", "miri-sanitizers-compile-fail", "platform-corpus", "dependency-policy", "clean-offline-closure"]
+blocking_diagnostics = ["P2-MISSING", "P2-STALE", "P2-ADAPTER", "P2-SNAPSHOT", "P2-PROCESS", "P2-FUZZ", "P2-PLATFORM", "P2-SUPPLY-CHAIN"]
+success = "all declared adapter, race, resource, process, fuzz, tool, platform, dependency, and clean-offline obligations are current and green"
+
+[[phase]]
+id = "P3"
+name = "proof-and-obligation-closure"
+command = "devenv tasks run buoy:p3"
+executes = ["buoy-obligations", "buoy-gate-wiring", "buoy-quality", "check-hardening-manifest --ledger-green"]
+requires = ["P2", "closed-assurance-ledger", "proof-correspondence", "proof-negative-controls", "campaign-freshness", "adversarial-review-resolved"]
+blocking_diagnostics = ["P3-MISSING", "P3-STALE", "P3-LEDGER-OPEN", "P3-CORRESPONDENCE", "P3-CAMPAIGN", "P3-REVIEW"]
+success = "every inventoried obligation has exact current evidence or an allowed explicit nonpassing disposition and no blocking finding remains"
+
+[[phase]]
+id = "FINAL"
+name = "exact-production-acceptance"
+command = "devenv test"
+executes = ["buoy-p0", "buoy-p1", "buoy-p2", "buoy-p3"]
+requires = ["P0", "P1", "P2", "P3"]
+blocking_diagnostics = ["FINAL-PHASE-ABSENT", "FINAL-PHASE-STALE", "FINAL-BLOCKING-OBLIGATION"]
+success = "local P0 through P3 execute once in order and pass in the pinned network-disabled environment while advisory debt remains visible"

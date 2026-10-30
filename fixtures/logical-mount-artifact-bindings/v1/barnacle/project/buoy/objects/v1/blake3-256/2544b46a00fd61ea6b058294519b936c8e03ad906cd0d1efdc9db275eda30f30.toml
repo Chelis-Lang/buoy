@@ -1,0 +1,9 @@
+schema = "buoy/implementation-binding/v1"
+id = "BARNACLE-FLAKE-BINDING"
+relation = "implements"
+subject = "blake3-256:f47aff14bfef5793abb4dc854c81b2a99b8ec29106e22abc6281107227ef3c72"
+requirement = "blake3-256:53b875a30d3d0a39bc1b3ad0b53de999f717f3d9ebe9e1e6b2d548e41f860574"
+
+[atom]
+id = "OSA-900"
+revision = "blake3-256:1d46b102eedb976fd1a11858c500f65fa9e961d6a62bc711733368f3ee40981f"

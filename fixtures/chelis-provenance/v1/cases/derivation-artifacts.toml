@@ -1,0 +1,217 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "derivation-std-bundle-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-std-bundle-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "packages/chelis-std/ -> crates/chelis-std-bundle/dist/ with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-std-bundle", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-std-bundle-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-std-bundle-source-digest-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "packages/chelis-std/ changed while the derivation record retains the prior source digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-SOURCE-STALE"]
+facts = ["artifact=deriv-std-bundle", "consistent=false"]
+execution = "integration"
+
+[[case]]
+id = "derivation-conformance-skills-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-conformance-skills-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "agent-skills/ -> crates/chelis-conformance/assets/skills/ with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-conformance-skills", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-conformance-skills-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-conformance-skills-target-digest-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "crates/chelis-conformance/assets/skills/ changed while the derivation record retains the prior target digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-TARGET-STALE"]
+facts = ["artifact=deriv-conformance-skills", "consistent=false"]
+execution = "integration"
+
+[[case]]
+id = "derivation-conformance-canonical-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-conformance-canonical-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "AGENTS.md and shell surface templates -> crates/chelis-conformance/assets/canonical/ with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-conformance-canonical", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-conformance-canonical-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-conformance-canonical-tool-identity-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "the conformance tripwire checker version changed while the derivation record retains the prior tool identity"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-TOOL-STALE"]
+facts = ["artifact=deriv-conformance-canonical", "consistent=false"]
+execution = "integration"
+
+[[case]]
+id = "derivation-erf-proof-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-erf-proof-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "scripts/generate_erf_proof.py -> crates/chelis-prove/data/erf_proof/ with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-erf-proof", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-erf-proof-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-erf-proof-configuration-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "generator flags for generate_erf_proof.py changed while the derivation record retains the prior configuration digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-CONFIGURATION-STALE"]
+facts = ["artifact=deriv-erf-proof", "consistent=false"]
+execution = "integration"
+
+[[case]]
+id = "derivation-special-envelope-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-special-envelope-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "scripts/generate_special_fn_envelope.py -> crates/chelis-prove/data/special_fn_envelopes/ with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-special-envelope", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-special-envelope-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-special-envelope-source-digest-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "scripts/generate_special_fn_envelope.py changed while the derivation record retains the prior source digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-SOURCE-STALE"]
+facts = ["artifact=deriv-special-envelope", "consistent=false"]
+execution = "integration"
+
+[[case]]
+id = "derivation-tree-sitter-surf-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-tree-sitter-surf-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "grammars/tree-sitter-chelis-surf/grammar.js -> grammars/tree-sitter-chelis-surf/src/ with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-tree-sitter-surf", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-tree-sitter-surf-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-tree-sitter-surf-target-digest-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "grammars/tree-sitter-chelis-surf/src/ changed while the derivation record retains the prior target digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-TARGET-STALE"]
+facts = ["artifact=deriv-tree-sitter-surf", "consistent=false"]
+execution = "integration"
+
+[[case]]
+id = "derivation-tree-sitter-deep-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-tree-sitter-deep-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "grammars/tree-sitter-chelis-deep/grammar.js -> grammars/tree-sitter-chelis-deep/src/ with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-tree-sitter-deep", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-tree-sitter-deep-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-tree-sitter-deep-tool-identity-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "the tree-sitter generator version changed while the derivation record retains the prior tool identity"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-TOOL-STALE"]
+facts = ["artifact=deriv-tree-sitter-deep", "consistent=false"]
+execution = "integration"
+
+[[case]]
+id = "derivation-coverage-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-coverage-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "scripts/prove_corpus/harvest_coverage.py -> coverage_map.json and coverage_summary.md with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-coverage", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-coverage-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-coverage-configuration-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "harvest flags for harvest_coverage.py changed while the derivation record retains the prior configuration digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-CONFIGURATION-STALE"]
+facts = ["artifact=deriv-coverage", "consistent=false"]
+execution = "integration"
+
+[[case]]
+id = "derivation-benchmark-current"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-benchmark-current"
+polarity = "positive"
+operation = "derivation-freshness"
+input = "benchmark runners -> benchmarks/results/latest.json with exact source target tool configuration relation scope and exclusions"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["artifact=deriv-benchmark", "fresh=true", "consistent=true", "behavior-correct=unassigned"]
+execution = "integration"
+
+[[case]]
+id = "derivation-benchmark-drift"
+requirement = "CHELIS-PROV-006"
+scenario = "artifact-deriv-benchmark-target-digest-drift"
+polarity = "negative"
+operation = "derivation-freshness"
+input = "benchmarks/results/latest.json changed while the derivation record retains the prior target digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-DERIVATION-TARGET-STALE"]
+facts = ["artifact=deriv-benchmark", "consistent=false"]
+execution = "integration"

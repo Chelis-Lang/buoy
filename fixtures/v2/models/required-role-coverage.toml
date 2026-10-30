@@ -1,0 +1,43 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-required-role-coverage-v2"
+requirement_ids = ["EVD-002", "EVD-005"]
+kind = "truth-table"
+expected_state_count = 225
+
+[[dimensions]]
+name = "positive_role"
+values = ["absent", "stale", "fresh"]
+[[dimensions]]
+name = "negative_role"
+values = ["absent", "stale", "fresh"]
+[[dimensions]]
+name = "positive_verdict"
+values = ["not-run", "pass", "fail", "error", "timeout"]
+[[dimensions]]
+name = "negative_verdict"
+values = ["not-run", "pass", "fail", "error", "timeout"]
+
+[[predicates]]
+name = "static_roles_satisfied"
+[[predicates.clauses]]
+all = ["positive_role=fresh", "negative_role=fresh"]
+
+[[predicates]]
+name = "tested"
+[[predicates.clauses]]
+all = ["static_roles_satisfied=true", "positive_verdict=pass", "negative_verdict=pass"]
+
+[[invariants]]
+id = "absent-positive-never-static-covered"
+if_all = ["positive_role=absent"]
+then_all = ["static_roles_satisfied=false", "tested=false"]
+
+[[invariants]]
+id = "stale-negative-never-tested"
+if_all = ["negative_role=stale"]
+then_all = ["static_roles_satisfied=false", "tested=false"]
+
+[[invariants]]
+id = "nonpass-required-verdict-never-tested"
+if_all = ["positive_verdict!=pass"]
+then_all = ["tested=false"]

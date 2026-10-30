@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "SPG-005"
+
+[[case]]
+id = "spg-005-positive-all-references-resolve"
+scenario = "positive-all-references-resolve"
+polarity = "positive"
+operation = "build-graph"
+baseline = "fixtures/v2/baselines/minimal-graph.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["reference-closure=closed"] }
+
+[[case]]
+id = "spg-005-negative-carrier-unknown-oracle"
+scenario = "negative-carrier-references-unknown-oracle"
+polarity = "negative"
+operation = "build-graph"
+baseline = "fixtures/v2/baselines/minimal-graph.toml"
+mutations = ["set-carrier-oracle-unknown"]
+expected = { outcome = "reject", codes = ["SPG-REF-UNKNOWN-ORACLE"], facts = ["reference-closure=open"] }

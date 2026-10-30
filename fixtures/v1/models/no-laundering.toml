@@ -1,0 +1,61 @@
+schema = "spec-provenance-reference-model/v1"
+id = "model-debt-waiver-reaffirmation-no-laundering-v1"
+requirement_ids = ["EVD-011", "EVD-012"]
+kind = "truth-table"
+expected_state_count = 160
+
+[[dimensions]]
+name = "technical_obligation"
+values = ["satisfied", "unsatisfied"]
+[[dimensions]]
+name = "debt"
+values = ["none", "active"]
+[[dimensions]]
+name = "waiver"
+values = ["none", "active"]
+[[dimensions]]
+name = "reaffirmation"
+values = ["none", "valid"]
+[[dimensions]]
+name = "carrier"
+values = ["current", "stale"]
+[[dimensions]]
+name = "verdict"
+values = ["not-run", "pass", "fail", "error", "timeout"]
+
+[[predicates]]
+name = "tested"
+[[predicates.clauses]]
+all = ["technical_obligation=satisfied", "carrier=current", "verdict=pass"]
+
+[[predicates]]
+name = "process_authorized"
+[[predicates.clauses]]
+all = ["technical_obligation=satisfied"]
+[[predicates.clauses]]
+all = ["waiver=active"]
+
+[[predicates]]
+name = "review_only"
+[[predicates.clauses]]
+all = ["reaffirmation=valid"]
+
+[[invariants]]
+id = "debt-never-satisfies"
+if_all = ["technical_obligation=unsatisfied", "debt=active"]
+then_all = ["tested=false"]
+
+[[invariants]]
+id = "waiver-never-satisfies"
+if_all = ["technical_obligation=unsatisfied", "waiver=active"]
+then_all = ["tested=false", "process_authorized=true"]
+
+[[invariants]]
+id = "reaffirmation-never-freshens"
+if_all = ["carrier=stale", "reaffirmation=valid"]
+then_all = ["tested=false", "review_only=true"]
+
+[[invariants]]
+id = "nonpass-never-tested"
+if_all = ["verdict!=pass"]
+then_all = ["tested=false"]

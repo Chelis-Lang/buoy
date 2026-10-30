@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "DET-001"
+
+[[case]]
+id = "det-001-positive-identical-explicit-inputs"
+scenario = "positive-identical-explicit-inputs"
+polarity = "positive"
+operation = "render-static"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["canonical-graph-bytes=same", "static-report-bytes=same"] }
+
+[[case]]
+id = "det-001-negative-ambient-state-differs"
+scenario = "negative-ambient-state-differs"
+polarity = "negative"
+operation = "render-static"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = ["vary-ambient-timezone-locale-host-root-provider"]
+expected = { outcome = "accept", codes = [], facts = ["canonical-graph-bytes=same", "static-report-bytes=same", "ambient-inputs-consumed=0"] }

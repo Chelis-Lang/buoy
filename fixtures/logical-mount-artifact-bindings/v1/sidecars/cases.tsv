@@ -1,0 +1,7 @@
+schema	case_id	control	expected
+buoy-binding-attachment-fixture/v1	valid	none	accept
+buoy-binding-attachment-fixture/v1	wrong-path	relation-path-mismatch	CAB-ATTACHMENT-PATH
+buoy-binding-attachment-fixture/v1	duplicate	unequal-same-relation	CAB-ATTACHMENT-DUPLICATE
+buoy-binding-attachment-fixture/v1	stale-subject	replace-subject-bytes	CAB-SUBJECT-STALE
+buoy-binding-attachment-fixture/v1	wrong-record	replace-record-reference	CAB-ATTACHMENT-RECORD
+buoy-binding-attachment-fixture/v1	foreign-member	replace-record-member	CAB-DIGEST-MEMBER

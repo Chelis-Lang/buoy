@@ -1,0 +1,35 @@
+schema = "spec-provenance-fixture-baseline/v1"
+id = "derivation-graph"
+
+[[artifacts]]
+id = "source-table"
+path = "spec/table.toml"
+media_type = "application/toml"
+bytes = "rows = [1, 2]"
+
+[[artifacts]]
+id = "generated-table"
+path = "src/generated.rs"
+media_type = "text/rust"
+bytes = "pub const ROWS: &[u8] = &[1, 2];"
+
+[[oracles]]
+id = "ORC-DERIVATION"
+kind = "derivation-consistency"
+runner = "$tool:fixture-derivation-checker"
+selection = "$payload:selection:derivation"
+normalization = "$payload:verdict:exit-code"
+configuration = "$digest:raw-artifact:derivation-config"
+scope = "$payload:scope:byte-generation"
+exclusions = []
+
+[[derivations]]
+id = "DERIV-001"
+sources = ["$artifact:source-table"]
+targets = ["$artifact:generated-table"]
+tool = "$tool:fixture-generator"
+configuration = "$digest:raw-artifact:derivation-config"
+oracle = "$object:oracle:ORC-DERIVATION"
+relation = "generated-from"
+scope = "$payload:scope:byte-generation"
+exclusions = []

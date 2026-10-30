@@ -1,0 +1,2 @@
+let checksum = cargo_package.checksum;
+let identity = SemanticDigest::parse_canonical(&format!("sha256:{checksum}"))?;

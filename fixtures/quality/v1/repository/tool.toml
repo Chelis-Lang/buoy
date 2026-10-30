@@ -1,0 +1,4 @@
+schema = "quality-assurance-fixture-tool/v1"
+id = "fixture-tool"
+version = "1.0.0"
+source = "repository-fixture"

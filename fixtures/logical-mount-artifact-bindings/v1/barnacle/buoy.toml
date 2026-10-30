@@ -1,0 +1,63 @@
+schema = "buoy/repository-config/v3"
+digest_algorithms = ["blake3-256"]
+
+[adapter_configurations]
+"openspec/v1" = '''
+schema = "buoy.openspec-authority/v1"
+
+[[capabilities]]
+name = "demo"
+format = "openspec/standing-spec/v1"
+scope = "openspec.demo"
+atom_kind = "behavioral"
+lifecycle = "proposed"
+reserved_ids = ["OSA-900"]
+'''
+
+[[mounts]]
+id = "authority"
+prefix = "authority"
+
+[[mounts]]
+id = "project"
+prefix = "project"
+
+[[selectors]]
+mount = "authority"
+root = "openspec/specs"
+adapter = "openspec/v1"
+include = ["**/spec.md"]
+exclude = []
+authority_expectation = "required"
+
+[[selectors]]
+mount = "project"
+root = "src"
+adapter = "rust/v1"
+include = ["**/*.rs"]
+exclude = []
+authority_expectation = "forbidden"
+
+[[selectors]]
+mount = "project"
+root = "flake.nix"
+adapter = "artifact/v1"
+include = ["flake.nix"]
+exclude = []
+authority_expectation = "forbidden"
+
+[[selectors]]
+mount = "project"
+root = "README.md"
+adapter = "artifact/v1"
+include = ["README.md"]
+exclude = []
+authority_expectation = "forbidden"
+
+[[selectors]]
+mount = "project"
+root = "buoy"
+adapter = "binding/v1"
+include = ["**/*.toml"]
+exclude = []
+authority_expectation = "forbidden"

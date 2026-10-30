@@ -1,0 +1,5 @@
+document = "blake3-256:527dfaeda1758a82c34de7e0d67dc94ff589fbfbe826ce695e7434eab642ec1a"
+requirement = "blake3-256:98555bbd1c86bf7ff0540e1056c983cd7d0eaa1d377dda8fb3e789019315f72d"
+atom_revision = "blake3-256:a352b07c143fff7a0aa8e2a57d65fba2ee2d59635fdb20191f68fe93ef21c87f"
+subject = "blake3-256:c1edc9516d7e36861c02c8a34d62571971c5a56fcd1620d7ba6353d8e1afeb58"
+binding = "blake3-256:644c6ed5a45bbcd93e3c5f0c4b8c2fda8ea4de78078a3d1ddd74d13bac6fba25"

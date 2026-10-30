@@ -1,0 +1,15 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "execution-report"
+static_graph = "$digest:complete-graph:deterministic-static"
+
+[[verdicts]]
+oracle = "$object:oracle:ORC-A"
+verdict = "pass"
+selection_receipt = "$digest:selection-receipt:ORC-A"
+execution_receipt = "$digest:execution-receipt:ORC-A"
+
+[[verdicts]]
+oracle = "$object:oracle:ORC-B"
+verdict = "fail"
+selection_receipt = "$digest:selection-receipt:ORC-B"
+execution_receipt = "$digest:execution-receipt:ORC-B"

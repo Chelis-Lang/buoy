@@ -1,0 +1,62 @@
+schema	case_id	polarity	mutation	expected_diagnostic	expected_count	covers
+quality-assurance-fixture-case/v1	QA-FIX-POSITIVE-ALL	positive	none	-	0	all categories states enforcement evidence verdict assurance ownership lifecycle
+quality-assurance-fixture-case/v1	QA-FIX-POSITIVE-ORDER	positive	reverse-controls	-	0	discovery-order independence
+quality-assurance-fixture-case/v1	QA-FIX-POSITIVE-ROOT	positive	alternate-root	-	0	absolute-root independence
+quality-assurance-fixture-case/v1	QA-FIX-001	negative	missing-required-name	QA-SCHEMA	1	missing required field
+quality-assurance-fixture-case/v1	QA-FIX-002	negative	unknown-implementation-state	QA-SCHEMA	1	unknown enum
+quality-assurance-fixture-case/v1	QA-FIX-003	negative	malformed-control-id	QA-ID	1	malformed QA identity
+quality-assurance-fixture-case/v1	QA-FIX-004	negative	retired-id-reuse	QA-ID-RETIRED	1	retired QA identity reuse
+quality-assurance-fixture-case/v1	QA-FIX-005	negative	duplicate-control	QA-ID-DUPLICATE	1	duplicate control
+quality-assurance-fixture-case/v1	QA-FIX-006	negative	duplicate-binding	QA-BINDING-DUPLICATE	1	duplicate binding
+quality-assurance-fixture-case/v1	QA-FIX-007	negative	unaccounted-tool	QA-COMPLETE-TOOL	1	unaccounted common or runtime QA-role tool
+quality-assurance-fixture-case/v1	QA-FIX-008	negative	unaccounted-task	QA-COMPLETE-TASK	1	unaccounted stable resolved task
+quality-assurance-fixture-case/v1	QA-FIX-009	negative	unaccounted-script	QA-COMPLETE-SCRIPT	1	unaccounted stable script
+quality-assurance-fixture-case/v1	QA-FIX-010	negative	unaccounted-obligation	QA-COMPLETE-OBLIGATION	1	unaccounted phase obligation
+quality-assurance-fixture-case/v1	QA-FIX-011	negative	pinned-only-implemented	QA-STATE-IMPLEMENTED	1	pinned tool is not implementation
+quality-assurance-fixture-case/v1	QA-FIX-012	negative	implemented-auto-focused	QA-ENFORCEMENT-FOCUSED	1	implementation is not focused
+quality-assurance-fixture-case/v1	QA-FIX-013	negative	focused-auto-blocking	QA-ENFORCEMENT-BLOCKING	1	focused is not blocking
+quality-assurance-fixture-case/v1	QA-FIX-014	negative	registration-auto-pass	QA-RESULT-AUTHORITY	1	registration is not current pass
+quality-assurance-fixture-case/v1	QA-FIX-015	negative	historical-result-current	QA-RESULT-STALE	1	historical result is not current
+quality-assurance-fixture-case/v1	QA-FIX-016	negative	missing-implementation-path	QA-PATH-MISSING	1	missing implementation authority
+quality-assurance-fixture-case/v1	QA-FIX-017	negative	stale-source-digest	QA-RESULT-STALE	1	stale source digest
+quality-assurance-fixture-case/v1	QA-FIX-018	negative	missing-positive-control	QA-STATE-POSITIVE	1	implemented positive control
+quality-assurance-fixture-case/v1	QA-FIX-019	negative	missing-negative-control	QA-STATE-NEGATIVE	1	implemented negative control
+quality-assurance-fixture-case/v1	QA-FIX-020	negative	omitted-gate-command	QA-GATE-OMITTED	1	blocking resolved graph inclusion
+quality-assurance-fixture-case/v1	QA-FIX-021	negative	blocked-without-discharge	QA-STATE-BLOCKED	1	blocked discharge condition
+quality-assurance-fixture-case/v1	QA-FIX-022	negative	retired-without-rationale	QA-STATE-RETIRED	1	retired rationale
+quality-assurance-fixture-case/v1	QA-FIX-023	negative	ambiguous-owner	QA-OWNER-AMBIGUOUS	1	single implementation owner
+quality-assurance-fixture-case/v1	QA-FIX-024	negative	duplicate-evidence-credit	QA-EVIDENCE-DUPLICATE	1	no duplicate evidence credit
+quality-assurance-fixture-case/v1	QA-FIX-025	negative	checkbox-only-implementation	QA-EVIDENCE-CHECKBOX	1	checkbox is not implementation evidence
+quality-assurance-fixture-case/v1	QA-FIX-026	negative	incomplete-replacement	QA-LIFECYCLE-REPLACEMENT	1	complete replacement mapping
+quality-assurance-fixture-case/v1	QA-FIX-027	negative	absolute-path	QA-PATH-ABSOLUTE	1	absolute path rejection
+quality-assurance-fixture-case/v1	QA-FIX-028	negative	traversing-path	QA-PATH-TRAVERSAL	1	path traversal rejection
+quality-assurance-fixture-case/v1	QA-FIX-029	negative	timestamp-field	QA-SCHEMA	1	timestamp exclusion
+quality-assurance-fixture-case/v1	QA-FIX-030	negative	host-field	QA-SCHEMA	1	host metadata exclusion
+quality-assurance-fixture-case/v1	QA-FIX-031	negative	report-drift	QA-REPORT-DRIFT	1	generated report drift
+quality-assurance-fixture-case/v1	QA-FIX-032	negative	bindings-drift	QA-BINDINGS-DRIFT	1	generated bindings drift
+quality-assurance-fixture-case/v1	QA-FIX-033	negative	sampled-as-exhaustive	QA-ASSURANCE-SAMPLED	1	sampled is not exhaustive
+quality-assurance-fixture-case/v1	QA-FIX-034	negative	coverage-as-proof	QA-ASSURANCE-COVERAGE	1	coverage is not proof
+quality-assurance-fixture-case/v1	QA-FIX-035	negative	incomplete-formal-binding	QA-ASSURANCE-FORMAL	1	complete formal binding
+quality-assurance-fixture-case/v1	QA-FIX-036	negative	missing-finite-model	QA-ASSURANCE-MODEL	1	exact finite model fields
+quality-assurance-fixture-case/v1	QA-FIX-037	negative	verdict-with-stale-evidence	QA-RESULT-STALE	1	current verdict requires current evidence
+quality-assurance-fixture-case/v1	QA-FIX-038	negative	unknown-assurance-class	QA-SCHEMA	1	closed assurance vocabulary
+quality-assurance-fixture-case/v1	QA-FIX-039	negative	terminal-retired-id-reuse	QA-ID-RETIRED	1	terminal lifecycle identity reuse
+quality-assurance-fixture-case/v1	QA-FIX-040	negative	duplicate-related-owner	QA-OWNER-AMBIGUOUS	1	related change is not additional owner
+quality-assurance-fixture-case/v1	QA-FIX-041	negative	stale-tool-digest	QA-RESULT-STALE	1	current verdict requires current tool authority
+quality-assurance-fixture-case/v1	QA-FIX-042	negative	result-verdict-mismatch	QA-RESULT-MISMATCH	1	result authority supplies exact verdict
+quality-assurance-fixture-case/v1	QA-FIX-043	negative	stale-scope-digest	QA-RESULT-STALE	1	current verdict requires current scope identity
+quality-assurance-fixture-case/v1	QA-FIX-044	negative	active-owner-as-baseline	QA-OWNER-AUTHORITY	1	active change is not completed baseline authority
+quality-assurance-fixture-case/v1	QA-FIX-045	negative	unknown-tool-binding	QA-TOOL-BINDING	1	tool binding must resolve through authoritative discovery
+quality-assurance-fixture-case/v1	QA-FIX-046	negative	available-without-identity	QA-STATE-AVAILABLE	1	available controls require an exact tool or configuration
+quality-assurance-fixture-case/v1	QA-FIX-047	negative	not-run-with-result	QA-RESULT-AUTHORITY	1	not-run controls cannot retain historical result authority
+quality-assurance-fixture-case/v1	QA-FIX-048	negative	retired-lifecycle-with-planned-state	QA-LIFECYCLE	1	retired lifecycle and implementation state agree
+quality-assurance-fixture-case/v1	QA-FIX-049	negative	missing-assurance-scope	QA-ASSURANCE-SCOPE	1	all controls retain explicit trust limitations
+quality-assurance-fixture-case/v1	QA-FIX-050	negative	current-without-evidence	QA-EVIDENCE-CURRENT	1	current evidence binds an explicit authority
+quality-assurance-fixture-case/v1	QA-FIX-051	negative	wrong-schema-id	QA-SCHEMA-ID	1	frozen registry schema identity
+quality-assurance-fixture-case/v1	QA-FIX-052	negative	wrong-digest-policy	QA-DIGEST-POLICY	1	active XXH3 binding policy
+quality-assurance-fixture-case/v1	QA-FIX-053	negative	wrong-final-command	QA-FINAL-COMMAND	1	devenv test remains the final oracle
+quality-assurance-fixture-case/v1	QA-FIX-054	negative	invalid-registry-path	QA-PATH-TRAVERSAL	1	registry output paths are normalized repository-relative paths
+quality-assurance-fixture-case/v1	QA-FIX-055	negative	unreadable-gate-source	QA-GATE-READ	1	resolved task authority discovery fails closed
+quality-assurance-fixture-case/v1	QA-FIX-056	negative	duplicate-disposition	QA-DISPOSITION-DUPLICATE	1	non-applicable identities are unique
+quality-assurance-fixture-case/v1	QA-FIX-057	negative	empty-disposition-rationale	QA-DISPOSITION	1	non-applicable disposition has exact rationale
+quality-assurance-fixture-case/v1	QA-FIX-058	negative	source-text-gate	QA-GATE-READ	1	source text cannot replace resolved task data

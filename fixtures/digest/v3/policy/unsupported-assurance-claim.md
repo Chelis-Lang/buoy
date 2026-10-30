@@ -1,0 +1,1 @@
+Digest equality establishes authenticity.

@@ -1,0 +1,30 @@
+class	field	rationale
+required	schema	the report names its versioned schema
+required	graph	the report binds the current graph digest
+required	selector	the report states the typed selector it received
+required	include_history	the report states the explicit history selection
+required	rows	the report carries canonically ordered rows
+required	diagnostics	the report carries the selected static diagnostics
+required-row	state	each row is current or historical
+required-row	relation	each row names its stable relation ID
+required-row	navigation	each row names its closed navigation relation
+required-row	record	each row carries the complete record digest
+required-row	requirement_id	each row names its stable requirement ID
+required-row	atom_revision	each row carries the complete atom revision
+required-row	requirement_node	each row carries the exact requirement node reference
+required-row	implementation_node	each row carries the exact implementation node reference
+required-row	freshness	each row carries separate freshness values
+forbidden	root	a physical root is not a canonical input
+forbidden	mount_root	a physical mount root is not a canonical input
+forbidden	absolute_path	an absolute path is not a canonical input
+forbidden	timestamp	a clock is not a canonical input
+forbidden	locale	a locale is not a canonical input
+forbidden	terminal_width	a terminal dimension is not a canonical input
+forbidden	provider	provider state is not a canonical input
+forbidden	semantic	complete source bytes are not trace projection fields
+order	current-before-historical	current rows precede historical rows
+order	relation-id	rows then sort by relation ID
+order	requirement-id	rows then sort by requirement ID
+order	implementation-path	rows then sort by logical implementation path
+order	implementation-node	rows then sort by implementation node digest
+order	record-digest	rows then sort by record digest

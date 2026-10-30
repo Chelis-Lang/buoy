@@ -1,0 +1,130 @@
+schema = "chelis-provenance-adversarial-review/v1"
+reviewed_on = "2026-08-31"
+scope = "every CHELIS-PROV requirement, fixture case, finite domain, registration binding, report surface, and registered gate"
+unresolved_findings = 0
+
+[[requirement]]
+id = "CHELIS-PROV-001"
+review = "the chelis-provenance crate links only buoy shell/core; buoy-core builds bare-metal without Chelis symbols"
+finding = "none"
+resolution = "resolved"
+
+[[requirement]]
+id = "CHELIS-PROV-002"
+review = "surface mapping materializes every declared member; dropped rows reject with SPG-SURFACE-INCOMPLETE in the mutation suite"
+finding = "none"
+resolution = "resolved"
+
+[[requirement]]
+id = "CHELIS-PROV-003"
+review = "extraction is total per byte; unknown schema versions fail loudly; unattached metadata and malformed records emit stable diagnostics"
+finding = "none"
+resolution = "resolved"
+
+[[requirement]]
+id = "CHELIS-PROV-004"
+review = "static, change, and advisory bytes are asserted identical across roots, input orders, repetition, and provider noise"
+finding = "none"
+resolution = "resolved"
+
+[[requirement]]
+id = "CHELIS-PROV-005"
+review = "registered Chelis carriers retain verdict not-run; no test or report renders a tested claim for them"
+finding = "carrier registrations could be misread as execution evidence"
+resolution = "resolved; registrations bind pending-atomization and not-run, and the promotion review lists them as unsatisfied obligations"
+
+[[requirement]]
+id = "CHELIS-PROV-006"
+review = "per-artifact drift fixtures cover all nine inventoried artifacts; consistency verdicts stay separate from behavior facts"
+finding = "tool and configuration drift detection requires configured current tool identities"
+resolution = "resolved; the configuration schema carries [[tool]] identities, the frozen fixture manifest keeps tool and configuration drift cases blocking, and derivation registrations record the expected tool per artifact"
+
+[[requirement]]
+id = "CHELIS-PROV-007"
+review = "impact closure reaches a fixed point over atom dependents and object references; every weakening protocol failure is a frozen fixture"
+finding = "none"
+resolution = "resolved"
+
+[[requirement]]
+id = "CHELIS-PROV-008"
+review = "execution consumes an immutable static identity and returns it unchanged; canonical execution bytes exclude logs, timing, and paths"
+finding = "none"
+resolution = "resolved"
+
+[[requirement]]
+id = "CHELIS-PROV-009"
+review = "the Gappa erf bundle and numerical envelopes carry no approved correspondence"
+finding = "existing Chelis proof-source bundles could be misread as accepted formal proof"
+resolution = "resolved; accepted_records is empty, the acceptance gate lists every required binding, and downstream backends stay excluded"
+
+[[requirement]]
+id = "CHELIS-PROV-010"
+review = "promotion review retains advisory enforcement under ratchet chelis-provenance-initial with visible unsatisfied obligations"
+finding = "none"
+resolution = "resolved"
+
+[[requirement]]
+id = "CHELIS-PROV-011"
+review = "descriptors declare exactly the dialect's own schema-v3 kind; substitution cases stay frozen with SPG-ADAPTER-UNDECLARED-SOURCE-ITEM-KIND"
+finding = "none"
+resolution = "resolved"
+
+[[requirement]]
+id = "CHELIS-PROV-012"
+review = "parser-backed anchoring over the vendored grammar; the drift check recomputes every vendored digest against the registered derivation before any gate trusts the build"
+finding = "under the lexical scheme a source the grammar rejects could pass as nonnormative text, and a marker inside a declaration body could silently re-anchor"
+resolution = "resolved: CHELIS-PROV-PARSE-ERROR fails extraction before any record check, and inner markers surface as unattached metadata"
+
+[[requirement]]
+id = "CHELIS-PROV-013"
+review = "report rows render directly from canonical object meta and atom revisions; no value is hand-rendered or derived from paths"
+finding = "a revision-bearing report could tempt hosts to treat report bytes as an authority instead of a projection"
+resolution = "resolved: the report stays a projection of the graph, cross-root byte equality is frozen, and the trust document names the projection boundary"
+
+[[requirement]]
+id = "CHELIS-PROV-014"
+review = "the advisory subcommand preserves the static exit class and grants no assurance; the consumer package selects features per package"
+finding = "multi-package feature unification could silently degrade non-default digest variants to xxh3-128 through the facade's default features"
+resolution = "resolved: chelis-provenance mirrors the digest features with default-features disabled on its buoy dependency, so every variant's unified feature set stays exact"
+
+[[requirement]]
+id = "CHELIS-PROV-015"
+review = "item and runner enforcement joins recorded fields against values recomputed from the same static pass; no second extraction or cached state exists"
+finding = "before enforcement, a body edit on a bound declaration or a toolchain bump passed the static check silently while the record still displayed a digest"
+resolution = "resolved: CHELIS-PROV-ITEM-STALE and CHELIS-PROV-ORACLE-RUNNER-STALE fail the static exit class, and undeclared runner bindings stay visible as an advisory gap"
+
+[[requirement]]
+id = "CHELIS-PROV-016"
+review = "the bound=/current= context format is appended deterministically and stays byte-identical across absolute roots"
+finding = "expected values in diagnostics could tempt a maintainer to copy the current digest without reviewing why it moved"
+resolution = "resolved: the context names both values but the rebind workflow still requires a reviewed dry-run diff before any write, mirroring golden regeneration policy"
+
+[[requirement]]
+id = "CHELIS-PROV-017"
+review = "the trace projection derives only from the static graph and saved record bytes; it introduces no new authority and recomputes every hop"
+finding = "a projection could be mistaken for an assurance claim stronger than the static check it wraps"
+resolution = "resolved: the trace verdict is accept only when the static check accepts and every hop matches, and the report names the static verdict separately"
+
+[[requirement]]
+id = "CHELIS-PROV-018"
+review = "rebind plans target only marker-prefixed record field lines located inside record byte spans, so declarations are structurally unreachable"
+finding = "a mechanical rewrite command is a laundering vector if it can move claims, verdicts, or receipts to match reality instead of bindings"
+resolution = "resolved: rebind rewrites only mechanical digest and revision fields, refuses on parse rejection, requires the explicit write flag, and any rebind changes the static identity so receipts force corpus re-execution"
+
+[[requirement]]
+id = "CHELIS-PROV-019"
+review = "resolution reuses the upstream object parser, which recomputes the record digest from the parsed fields and compares it with the digest the store path claims, so a substituted object cannot answer for an address"
+finding = "object substitution would defeat content addressing entirely if the store path were trusted, and a change-detection member would make an address meaningless in principle"
+resolution = "resolved: the parser rejects any object whose canonical bytes or path digest disagree, and a build whose active member is not collision resistant resolves no binding at all rather than resolving one weakly"
+
+[[requirement]]
+id = "CHELIS-PROV-020"
+review = "source currency recomputes the attached declaration and exact authority record block under the active member, and atom-revision freshness flows through validate_graph"
+finding = "a compact form could silently weaken enforcement relative to the inline form, because the in-source marker carries no item digest of its own"
+resolution = "resolved: subject and requirement digests are enforced with bound and current contexts; validate_graph includes implementation_bindings in its atom-revision closure, so a stale compact binding rejects with SPG-REF-DANGLING-OR-STALE like the inline form"
+
+[[requirement]]
+id = "CHELIS-PROV-021"
+review = "conversion and regeneration both plan before writing, splice only the record block or the address value, and leave every declaration byte identical, and conversion inputs were reviewed against what the stored schema can express"
+finding = "a mechanical conversion is a laundering vector if it can narrow a claim to fit the stored schema, and an immutable object store invites two further hazards: editing an object in place, and retaining a superseded object that keeps a stale record resolvable"
+resolution = "resolved: conversion refuses unsupported navigation, atom counts, stale item digests, and relation IDs that coexist in inline and compact forms; every planned object passes the upstream parser; regeneration writes a successor object, updates the address, and removes only unreferenced superseded objects; destinations with different bytes refuse, and dry runs cannot touch saved bytes"

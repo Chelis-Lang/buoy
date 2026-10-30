@@ -1,0 +1,68 @@
+# Repository-owned dependency policy. The focused Nix gate substitutes the
+# immutable RustSec database path for @advisoryDb@ before invoking cargo-deny.
+[graph]
+targets = [
+  "aarch64-apple-darwin",
+  "x86_64-apple-darwin",
+  "x86_64-unknown-linux-gnu",
+  "x86_64-pc-windows-msvc",
+  "thumbv7em-none-eabi",
+]
+all-features = true
+
+[advisories]
+db-path = "@advisoryDb@"
+db-urls = ["https://github.com/RustSec/advisory-db"]
+ignore = [
+  { id = "RUSTSEC-2024-0436", reason = "paste 1.0.15 is a transitive macro dependency of pinned Hegel/Dylint tooling; unmaintained status remains visible and grants no safety claim" },
+]
+
+[licenses]
+allow = [
+  "0BSD",
+  "Apache-2.0",
+  "Apache-2.0 WITH LLVM-exception",
+  "MIT",
+  "Unicode-3.0",
+  "Unlicense",
+  "Zlib",
+]
+confidence-threshold = 0.8
+exceptions = [
+  { allow = ["BSD-2-Clause"], crate = "arrayref@0.3.9" },
+  { allow = ["MPL-2.0"], crate = "cbindgen@0.29.2" },
+  { allow = ["MPL-2.0"], crate = "cbindgen@0.29.4" },
+  { allow = ["ISC"], crate = "libloading@0.8.9" },
+  { allow = ["CC0-1.0", "Apache-2.0", "Apache-2.0 WITH LLVM-exception"], crate = "blake3@1.8.2" },
+  { allow = ["MIT", "Apache-2.0"], crate = "sha2@0.10.9" },
+  { allow = ["BSL-1.0"], crate = "xxhash-rust@0.8.17" },
+]
+
+[licenses.private]
+ignore = true
+registries = []
+
+[bans]
+multiple-versions = "deny"
+wildcards = "deny"
+highlight = "all"
+workspace-default-features = "allow"
+external-default-features = "allow"
+allow = []
+allow-workspace = true
+deny = []
+skip = [
+  { crate = "winnow@0.7.15", reason = "toml 0.9.5 retains its reviewed pre-1.0 parser while toml_parser 1.1.2 requires winnow 1.0.4" },
+]
+skip-tree = []
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = ["https://github.com/rust-lang/rust-clippy"]
+
+[sources.allow-org]
+github = []
+gitlab = []
+bitbucket = []

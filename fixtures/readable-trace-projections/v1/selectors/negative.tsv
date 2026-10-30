@@ -1,0 +1,12 @@
+case	class	selector_flag	selector_value	expected_exit	rationale
+absent-selector	usage	none	none	64	the query requires exactly one typed selector
+conflicting-selectors	usage	--requirement-id --relation-id	BGLC-003 BGLC-RENDER-CATALOG	64	two selectors cannot select one object
+malformed-requirement-id	input	--requirement-id	invalid id	70	a stable ID rejects a space
+malformed-relation-id	input	--relation-id	lower-case	70	a stable ID rejects lower-case bytes
+malformed-path	input	--implementation-path	/absolute/path.rs	70	a logical path rejects an absolute root
+malformed-record-digest	input	--record	blake3-256:0e857e33	70	a record selector requires a complete digest
+abbreviated-record-digest	input	--record	0e857e33e387325fbf457e426bc42286d9d99926b19f3efa3c203795cfeeb6c4	70	a record selector requires an algorithm-qualified digest
+unresolved-requirement-id	input	--requirement-id	BGLC-999	70	a valid selector without a matching object is a not-found input failure
+unresolved-relation-id	input	--relation-id	BGLC-ABSENT-RELATION	70	a valid relation selector without a record is a not-found input failure
+unresolved-path	input	--implementation-path	src/absent.rs	70	a valid path without a selected item is a not-found input failure
+unresolved-record-digest	input	--record	blake3-256:1111111111111111111111111111111111111111111111111111111111111111	70	a valid digest without a stored record is a not-found input failure

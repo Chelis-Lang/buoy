@@ -1,0 +1,70 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-chelis-no-laundering-v1"
+requirement_ids = ["CHELIS-PROV-005", "CHELIS-PROV-006", "CHELIS-PROV-007"]
+kind = "truth-table"
+expected_state_count = 1280
+
+[[dimensions]]
+name = "technical_obligation"
+values = ["satisfied", "unsatisfied"]
+[[dimensions]]
+name = "verdict"
+values = ["not-run", "pass", "fail", "error", "timeout"]
+[[dimensions]]
+name = "fresh"
+values = ["true", "false"]
+[[dimensions]]
+name = "selected"
+values = ["true", "false"]
+[[dimensions]]
+name = "debt"
+values = ["none", "active"]
+[[dimensions]]
+name = "waiver"
+values = ["none", "active"]
+[[dimensions]]
+name = "reaffirmation"
+values = ["none", "valid"]
+[[dimensions]]
+name = "consistency"
+values = ["none", "pass"]
+[[dimensions]]
+name = "review"
+values = ["none", "approved"]
+
+[[predicates]]
+name = "tested"
+[[predicates.clauses]]
+all = ["technical_obligation=satisfied", "verdict=pass", "fresh=true", "selected=true"]
+
+[[predicates]]
+name = "process_authorized"
+[[predicates.clauses]]
+all = ["technical_obligation=satisfied"]
+[[predicates.clauses]]
+all = ["waiver=active"]
+
+[[invariants]]
+id = "debt-never-tests"
+if_all = ["technical_obligation=unsatisfied", "debt=active"]
+then_all = ["tested=false"]
+[[invariants]]
+id = "waiver-never-tests"
+if_all = ["technical_obligation=unsatisfied", "waiver=active"]
+then_all = ["tested=false", "process_authorized=true"]
+[[invariants]]
+id = "reaffirmation-never-freshens"
+if_all = ["fresh=false", "reaffirmation=valid"]
+then_all = ["tested=false"]
+[[invariants]]
+id = "consistency-never-proves-behavior"
+if_all = ["technical_obligation=unsatisfied", "consistency=pass"]
+then_all = ["tested=false"]
+[[invariants]]
+id = "review-never-tests"
+if_all = ["technical_obligation=unsatisfied", "review=approved"]
+then_all = ["tested=false"]
+[[invariants]]
+id = "nonpass-never-tests"
+if_all = ["verdict!=pass"]
+then_all = ["tested=false"]

@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "EVD-005"
+
+[[case]]
+id = "evd-005-positive-all-required-tests-pass"
+scenario = "positive-every-required-test-passes"
+polarity = "positive"
+operation = "aggregate-assurance"
+baseline = "fixtures/v2/baselines/evidence-assurance.toml"
+mutations = ["set-all-required-verdicts-pass"]
+expected = { outcome = "accept", codes = [], facts = ["verdict:ORC-POSITIVE=pass", "verdict:ORC-NEGATIVE=pass", "assurance:EVD-BASE=tested"] }
+
+[[case]]
+id = "evd-005-negative-one-required-timeout"
+scenario = "negative-one-required-test-times-out"
+polarity = "negative"
+operation = "aggregate-assurance"
+baseline = "fixtures/v2/baselines/evidence-assurance.toml"
+mutations = ["set-all-required-verdicts-pass", "timeout-one-required-carrier"]
+expected = { outcome = "accept", codes = ["EVD-ASSURANCE-REQUIRED-TIMEOUT"], facts = ["verdict:ORC-POSITIVE=pass", "verdict:ORC-NEGATIVE=timeout", "assurance:EVD-BASE:tested=false"] }

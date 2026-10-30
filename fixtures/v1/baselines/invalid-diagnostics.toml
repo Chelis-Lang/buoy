@@ -1,0 +1,28 @@
+schema = "spec-provenance-fixture-baseline/v1"
+id = "invalid-diagnostics"
+
+[[files]]
+path = "spec/duplicate.md"
+adapter = "markdown/v1"
+authority_expectation = "required"
+content = "duplicate authority fixture\n"
+
+[[atoms]]
+id = "DET-007"
+state = "proposed"
+kind = "constraint"
+scope = ["spec-provenance.diagnostics"]
+statement = "Canonical diagnostics exclude host data."
+authority = "$source:spec/duplicate.md:0"
+
+[[atoms]]
+id = "DET-007"
+state = "proposed"
+kind = "constraint"
+scope = ["spec-provenance.diagnostics"]
+statement = "Canonical diagnostics exclude host data."
+authority = "$source:spec/duplicate.md:1"
+
+[raw_log]
+text = "verifier failed at /tmp/host-a/proof.rs in pid 12345"
+canonical = false

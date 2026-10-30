@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "lifecycle-graph"
+
+[[atoms]]
+id = "SPG-003"
+state = "ratified"
+kind = "constraint"
+scope = ["spec-provenance.lifecycle"]
+statement = "A retired atom ID MUST remain permanently reserved and MUST NOT return to a live state."
+authority = "$source:spec/lifecycle.md:0"
+approval = "$approval:spec-provenance-maintainers:SPG-003"
+
+[[atoms]]
+id = "SPG-003-REPLACEMENT"
+state = "ratified"
+kind = "constraint"
+scope = ["spec-provenance.lifecycle"]
+statement = "A superseding atom MUST use a newly allocated stable ID."
+authority = "$source:spec/lifecycle.md:1"
+approval = "$approval:spec-provenance-maintainers:SPG-003-REPLACEMENT"

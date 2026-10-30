@@ -1,0 +1,3 @@
+pub fn emit_digest(bytes: [u8; 16]) -> String {
+    format!("xxh3-128:{}", lower_hex(bytes))
+}

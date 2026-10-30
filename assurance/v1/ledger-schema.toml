@@ -1,0 +1,114 @@
+schema = "spec-provenance-assurance-ledger-schema/v1"
+identity = "category-plus-stable-id"
+ordering = "category-then-stable-id-canonical-utf8"
+no_cross_class_inference = true
+
+categories = [
+  "requirement",
+  "scenario",
+  "schema-row",
+  "source-target",
+  "fixture-operation",
+  "fixture-mutation",
+  "property",
+  "finite-model",
+  "mutation-class",
+  "platform-backend",
+  "proof-theorem",
+  "supply-chain-input",
+  "phase-handoff",
+]
+
+evidence_classes = [
+  "point-fixture",
+  "production-property-differential",
+  "sampled-property",
+  "production-finite-model-conformance",
+  "structural-coverage",
+  "structural-source-execution",
+  "automated-mutation",
+  "fuzz-campaign",
+  "fault-injection",
+  "platform-conformance",
+  "formal-proof",
+  "supply-chain-policy",
+  "review-only",
+]
+
+dispositions = ["satisfied", "not-applicable", "unsupported", "blocked"]
+
+[required_fields]
+entry = ["category", "id", "requirement_scope", "evidence_class", "disposition", "rationale", "source_digest", "tool_digest", "configuration_digest", "result_digest", "evidence_paths", "expires_by_policy", "downstream_exclusions"]
+satisfied = ["evidence_paths", "source_digest", "tool_digest", "configuration_digest", "result_digest"]
+not_applicable = ["rationale", "approval"]
+unsupported = ["rationale", "blocker", "approval"]
+blocked = ["rationale", "blocker", "approval"]
+formal_proof = ["property", "implementation_representation", "correspondence", "proof_source", "verifier", "solver", "configuration", "assumptions", "negative_control", "scope", "exclusions"]
+
+[[rule]]
+id = "coverage-is-not-proof"
+forbid = "structural-coverage or structural-source-execution satisfies behavioral completeness, exhaustive evidence, or proof-theorem"
+
+[[rule]]
+id = "sampled-property-is-not-exhaustive"
+forbid = "sampled-property satisfies exhaustive evidence, formal-proof, compiler correctness, cryptographic correctness, or prose-to-property correspondence"
+
+[[rule]]
+id = "annotation-is-not-test"
+forbid = "registration metadata satisfies fixture-operation or property"
+
+[[rule]]
+id = "reference-only-is-not-production"
+forbid = "reference-only model satisfies production-finite-model-conformance"
+
+[[rule]]
+id = "source-hash-is-not-correspondence"
+forbid = "source digest alone satisfies formal-proof"
+
+[[rule]]
+id = "aggregate-green-is-not-entry-evidence"
+forbid = "final command status substitutes for exact entry evidence"
+
+[[rule]]
+id = "shared-observation-is-not-separate-execution"
+forbid = "manifest presence, a shared case observation, or an aggregated mutation list substitutes for one normalized result per operation, mutation, scenario, requirement, finite model, or intentionally-false control"
+
+[[rule]]
+id = "execution-bindings-fail-closed"
+require = "each local execution record binds exact source, tool, configuration, normalized result, passing status, and one inventoried category-plus-stable-id without duplicates or orphans"
+
+[[rule]]
+id = "waiver-is-not-satisfaction"
+forbid = "waiver or debt changes unsatisfied technical disposition to satisfied"
+
+[[freshness_rule]]
+evidence_class = "point-fixture"
+binds = ["source_digest", "tool_digest", "configuration_digest", "result_digest", "separate_stable_identity", "passing_execution"]
+
+[[freshness_rule]]
+evidence_class = "production-finite-model-conformance"
+binds = ["model_source_digest", "production_source_digest", "reference_source_digest", "tool_digest", "configuration_digest", "result_digest", "declared_state_bound"]
+
+[[freshness_rule]]
+evidence_class = "structural-source-execution"
+binds = ["source_digest", "tool_digest", "configuration_digest", "source_inventory_digest", "platform", "export_digest", "exact_integer_counts"]
+
+[[freshness_rule]]
+evidence_class = "sampled-property"
+binds = ["property_source_digest", "production_source_digest", "reference_source_digest", "tool_digest", "settings_digest", "domain_digest", "replay_digests"]
+
+[[freshness_rule]]
+evidence_class = "fuzz-campaign"
+binds = ["source_digest", "tool_digest", "configuration_digest", "duration_or_case_bound", "expiry"]
+
+[[freshness_rule]]
+evidence_class = "automated-mutation"
+binds = ["source_digest", "tool_digest", "configuration_digest", "score", "survivor_dispositions", "expiry"]
+
+[[freshness_rule]]
+evidence_class = "formal-proof"
+binds = ["implementation_representation", "proof_source", "verifier", "solver", "configuration", "assumptions", "negative_control"]
+
+[[freshness_rule]]
+evidence_class = "platform-conformance"
+binds = ["source_digest", "tool_digest", "configuration_digest", "platform", "canonical_corpus_digest"]

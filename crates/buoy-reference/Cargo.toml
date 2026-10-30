@@ -1,0 +1,14 @@
+[package]
+name = "buoy-reference"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+description = "Encoder-independent executable reference authority for Buoy"
+
+[dependencies]
+unicode-normalization = { version = "=0.1.24", default-features = false }
+
+[lints]
+workspace = true

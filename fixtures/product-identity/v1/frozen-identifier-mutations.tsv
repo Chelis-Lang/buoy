@@ -1,0 +1,13 @@
+schema	id	class	source_path	frozen	replacement	expected_diagnostic
+buoy-frozen-identifier-mutations/v1	FROZEN-001	schema	src/migration.rs	spec-provenance/v1	buoy/v1	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-002	schema	src/migration.rs	spec-provenance/v2	buoy/v2	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-003	result-protocol	src/repository.rs	spec-provenance-result/v1	buoy-result/v1	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-004	report-schema	fixtures/hardening/v2/canonical-report-goldens.tsv	spec-provenance-report/v2	buoy-report/v2	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-005	presentation-schema	src/presentation.rs	spec-provenance-report-json/v2	buoy-report-json/v2	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-006	presentation-schema	src/presentation.rs	spec-provenance-report-human/v2	buoy-report-human/v2	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-007	configuration-schema	src/repository.rs	spec-provenance-config/v1	buoy-config/v1	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-008	change-schema	src/cli.rs	spec-provenance-change-manifest/v1	buoy-change-manifest/v1	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-009	digest-domain	crates/buoy-core/src/value.rs	spec-provenance/v2	buoy/v2	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-010	historical-vector-schema	fixtures/hardening/v1/canonical-vectors.tsv	spec-provenance-canonical-vector/v1	buoy-canonical-vector/v1	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-011	fixture-schema	fixtures/v2/det/DET-001.toml	spec-provenance-fixture-cases/v2	buoy-fixture-cases/v2	PID-FROZEN-IDENTITY
+buoy-frozen-identifier-mutations/v1	FROZEN-012	historical-fixture-schema	fixtures/v1/det/DET-001.toml	spec-provenance-fixture-cases/v1	buoy-fixture-cases/v1	PID-FROZEN-IDENTITY

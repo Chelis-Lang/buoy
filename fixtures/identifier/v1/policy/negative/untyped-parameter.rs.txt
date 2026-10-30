@@ -1,0 +1,15 @@
+// Regression: a model constructor reintroduces an untyped stable-ID parameter.
+
+impl Atom {
+    pub fn new(id: impl Into<String>, state: LifecycleState) -> Result<Self, ConstructionError> {
+        let id = id.into();
+        let meta = ObjectMeta::for_fields(ObjectKind::Atom, id, state);
+        Ok(Self { meta })
+    }
+}
+
+impl ChangeDisposition {
+    pub fn new(id: StableId, impacted_id: String) -> Result<Self, ConstructionError> {
+        Ok(Self { id, impacted_id })
+    }
+}

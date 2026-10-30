@@ -1,0 +1,8 @@
+{
+  "schema": "buoy/consumer-package-source-content/v1",
+  "algorithm": "sha256",
+  "mode": "recursive-nar",
+  "declared_source": "nix/tools/declared-source.nix",
+  "review_note": "Reviewed content digest of the declared source closure that nix/consumer-package-v1.nix builds. Realization declares this constant to Nix; Nix derives the realized tree's own content hash and fails closed on any difference. Never derive this value inside a verification path. Regenerate it only through the explicit maintainer command nix/tools/derive-source-content-digest.sh --update and re-review the resulting source tree.",
+  "reviewed_source_content_hash": "sha256-5wLl9eGhcpvglJxPDhPlKuFwiYKv67v0Ms4XsF+SrZI="
+}

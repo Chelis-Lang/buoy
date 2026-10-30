@@ -1,0 +1,41 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-chelis-surface-completeness-v1"
+requirement_ids = ["CHELIS-PROV-002"]
+kind = "truth-table"
+expected_state_count = 30
+
+[[dimensions]]
+name = "member"
+values = ["present", "missing"]
+[[dimensions]]
+name = "disposition"
+values = ["normative", "prohibited", "deferred", "not-applicable", "missing"]
+[[dimensions]]
+name = "authority"
+values = ["current", "missing", "stale"]
+
+[[predicates]]
+name = "complete"
+[[predicates.clauses]]
+all = ["member=present", "disposition!=missing", "authority=current"]
+
+[[invariants]]
+id = "missing-member-never-complete"
+if_all = ["member=missing"]
+then_all = ["complete=false"]
+[[invariants]]
+id = "missing-disposition-never-complete"
+if_all = ["disposition=missing"]
+then_all = ["complete=false"]
+[[invariants]]
+id = "unsupported-members-remain-visible"
+if_all = ["member=present", "disposition=prohibited", "authority=current"]
+then_all = ["complete=true"]
+[[invariants]]
+id = "deferred-members-remain-visible"
+if_all = ["member=present", "disposition=deferred", "authority=current"]
+then_all = ["complete=true"]
+[[invariants]]
+id = "stale-authority-never-complete"
+if_all = ["authority=stale"]
+then_all = ["complete=false"]

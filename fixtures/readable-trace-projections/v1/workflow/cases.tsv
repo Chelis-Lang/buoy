@@ -1,0 +1,10 @@
+case	artifact	accepted	expected_diagnostic	rationale
+planned-relations	workflow/planned-relations.md	true	none	a planned row records intent without a current digest
+completion-snapshot	workflow/completion-snapshot.md	true	none	a completed row records the immutable record locator
+fabricated-completion	workflow/negative-fabricated-completion.md	false	premature-completion	a planned row must not carry a record digest as its target selector
+placeholder-snapshot	workflow/negative-placeholder-snapshot.md	false	placeholder-identity	an empty snapshot must not use placeholder identity values
+copied-record-body	workflow/negative-copied-record-body.md	false	copied-record-body	a snapshot points at the record and never copies its body
+provider-status	workflow/negative-provider-status.md	false	provider-status	a repository-owned artifact records no provider state
+incomplete-row	workflow/negative-incomplete-row.md	false	incomplete-row	a planned row must record every reviewed column
+missing-link-review	workflow/negative-missing-link-review.md	false	missing-link-review	each affected requirement must have one link-review row
+record-locator-in-plan	workflow/negative-record-locator-in-plan.md	false	premature-completion	a planned row must not carry a canonical record locator

@@ -1,0 +1,54 @@
+schema = "buoy-adversarial-runtime-tools/v1"
+claim_boundary = "dynamic and compile-time testing evidence only; no result is formal proof or evidence for excluded code/platforms"
+
+[[lane]]
+id = "miri-pure-core"
+tool = "cargo-miri"
+toolchain = "nightly-2026-04-16"
+command = "devenv shell -- buoy-miri"
+platforms = ["linux", "macos"]
+scope = [
+  "buoy-core canonical value encode/decode differential tests",
+  "one exact buoy-core assumption-to-property-to-proof impact fixed-point traversal",
+]
+exclusions = [
+  "filesystem and process effects",
+  "foreign-function, operating-system, rustc, LLVM, and native-code correctness",
+  "Windows execution until a pinned Windows Miri lane is separately selected",
+]
+assurance_class = "dynamic-undefined-behavior-testing"
+
+[[lane]]
+id = "address-sanitizer-selected"
+tool = "rustc-address-sanitizer"
+toolchain = "nightly-2026-04-16"
+command = "devenv shell -- buoy-sanitizer"
+platforms = ["linux", "macos"]
+scope = [
+  "buoy-core strict canonical differential tests",
+]
+exclusions = [
+  "Darwin leak detection because LeakSanitizer shutdown does not exit cleanly; address detection remains enabled, while Linux retains leak detection",
+  "shell-validator sanitizer execution; its focused Darwin test body passed but the LeakSanitizer wrapper did not exit cleanly",
+  "Miri-only undefined behavior classes",
+  "unselected binaries, formal proofs, and Windows",
+  "memory safety of dependencies or operating-system code not executed by the focused tests",
+]
+assurance_class = "dynamic-memory-error-testing"
+
+[[lane]]
+id = "public-api-compile-fail"
+tool = "rustc-trybuild"
+toolchain = "nightly-2026-04-16"
+command = "devenv shell -- buoy-compile-fail"
+platforms = ["linux", "macos", "windows"]
+scope = [
+  "private-field direct construction",
+  "metadata-kind substitution",
+  "forbidden callable/effect dependency in buoy-core public interfaces",
+]
+exclusions = [
+  "runtime behavior",
+  "semantic completeness beyond the named compile-time API invariants",
+]
+assurance_class = "compile-time-api-testing"

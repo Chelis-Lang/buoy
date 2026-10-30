@@ -1,0 +1,205 @@
+schema = "chelis-provenance-fixture-cases/v1"
+
+[[case]]
+id = "binding-address-resolves"
+requirement = "CHELIS-PROV-019"
+scenario = "positive-one-line-resolves-the-binding"
+polarity = "positive"
+operation = "binding-resolution"
+input = "a two-line binding record above a declaration and a store object whose bytes hash to the address"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["core-materialization=true", "frozen-upstream-layout", "collision-resistant-member"]
+execution = "integration"
+
+[[case]]
+id = "binding-object-tampered"
+requirement = "CHELIS-PROV-019"
+scenario = "negative-tampered-object-dangles"
+polarity = "negative"
+operation = "binding-resolution"
+input = "a store object edited after the address was recorded"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-BINDING-ADDRESS"]
+facts = ["structural-immutability", "no-materialization-on-reject", "static-exit-class"]
+execution = "integration"
+
+[[case]]
+id = "binding-object-missing"
+requirement = "CHELIS-PROV-019"
+scenario = "negative-missing-object-fails-closed"
+polarity = "negative"
+operation = "binding-resolution"
+input = "a binding address with no object at its content-addressed path"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-BINDING-ADDRESS"]
+facts = ["missing-object", "static-exit-class"]
+execution = "integration"
+
+[[case]]
+id = "binding-store-outside-selectors"
+requirement = "CHELIS-PROV-019"
+scenario = "negative-store-outside-every-selector-root"
+polarity = "negative-control"
+operation = "binding-resolution"
+input = "a configured binding store that lies under no selector root"
+expected_outcome = "reject"
+diagnostics = []
+facts = ["configuration-boundary", "selector-bounded-store"]
+execution = "integration"
+
+[[case]]
+id = "binding-marker-field-set-closed"
+requirement = "CHELIS-PROV-019"
+scenario = "negative-unknown-or-missing-marker-field"
+polarity = "negative"
+operation = "binding-grammar"
+input = "a binding marker carrying a second field, or none"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-MALFORMED-RECORD"]
+facts = ["closed-field-set=record", "duplicate-reason-preserved", "no-record-extracted"]
+execution = "integration"
+
+[[case]]
+id = "binding-marker-malformed-address"
+requirement = "CHELIS-PROV-019"
+scenario = "negative-marker-address-is-not-a-digest"
+polarity = "negative"
+operation = "binding-resolution"
+input = "a well-formed marker whose address text parses as no digest"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-BINDING-ADDRESS"]
+facts = ["grammar-accepts", "resolution-rejects", "no-materialization-on-reject"]
+execution = "integration"
+
+[[case]]
+id = "binding-change-detection-member"
+requirement = "CHELIS-PROV-019"
+scenario = "negative-change-detection-member-resolves-nothing"
+polarity = "negative"
+operation = "binding-resolution"
+input = "a compact binding in a build whose active member is xxh3-128"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-BINDING-ADDRESS"]
+facts = ["algorithm-not-collision-resistant", "fails-closed=true", "precedes-store-lookup"]
+execution = "integration"
+
+[[case]]
+id = "binding-conversion-refuses-unconvertible-links"
+requirement = "CHELIS-PROV-021"
+scenario = "negative-conversion-cannot-narrow-a-claim"
+polarity = "negative-control"
+operation = "binding-conversion"
+input = "an inline link with non-implements navigation, an atom count other than one, or a stale item digest"
+expected_outcome = "reject"
+diagnostics = []
+facts = ["no-laundering=true", "refuses-before-write=true", "store-unchanged=true"]
+execution = "integration"
+
+[[case]]
+id = "binding-link-duplicate"
+requirement = "CHELIS-PROV-021"
+scenario = "negative-inline-and-compact-forms-cannot-coexist"
+polarity = "negative"
+operation = "binding-conversion"
+input = "one relation ID in both an inline link and a compact binding"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-BINDING-LINK-DUPLICATE"]
+facts = ["one-relation-one-form", "partial-conversion-rejected"]
+execution = "integration"
+
+[[case]]
+id = "binding-subject-current"
+requirement = "CHELIS-PROV-020"
+scenario = "positive-subject-matches-the-declaration"
+polarity = "positive"
+operation = "binding-subject-currency"
+input = "a binding whose subject digest equals the attached declaration's parsed node digest"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["no-weaker-than-inline=true"]
+execution = "integration"
+
+[[case]]
+id = "binding-subject-stale"
+requirement = "CHELIS-PROV-020"
+scenario = "negative-body-edit-invalidates-the-subject"
+polarity = "negative"
+operation = "binding-subject-currency"
+input = "an edit to the attached declaration body after binding"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-BINDING-SUBJECT-STALE"]
+facts = ["context-format=bound-and-current", "static-exit-class"]
+execution = "integration"
+
+[[case]]
+id = "binding-atom-revision-stale"
+requirement = "CHELIS-PROV-020"
+scenario = "negative-authority-edit-invalidates-the-bound-revision"
+polarity = "negative"
+operation = "binding-atom-currency"
+input = "an authority statement edit after the compact binding was written"
+expected_outcome = "reject"
+diagnostics = ["SPG-REF-DANGLING-OR-STALE"]
+facts = ["same-enforcement-as-inline=true", "core-atom-revision-closure"]
+execution = "integration"
+
+[[case]]
+id = "binding-requirement-stale"
+requirement = "CHELIS-PROV-020"
+scenario = "negative-authority-formatting-invalidates-the-requirement"
+polarity = "negative"
+operation = "binding-requirement-currency"
+input = "a formatting-only authority record edit after binding"
+expected_outcome = "reject"
+diagnostics = ["CHELIS-PROV-BINDING-REQUIREMENT-STALE"]
+facts = ["context-format=bound-and-current", "exact-authority-record-block"]
+execution = "integration"
+
+[[case]]
+id = "binding-convert-and-trace"
+requirement = "CHELIS-PROV-021"
+scenario = "positive-convert-verify-trace"
+polarity = "positive"
+operation = "binding-conversion"
+input = "one inline implementation link converted with the write flag"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["graph-semantically-unchanged=true", "two-line-source-form", "trace-expands-store"]
+execution = "integration"
+
+[[case]]
+id = "binding-rebind-supersedes"
+requirement = "CHELIS-PROV-021"
+scenario = "positive-rebind-supersedes-the-object"
+polarity = "positive"
+operation = "binding-regeneration"
+input = "a binding left stale by a reviewed spec edit"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["object-write", "address", "object-remove", "idempotent-after-write=true"]
+execution = "integration"
+
+[[case]]
+id = "binding-dry-runs-immutable"
+requirement = "CHELIS-PROV-021"
+scenario = "negative-dry-runs-cannot-mutate"
+polarity = "negative-control"
+operation = "binding-regeneration"
+input = "bind and rebind invoked without the write flag"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["saved-bytes-unchanged=true", "store-unchanged=true"]
+execution = "integration"
+
+[[case]]
+id = "binding-declarations-untouched"
+requirement = "CHELIS-PROV-021"
+scenario = "negative-declarations-never-rewritten"
+polarity = "negative-control"
+operation = "binding-conversion"
+input = "a conversion applied with the write flag"
+expected_outcome = "accept"
+diagnostics = []
+facts = ["declaration-bytes-identical=true", "only-record-block-changes=true"]
+execution = "integration"

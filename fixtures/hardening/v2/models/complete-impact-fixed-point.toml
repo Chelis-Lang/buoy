@@ -1,0 +1,56 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-complete-impact-fixed-point-v2"
+requirement_ids = ["DGA-001", "DGA-006"]
+kind = "truth-table"
+expected_state_count = 32
+
+[[dimensions]]
+name = "direct_change"
+values = ["present", "absent"]
+[[dimensions]]
+name = "first_edge"
+values = ["present", "omitted"]
+[[dimensions]]
+name = "second_edge"
+values = ["present", "omitted"]
+[[dimensions]]
+name = "traversal"
+values = ["fixed-point", "one-hop"]
+[[dimensions]]
+name = "graph_binding"
+values = ["exact", "stale"]
+
+[[predicates]]
+name = "first_hop_reached"
+[[predicates.clauses]]
+all = ["direct_change=present", "first_edge=present"]
+
+[[predicates]]
+name = "closure_complete"
+[[predicates.clauses]]
+all = ["first_hop_reached=true", "second_edge=present", "traversal=fixed-point", "graph_binding=exact"]
+
+[[invariants]]
+id = "absent-root-prevents-closure"
+if_all = ["direct_change=absent"]
+then_all = ["closure_complete=false"]
+[[invariants]]
+id = "omitted-first-edge-prevents-closure"
+if_all = ["first_edge=omitted"]
+then_all = ["closure_complete=false"]
+[[invariants]]
+id = "omitted-second-edge-prevents-closure"
+if_all = ["second_edge=omitted"]
+then_all = ["closure_complete=false"]
+[[invariants]]
+id = "one-hop-is-not-fixed-point"
+if_all = ["traversal=one-hop"]
+then_all = ["closure_complete=false"]
+[[invariants]]
+id = "stale-graph-binding-prevents-closure"
+if_all = ["graph_binding=stale"]
+then_all = ["closure_complete=false"]
+[[invariants]]
+id = "two-hop-exact-fixed-point-closes"
+if_all = ["direct_change=present", "first_edge=present", "second_edge=present", "traversal=fixed-point", "graph_binding=exact"]
+then_all = ["first_hop_reached=true", "closure_complete=true"]

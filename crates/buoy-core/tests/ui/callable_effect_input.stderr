@@ -1,0 +1,18 @@
+error[E0308]: mismatched types
+  --> tests/ui/callable_effect_input.rs:12:26
+   |
+ 8 |     let effectful_graph_loader = || {
+   |                                  -- the found closure
+...
+12 |     validate_saved_graph(effectful_graph_loader);
+   |     -------------------- ^^^^^^^^^^^^^^^^^^^^^^ expected `&SpecGraph`, found closure
+   |     |
+   |     arguments to this function are incorrect
+   |
+   = note: expected reference `&SpecGraph`
+                found closure `{closure@$DIR/tests/ui/callable_effect_input.rs:8:34: 8:36}`
+note: function defined here
+  --> tests/ui/callable_effect_input.rs:3:4
+   |
+ 3 | fn validate_saved_graph(graph: &SpecGraph) {
+   |    ^^^^^^^^^^^^^^^^^^^^ -----------------

@@ -1,0 +1,2 @@
+let sri = nix_fetch.hash;
+let identity: SemanticDigest = sri.parse()?;

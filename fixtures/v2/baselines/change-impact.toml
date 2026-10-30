@@ -1,0 +1,71 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "change-impact"
+
+[base]
+graph = "$graph:impact-base"
+
+[head]
+graph = "$graph:impact-head"
+
+[[changed_objects]]
+kind = "atom"
+id = "DET-010"
+base = "$digest:atom-revision:DET-010:base"
+head = "$digest:atom-revision:DET-010:head"
+
+[[affected_objects]]
+kind = "carrier"
+id = "CAR-IMPACT"
+base = "$digest:carrier:CAR-IMPACT:base"
+head = "$digest:carrier:CAR-IMPACT:head"
+
+[[affected_objects]]
+kind = "surface-disposition"
+id = "SURFACE-IMPACT/member-a"
+base = "$digest:surface-disposition:SURFACE-IMPACT/member-a:base"
+head = "$digest:surface-disposition:SURFACE-IMPACT/member-a:head"
+
+[[affected_objects]]
+kind = "derivation"
+id = "DERIV-IMPACT"
+base = "$digest:derivation:DERIV-IMPACT:base"
+head = "$digest:derivation:DERIV-IMPACT:head"
+
+[[affected_objects]]
+kind = "proof"
+id = "PROOF-IMPACT"
+base = "$digest:proof-record:PROOF-IMPACT:base"
+head = "$digest:proof-record:PROOF-IMPACT:head"
+
+[[manifest.changed_paths]]
+path = "spec/requirements.md"
+base = "$raw:base/spec/requirements.md"
+head = "$raw:head/spec/requirements.md"
+
+[[manifest.dispositions]]
+impact = "$impact:carrier:CAR-IMPACT"
+disposition = "reaffirmed"
+base = "$digest:carrier:CAR-IMPACT:base"
+head = "$digest:carrier:CAR-IMPACT:head"
+record = "$object:reaffirmation:REAFFIRM-CAR-IMPACT"
+
+[[manifest.dispositions]]
+impact = "$impact:surface-disposition:SURFACE-IMPACT/member-a"
+disposition = "revised"
+base = "$digest:surface-disposition:SURFACE-IMPACT/member-a:base"
+head = "$digest:surface-disposition:SURFACE-IMPACT/member-a:head"
+record = "$object:review:REVIEW-SURFACE-IMPACT"
+
+[[manifest.dispositions]]
+impact = "$impact:derivation:DERIV-IMPACT"
+disposition = "revised"
+base = "$digest:derivation:DERIV-IMPACT:base"
+head = "$digest:derivation:DERIV-IMPACT:head"
+record = "$object:review:REVIEW-DERIV-IMPACT"
+
+[[manifest.dispositions]]
+impact = "$impact:proof:PROOF-IMPACT"
+disposition = "retired"
+base = "$digest:proof-record:PROOF-IMPACT:base"
+head = "$none"
+record = "$object:review:REVIEW-PROOF-IMPACT"

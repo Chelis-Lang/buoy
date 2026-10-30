@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "FPR-001"
+
+[[case]]
+id = "fpr-001-positive-correspondence-approved"
+scenario = "positive-correspondence-approved"
+polarity = "positive"
+operation = "validate-formal-property"
+baseline = "fixtures/v1/baselines/proof-record.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["formal-property:PROP-TERMINALITY=eligible", "correspondence:PROP-TERMINALITY=review-only"] }
+
+[[case]]
+id = "fpr-001-negative-property-inferred-from-prose"
+scenario = "negative-property-inferred-from-prose"
+polarity = "negative"
+operation = "validate-formal-property"
+baseline = "fixtures/v1/baselines/proof-record.toml"
+mutations = ["remove-formalization-approval"]
+expected = { outcome = "reject", codes = ["FPR-PROPERTY-MISSING-CORRESPONDENCE-APPROVAL"], facts = ["formal-property:PROP-TERMINALITY=ineligible", "assurance:FPR-BASE:formally-proved=false"] }

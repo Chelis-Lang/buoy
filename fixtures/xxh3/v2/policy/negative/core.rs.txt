@@ -1,0 +1,5 @@
+use sha2::{Digest as _, Sha256};
+
+pub fn prohibited_hash(input: &[u8]) -> [u8; 32] {
+    Sha256::digest(input).into()
+}

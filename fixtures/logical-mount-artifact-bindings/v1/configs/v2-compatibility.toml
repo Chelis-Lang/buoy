@@ -1,0 +1,9 @@
+schema = "spec-provenance-config/v2"
+digest_algorithms = ["xxh3-128"]
+
+[[selectors]]
+root = "src"
+adapter = "rust/v1"
+include = ["**/*.rs"]
+exclude = []
+authority_expectation = "forbidden"

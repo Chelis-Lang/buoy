@@ -1,0 +1,61 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-chelis-required-role-coverage-v1"
+requirement_ids = ["CHELIS-PROV-005", "CHELIS-PROV-009"]
+kind = "truth-table"
+expected_state_count = 3645
+
+[[dimensions]]
+name = "positive"
+values = ["current", "stale", "missing"]
+[[dimensions]]
+name = "negative"
+values = ["current", "stale", "missing"]
+[[dimensions]]
+name = "property"
+values = ["current", "stale", "missing"]
+[[dimensions]]
+name = "exhaustive_model"
+values = ["current", "stale", "missing"]
+[[dimensions]]
+name = "formal_property"
+values = ["current", "stale", "missing"]
+[[dimensions]]
+name = "structural"
+values = ["current", "stale", "missing"]
+[[dimensions]]
+name = "verdict"
+values = ["not-run", "pass", "fail", "error", "timeout"]
+
+[[predicates]]
+name = "covered"
+[[predicates.clauses]]
+all = ["positive=current", "negative=current", "property=current", "exhaustive_model=current", "formal_property=current", "structural=current", "verdict=pass"]
+
+[[invariants]]
+id = "missing-positive-never-covered"
+if_all = ["positive=missing"]
+then_all = ["covered=false"]
+[[invariants]]
+id = "stale-negative-never-covered"
+if_all = ["negative=stale"]
+then_all = ["covered=false"]
+[[invariants]]
+id = "missing-property-never-covered"
+if_all = ["property=missing"]
+then_all = ["covered=false"]
+[[invariants]]
+id = "stale-exhaustive-never-covered"
+if_all = ["exhaustive_model=stale"]
+then_all = ["covered=false"]
+[[invariants]]
+id = "missing-formal-never-covered"
+if_all = ["formal_property=missing"]
+then_all = ["covered=false"]
+[[invariants]]
+id = "stale-structural-never-covered"
+if_all = ["structural=stale"]
+then_all = ["covered=false"]
+[[invariants]]
+id = "nonpass-never-covered"
+if_all = ["verdict!=pass"]
+then_all = ["covered=false"]

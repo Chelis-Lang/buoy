@@ -1,0 +1,11 @@
+schema	id	kind	path	digest
+buoy-pre-rename-corpus/v1	canonical-values-v2	canonical-value	fixtures/hardening/v2/canonical-vectors.tsv	xxh3-128:730332e0563a924d602e2d1839b17918
+buoy-pre-rename-corpus/v1	canonical-graph-v2	canonical-graph	fixtures/hardening/v2/canonical-vectors.tsv	xxh3-128:730332e0563a924d602e2d1839b17918
+buoy-pre-rename-corpus/v1	canonical-static-report-v2	static-report	fixtures/hardening/v2/canonical-report-goldens.tsv	xxh3-128:a83caa0c2bb45f187617c9d35c84d8ef
+buoy-pre-rename-corpus/v1	canonical-execution-report-v2	execution-report	fixtures/hardening/v2/canonical-report-goldens.tsv	xxh3-128:a83caa0c2bb45f187617c9d35c84d8ef
+buoy-pre-rename-corpus/v1	canonical-impact-report-v2	impact-report	fixtures/hardening/v2/canonical-report-goldens.tsv	xxh3-128:a83caa0c2bb45f187617c9d35c84d8ef
+buoy-pre-rename-corpus/v1	protocol-inventory-v2	protocol	schema/v2/inventory.tsv	xxh3-128:c2de225f2ef244283f5d4ecfe3861bfa
+buoy-pre-rename-corpus/v1	diagnostic-corpus-v2	diagnostic	fixtures/v2/baselines/invalid-diagnostics.toml	xxh3-128:51f77fad74253bc0365574aab321aa37
+buoy-pre-rename-corpus/v1	historical-values-v1	historical-reader	fixtures/hardening/v1/canonical-vectors.tsv	xxh3-128:999d8614e9f382ca386a6229cc1ace51
+buoy-pre-rename-corpus/v1	historical-reports-v1	historical-reader	fixtures/hardening/v1/canonical-report-goldens.tsv	xxh3-128:648b86e395114a2bf07733ce583fbd40
+buoy-pre-rename-corpus/v1	historical-migration-input-v1	historical-reader	fixtures/xxh3/v2/migration/complete-v1-input.toml	xxh3-128:23d808d4ee0074aed9ff3d29398ccf73

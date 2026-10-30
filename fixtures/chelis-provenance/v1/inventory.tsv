@@ -1,0 +1,56 @@
+id	category	path	revision	assurance	observation
+norm-canonical	normative-source	spec/design/chelis_canonical_reference.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Project-level truth and documentation hierarchy.
+norm-00	normative-source	spec/00-context.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Language context and principles.
+norm-01	normative-source	spec/01-nomenclature.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Naming and style contract.
+norm-02	normative-source	spec/02-surf-syntax.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Surf syntax contract.
+norm-03	normative-source	spec/03-deep-syntax.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Deep syntax and closed tag vocabulary.
+norm-04	normative-source	spec/04-type-system.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Type precision dimension and effect rules.
+norm-05	normative-source	spec/05-risc-primitives.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Primitive operation contracts.
+norm-06	normative-source	spec/06-transformations.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	AD and compiler transformation contracts.
+norm-07	normative-source	spec/07-concurrency.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Concurrency contract.
+norm-08	normative-source	spec/08-backends.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Backend and manual-gate contract.
+norm-09	normative-source	spec/09-tide.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Tide API MCP and LSP contract.
+norm-10	normative-source	spec/10-serialization.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Serialization contract.
+norm-11	normative-source	spec/11-ffi.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	FFI artifact contract.
+norm-12	normative-source	spec/12-roadmap.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Active roadmap contract.
+cap-op-dtype-lane	capability-matrix	spec/design/capability_table.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Pre-implementation semantic and backend table schema.
+cap-deep-tags	capability-matrix	spec/03-deep-syntax.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Closed Deep tag vocabulary and dispositions.
+cap-cli	capability-matrix	crates/chelis-cli/src/main.rs	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Clap command and subcommand surface.
+cap-lint	capability-matrix	crates/chelis-lint/src/rules/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Executable lint-rule registry.
+cap-shell-contract	capability-matrix	crates/chelis-conformance/src/manifest.rs	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Machine-readable shell contract MANIFEST.
+cap-shell-registry	capability-matrix	crates/chelis-conformance/src/registry.rs	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Machine-readable shell ecosystem REGISTRY.
+carrier-pr-gate	executable-carrier	scripts/gate.py	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Per-PR command list source of truth.
+carrier-ci	executable-carrier	.github/workflows/ci.yml	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Split CI jobs invoking gate stages.
+carrier-phase-oracles	executable-carrier	docs/phase_oracles.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Default nightly manual and aspirational oracle index.
+carrier-manual	executable-carrier	docs/manual_gates.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Ignored-test and external-prerequisite oracle inventory.
+carrier-crate-tests	executable-carrier	crates/*/tests/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Workspace integration-test carriers; roles require explicit registration.
+carrier-inline-tests	executable-carrier	crates/*/src/**/*.rs #[cfg(test)]	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Inline Rust test carriers; names do not imply role.
+carrier-native-tests	executable-carrier	tests/**/*.ch	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Chelis-native test corpus.
+carrier-examples	executable-carrier	examples/**/*.ch	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Executable example corpus distinct from illustrative examples.
+model-pred	model	crates/chelis-pred/src/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Predicate representation and evaluation support.
+model-property-runner	model	crates/chelis-prove/src/property_runner/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Sampled property execution and generation.
+model-obligations	model	crates/chelis-prove/src/obligation_engine/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Verification obligation construction and dispatch.
+formal-smt	formal-property	crates/chelis-prove/src/clarabel_sos/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	SMT and proof-discharge implementation surface; no broad proof claim assigned.
+formal-erf	formal-property	crates/chelis-prove/data/erf_proof/manifest.json	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Gappa proof-source bundle and manifest.
+formal-special-functions	formal-property	crates/chelis-prove/data/special_fn_envelopes/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Generated numerical envelope records and configurations.
+formal-lean-absence	formal-property	(no tracked .lean files)	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	No current Lean proof source exists at the pinned revision.
+deriv-std-bundle	generated-or-mirrored	packages/chelis-std/ -> crates/chelis-std-bundle/dist/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Regenerated by scripts/regenerate_chelis_std_bundle.py.
+deriv-conformance-skills	generated-or-mirrored	agent-skills/ -> crates/chelis-conformance/assets/skills/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Embedded copy regenerated by scripts/regenerate_conformance_assets.py.
+deriv-conformance-canonical	generated-or-mirrored	AGENTS.md and shell surface templates -> crates/chelis-conformance/assets/canonical/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Embedded canonical assets checked by conformance tripwires.
+deriv-erf-proof	generated-or-mirrored	scripts/generate_erf_proof.py -> crates/chelis-prove/data/erf_proof/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Generated Sollya and Gappa proof-source bundle.
+deriv-special-envelope	generated-or-mirrored	scripts/generate_special_fn_envelope.py -> crates/chelis-prove/data/special_fn_envelopes/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Generated numerical envelopes.
+deriv-tree-sitter-surf	generated-or-mirrored	grammars/tree-sitter-chelis-surf/grammar.js -> grammars/tree-sitter-chelis-surf/src/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Tree-sitter generated parser artifacts.
+deriv-tree-sitter-deep	generated-or-mirrored	grammars/tree-sitter-chelis-deep/grammar.js -> grammars/tree-sitter-chelis-deep/src/	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Tree-sitter generated parser artifacts.
+deriv-coverage	generated-or-mirrored	scripts/prove_corpus/harvest_coverage.py -> scripts/prove_corpus/coverage_map.json and coverage_summary.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Generated coverage inventory and narrative summary.
+deriv-benchmark	generated-or-mirrored	benchmark runners -> benchmarks/results/latest.json	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Recorded benchmark output with explicit skip reasons.
+exemption-style-flag	current-exemption	--allow-style-violations	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Emergency local style-gate bypass; forbidden in CI.
+exemption-style-env	current-exemption	CHELIS_STYLE_GATE_DISABLE=1	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Integration-test-only process bypass.
+exemption-docs-only	current-exemption	scripts/ci_detect_docs_only.py	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Docs-only changes skip heavy jobs while docs checks remain.
+exemption-ignored	current-exemption	docs/manual_gates.md	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Ignored tests require named manual commands and prerequisites.
+exemption-nightly	current-exemption	.config/nextest.toml nightly profile	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Heavy tests are excluded from default and CI profiles and run nightly.
+exemption-spec	current-exemption	spec/design/spec_provenance.md spec-exempt design	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Process-level proposed exemption with visible follow-up debt; implementation status not inferred.
+release-workflow	release-command	.github/workflows/release.yml	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Builds Linux glibc-2.31 Linux latest and Darwin arm64 artifacts on v* tags.
+release-cli	release-command	cargo build --release -p chelis-cli --features smt	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Release CLI build command.
+release-runtime	release-command	cargo build --release -p chelis-runtime	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Release static runtime build command.
+release-bootstrap	release-command	cargo build --release -p chelisup	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Bootstrap installer build on compatibility jobs.
+release-tag	release-command	git tag -a vX.Y.Z then git push origin vX.Y.Z	c0d4caf16f557406f299f0989bab48fa0f924cbd	unassigned	Documented release trigger; not executed by this change.

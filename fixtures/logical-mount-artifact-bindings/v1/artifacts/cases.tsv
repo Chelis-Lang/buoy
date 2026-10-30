@@ -1,0 +1,5 @@
+schema	case_id	bytes_hex	mutation_hex	expected
+buoy-artifact-fixture/v1	utf8	68656c6c6f0a	-	accept
+buoy-artifact-fixture/v1	invalid-utf8	ff00fe	-	accept
+buoy-artifact-fixture/v1	empty	-	-	accept
+buoy-artifact-fixture/v1	byte-drift	00010203	00010204	digest-change

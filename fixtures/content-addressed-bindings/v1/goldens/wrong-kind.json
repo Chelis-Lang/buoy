@@ -1,0 +1,1 @@
+{"schema":"buoy/binding-diagnostic-golden/v1","case":"wrong-kind","accepted":false,"source_graph":"blake3-256:0bc2290271d97ed1a3079051033c8a785986f8b5825c0337541ea201a1de6877","binding":"blake3-256:8d2f92a7ddb2771319d095cdcb2eba7d8c57f33fe785f48be7b1eef3ce7ac142","diagnostics":["CAB-REQUIREMENT-KIND"]}

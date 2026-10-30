@@ -1,0 +1,38 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "DET-004"
+
+[[case]]
+id = "det-004-positive-semantic-field-changes"
+scenario = "positive-semantic-field-changes"
+polarity = "positive"
+operation = "encode-canonical"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = ["mutate-digest-bound-field"]
+expected = { outcome = "accept", codes = [], facts = ["canonical-preimage=different", "full-digest=different", "digest-algorithm=sha256"] }
+
+[[case]]
+id = "det-004-negative-ambiguous-concatenation-boundary"
+scenario = "negative-ambiguous-concatenation-boundary"
+polarity = "negative"
+operation = "encode-canonical"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = ["encode-ambiguous-concatenation-pair"]
+expected = { outcome = "accept", codes = [], facts = ["raw-concatenation=same", "canonical-preimage=different", "full-digest=different"] }
+
+[[case]]
+id = "det-004-negative-digest-algorithm-changes-in-place"
+scenario = "negative-digest-algorithm-changes-in-place"
+polarity = "negative"
+operation = "encode-canonical"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = ["reinterpret-sha256-identity-under-other-algorithm"]
+expected = { outcome = "reject", codes = ["DET-DIGEST-SCHEMA-MISMATCH"], facts = ["identity-reinterpreted=false"] }
+
+[[case]]
+id = "det-004-negative-truncated-identity"
+scenario = "negative-truncated-digest-used-as-identity"
+polarity = "negative"
+operation = "encode-canonical"
+baseline = "fixtures/v1/baselines/deterministic-static.toml"
+mutations = ["replace-identity-with-truncated-digest"]
+expected = { outcome = "reject", codes = ["DET-DIGEST-TRUNCATED-IDENTITY"], facts = ["identity-width=invalid"] }

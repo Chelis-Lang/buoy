@@ -1,0 +1,24 @@
+schema = "chelis-provenance-proof-bindings/v1"
+chelis_revision = "c0d4caf16f557406f299f0989bab48fa0f924cbd"
+
+[spike-review]
+decision = "no new proof representation accepted"
+rationale = "the Chelis adapters reuse the standalone SourceItemKind integrity abstraction; the selected Verus lane already covers it"
+verus_spike = "proofs/spikes/verus/source_item_kind.rs"
+aeneas_binding = "not adopted; Chelis has no tracked Lean proof source at the pinned revision (inventory item formal-lean-absence)"
+
+[acceptance-gate]
+required_bindings = [
+    "approved human correspondence review",
+    "exact implementation digest",
+    "exact proof-source digests",
+    "exact translator and verifier tool identities",
+    "exact external-model and generated-artifact digests",
+    "recorded assumptions",
+    "intended failing negative control",
+    "exact scope",
+    "downstream compiler and backend exclusions",
+]
+accepted_records = []
+rationale = "the Chelis Gappa erf bundle and numerical envelopes carry no approved correspondence at the pinned revision, so no Chelis claim may be reported formally proved"
+downstream_exclusions = ["rustc", "LLVM", "emitted backends", "machine code"]

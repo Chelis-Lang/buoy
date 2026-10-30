@@ -1,0 +1,5 @@
+case	selector_flag	selector_value	expected_rows	expected_exit	rationale
+requirement-id	--requirement-id	BGLC-003	1	0	one stable requirement ID selects its current relation
+relation-id	--relation-id	BGLC-RENDER-CATALOG	1	0	one stable relation ID selects its current record
+implementation-path	--implementation-path	src/lib.rs	1	0	one logical path selects every relation in that file
+record-digest	--record	blake3-256:0e857e33e387325fbf457e426bc42286d9d99926b19f3efa3c203795cfeeb6c4	1	0	one complete record digest selects that exact record

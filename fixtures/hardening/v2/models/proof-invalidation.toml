@@ -1,0 +1,124 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-proof-invalidation-hardening-v2"
+requirement_ids = ["ADV-007", "ADV-012", "SCF-005"]
+kind = "truth-table"
+expected_state_count = 65536
+
+[[dimensions]]
+name = "atom"
+values = ["current", "stale"]
+[[dimensions]]
+name = "property"
+values = ["current", "stale"]
+[[dimensions]]
+name = "implementation"
+values = ["current", "stale"]
+[[dimensions]]
+name = "assumption"
+values = ["current", "stale"]
+[[dimensions]]
+name = "translator"
+values = ["current", "stale"]
+[[dimensions]]
+name = "translator_config"
+values = ["current", "stale"]
+[[dimensions]]
+name = "verifier"
+values = ["current", "stale"]
+[[dimensions]]
+name = "verifier_config"
+values = ["current", "stale"]
+[[dimensions]]
+name = "external_model"
+values = ["current", "stale"]
+[[dimensions]]
+name = "generated_artifact"
+values = ["current", "stale"]
+[[dimensions]]
+name = "proof_source"
+values = ["current", "stale"]
+[[dimensions]]
+name = "verdict"
+values = ["current", "stale"]
+[[dimensions]]
+name = "scope"
+values = ["current", "stale"]
+[[dimensions]]
+name = "exclusions"
+values = ["current", "stale"]
+[[dimensions]]
+name = "correspondence_derivation"
+values = ["current", "stale"]
+[[dimensions]]
+name = "negative_control"
+values = ["expected-fail", "unexpected"]
+
+[[predicates]]
+name = "proof_fresh"
+[[predicates.clauses]]
+all = ["atom=current", "property=current", "implementation=current", "assumption=current", "translator=current", "translator_config=current", "verifier=current", "verifier_config=current", "external_model=current", "generated_artifact=current", "proof_source=current", "verdict=current", "scope=current", "exclusions=current", "correspondence_derivation=current", "negative_control=expected-fail"]
+
+[[invariants]]
+id = "stale-atom-invalidates"
+if_all = ["atom=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-property-invalidates"
+if_all = ["property=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-implementation-invalidates"
+if_all = ["implementation=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-assumption-invalidates"
+if_all = ["assumption=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-translator-invalidates"
+if_all = ["translator=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-translator-config-invalidates"
+if_all = ["translator_config=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-verifier-invalidates"
+if_all = ["verifier=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-verifier-config-invalidates"
+if_all = ["verifier_config=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-external-model-invalidates"
+if_all = ["external_model=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-generated-artifact-invalidates"
+if_all = ["generated_artifact=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-proof-source-invalidates"
+if_all = ["proof_source=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-verdict-invalidates"
+if_all = ["verdict=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-scope-invalidates"
+if_all = ["scope=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-exclusions-invalidates"
+if_all = ["exclusions=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "stale-correspondence-invalidates"
+if_all = ["correspondence_derivation=stale"]
+then_all = ["proof_fresh=false"]
+[[invariants]]
+id = "unexpected-negative-control-invalidates"
+if_all = ["negative_control=unexpected"]
+then_all = ["proof_fresh=false"]

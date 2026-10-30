@@ -1,0 +1,44 @@
+schema = "spec-provenance-fixture-baseline/v1"
+id = "carrier-source"
+
+[[files]]
+path = "spec/requirements.md"
+adapter = "markdown/v1"
+authority_expectation = "required"
+content = '''```spec-provenance-atom-v1
+id = "SPG-004"
+state = "proposed"
+kind = "behavioral"
+scope = ["spec-provenance.carrier"]
+statement = "The adapter MUST attach evidence metadata only to an eligible parsed item."
+```
+'''
+
+[[files]]
+path = "tests/carrier.rs"
+adapter = "rust/v1"
+authority_expectation = "forbidden"
+content = '''#[spec_provenance::evidence(
+    id = "CAR-001",
+    role = "positive",
+    oracle = "ORC-TEST",
+    config = "$digest:raw-artifact:test-config",
+    scope = "spec-provenance.scope.exact-corpus/v1",
+    corpus("$digest:raw-artifact:carrier-corpus"),
+    atom(id = "SPG-004", revision = "$digest:atom-revision:SPG-004")
+)]
+#[test]
+fn metadata_is_attached() {
+    assert!(true);
+}
+'''
+
+[[oracles]]
+id = "ORC-TEST"
+kind = "test"
+runner = "$tool:fixture-test-runner"
+selection = "$payload:selection:exact-item"
+normalization = "$payload:verdict:libtest"
+configuration = "$digest:raw-artifact:test-config"
+scope = "$payload:scope:carrier"
+exclusions = []

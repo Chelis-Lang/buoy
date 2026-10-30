@@ -1,0 +1,8 @@
+schema = "buoy-compatibility-removal/v1"
+release = "0.3.0"
+remove_packages = ["spec-provenance", "spec-provenance-core"]
+remove_crates = ["spec_provenance", "spec_provenance_core"]
+remove_binaries = ["spec-provenance"]
+remove_task_prefixes = ["spec-provenance:"]
+retain_diagnostic = "warning: `spec-provenance` is deprecated; use `buoy`; compatibility expires at 0.3.0"
+retain_readers = ["spec-provenance/v1", "spec-provenance/v2"]

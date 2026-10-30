@@ -1,0 +1,4 @@
+schema	case_id	project_files	project_bytes	authority_files	authority_bytes	limit	expected
+buoy-mount-budget-fixture/v1	within-total	1	3	1	4	8	accept
+buoy-mount-budget-fixture/v1	combined-bytes	1	3	1	4	6	REH-BUDGET-TOTAL-BYTES
+buoy-mount-budget-fixture/v1	combined-files	1	3	1	4	1	REH-BUDGET-SELECTED-FILES

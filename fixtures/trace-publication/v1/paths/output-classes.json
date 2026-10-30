@@ -1,0 +1,12 @@
+{
+  "schema": "buoy-trace-publication-output-path-fixtures/v1",
+  "cases": [
+    { "name": "regular-derived", "kind": "page", "path": "docs/trace/blake3-256/aaaa.md", "source_set": ["openspec/specs/demo/spec.md"], "expected": "accept" },
+    { "name": "selected-derived", "kind": "page", "path": "openspec/specs/demo/spec.md", "source_set": ["openspec/specs/demo/spec.md"], "expected": "reject", "diagnostic": "TPT-SELECTED-OUTPUT" },
+    { "name": "controlled-source-edit", "kind": "source-edit", "path": "openspec/specs/demo/spec.md", "source_set": ["openspec/specs/demo/spec.md"], "expected": "accept" },
+    { "name": "escape", "kind": "page", "path": "../outside/trace.md", "source_set": [], "expected": "reject", "diagnostic": "TPT-OUTPUT-ESCAPE" },
+    { "name": "link-like", "kind": "page", "path": "docs/trace/link", "source_set": [], "expected": "reject", "diagnostic": "TPT-OUTPUT-LINK" },
+    { "name": "replacement", "kind": "page", "path": "docs/current.md", "source_set": [], "lifecycle": "replaceable", "expected": "accept" },
+    { "name": "collision", "kind": "page", "path": "docs/trace/blake3-256/aaaa.md", "second_path": "docs/trace/blake3-256/aaaa.md", "source_set": [], "expected": "reject", "diagnostic": "TPT-OUTPUT-COLLISION" }
+  ]
+}

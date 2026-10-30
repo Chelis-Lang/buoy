@@ -1,0 +1,2 @@
+schema	id	path	line	column	form	lexeme	context_digest	disposition	rationale	owner	rule
+buoy-naming-inventory/v1	OLD-NAME-000001	src/current.rs	1	1	snake	spec_provenance	xxh3-128:00000000000000000000000000000000	historical-reference	incorrect class	buoy-maintainers	retain-as-history

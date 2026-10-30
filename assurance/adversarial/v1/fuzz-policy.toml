@@ -1,0 +1,38 @@
+schema = "buoy-adversarial-campaign-policy/v1"
+id = "FUZZ-INITIAL-2026-07-22"
+kind = "fuzz"
+tool_id = "cargo-fuzz"
+tool_version = "0.13.2"
+tool_binding = "assurance/v1/toolchain.toml#cargo-fuzz@0.13.2"
+source_paths = [
+  "src",
+  "crates/buoy-core/src",
+  "fuzz/fuzz_targets",
+]
+configuration_paths = [
+  "fuzz/Cargo.toml",
+  "fuzz/Cargo.lock",
+  "fuzz/corpus",
+  "assurance/v1/toolchain.toml",
+  "assurance/adversarial/v1/fuzz-policy.toml",
+]
+required_units = [
+  "canonical_values",
+  "paths_globs",
+  "adapters",
+  "config_manifests",
+  "graphs_governance",
+  "reports",
+  "publication",
+]
+minimum_cases = 448
+minimum_duration_seconds = 1
+minimum_score_basis_points = 0
+maximum_age_days = 30
+campaign_command = "devenv tasks run buoy:fuzz-campaign"
+replay_command = "devenv shell -- buoy-fuzz-replay"
+assurance_scope = "bounded coverage-guided crash/panic/invariant search over seven declared harnesses; no proof, completeness, platform-effect, or long-duration claim"
+exclusions = [
+  "live filesystem, network, environment, clocks, and external processes are absent from every fuzz harness",
+  "scheduled duration beyond the recorded bounded initial run remains a separate 9.12 obligation",
+]

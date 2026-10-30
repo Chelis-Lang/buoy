@@ -1,0 +1,10 @@
+{
+  "schema": "buoy-trace-publication-compact-locator-fixtures/v1",
+  "cases": [
+    { "name": "qualified", "attribute": "#[buoy::implements(\"blake3-256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")]", "active_member": "blake3-256", "expected": "accept" },
+    { "name": "raw", "attribute": "#[buoy::implements(\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")]", "active_member": "blake3-256", "expected": "reject", "diagnostic": "CAB-COMPACT-ATTRIBUTE-DIGEST" },
+    { "name": "wrong-member", "attribute": "#[buoy::implements(\"sha-256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")]", "active_member": "blake3-256", "expected": "reject", "diagnostic": "CAB-COMPACT-DIGEST-MEMBER" },
+    { "name": "change-detection", "attribute": "#[buoy::implements(\"xxh3-128:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")]", "active_member": "xxh3-128", "expected": "reject", "diagnostic": "CAB-DIGEST-CLASS" },
+    { "name": "extra-field", "attribute": "#[buoy::implements(\"blake3-256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", relation = \"implements\")]", "active_member": "blake3-256", "expected": "reject", "diagnostic": "CAB-COMPACT-ATTRIBUTE-SYNTAX" }
+  ]
+}

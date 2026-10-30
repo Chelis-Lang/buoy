@@ -1,0 +1,3 @@
+chelis static report
+verdict: accept
+objects: atoms=1 bindings=0 carriers=0 links=1 surfaces=1 policies=0 derivations=0 oracles=0

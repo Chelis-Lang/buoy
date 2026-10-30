@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "SPG-009"
+
+[[case]]
+id = "spg-009-positive-explicit-dispositions"
+scenario = "positive-rejection-is-explicitly-authorized"
+polarity = "positive"
+operation = "validate-surface"
+baseline = "fixtures/v2/baselines/surface-graph.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["surface-member:member-a=authority", "surface-member:member-b=authority"] }
+
+[[case]]
+id = "spg-009-negative-disposition-without-authority"
+scenario = "negative-implementation-is-the-only-authority"
+polarity = "negative"
+operation = "validate-surface"
+baseline = "fixtures/v2/baselines/surface-graph.toml"
+mutations = ["remove-disposition-authority"]
+expected = { outcome = "reject", codes = ["SPG-SURFACE-MISSING-AUTHORITY"], facts = ["surface:SURFACE-001=incomplete", "surface-member:member-b=undecided"] }

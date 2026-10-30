@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "DET-003"
+
+[[case]]
+id = "det-003-positive-input-order-permuted"
+scenario = "positive-input-order-permuted"
+polarity = "positive"
+operation = "render-static"
+baseline = "fixtures/v2/baselines/deterministic-static.toml"
+mutations = ["permute-repository-traversal", "permute-canonical-collection"]
+expected = { outcome = "accept", codes = [], facts = ["canonical-graph-bytes=same", "diagnostic-bytes=same"] }
+
+[[case]]
+id = "det-003-negative-duplicate-canonical-key"
+scenario = "negative-duplicate-canonical-key"
+polarity = "negative"
+operation = "render-static"
+baseline = "fixtures/v2/baselines/deterministic-static.toml"
+mutations = ["duplicate-canonical-key"]
+expected = { outcome = "reject", codes = ["DET-COLLECTION-DUPLICATE-KEY"], facts = ["duplicate-selection=none", "diagnostics=total-order"] }

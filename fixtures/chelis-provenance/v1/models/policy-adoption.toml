@@ -1,0 +1,54 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-chelis-policy-adoption-v1"
+requirement_ids = ["CHELIS-PROV-007", "CHELIS-PROV-010"]
+kind = "truth-table"
+expected_state_count = 64
+
+[[dimensions]]
+name = "scope"
+values = ["unchanged", "reduced"]
+[[dimensions]]
+name = "roles"
+values = ["unchanged", "reduced"]
+[[dimensions]]
+name = "surface"
+values = ["complete", "gap"]
+[[dimensions]]
+name = "obligations"
+values = ["green", "gap"]
+[[dimensions]]
+name = "ratchet"
+values = ["same", "changed"]
+[[dimensions]]
+name = "requested_mode"
+values = ["advisory", "blocking"]
+
+[[predicates]]
+name = "blocking_allowed"
+[[predicates.clauses]]
+all = ["scope=unchanged", "roles=unchanged", "surface=complete", "obligations=green", "ratchet=same", "requested_mode=blocking"]
+
+[[invariants]]
+id = "reduced-scope-never-promotes"
+if_all = ["scope=reduced", "requested_mode=blocking"]
+then_all = ["blocking_allowed=false"]
+[[invariants]]
+id = "reduced-roles-never-promote"
+if_all = ["roles=reduced", "requested_mode=blocking"]
+then_all = ["blocking_allowed=false"]
+[[invariants]]
+id = "surface-gap-never-promotes"
+if_all = ["surface=gap", "requested_mode=blocking"]
+then_all = ["blocking_allowed=false"]
+[[invariants]]
+id = "obligation-gap-never-promotes"
+if_all = ["obligations=gap", "requested_mode=blocking"]
+then_all = ["blocking_allowed=false"]
+[[invariants]]
+id = "ratchet-change-never-promotes"
+if_all = ["ratchet=changed", "requested_mode=blocking"]
+then_all = ["blocking_allowed=false"]
+[[invariants]]
+id = "intact-green-advisory-promotes"
+if_all = ["scope=unchanged", "roles=unchanged", "surface=complete", "obligations=green", "ratchet=same", "requested_mode=blocking"]
+then_all = ["blocking_allowed=true"]

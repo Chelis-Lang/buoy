@@ -1,0 +1,19 @@
+[package]
+name = "fcis_core"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license = "MIT"
+description = "Dylint checks for the functional-core boundary"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+clippy_utils = { version = "=0.1.97", git = "https://github.com/rust-lang/rust-clippy", rev = "f6d310692116e9a527ce6d0b3526c965d9c5d7b9" }
+dylint_linting = "=6.0.1"
+
+[package.metadata.rust-analyzer]
+rustc_private = true
+
+[workspace]

@@ -1,0 +1,27 @@
+{
+  "schema": "buoy/trace-report/v1",
+  "note": "Two rows collectively contain the fields of one expected relation. Row-conformance MUST reject fragment-level matches.",
+  "rows": [
+    {
+      "relation": "TRACE-RELATION",
+      "record": "blake3-256:aaaa",
+      "requirement_id": "DEMO-001",
+      "atom_revision": "blake3-256:bbbb",
+      "requirement_path": "openspec/specs/demo/spec.md",
+      "implementation_path": null,
+      "state": "current",
+      "freshness": { "record": true, "implementation": false, "requirement": true, "authority": true }
+    },
+    {
+      "relation": "TRACE-RELATION",
+      "record": "blake3-256:aaaa",
+      "requirement_id": "DEMO-001",
+      "atom_revision": "blake3-256:bbbb",
+      "requirement_path": null,
+      "implementation_path": "src/lib.rs",
+      "state": "current",
+      "freshness": { "record": true, "implementation": true, "requirement": false, "authority": true }
+    }
+  ],
+  "expected_row_count": 2
+}

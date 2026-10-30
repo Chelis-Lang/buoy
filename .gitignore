@@ -1,0 +1,34 @@
+# Rust
+target/
+**/*.rs.bk
+
+# Devenv and direnv
+.devenv*
+.direnv/
+devenv.local.nix
+devenv.local.yaml
+.pre-commit-config.yaml
+result
+dylint_lints/fcis_core/rust-toolchain.toml
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+.pi/
+
+# LLVM coverage droppings
+*.profraw
+
+# Local credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local assistant state
+.claude/
+.worktrees/
+.drain-*

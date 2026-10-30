@@ -1,0 +1,5 @@
+case	setup	state	include_history	expected_exit	primary_diagnostic	rationale
+current	none	current	false	0	none	the saved snapshot holds one fresh relation
+historical	rebind-relation	historical	true	0	none	an old retained record keeps no current attachment
+stale-requirement	edit-requirement-bytes	stale	false	2	CAB-REQUIREMENT-STALE	a changed requirement makes the selected attachment stale
+stale-implementation	edit-implementation-bytes	stale	false	2	CAB-SUBJECT-STALE	a changed Rust item makes the selected attachment stale

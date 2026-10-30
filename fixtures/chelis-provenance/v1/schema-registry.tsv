@@ -1,0 +1,28 @@
+schema_id	class	owner	status	purpose
+chelis-atom-namespace/v1	atom-namespace	chelis	draft-reserved	Stable Chelis atom allocation namespaces and tombstones.
+chelis-surface-axis/v1	finite-surface-axis	chelis	draft-reserved	Axis IDs and complete ordered value vocabularies.
+chelis-surface-member-key/v1	finite-surface-member-key	chelis	draft-reserved	Canonical keys for complete Cartesian-product members.
+chelis-surface-disposition/v1	surface-disposition	chelis	draft-reserved	Normative prohibited deferred and not-applicable member states.
+chelis-evidence-scope/v1	evidence-scope	chelis	draft-reserved	Exact corpus configuration assumptions exclusions and claim boundaries.
+chelis-derivation-relation/v1	derivation-relation	chelis	draft-reserved	Generated mirrored embedded and consistency-only relations.
+chelis-report-machine/v1	report-rendering	chelis	draft-reserved	Canonical machine report payload.
+chelis-report-human/v1	report-rendering	chelis	draft-reserved	Derived deterministic human report rendering.
+chelis-change-record/v1	neutral-change-record	chelis	draft-reserved	Provider-neutral base/head review disposition and weakening records.
+chelis-adapter-config/v1	adapter-configuration	chelis	draft-reserved	Exact selectors authority expectations parser identities and schema bindings.
+chelis-surf/v1	adapter-identity	chelis	draft-reserved	Surf saved-snapshot adapter identity.
+chelis-deep/v1	adapter-identity	chelis	draft-reserved	Deep saved-snapshot adapter identity.
+chelis-surf-syntax/v1	syntax-schema	chelis	superseded	Lexical Surf anchoring at repository version 0.16.1; superseded by chelis-surf-syntax/v2 with source reingestion.
+chelis-surf-syntax/v2	syntax-schema	chelis	active	Parser-backed Surf syntax over the vendored tree-sitter grammar at Chelis v0.18.5 (fc3232ff).
+chelis-deep-syntax/v1	syntax-schema	chelis	draft-reserved	Pinned Chelis Deep strict parser syntax at repository version 0.16.1.
+chelis-static-report/v2	report-rendering	chelis	superseded	Revision-bearing canonical static report without the compact-binding object class; superseded by chelis-static-report/v3.
+chelis-static-report/v3	report-rendering	chelis	active	Revision-bearing canonical static report with per-object identity digests and the compact-binding object class.
+chelis-advisory-report/v1	report-rendering	chelis	active	Deterministic advisory projection over registered records and receipts.
+chelis-trace-projection/v1	report-rendering	chelis	superseded	Full-chain trace projection without compact-binding store hops; superseded by chelis-trace-projection/v2.
+chelis-trace-projection/v2	report-rendering	chelis	active	Full-chain trace projection with bound and recomputed values per hop, including compact-binding hops and explicit object verification state.
+chelis-rebind-plan/v1	report-rendering	chelis	superseded	Field-level rebind plan without object-store actions; superseded by chelis-rebind-plan/v2.
+chelis-rebind-plan/v2	report-rendering	chelis	active	Deterministic rebind plan over record-carried digests, revisions, and content-addressed object writes, address updates, and removals.
+chelis-bind-plan/v1	report-rendering	chelis	active	Deterministic conversion plan from one inline link into one compact binding.
+chelis-surf-declaration/v1	syntax-capability	chelis	draft-reserved	Surf declaration spans from chelis-surf parser output.
+chelis-surf-comment/v1	syntax-capability	chelis	draft-reserved	Surf comments explicitly dispositioned as metadata or nonnormative.
+chelis-deep-node/v1	syntax-capability	chelis	draft-reserved	Strict Deep node spans from chelis-deep parser output.
+chelis-deep-comment/v1	syntax-capability	chelis	draft-reserved	Deep comments explicitly dispositioned as metadata or nonnormative.

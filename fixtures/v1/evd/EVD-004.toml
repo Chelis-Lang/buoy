@@ -1,0 +1,47 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "EVD-004"
+
+[[case]]
+id = "evd-004-positive-selected-oracle-passes"
+scenario = "positive-selected-oracle-passes"
+polarity = "positive"
+operation = "normalize-verdict"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["select-oracle-pass"]
+expected = { outcome = "accept", codes = [], facts = ["verdict:ORC-POSITIVE=pass"] }
+
+[[case]]
+id = "evd-004-negative-runner-crashes"
+scenario = "negative-runner-crashes"
+polarity = "negative"
+operation = "normalize-verdict"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["select-oracle-error"]
+expected = { outcome = "accept", codes = ["EVD-ORACLE-RUNNER-ERROR"], facts = ["verdict:ORC-POSITIVE=error"] }
+
+[[case]]
+id = "evd-004-positive-discovered-not-run"
+scenario = "positive-discovered-oracle-not-run"
+polarity = "positive"
+operation = "normalize-verdict"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["select-oracle-not-run"]
+expected = { outcome = "accept", codes = [], facts = ["verdict:ORC-POSITIVE=not-run"] }
+
+[[case]]
+id = "evd-004-positive-selected-oracle-fails"
+scenario = "positive-selected-oracle-fails"
+polarity = "positive"
+operation = "normalize-verdict"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["select-oracle-fail"]
+expected = { outcome = "accept", codes = [], facts = ["verdict:ORC-POSITIVE=fail"] }
+
+[[case]]
+id = "evd-004-positive-selected-oracle-times-out"
+scenario = "positive-selected-oracle-times-out"
+polarity = "positive"
+operation = "normalize-verdict"
+baseline = "fixtures/v1/baselines/evidence-assurance.toml"
+mutations = ["select-oracle-timeout"]
+expected = { outcome = "accept", codes = [], facts = ["verdict:ORC-POSITIVE=timeout"] }

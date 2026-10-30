@@ -1,0 +1,18 @@
+schema = "buoy/repository-config/v3"
+digest_algorithms = ["xxh3-128"]
+
+[[mounts]]
+id = "project"
+prefix = "project"
+
+[[mounts]]
+id = "project"
+prefix = "other"
+
+[[selectors]]
+mount = "project"
+root = "src"
+adapter = "artifact/v1"
+include = ["**/*"]
+exclude = []
+authority_expectation = "forbidden"

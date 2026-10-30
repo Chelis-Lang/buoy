@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "FPR-004"
+
+[[case]]
+id = "fpr-004-positive-current-proof-accepted"
+scenario = "positive-current-proof-accepted"
+polarity = "positive"
+operation = "aggregate-formal-assurance"
+baseline = "fixtures/v1/baselines/proof-record.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["proof:PROOF-TERMINALITY=fresh", "proof-control:PROOF-TERMINALITY-POSITIVE=pass", "proof-control:PROOF-TERMINALITY-NEGATIVE=expected-fail", "assurance:PROP-TERMINALITY=formally-proved"] }
+
+[[case]]
+id = "fpr-004-negative-stale-command-passes"
+scenario = "negative-stale-proof-command-still-passes"
+polarity = "negative"
+operation = "aggregate-formal-assurance"
+baseline = "fixtures/v1/baselines/proof-record.toml"
+mutations = ["accept-verifier-with-stale-atom"]
+expected = { outcome = "accept", codes = ["FPR-PROOF-STALE-ATOM"], facts = ["verdict:PROOF-TERMINALITY=pass", "proof:PROOF-TERMINALITY=stale", "assurance:PROP-TERMINALITY:formally-proved=false"] }

@@ -1,0 +1,38 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "minimal-graph"
+
+[[atoms]]
+id = "SPG-002"
+state = "proposed"
+kind = "behavioral"
+scope = ["spec-provenance.graph"]
+statement = "A carrier MUST bind the current semantic revision of its atom."
+authority = "$source:spec/requirements.md:0"
+
+[[oracles]]
+id = "ORC-TEST"
+kind = "test"
+runner = "$tool:fixture-test-runner"
+selection = "$payload:selection:exact-item"
+normalization = "$payload:verdict:libtest"
+configuration = "$digest:raw-artifact:test-config"
+scope = "$payload:scope:carrier"
+exclusions = []
+
+[[carriers]]
+id = "CAR-001"
+role = "positive"
+atoms = ["$atom:SPG-002:$digest:atom-revision:SPG-002"]
+item = "$item:tests/carrier.rs:carrier_test"
+oracle = "$object:oracle:ORC-TEST"
+configuration = "$digest:raw-artifact:test-config"
+corpora = ["$digest:raw-artifact:carrier-corpus"]
+scope = "$payload:scope:exact-corpus"
+assumptions = []
+exclusions = []
+
+[[implementation_links]]
+id = "IMPL-001"
+atoms = ["$atom:SPG-002:$digest:atom-revision:SPG-002"]
+item = "$item:src/lib.rs:linked_implementation"
+navigation = "implements"

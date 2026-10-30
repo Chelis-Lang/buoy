@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v1"
+requirement = "FPR-005"
+
+[[case]]
+id = "fpr-005-positive-source-scope-explicit"
+scenario = "positive-source-level-scope-explicit"
+polarity = "positive"
+operation = "render-proof-trust"
+baseline = "fixtures/v1/baselines/proof-record.toml"
+mutations = ["render-explicit-source-trust"]
+expected = { outcome = "accept", codes = [], facts = ["trusted-tool:TOOL-AENEAS=visible", "trusted-tool:TOOL-LEAN=visible", "representation:IMPL-LIFECYCLE=rust-source/v1", "exclusion:rustc-translation=visible", "exclusion:llvm-optimization=visible"] }
+
+[[case]]
+id = "fpr-005-negative-ir-claims-backend"
+scenario = "negative-ir-proof-claims-backend-correctness"
+polarity = "negative"
+operation = "render-proof-trust"
+baseline = "fixtures/v1/baselines/proof-record.toml"
+mutations = ["claim-unverified-backend-correctness"]
+expected = { outcome = "reject", codes = ["FPR-CLAIM-EXCEEDS-BOUND-REPRESENTATION"], facts = ["backend-correctness=unproved", "assurance:PROP-TERMINALITY:formally-proved=false"] }

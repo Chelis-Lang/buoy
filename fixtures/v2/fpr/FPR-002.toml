@@ -1,0 +1,20 @@
+schema = "spec-provenance-fixture-cases/v2"
+requirement = "FPR-002"
+
+[[case]]
+id = "fpr-002-positive-complete-current-bindings"
+scenario = "positive-complete-current-bindings"
+polarity = "positive"
+operation = "validate-proof-record"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = []
+expected = { outcome = "accept", codes = [], facts = ["proof:PROOF-TERMINALITY=complete", "proof:PROOF-TERMINALITY=freshness-eligible"] }
+
+[[case]]
+id = "fpr-002-negative-external-model-absent"
+scenario = "negative-external-model-binding-absent"
+polarity = "negative"
+operation = "validate-proof-record"
+baseline = "fixtures/v2/baselines/proof-record.toml"
+mutations = ["remove-external-model-binding"]
+expected = { outcome = "reject", codes = ["FPR-PROOF-MISSING-EXTERNAL-MODEL"], facts = ["proof:PROOF-TERMINALITY=incomplete", "assurance:FPR-BASE:formally-proved=false"] }

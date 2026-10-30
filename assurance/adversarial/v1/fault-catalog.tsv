@@ -1,0 +1,9 @@
+schema	id	category	platforms	production_path	expected	focused_test	bound
+buoy-fault-injection/v1	FAULT-FILESYSTEM-READ	filesystem	linux;macos	src/repository.rs#snapshot_repository_fault_control	REPO-READ	adversarial_faults::filesystem_faults_fail_closed	5s
+buoy-fault-injection/v1	FAULT-PARSER-MALFORMED	parser	linux;macos;windows	src/adapters/markdown.rs;src/adapters/rust.rs	SPG-ADAPTER-INVALID-UTF8	adversarial_faults::parser_and_allocation_faults_fail_closed	1s
+buoy-fault-injection/v1	FAULT-ALLOCATION-BUDGET	allocation-budget	linux;macos;windows	src/repository.rs#RepositoryConfig::parse	REH-BUDGET-CONFIG-BYTES	adversarial_faults::parser_and_allocation_faults_fail_closed	1s
+buoy-fault-injection/v1	FAULT-PROCESS-SPAWN	process	linux;macos;windows	src/oracle.rs#run_oracle	SpawnError	adversarial_faults::process_pipe_result_timeout_and_cancellation_faults_are_bounded	5s
+buoy-fault-injection/v1	FAULT-PIPE-OVERFLOW	pipe	linux;macos	src/oracle.rs#spawn_reader	OutputOverflow	adversarial_faults::process_pipe_result_timeout_and_cancellation_faults_are_bounded	5s
+buoy-fault-injection/v1	FAULT-RESULT-MALFORMED	result	linux;macos	src/oracle.rs#parse_semantic_result	MalformedResult	adversarial_faults::process_pipe_result_timeout_and_cancellation_faults_are_bounded	5s
+buoy-fault-injection/v1	FAULT-TIMEOUT	timeout	linux;macos	src/oracle.rs#terminate_and_reap	TimedOut	adversarial_faults::process_pipe_result_timeout_and_cancellation_faults_are_bounded	5s
+buoy-fault-injection/v1	FAULT-CANCELLATION	cancellation	linux;macos	src/oracle.rs#CancellationToken	Cancelled	adversarial_faults::process_pipe_result_timeout_and_cancellation_faults_are_bounded	5s

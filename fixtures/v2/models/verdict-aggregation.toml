@@ -1,0 +1,49 @@
+schema = "spec-provenance-reference-model/v2"
+id = "model-verdict-aggregation-v2"
+requirement_ids = ["EVD-001", "EVD-004", "EVD-005"]
+kind = "truth-table"
+expected_state_count = 400
+
+[[dimensions]]
+name = "carrier_a"
+values = ["fresh", "stale"]
+[[dimensions]]
+name = "carrier_b"
+values = ["fresh", "stale"]
+[[dimensions]]
+name = "selection_a"
+values = ["selected", "not-selected"]
+[[dimensions]]
+name = "selection_b"
+values = ["selected", "not-selected"]
+[[dimensions]]
+name = "verdict_a"
+values = ["not-run", "pass", "fail", "error", "timeout"]
+[[dimensions]]
+name = "verdict_b"
+values = ["not-run", "pass", "fail", "error", "timeout"]
+
+[[predicates]]
+name = "tested"
+[[predicates.clauses]]
+all = ["carrier_a=fresh", "carrier_b=fresh", "selection_a=selected", "selection_b=selected", "verdict_a=pass", "verdict_b=pass"]
+
+[[invariants]]
+id = "partial-selection-never-tested"
+if_all = ["selection_b=not-selected"]
+then_all = ["tested=false"]
+
+[[invariants]]
+id = "timeout-never-tested"
+if_all = ["verdict_a=timeout"]
+then_all = ["tested=false"]
+
+[[invariants]]
+id = "error-never-tested"
+if_all = ["verdict_b=error"]
+then_all = ["tested=false"]
+
+[[invariants]]
+id = "stale-sibling-never-tested"
+if_all = ["carrier_b=stale"]
+then_all = ["tested=false"]

@@ -1,0 +1,5 @@
+[[package]]
+name = "opaque-registry-package"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"

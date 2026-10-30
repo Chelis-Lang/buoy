@@ -1,0 +1,6 @@
+schema	algorithm	case	source	revision	input_encoding	input	output_hex
+buoy-digest-known-answer/v3	xxh3-128	empty	Cyan4973/xxHash tests/sanity_test_vectors.h	v0.8.3	hex	-	99aa06d3014798d86001c324468d497f
+buoy-digest-known-answer/v3	xxh3-128	sanity-buffer-length-3	Cyan4973/xxHash tests/sanity_test_vectors.h	v0.8.3	xxhash-sanity-buffer	length=3;index=9	20efc49ff02422ea54247382a8d6b94d
+buoy-digest-known-answer/v3	blake3-256	empty	BLAKE3-team/BLAKE3 test_vectors/test_vectors.json	1.8.2	hex	-	af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262
+buoy-digest-known-answer/v3	sha-256	empty	NIST CAVP SHA2ShortMsg.rsp	FIPS 180-4	hex	-	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+buoy-digest-known-answer/v3	sha-256	abc	NIST FIPS 180-4 example	FIPS 180-4	utf8	abc	ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad

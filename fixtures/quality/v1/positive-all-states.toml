@@ -1,0 +1,573 @@
+schema = "quality-assurance-controls/v1"
+mode = "synthetic"
+digest_policy = "xxh3-128"
+final_command = "devenv test"
+gate_source = "fixtures/devenv/v1/valid-tasks.json"
+report_path = "docs/assurance/quality-assurance-status.md"
+bindings_path = "assurance/v1/quality-assurance-bindings.tsv"
+retired_ids = []
+
+[synthetic_inventory]
+tools = ["fixture-tool", "fixture-na-tool"]
+tasks = ["buoy:fixture", "buoy:fixture-na"]
+scripts = ["buoy-fixture", "buoy-fixture-na"]
+obligations = ["FIXTURE:quality", "FIXTURE:quality-na"]
+
+[[non_applicable]]
+kind = "tool"
+id = "fixture-na-tool"
+disposition = "not-applicable"
+rationale = "Synthetic positive coverage for an explicitly inapplicable tool."
+
+[[non_applicable]]
+kind = "task"
+id = "buoy:fixture-na"
+disposition = "not-applicable"
+rationale = "Synthetic positive coverage for an explicitly inapplicable task."
+
+[[non_applicable]]
+kind = "script"
+id = "buoy-fixture-na"
+disposition = "not-applicable"
+rationale = "Synthetic positive coverage for an explicitly inapplicable script."
+
+[[non_applicable]]
+kind = "obligation"
+id = "FIXTURE:quality-na"
+disposition = "not-applicable"
+rationale = "Synthetic positive coverage for an explicitly inapplicable obligation."
+
+[[controls]]
+id = "QA-9001"
+name = "Planned code-hygiene control"
+category = "code-hygiene"
+scope = "Synthetic planned control with no implementation claim."
+implementation_state = "planned"
+enforcement_state = "none"
+evidence_state = "absent"
+execution_verdict = "not-run"
+assurance_class = "none"
+lifecycle = "active"
+tool_bindings = []
+implementation_paths = []
+configuration_paths = []
+evidence_paths = []
+positive_controls = []
+negative_controls = []
+documentation_paths = []
+evidence_credits = ["FIXTURE-CREDIT-9001"]
+accounts = []
+trust_statement = "No implementation or execution is trusted."
+assumptions = []
+exclusions = ["No control exists yet."]
+non_claims = ["Planning is not implementation."]
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+
+[[controls]]
+id = "QA-9002"
+name = "Available ordinary-verification tool"
+category = "ordinary-verification"
+scope = "Synthetic pinned tool without a project campaign."
+implementation_state = "available"
+enforcement_state = "advisory"
+evidence_state = "current"
+execution_verdict = "not-run"
+assurance_class = "review-only"
+lifecycle = "active"
+tool_bindings = ["fixture-tool"]
+implementation_paths = []
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = []
+negative_controls = []
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9002"]
+accounts = ["tool:fixture-tool"]
+trust_statement = "Only the exact fixture tool binding is trusted."
+assumptions = ["The fixture inventory is authoritative for this synthetic case."]
+exclusions = ["Availability does not establish implementation."]
+non_claims = ["No execution verdict is claimed."]
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+
+[[controls]]
+id = "QA-9003"
+name = "Focused deterministic fixture verification"
+category = "deterministic-fixtures"
+scope = "Synthetic implemented focused control with a current pass."
+implementation_state = "implemented"
+enforcement_state = "focused"
+evidence_state = "current"
+execution_verdict = "pass"
+assurance_class = "tested"
+lifecycle = "active"
+focused_command = "devenv tasks run buoy:fixture"
+tool_bindings = ["fixture-tool"]
+implementation_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = ["fixtures/quality/v1/repository/positive.txt"]
+negative_controls = ["fixtures/quality/v1/repository/negative.txt"]
+documentation_paths = ["fixtures/quality/v1/repository/owner.md", "openspec/changes/archive/2026-08-02-harden-spec-provenance-production-readiness/tasks.md", "openspec/changes/archive/2026-08-28-integrate-spec-provenance-with-chelis/tasks.md", "openspec/changes/README.md"]
+evidence_credits = ["FIXTURE-CREDIT-9003"]
+accounts = ["task:buoy:fixture", "script:buoy-fixture"]
+trust_statement = "Only current fixture bytes and the normalized result are trusted."
+assumptions = ["The synthetic command resolves in its fixture inventory."]
+exclusions = ["A pass does not establish exhaustiveness or proof."]
+non_claims = ["Registration alone is not execution."]
+[controls.owner]
+kind = "change"
+authority = "openspec/changes/archive/2026-08-02-add-buoy-quality-assurance-tracking/tasks.md"
+related_changes = ["harden-spec-provenance-production-readiness"]
+additional_claimants = []
+[controls.result]
+path = "fixtures/quality/v1/repository/result.tsv"
+source_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+tool_bindings = ["fixture-tool"]
+tool_paths = ["fixtures/quality/v1/repository/tool.toml"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+scope = "synthetic-focused-pass"
+source_digest = "$CURRENT_SOURCE"
+tool_digest = "$CURRENT_TOOL"
+configuration_digest = "$CURRENT_CONFIGURATION"
+scope_digest = "$CURRENT_SCOPE"
+result_digest = "$CURRENT_RESULT"
+
+[[controls]]
+id = "QA-9004"
+name = "Blocked platform-runtime control"
+category = "platform-runtime"
+scope = "Synthetic blocked campaign with visible stale evidence."
+implementation_state = "blocked"
+enforcement_state = "none"
+evidence_state = "stale"
+execution_verdict = "not-run"
+assurance_class = "none"
+lifecycle = "active"
+tool_bindings = []
+implementation_paths = []
+configuration_paths = []
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = []
+negative_controls = []
+documentation_paths = ["fixtures/quality/v1/repository/blocker.md"]
+evidence_credits = ["FIXTURE-CREDIT-9004"]
+accounts = []
+trust_statement = "The blocker record is trusted only as process evidence."
+assumptions = []
+exclusions = ["Blocked work has no passing verdict."]
+non_claims = ["Historical evidence is not current."]
+blocker = "fixtures/quality/v1/repository/blocker.md"
+discharge_condition = "Add a supported platform campaign and current normalized result."
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+
+[[controls]]
+id = "QA-9005"
+name = "Retired structural control"
+category = "structural-enforcement"
+scope = "Synthetic retired control replaced by QA-9006."
+implementation_state = "retired"
+enforcement_state = "none"
+evidence_state = "current"
+execution_verdict = "not-run"
+assurance_class = "review-only"
+lifecycle = "retired"
+tool_bindings = []
+implementation_paths = []
+configuration_paths = []
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = []
+negative_controls = []
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9005"]
+accounts = []
+trust_statement = "Only the terminal retirement rationale is trusted."
+assumptions = []
+exclusions = ["Retirement is not a current implementation."]
+non_claims = ["The retired identity may not be reused."]
+retirement_rationale = "The replacement has a narrower explicit detector scope."
+replacement = "QA-9006"
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+
+[[controls]]
+id = "QA-9006"
+name = "Blocking structural replacement"
+category = "structural-enforcement"
+scope = "Synthetic replacement control structurally included in the final gate."
+implementation_state = "implemented"
+enforcement_state = "blocking"
+evidence_state = "current"
+execution_verdict = "fail"
+assurance_class = "structurally-enforced"
+lifecycle = "replacement"
+focused_command = "devenv tasks run buoy:fixture"
+gate_invocation = "cargo test --workspace --all-targets --all-features"
+gate_omission_control = "fixtures/quality/v1/repository/gate-omission.txt"
+tool_bindings = ["fixture-tool"]
+implementation_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = ["fixtures/quality/v1/repository/positive.txt"]
+negative_controls = ["fixtures/quality/v1/repository/negative.txt"]
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9006"]
+accounts = ["obligation:FIXTURE:quality"]
+trust_statement = "Structural gate inclusion and the detector result are separate facts."
+assumptions = ["The exact gate source is reviewed."]
+exclusions = ["Structural enforcement does not prove semantic correctness."]
+non_claims = ["Registry validation does not execute the child lane."]
+replaces = ["QA-9005"]
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+[controls.result]
+path = "fixtures/quality/v1/repository/result-fail.tsv"
+source_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+tool_bindings = ["fixture-tool"]
+tool_paths = ["fixtures/quality/v1/repository/tool.toml"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+scope = "synthetic-blocking-fail"
+source_digest = "$CURRENT_SOURCE"
+tool_digest = "$CURRENT_TOOL"
+configuration_digest = "$CURRENT_CONFIGURATION"
+scope_digest = "$CURRENT_SCOPE"
+result_digest = "$CURRENT_RESULT"
+
+[[controls]]
+id = "QA-9007"
+name = "Sampled property error control"
+category = "sampled-properties"
+scope = "Synthetic sampled property execution ending in a normalized error."
+implementation_state = "implemented"
+enforcement_state = "focused"
+evidence_state = "current"
+execution_verdict = "error"
+assurance_class = "sampled"
+lifecycle = "active"
+focused_command = "devenv tasks run buoy:fixture"
+tool_bindings = ["fixture-tool"]
+implementation_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = ["fixtures/quality/v1/repository/positive.txt"]
+negative_controls = ["fixtures/quality/v1/repository/negative.txt"]
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9007"]
+accounts = []
+trust_statement = "Only the committed sampled domain and normalized error are trusted."
+assumptions = ["The independent reference is correct within the fixture scope."]
+exclusions = ["Sampling is not exhaustive or formal."]
+non_claims = ["No defect-absence claim is made."]
+[controls.owner]
+kind = "change"
+authority = "openspec/changes/archive/2026-08-02-add-buoy-quality-assurance-tracking/tasks.md"
+related_changes = []
+additional_claimants = []
+[controls.result]
+path = "fixtures/quality/v1/repository/result-error.tsv"
+source_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+tool_bindings = ["fixture-tool"]
+tool_paths = ["fixtures/quality/v1/repository/tool.toml"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+scope = "synthetic-sampled-error"
+source_digest = "$CURRENT_SOURCE"
+tool_digest = "$CURRENT_TOOL"
+configuration_digest = "$CURRENT_CONFIGURATION"
+scope_digest = "$CURRENT_SCOPE"
+result_digest = "$CURRENT_RESULT"
+
+[[controls]]
+id = "QA-9008"
+name = "Bounded exhaustive timeout control"
+category = "finite-model"
+scope = "Synthetic finite model with an exact bounded state space and timeout verdict."
+implementation_state = "implemented"
+enforcement_state = "advisory"
+evidence_state = "current"
+execution_verdict = "timeout"
+assurance_class = "bounded-exhaustive"
+lifecycle = "active"
+focused_command = "devenv tasks run buoy:fixture"
+tool_bindings = ["fixture-tool"]
+implementation_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+configuration_paths = ["fixtures/quality/v1/repository/model.toml"]
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = ["fixtures/quality/v1/repository/positive.txt"]
+negative_controls = ["fixtures/quality/v1/repository/negative.txt"]
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9008"]
+accounts = []
+trust_statement = "Only states reachable under the exact finite bounds are in scope."
+assumptions = ["Transitions in the bound model are complete for the synthetic model."]
+exclusions = ["States outside the finite bounds are excluded."]
+non_claims = ["A timeout is not a pass."]
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+[controls.finite_model]
+id = "FIXTURE-MODEL-1"
+path = "fixtures/quality/v1/repository/model.toml"
+bounds = "states=4;events=2"
+transitions = "explicit-total-transition-table"
+invariants = ["identity-stability", "terminal-retirement"]
+[controls.result]
+path = "fixtures/quality/v1/repository/result-timeout.tsv"
+source_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+tool_bindings = ["fixture-tool"]
+tool_paths = ["fixtures/quality/v1/repository/tool.toml"]
+configuration_paths = ["fixtures/quality/v1/repository/model.toml"]
+scope = "synthetic-bounded-timeout"
+source_digest = "$CURRENT_SOURCE"
+tool_digest = "$CURRENT_TOOL"
+configuration_digest = "$CURRENT_CONFIGURATION"
+scope_digest = "$CURRENT_SCOPE"
+result_digest = "$CURRENT_RESULT"
+
+[[controls]]
+id = "QA-9009"
+name = "Formal verification pass control"
+category = "formal-verification"
+scope = "Synthetic formal obligation over one exact representation."
+implementation_state = "implemented"
+enforcement_state = "focused"
+evidence_state = "current"
+execution_verdict = "pass"
+assurance_class = "formally-proved"
+lifecycle = "active"
+focused_command = "devenv tasks run buoy:fixture"
+tool_bindings = ["fixture-tool"]
+implementation_paths = ["fixtures/quality/v1/repository/formal.rs"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+evidence_paths = ["fixtures/quality/v1/repository/proof.rs"]
+positive_controls = ["fixtures/quality/v1/repository/proof.rs"]
+negative_controls = ["fixtures/quality/v1/repository/negative.txt"]
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9009"]
+accounts = []
+trust_statement = "The verifier, solver, representation, proof, and assumptions are exact inputs."
+assumptions = ["The bound representation corresponds to the named synthetic function."]
+exclusions = ["Compiler, backend, native-code, and prose correspondence are excluded."]
+non_claims = ["No proof outside the named obligation is claimed."]
+[controls.owner]
+kind = "change"
+authority = "openspec/changes/archive/2026-08-02-add-buoy-quality-assurance-tracking/tasks.md"
+related_changes = []
+additional_claimants = []
+[controls.formal_binding]
+implementation_representation = "fixtures/quality/v1/repository/formal.rs"
+proof_source = "fixtures/quality/v1/repository/proof.rs"
+verifier = "fixture-verifier"
+solver = "fixture-solver"
+configuration = "fixtures/quality/v1/repository/configuration.toml"
+correspondence = "review-only synthetic correspondence"
+negative_control = "fixtures/quality/v1/repository/negative.txt"
+scope = "one synthetic identity obligation"
+assumptions = ["mathematical integers model the fixture values"]
+exclusions = ["rustc", "LLVM", "native-code", "natural-language truth"]
+[controls.result]
+path = "fixtures/quality/v1/repository/result-formal-pass.tsv"
+source_paths = ["fixtures/quality/v1/repository/formal.rs"]
+tool_bindings = ["fixture-tool"]
+tool_paths = ["fixtures/quality/v1/repository/tool.toml"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+scope = "synthetic-formal-pass"
+source_digest = "$CURRENT_SOURCE"
+tool_digest = "$CURRENT_TOOL"
+configuration_digest = "$CURRENT_CONFIGURATION"
+scope_digest = "$CURRENT_SCOPE"
+result_digest = "$CURRENT_RESULT"
+
+[[controls]]
+id = "QA-9010"
+name = "Linked source-coverage control"
+category = "source-coverage"
+scope = "Synthetic source-to-result linkage without a proof claim."
+implementation_state = "implemented"
+enforcement_state = "none"
+evidence_state = "current"
+execution_verdict = "pass"
+assurance_class = "linked"
+lifecycle = "active"
+focused_command = "devenv tasks run buoy:fixture"
+tool_bindings = ["fixture-tool"]
+implementation_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = ["fixtures/quality/v1/repository/positive.txt"]
+negative_controls = ["fixtures/quality/v1/repository/negative.txt"]
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9010"]
+accounts = []
+trust_statement = "Only exact source linkage is established."
+assumptions = []
+exclusions = ["Coverage does not establish proof or behavioral completeness."]
+non_claims = ["No proof claim is made."]
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+[controls.result]
+path = "fixtures/quality/v1/repository/result-linked-pass.tsv"
+source_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+tool_bindings = ["fixture-tool"]
+tool_paths = ["fixtures/quality/v1/repository/tool.toml"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+scope = "synthetic-linked-pass"
+source_digest = "$CURRENT_SOURCE"
+tool_digest = "$CURRENT_TOOL"
+configuration_digest = "$CURRENT_CONFIGURATION"
+scope_digest = "$CURRENT_SCOPE"
+result_digest = "$CURRENT_RESULT"
+
+[[controls]]
+id = "QA-9011"
+name = "Available adversarial campaign"
+category = "adversarial-campaign"
+scope = "Synthetic campaign tool available but unused."
+implementation_state = "available"
+enforcement_state = "advisory"
+evidence_state = "absent"
+execution_verdict = "not-run"
+assurance_class = "none"
+lifecycle = "active"
+tool_bindings = ["fixture-tool"]
+implementation_paths = []
+configuration_paths = []
+evidence_paths = []
+positive_controls = []
+negative_controls = []
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9011"]
+accounts = []
+trust_statement = "Only tool availability is trusted."
+assumptions = []
+exclusions = ["No campaign, threshold, or pass exists."]
+non_claims = ["Availability is not implementation."]
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+
+[[controls]]
+id = "QA-9012"
+name = "Supply-chain review control"
+category = "supply-chain"
+scope = "Synthetic supply-chain policy review."
+implementation_state = "planned"
+enforcement_state = "none"
+evidence_state = "absent"
+execution_verdict = "not-run"
+assurance_class = "review-only"
+lifecycle = "active"
+tool_bindings = []
+implementation_paths = []
+configuration_paths = []
+evidence_paths = []
+positive_controls = []
+negative_controls = []
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9012"]
+accounts = []
+trust_statement = "The plan records scope only."
+assumptions = []
+exclusions = ["No dependency policy execution is claimed."]
+non_claims = ["Review does not satisfy a technical control."]
+[controls.owner]
+kind = "change"
+authority = "openspec/changes/archive/2026-08-02-add-buoy-quality-assurance-tracking/tasks.md"
+related_changes = []
+additional_claimants = []
+
+[[controls]]
+id = "QA-9013"
+name = "Registry governance replacement"
+category = "registry-governance"
+scope = "Synthetic registry lifecycle and ownership check."
+implementation_state = "implemented"
+enforcement_state = "focused"
+evidence_state = "current"
+execution_verdict = "pass"
+assurance_class = "tested"
+lifecycle = "active"
+focused_command = "devenv tasks run buoy:fixture"
+tool_bindings = ["fixture-tool"]
+implementation_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+evidence_paths = ["fixtures/quality/v1/repository/evidence.txt"]
+positive_controls = ["fixtures/quality/v1/repository/positive.txt"]
+negative_controls = ["fixtures/quality/v1/repository/negative.txt"]
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9013"]
+accounts = []
+trust_statement = "The closed registry schema and exact fixtures are trusted."
+assumptions = []
+exclusions = ["Registry success is not child-lane execution."]
+non_claims = ["No cross-class promotion is allowed."]
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []
+[controls.result]
+path = "fixtures/quality/v1/repository/result-registry-pass.tsv"
+source_paths = ["fixtures/quality/v1/repository/implementation.rs"]
+tool_bindings = ["fixture-tool"]
+tool_paths = ["fixtures/quality/v1/repository/tool.toml"]
+configuration_paths = ["fixtures/quality/v1/repository/configuration.toml"]
+scope = "synthetic-registry-pass"
+source_digest = "$CURRENT_SOURCE"
+tool_digest = "$CURRENT_TOOL"
+configuration_digest = "$CURRENT_CONFIGURATION"
+scope_digest = "$CURRENT_SCOPE"
+result_digest = "$CURRENT_RESULT"
+
+[[controls]]
+id = "QA-9014"
+name = "Reproducibility planning control"
+category = "reproducibility"
+scope = "Synthetic clean-environment reproducibility plan."
+implementation_state = "planned"
+enforcement_state = "none"
+evidence_state = "absent"
+execution_verdict = "not-run"
+assurance_class = "none"
+lifecycle = "active"
+tool_bindings = []
+implementation_paths = []
+configuration_paths = []
+evidence_paths = []
+positive_controls = []
+negative_controls = []
+documentation_paths = ["fixtures/quality/v1/repository/owner.md"]
+evidence_credits = ["FIXTURE-CREDIT-9014"]
+accounts = []
+trust_statement = "No reproducibility execution is trusted."
+assumptions = []
+exclusions = ["No clean-machine closure exists."]
+non_claims = ["Offline configuration is not a current replay result."]
+[controls.owner]
+kind = "baseline"
+authority = "fixtures/quality/v1/repository/owner.md"
+related_changes = []
+additional_claimants = []

@@ -1,0 +1,51 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "formal-lane-selection"
+
+candidates = ["verus", "aeneasverif"]
+criteria = ["maintainability", "faithfulness", "assumptions", "subset-support", "ci-cost"]
+required_obligations = ["lifecycle", "decision-surface-completeness", "carrier-derivation-freshness", "policy-no-laundering", "change-impact-closure", "canonical-field-encoding"]
+
+[[tool_pins]]
+id = "VERUS"
+locator = "fixture://verus/archive"
+integrity = "$digest:raw-artifact:verus-archive"
+offline = true
+
+[[tool_pins]]
+id = "Z3"
+locator = "fixture://z3/archive"
+integrity = "$digest:raw-artifact:z3-archive"
+offline = true
+
+[[tool_pins]]
+id = "CHARON"
+locator = "fixture://charon/archive"
+integrity = "$digest:raw-artifact:charon-archive"
+offline = true
+
+[[tool_pins]]
+id = "AENEAS"
+locator = "fixture://aeneas/archive"
+integrity = "$digest:raw-artifact:aeneas-archive"
+offline = true
+
+[[tool_pins]]
+id = "LEAN"
+locator = "fixture://lean/archive"
+integrity = "$digest:raw-artifact:lean-archive"
+offline = true
+
+[[spikes]]
+candidate = "verus"
+obligations = ["lifecycle", "decision-surface-completeness", "carrier-derivation-freshness", "policy-no-laundering", "change-impact-closure", "canonical-field-encoding"]
+result = "proved"
+
+[[spikes]]
+candidate = "aeneasverif"
+obligations = ["lifecycle", "decision-surface-completeness", "carrier-derivation-freshness", "policy-no-laundering", "change-impact-closure", "canonical-field-encoding"]
+result = "proved"
+
+[decision]
+status = "candidate-comparison-required"
+primary = "unset"
+backend = "unset"

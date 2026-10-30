@@ -1,0 +1,7 @@
+schema = "buoy.openspec-authority/v1"
+
+[[capabilities]]
+name = "demo"
+atom_kind = "behavioral"
+lifecycle = "ratified"
+reserved_ids = ["OSA-900"]

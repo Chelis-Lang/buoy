@@ -1,0 +1,17 @@
+schema = "spec-provenance-fixture-baseline/v2"
+id = "atom-source"
+
+[[files]]
+path = "spec/requirements.md"
+adapter = "markdown/v1"
+authority_expectation = "required"
+content = '''# Requirements
+
+```spec-provenance-atom-v1
+id = "SPG-001"
+state = "proposed"
+kind = "behavioral"
+scope = ["spec-provenance.graph"]
+statement = "The graph builder MUST reject duplicate authority for one live atom ID."
+```
+'''
