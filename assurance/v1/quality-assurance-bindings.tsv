@@ -224,7 +224,7 @@ quality-assurance-binding/v1	QA-0040	formal-negative,negative-control	proofs/cor
 quality-assurance-binding/v1	QA-0040	configuration,evidence,formal-configuration	proofs/core/proof-record.toml	xxh3-128:c3a3c595ef105d3ee91b739f782fd4e1
 quality-assurance-binding/v1	QA-0041	implementation	devenv.nix	xxh3-128:811b9d982de0751f83b12230e58757d4
 quality-assurance-binding/v1	QA-0041	documentation	docs/assurance/trust-boundaries.md	xxh3-128:2b40825b26a2c22881b17a24eb9390a3
-quality-assurance-binding/v1	QA-0041	documentation	docs/tooling/formal-toolchains.md	xxh3-128:a9598e7b3578572ab985710cb3b9c778
+quality-assurance-binding/v1	QA-0041	documentation	docs/tooling/formal-toolchains.md	xxh3-128:e99cdad3ca586b4e5b1a141cb7891784
 quality-assurance-binding/v1	QA-0041	gate-omission	fixtures/quality/v1/cases.tsv	xxh3-128:6c4de711079d6dcdd1696be014fd5b61
 quality-assurance-binding/v1	QA-0041	configuration	nix/formal-tools.nix	xxh3-128:fc66116ef54e63dd4ebfb94ec6ba11af
 quality-assurance-binding/v1	QA-0041	owner	openspec/changes/archive/2026-08-02-harden-spec-provenance-production-readiness/tasks.md	xxh3-128:c9d7177237793495311d3aed6b7875d8

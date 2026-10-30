@@ -67,7 +67,7 @@ A binary release needs a separate dependency license review.
 `buoy:consumer-package` is an optional private-source development check.
 The final acceptance graph does not include this task.
 The formal tasks remain mandatory within the full acceptance graph.
-The retained GitHub workflows do not run assurance tasks under the local-only policy.
+This repository defines no GitHub Actions workflows.
 
 ## Selected candidates
 
