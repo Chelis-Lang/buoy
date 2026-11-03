@@ -177,3 +177,17 @@ test = false
 
 [lints]
 workspace = true
+
+# Keep dev/test debug info small: full DWARF made per-worktree target/ dirs
+# grow to tens of GB. For a debugger session: CARGO_PROFILE_DEV_DEBUG=2.
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false
+
+[profile.test]
+debug = "line-tables-only"
+
+[profile.test.package."*"]
+debug = false
